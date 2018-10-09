@@ -1,36 +1,70 @@
 # Yuma
 
-One Paragraph of project description goes here
+Yuma is a trusted marketplace of personal caterers who can prepare your weekly meals for you. Find menus that meet your diet and budget to benefit from having your weekly meals on hand.
 
-## Getting Started
+-----
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+This is a multi-module Spring Boot React Apache Maven starter app with good defaults. The react app is built using [create-react-app](https://github.com/facebookincubator/create-react-app).
 
-### Prerequisites
+This project provides productive setup for building Spring Boot React applications. The application is divided into two Maven modules:
 
-What things you need to install the software and how to install them
+1. `backend`: This contains Java code of the application.
+2. `frontend`: This contains all react JavaScript code of the application.
 
-```
-Give examples
-```
+## Running the full application
 
-### Installing
+You can build the package as a single artifact by running the `./mvnw clean install`.
+Next, you can run the application by executing:
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
+```bash
+$ java -jar backend/target/backend-0.1.0-SNAPSHOT.jar
 ```
 
-And repeat
+The application will be accessible at `http://localhost:8080`.
+
+## Features
+
+This starter comes bundled with the following features:
+
+1. Multi module Maven project: A multi module project to modularize backend and frontend code separately.
+2. Maven wrapper: So, you don't need to install Maven on your machine.
+3. Checkstyle: Enforce sane coding standard guidelines.
+4. ErrorProne: Find errors in your code.
+5. Copy paste detection: Uses PMD CPD check to detect code duplication.
+6. CORS enabled: A global configuration is added to enable CORS so that frontend can work seamlessly with backend during development.
+7. REST API base path: Sets the base REST API path to `/api`. You can configure it by changing `rest.api.base.path` property.
+8. Bundle Git commit information
+
+## Running the backend for development mode
+
+There are multiple ways to run the backend. For development, you can use your favorite IDE and run the
+`Application`. As soon as your code compiles, Spring Boot DevTools will reload the code.
+
+You can also run the application using Maven.
+
+```bash
+$ cd backend
+$  ../mvnw spring-boot:run
+```
+
+## Running the frontend for development mode
+
+**You will need 6.0+ and yarn to run the dev server and build the project**.
+
+Make sure to install [yarn on your development machine](https://yarnpkg.com/en/docs/install).
+
+To install all the required binaries for your project, you can run following command.
 
 ```
-until finished
+$ cd frontend
+$ ../mvnw frontend:install-node-and-yarn frontend:yarn
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+Once the above command finishes, you can start the frontend using the `yarn start` command.
+
+## Hot reloading
+
+Both the frontend and backend support hot reloading.
 
 ## Running the tests
 
@@ -82,4 +116,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 * Hat tip to anyone whose code was used
 * Inspiration
-* etc
+* etc...

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="7.7">
+<file name="/Users/faisal/Documents/yuma/backend/src/main/java/com/yuma/app/Application.java">
+</file>
+<file name="/Users/faisal/Documents/yuma/backend/src/main/java/com/yuma/app/resources/PingResource.java">
+</file>
+<file name="/Users/faisal/Documents/yuma/backend/src/main/resources/application.properties">
+</file>
+</checkstyle>
