@@ -29,7 +29,7 @@ This starter comes bundled with the following features:
 1. Multi module Maven project: A multi module project to modularize backend and frontend code separately.
 2. Maven wrapper: So, you don't need to install Maven on your machine.
 3. Checkstyle: Enforce sane coding standard guidelines.
-4. ErrorProne: Find errors in your code.
+4. ErrorProne: Find errors in your code(Not supported in JDK 9).
 5. Copy paste detection: Uses PMD CPD check to detect code duplication.
 6. CORS enabled: A global configuration is added to enable CORS so that frontend can work seamlessly with backend during development.
 7. REST API base path: Sets the base REST API path to `/api`. You can configure it by changing `rest.api.base.path` property.
