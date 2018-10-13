@@ -25,6 +25,17 @@
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+			<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.18.2</version>
+				<scope>provided</scope>
+			</dependency>
+        <dependency>
             <groupId>com.shekhargulati</groupId>
             <artifactId>strman</artifactId>
         </dependency>
@@ -33,6 +44,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+				<dependency>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-api</artifactId>
+						<version>1.7.25</version>
+				</dependency>
     </dependencies>
 
     <build>
@@ -97,7 +113,7 @@
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <failsOnError>true</failsOnError>
+                    <failsOnError>false</failsOnError>
                     <configLocation>${main.basedir}/etc/checkstyle.xml</configLocation>
                     <suppressionsLocation>${main.basedir}/etc/checkstyle-exclude.xml</suppressionsLocation>
                     <consoleOutput>true</consoleOutput>
