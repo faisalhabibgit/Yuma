@@ -5,10 +5,11 @@ jobs:
   include:
     - stage: Clean
       language: java
-      script: ./mvnw :backend:clean
-    - stage: Build
-      script: ./mvnw :backend:build -x test
-    - script: ./mvnw :frontend:build
+      script: ./mvnw clean
+    - stage: Install
+      language: java
+      script: ./mvnw install
+    - stage: Package
+      script: ./mvnw package
     - stage: Test
-      script: ./mvnw :backend:test
-    - script: ./mvnw :frontend:test
+      script: ./mvnw test
