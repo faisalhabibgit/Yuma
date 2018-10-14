@@ -1,2 +1,14 @@
 language: java
 jdk: oraclejdk8
+language: java
+jobs:
+  include:
+    - stage: Clean
+      language: java
+      script: ./mvnw :backend:clean
+    - stage: Build
+      script: ./mvnw :backend:build -x test
+    - script: ./mvnw :frontend:build
+    - stage: Test
+      script: ./mvnw :backend:test
+    - script: ./mvnw :frontend:test
