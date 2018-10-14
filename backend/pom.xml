@@ -33,13 +33,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/exec-maven-plugin -->
-        <dependency>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -101,6 +94,12 @@
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
                         <version>${checkstyle.puppycrawl.version}</version>
+                    </dependency>
+                    <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/exec-maven-plugin -->
+                    <dependency>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.2.1</version>
                     </dependency>
                 </dependencies>
                 <configuration>
