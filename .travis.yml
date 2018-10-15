@@ -4,10 +4,8 @@ language: java
 jobs:
   include:
     - stage: Clean
-      language: java
       script: ./mvnw clean
     - stage: Install
-      language: java
       script: ./mvnw install
     - stage: Package
       script: ./mvnw package
