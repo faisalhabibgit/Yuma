@@ -20,6 +20,13 @@ Next, you can run the application by executing:
 $ java -jar backend/target/backend-0.1.0-SNAPSHOT.jar
 ```
 
+*Make sure to use Java 1.8 with Maven.*
+
+>*For MacOS*
+```bash
+$ export JAVA_HOME=`/usr/libexec/java_home -d 64 -v "1.8*"`
+```
+
 The application will be accessible at `http://localhost:8080`.
 
 ## Features
