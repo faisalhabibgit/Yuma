@@ -15,13 +15,12 @@ import com.yuma.app.repository.ConsumersRepository;
 
 @Slf4j
 @RestController
-@RequestMapping("/rest/consumer")
+@RequestMapping("/rest")
 public class UserResource {
 	
 	final Logger logger = LoggerFactory.getLogger("initial Logger");
 	
 	private ConsumersRepository consumersRepository;
-
 	public UserResource(ConsumersRepository consumersRepository) {
 		this.consumersRepository = consumersRepository;
 	}
