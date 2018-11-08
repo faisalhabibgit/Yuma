@@ -17,6 +17,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 
 
 public class Caterer {
@@ -31,17 +32,6 @@ public class Caterer {
     private String timestamp;
 
 
-    private Caterer(UUID userId,String name,String email,Address address,String specialty,ArrayList<Meal> meals,String timestamp)
-    {
-        this.userId = userId;
-        this.name= name;
-        this.email= email;
-        this.address = address;
-        this.specialty = specialty;
-        this.meals = meals;
-        this.timestamp = timestamp;
-
-    }
 
     @Override
     public String toString() {
@@ -56,6 +46,6 @@ public class Caterer {
                 '}';
 
     }
-    
+
 
 }
