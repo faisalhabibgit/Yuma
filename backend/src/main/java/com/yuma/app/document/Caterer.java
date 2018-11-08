@@ -31,7 +31,7 @@ public class Caterer {
     private String timestamp;
 
 
-    private Caterer(UUID userId,String name,String email,Address address,String specialty,ArrayList<Meal> meals)
+    private Caterer(UUID userId,String name,String email,Address address,String specialty,ArrayList<Meal> meals,String timestamp)
     {
         this.userId = userId;
         this.name= name;
@@ -39,6 +39,7 @@ public class Caterer {
         this.address = address;
         this.specialty = specialty;
         this.meals = meals;
+        this.timestamp = timestamp;
 
     }
 
@@ -51,6 +52,7 @@ public class Caterer {
                 ", address=" + address + '\'' +
                 ", specialty=" + specialty+ '\'' +
                 ", meals=" + meals +
+                ", timestamp=" + timestamp +
                 '}';
 
     }
