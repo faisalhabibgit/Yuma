@@ -2,7 +2,6 @@ package com.yuma.app.resources;
 
 import java.util.List;
 
-import com.mongodb.util.JSON;
 import com.yuma.app.service.MealService;
 import com.yuma.app.to.MealTo;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j

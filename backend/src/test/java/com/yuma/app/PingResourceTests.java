@@ -1,4 +1,4 @@
-package com.yuma.app.resources;
+package com.yuma.app;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

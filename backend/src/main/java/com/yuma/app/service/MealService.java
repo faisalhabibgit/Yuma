@@ -4,7 +4,6 @@ import com.yuma.app.document.Meal;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.to.MealTo;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class MealService {
 
         Meal meal = mealRepository.findOne(mealTo.getMealId());
 
-        if(meal != null) {
+        if(meal == null) {
             throw new IllegalArgumentException("Entity doesn't exist in the database");
         }
 
