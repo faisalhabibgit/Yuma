@@ -1,6 +1,5 @@
 package com.yuma.app.document;
 
-import java.sql.Timestamp;
 import java.util.UUID;
 
 import lombok.Getter;
