@@ -2,32 +2,40 @@ package com.yuma.app.resources;
 
 import java.util.List;
 
+import com.mongodb.util.JSON;
+import com.yuma.app.service.MealService;
+import com.yuma.app.to.MealTo;
 import lombok.extern.slf4j.Slf4j;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.yuma.app.document.Meal;
-import com.yuma.app.repository.MealRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
 @RequestMapping("/meals")
 public class MealResource {
 
+	private MealService mealService;
+
 	final Logger logger = LoggerFactory.getLogger("meal Logger");
 
-	private MealRepository mealRepository;
-	public MealResource(MealRepository mealRepository) {
-		this.mealRepository = mealRepository;
+	@Autowired
+	public MealResource(MealService mealService) {
+		this.mealService = mealService;
 	}
 
-	@GetMapping("/get")
-	public List<Meal> getAll() {
+	@GetMapping
+	public List<MealTo> getAll() {
 		logger.info("retrieving meals list from DB");
-		return this.mealRepository.findAll();
+		return this.mealService.list();
+	}
+
+	@RequestMapping(method = RequestMethod.PUT)
+	public MealTo update(@RequestBody MealTo mealTo) {
+		logger.info("updating meal into the database");
+		return this.mealService.update(mealTo);
 	}
 }

@@ -2,7 +2,9 @@ package com.yuma.app.document;
 
 import java.util.UUID;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import org.springframework.data.annotation.Id;
@@ -11,26 +13,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Consumer {
 
 	@Id
-	private final UUID userId;
-	private final String firstName;
-	private final String lastName;
-	private final String personalEmail;
-	private final String workEmail;
-	private final Preferences preferences;
-	private final String timestamp;
-
-	public Consumer(UUID userId, String firstName, String lastName, String personalEmail, String workEmail, Preferences preferences, String timestamp) {
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.personalEmail = personalEmail;
-		this.workEmail = workEmail;
-		this.preferences = preferences;
-		this.timestamp = timestamp;
-	}
+	private UUID userId;
+	private String firstName;
+	private String lastName;
+	private String personalEmail;
+	private String workEmail;
+	private Preferences preferences;
+	private String timestamp;
 
 	@Override
 	public String toString() {

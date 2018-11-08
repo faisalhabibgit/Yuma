@@ -1,4 +1,4 @@
-package com.yuma.app.service;
+package com.yuma.app.catalog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
