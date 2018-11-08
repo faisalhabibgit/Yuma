@@ -1,33 +1,33 @@
 package com.yuma.app.document;
+
+
+
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import org.springframework.data.mongodb.core.mapping.Document;
 
+
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class Address {
 
-    private final int streetAddress;
-    private final String street;
-    private final String city;
-    private final String state;
-    private final String country;
-    private final String postalCode;
+    private int streetAddress;
+    private  String street;
+    private  String city;
+    private String state;
+    private String country;
+    private String postalCode;
 
-    public Address(int streetAddress, String street,String city,String state,String country,String postalCode){
 
-        this.streetAddress = streetAddress;
-        this.street = street;
-        this.city = city;
-        this.state = state;
-        this.country = country;
-        this.postalCode = postalCode;
-
-    }
 
     @Override
     public String toString() {
