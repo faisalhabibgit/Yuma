@@ -29,13 +29,13 @@ public class Consumer {
 	@Override
 	public String toString() {
 		return "Consumer{" +
-			"userId=" + userId +
-			", firstName='" + firstName + '\'' +
-			", lastName='" + lastName + '\'' +
-			", personalEmail='" + personalEmail + '\'' +
-			", workEmail='" + workEmail + '\'' +
-			", preferences=" + preferences +
-			", timestamp=" + timestamp +
-			'}';
+				"userId=" + userId +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", personalEmail='" + personalEmail + '\'' +
+				", workEmail='" + workEmail + '\'' +
+				", preferences=" + preferences +
+				", timestamp=" + timestamp +
+				'}';
 	}
 }

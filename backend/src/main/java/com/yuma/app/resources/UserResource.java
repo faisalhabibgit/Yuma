@@ -17,11 +17,10 @@ import com.yuma.app.repository.ConsumersRepository;
 @RestController
 @RequestMapping("/rest")
 public class UserResource {
-
+	
 	final Logger logger = LoggerFactory.getLogger("initial Logger");
-
+	
 	private ConsumersRepository consumersRepository;
-
 	public UserResource(ConsumersRepository consumersRepository) {
 		this.consumersRepository = consumersRepository;
 	}

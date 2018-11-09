@@ -24,16 +24,16 @@ public class MealCatalog {
 		this.meals = meals;
 		this.consumers = consumers;
 	}
-
-	public ArrayList<Meal> generatePossibleMealsForConsumer(Consumer consumer) {
-
+	
+	public ArrayList<Meal> generatePossibleMealsForConsumer(Consumer consumer){
+		
 		return null;
 	}
-
-	public ArrayList<Meal> getWeeklyCombination() {
-
+	
+	public ArrayList<Meal> getWeeklyCombination(){
+		
 		return null;
 	}
-
-
+	
+	
 }
