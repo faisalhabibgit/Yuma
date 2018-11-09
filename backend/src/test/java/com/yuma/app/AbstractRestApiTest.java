@@ -1,4 +1,4 @@
-package com.yuma.app.resources;
+package com.yuma.app;
 
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
