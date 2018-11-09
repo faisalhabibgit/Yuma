@@ -18,11 +18,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 public class Meal {
 
+	protected List<Ingredients> ingredients;
 	@Id
 	private UUID mealId;
 	private String description;
-    private boolean isAvailable;
-	protected List<Ingredients> ingredients;
+	private boolean isAvailable;
 
 	@Override
 	public String toString() {

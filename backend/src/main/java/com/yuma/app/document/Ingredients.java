@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Ingredients {
-	
+
 	private String name;
 	private double weight;
 	private double calories;

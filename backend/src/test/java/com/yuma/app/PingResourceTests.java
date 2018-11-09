@@ -11,6 +11,6 @@ public class PingResourceTests extends AbstractRestApiTest {
 
 	@Test
 	public void should_return_pong_when_get_request_is_made_to_ping() throws Exception {
-        
+
 	}
 }
