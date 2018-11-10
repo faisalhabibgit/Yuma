@@ -22,6 +22,8 @@ public class MealTo {
 	private String description;
 	private boolean isAvailable;
 	private HashSet<String> flags;
+	
+	
 
 	@Override
 	public String toString() {
