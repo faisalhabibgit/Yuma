@@ -1,5 +1,7 @@
 package com.yuma.app.config;
 
+import com.yuma.app.converter.CatererConverter;
+import com.yuma.app.converter.CatererToConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.ConversionService;
@@ -18,5 +20,7 @@ public class ConverterConfiguration {
 
 		registry.addConverter(new MealConverter());
 		registry.addConverter(new MealToConverter());
+		registry.addConverter(new CatererConverter());
+		registry.addConverter(new CatererToConverter());
 	}
 }
