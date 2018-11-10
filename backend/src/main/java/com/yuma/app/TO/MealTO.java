@@ -1,5 +1,6 @@
-package com.yuma.app.TO;
+package com.yuma.app.to;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,6 +21,7 @@ public class MealTO {
 	private UUID mealId;
 	private String description;
 	private boolean isAvailable;
+	private HashSet<String> flags;
 
 	@Override
 	public String toString() {
@@ -28,6 +30,7 @@ public class MealTO {
 			", description='" + description + '\'' +
 			", isAvailable=" + isAvailable +
 			", ingredients=" + ingredients +
+			", flags=" + flags +
 			'}';
 	}
 
