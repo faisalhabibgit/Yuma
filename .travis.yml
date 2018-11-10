@@ -1,0 +1,13 @@
+language: java
+jdk: oraclejdk8
+language: java
+jobs:
+  include:
+    - stage: Clean
+      script: ./mvnw clean
+    - stage: Install
+      script: ./mvnw install
+    - stage: Package
+      script: ./mvnw package
+    - stage: Test
+      script: ./mvnw test
