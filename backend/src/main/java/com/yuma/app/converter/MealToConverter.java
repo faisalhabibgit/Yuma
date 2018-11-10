@@ -13,6 +13,7 @@ public class MealToConverter implements Converter<Meal, MealTo> {
 		mealTo.setDescription(meal.getDescription());
 		mealTo.setAvailable(meal.isAvailable());
 		mealTo.setIngredients(meal.getIngredients());
+		mealTo.setFlags(meal.getFlags());
 		return mealTo;
 	}
 }
