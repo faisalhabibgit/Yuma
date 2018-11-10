@@ -3,6 +3,8 @@ package com.yuma.app.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.querydsl.core.types.Predicate;
+import com.yuma.app.util.Helper;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,17 @@ public class MealService {
 		this.conversionService = conversionService;
 	}
 
+	public List<MealTo> listByPredicate(Predicate predicate) {
+
+		List<MealTo> mealTos = new ArrayList<>();
+		List<Meal> mealList = Helper.toList(mealRepository.findAll(predicate));
+
+		for (Meal meal: mealList) {
+			mealTos.add(conversionService.convert(meal, MealTo.class));
+		}
+		return mealTos;
+	}
+	
 	public List<MealTo> list() {
 
 		List<MealTo> mealTos = new ArrayList<>();
