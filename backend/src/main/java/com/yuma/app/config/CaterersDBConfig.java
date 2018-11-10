@@ -44,7 +44,6 @@ public class CaterersDBConfig {
 		return strings -> {
 			catererRepository.save(new Caterer(UUID.randomUUID(), "OrelMoisa", "orelmoisa@gmail.com", new Address(5601, "smart", "CSL", "QC", "Canada", "H4W2m4"), "chinese", new ArrayList<>(), "234"));
 
-
 		};
 	}
 
