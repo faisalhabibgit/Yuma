@@ -1,6 +1,7 @@
 package com.yuma.app.resources;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.querydsl.core.types.Predicate;
 import com.yuma.app.document.QMeal;
@@ -44,5 +45,11 @@ public class MealResource {
 	public MealTo update(@RequestBody MealTo mealTo) {
 		logger.info("updating meal into the database");
 		return this.mealService.update(mealTo);
+	}
+
+	@DeleteMapping("/delete/{mealId}")
+	public void deleteMeal(@PathVariable UUID mealId){
+		logger.info("deleting meal with mealId {}", mealId);
+		 this.mealService.deleteMeal(mealId);
 	}
 }

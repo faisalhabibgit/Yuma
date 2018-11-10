@@ -2,6 +2,7 @@ package com.yuma.app.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.querydsl.core.types.Predicate;
 import com.yuma.app.util.Helper;
@@ -57,5 +58,9 @@ public class MealService {
 		meal.updateFrom(mealToUpdate);
 		meal = mealRepository.save(meal);
 		return conversionService.convert(meal, MealTo.class);
+	}
+	
+	public void deleteMeal(UUID mealId){
+		 mealRepository.delete(mealRepository.findOne(mealId));
 	}
 }
