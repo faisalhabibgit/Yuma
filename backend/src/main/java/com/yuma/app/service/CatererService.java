@@ -59,6 +59,7 @@ public class CatererService {
 	}
 
 	public void deleteCaterer(UUID catererId){
+		
 		catererRepository.delete(catererRepository.findOne(catererId));
 	}
 }
