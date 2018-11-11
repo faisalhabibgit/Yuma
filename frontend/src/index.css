@@ -5,10 +5,19 @@ body {
 }
 
 .navbutton {
-			margin: 5px;
-			padding: 5px;
-	    background-color: white;
-      color: black;
-      border: 2px solid lightblue; /* Green */
-      border-radius: 4px;
+	margin: 5px;
+	padding: 5px;
+	background-color: white;
+	color: black;
+	border: 2px solid lightblue; /* Green */
+	border-radius: 4px;
+}
+
+label {
+  margin: 5px;
+	padding: 5px;
+}
+
+input {
+  margin: 5px;
 }

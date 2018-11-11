@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 class LoginCaterer extends Component {
   constructor() {
     super();
@@ -59,13 +61,20 @@ class LoginCaterer extends Component {
               {this.state.error}
             </h3>
           }
+          
           <label>User Name</label>
           <input type="text" data-test="username" value={this.state.username} onChange={this.handleUserChange} />
-
+          
+          <br />
+          
           <label>Password</label>
           <input type="password" data-test="password" value={this.state.password} onChange={this.handlePassChange} />
-
+          
+          <br />
           <input type="submit" value="Log In" data-test="submit" />
+          
+          <Link to="/ForgotPassword">ForgotPassword</Link>
+          
         </form>
       </div>
     );
