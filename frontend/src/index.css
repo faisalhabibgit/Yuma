@@ -21,3 +21,8 @@ label {
 input {
   margin: 5px;
 }
+
+.buttonSize{
+	height:50px;
+	width:100px;
+}

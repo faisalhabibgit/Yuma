@@ -18,17 +18,35 @@ class App extends Component {
             <h2>Welcome to Yuma Ops!</h2>
           </div>
           
-          <div className="navbar">
-            <Link className="navbutton" to="/">Home</Link>
-            <Link className="navbutton" to="/LoginCaterer">Login</Link>
-            <Link className="navbutton" to="/Registration">Registration</Link>
-          </div>
-          <hr />
+          {/*<div className="navbar">*/}
+            {/*<Link className="navbutton" to="/">Home</Link>*/}
+            {/*<Link className="navbutton" to="/LoginCaterer">Login</Link>*/}
+            {/*<Link className="navbutton" to="/Registration">Registration</Link>*/}
+          {/*</div>*/}
+          {/*<hr />*/}
           
-          <Route exact path="/LoginCaterer" component={LoginCaterer} />
-          <Route exact path="/Registration" component={Registration} />
-          <Route exact path="/ForgotPassword" component={ForgotPassword} />
+          {/*<Route exact path="/LoginCaterer" component={LoginCaterer} />*/}
           
+          {/*<Route exact path="/ForgotPassword" component={ForgotPassword} />*/}
+            <center>
+              <h2>
+                Please Identify Yourself:
+              </h2>
+              
+              <Link to="/LoginCaterer">
+                <button className="buttonSize" type="button">
+                  Caterer
+                </button>
+              </Link>
+              <Link to="/LoginCaterer" class="size">
+                <button className="buttonSize" type="button">
+                  Customers
+                </button>
+              </Link>
+
+              <Route exact path="/LoginCaterer" component={LoginCaterer} />
+              
+            </center>
           
           
         </div>

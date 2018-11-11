@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Registration from './Registration';
 
 class LoginCaterer extends Component {
   constructor() {
@@ -74,6 +75,10 @@ class LoginCaterer extends Component {
           <input type="submit" value="Log In" data-test="submit" />
           
           <Link to="/ForgotPassword">ForgotPassword</Link>
+          <br></br>
+
+          <Link to="/Registration">Registration</Link>
+          <Route exact path="/Registration" component={Registration} />
           
         </form>
       </div>
