@@ -3,19 +3,18 @@ package com.yuma.app.converter;
 import org.springframework.core.convert.converter.Converter;
 
 import com.yuma.app.document.Meal;
-import com.yuma.app.to.MealTo;
+import com.yuma.app.TO.MealTO;
 
-
-public class MealConverter implements Converter<MealTo, Meal> {
+public class MealConverter implements Converter<MealTO, Meal> {
 
 	@Override
-	public Meal convert(MealTo mealTo) {
+	public Meal convert(MealTO mealTO) {
 		Meal meal = new Meal();
-		meal.setMealId(mealTo.getMealId());
-		meal.setDescription(mealTo.getDescription());
-		meal.setAvailable(mealTo.isAvailable());
-		meal.setIngredients(mealTo.getIngredients());
-		meal.setFlags(mealTo.getFlags());
+		meal.setMealId(mealTO.getMealId());
+		meal.setDescription(mealTO.getDescription());
+		meal.setAvailable(mealTO.isAvailable());
+		meal.setIngredients(mealTO.getIngredients());
+		meal.setFlags(mealTO.getFlags());
 		return meal;
 	}
 }
