@@ -38,7 +38,7 @@ class Registration extends Component {
       return this.setState({ error: 'Password is required' });
     }
     
-    if (this.state.confirmPassword != this.state.password) {
+    if (this.state.confirmPassword !== this.state.password) {
       return this.setState({ error: 'Password does not match' });
     }
 
