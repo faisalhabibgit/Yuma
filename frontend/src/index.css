@@ -3,3 +3,12 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.navbutton {
+			margin: 5px;
+			padding: 5px;
+	    background-color: white;
+      color: black;
+      border: 2px solid lightblue; /* Green */
+      border-radius: 4px;
+}
