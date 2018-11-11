@@ -66,19 +66,26 @@ class LoginCaterer extends Component {
           <label>User Name</label>
           <input type="text" data-test="username" value={this.state.username} onChange={this.handleUserChange} />
           
-          <br />
+          <br/>
           
           <label>Password</label>
           <input type="password" data-test="password" value={this.state.password} onChange={this.handlePassChange} />
           
-          <br />
+          <br/>
           <input type="submit" value="Log In" data-test="submit" />
-          
+          <br/>
           <Link to="/ForgotPassword">ForgotPassword</Link>
-          <br></br>
-
-          <Link to="/Registration">Registration</Link>
+          
+          <Link style={{ margin:25}} to="/Registration">Registration</Link>
           <Route exact path="/Registration" component={Registration} />
+
+          <br/>
+          <br/>
+          <Link to="/App">
+            <button type="button">
+              Go back home
+            </button>
+          </Link>
           
         </form>
       </div>

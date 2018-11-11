@@ -33,7 +33,8 @@ class App extends Component {
                 Please Identify Yourself:
               </h2>
               
-              <Link to="/LoginCaterer">
+              <div className="originInterface">
+                <Link to="/LoginCaterer">
                 <button className="buttonSize" type="button">
                   Caterer
                 </button>
@@ -43,11 +44,12 @@ class App extends Component {
                   Customers
                 </button>
               </Link>
-
-              <Route exact path="/LoginCaterer" component={LoginCaterer} />
-              
+                <Route exact path="/ForgotPassword" component={ForgotPassword} />
+                <Route exact path="/Registration" component={Registration} />
+                <Route exact path="/LoginCaterer" component={LoginCaterer} />
+              </div>
             </center>
-          
+            
           
         </div>
        </Router>

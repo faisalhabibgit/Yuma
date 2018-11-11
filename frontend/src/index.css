@@ -23,6 +23,11 @@ input {
 }
 
 .buttonSize{
-	height:50px;
-	width:100px;
+	height:75px;
+	width:150px;
+	margin: 50px;
+}
+
+.originInterface{
+	margin-top:25px;
 }
