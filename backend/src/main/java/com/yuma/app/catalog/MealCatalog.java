@@ -2,6 +2,7 @@ package com.yuma.app.catalog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,12 +26,14 @@ public class MealCatalog {
 		this.consumers = consumers;
 	}
 
-	public ArrayList<Meal> generatePossibleMealsForConsumer(Consumer consumer) {
+	private static int randomIntGenerator(int upperBound) {
+		Random rand = new Random();
 
-		return null;
+		return rand.nextInt(upperBound);
 	}
 
-	public ArrayList<Meal> getWeeklyCombination() {
+	public ArrayList<Meal> getWeeklyCombination(ArrayList<Meal> availableMeals, ArrayList<Consumer> activeConsumers) {
+
 
 		return null;
 	}

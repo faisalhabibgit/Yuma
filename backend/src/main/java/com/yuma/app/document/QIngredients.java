@@ -1,14 +1,14 @@
 package com.yuma.app.document;
 
+import static com.querydsl.core.types.PathMetadataFactory.forVariable;
+
+import javax.annotation.Generated;
+
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.PathMetadata;
 import com.querydsl.core.types.dsl.EntityPathBase;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.StringPath;
-
-import javax.annotation.Generated;
-
-import static com.querydsl.core.types.PathMetadataFactory.forVariable;
 
 
 /**
@@ -17,10 +17,8 @@ import static com.querydsl.core.types.PathMetadataFactory.forVariable;
 @Generated("com.querydsl.codegen.EntitySerializer")
 public class QIngredients extends EntityPathBase<Ingredients> {
 
-	private static final long serialVersionUID = -1324781363L;
-
 	public static final QIngredients ingredients = new QIngredients("ingredients");
-
+	private static final long serialVersionUID = -1324781363L;
 	public final NumberPath<Double> calories = createNumber("calories", Double.class);
 
 	public final StringPath name = createString("name");
