@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.yuma.app.document.Meal;
 import com.yuma.app.repository.MealRepository;
-import com.yuma.app.to.MealTo;
+import com.yuma.app.TO.MealTO;
 
 @Service
 public class MealService {
@@ -24,29 +24,30 @@ public class MealService {
 		this.conversionService = conversionService;
 	}
 
-	public List<MealTo> listByPredicate(Predicate predicate) {
+	public List<MealTO> listByPredicate(Predicate predicate) {
 
-		List<MealTo> mealTos = new ArrayList<>();
-		List<Meal> mealList = Helper.toMealList(mealRepository.findAll(predicate));
+
+		List<MealTO> mealTos = new ArrayList<>();
+		List<Meal> mealList = Helper.toList(mealRepository.findAll(predicate));
 
 		for (Meal meal: mealList) {
-			mealTos.add(conversionService.convert(meal, MealTo.class));
+			mealTos.add(conversionService.convert(meal, MealTO.class));
 		}
 		return mealTos;
 	}
 	
-	public List<MealTo> list() {
+	public List<MealTO> list() {
 
-		List<MealTo> mealTos = new ArrayList<>();
+		List<MealTO> mealTos = new ArrayList<>();
 		List<Meal> mealList = mealRepository.findAll();
 
 		for (Meal meal : mealList) {
-			mealTos.add(conversionService.convert(meal, MealTo.class));
+			mealTos.add(conversionService.convert(meal, MealTO.class));
 		}
 		return mealTos;
 	}
 
-	public MealTo update(MealTo mealTo) {
+	public MealTO update(MealTO mealTo) {
 
 		Meal meal = mealRepository.findOne(mealTo.getMealId());
 
@@ -57,7 +58,7 @@ public class MealService {
 		Meal mealToUpdate = conversionService.convert(mealTo, Meal.class);
 		meal.updateFrom(mealToUpdate);
 		meal = mealRepository.save(meal);
-		return conversionService.convert(meal, MealTo.class);
+		return conversionService.convert(meal, MealTO.class);
 	}
 	
 	public void deleteMeal(UUID mealId){

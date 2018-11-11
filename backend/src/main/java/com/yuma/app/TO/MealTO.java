@@ -1,4 +1,4 @@
-package com.yuma.app.to;
+package com.yuma.app.TO;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,7 +14,7 @@ import com.yuma.app.document.Ingredients;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MealTo {
+public class MealTO {
 
 	protected List<Ingredients> ingredients;
 	private UUID mealId;
