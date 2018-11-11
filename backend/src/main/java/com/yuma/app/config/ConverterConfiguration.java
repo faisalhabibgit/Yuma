@@ -6,7 +6,7 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.converter.ConverterRegistry;
 
 import com.yuma.app.converter.MealConverter;
-import com.yuma.app.converter.MealToConverter;
+import com.yuma.app.converter.MealTOConverter;
 
 @Configuration
 public class ConverterConfiguration {
@@ -17,6 +17,6 @@ public class ConverterConfiguration {
 		ConverterRegistry registry = (ConverterRegistry) conversionService;
 
 		registry.addConverter(new MealConverter());
-		registry.addConverter(new MealToConverter());
+		registry.addConverter(new MealTOConverter());
 	}
 }
