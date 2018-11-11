@@ -3,14 +3,14 @@ package com.yuma.app.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.querydsl.core.types.Predicate;
-import com.yuma.app.util.Helper;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
+import com.querydsl.core.types.Predicate;
+import com.yuma.app.TO.MealTO;
 import com.yuma.app.document.Meal;
 import com.yuma.app.repository.MealRepository;
-import com.yuma.app.TO.MealTO;
+import com.yuma.app.util.Helper;
 
 @Service
 public class MealService {
@@ -28,12 +28,12 @@ public class MealService {
 		List<MealTO> mealTos = new ArrayList<>();
 		List<Meal> mealList = Helper.toList(mealRepository.findAll(predicate));
 
-		for (Meal meal: mealList) {
+		for (Meal meal : mealList) {
 			mealTos.add(conversionService.convert(meal, MealTO.class));
 		}
 		return mealTos;
 	}
-	
+
 	public List<MealTO> list() {
 
 		List<MealTO> mealTos = new ArrayList<>();

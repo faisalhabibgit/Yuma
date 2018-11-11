@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,6 +42,6 @@ public class Meal {
 		this.setAvailable(mealToUpdate.isAvailable());
 		this.setIngredients(mealToUpdate.getIngredients());
 		this.setFlags(mealToUpdate.getFlags());
-		
+
 	}
 }
