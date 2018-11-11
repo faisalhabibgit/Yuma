@@ -1,15 +1,16 @@
 package com.yuma.app.document;
 
-import static com.querydsl.core.types.PathMetadataFactory.*;
+import static com.querydsl.core.types.PathMetadataFactory.forVariable;
 
-import com.querydsl.core.types.dsl.*;
-
-import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
+
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.PathMetadata;
+import com.querydsl.core.types.dsl.ComparablePath;
+import com.querydsl.core.types.dsl.EntityPathBase;
+import com.querydsl.core.types.dsl.ListPath;
 import com.querydsl.core.types.dsl.PathInits;
-import com.yuma.app.document.Caterer;
-import com.yuma.app.document.Meal;
+import com.querydsl.core.types.dsl.StringPath;
 
 
 /**
@@ -18,12 +19,9 @@ import com.yuma.app.document.Meal;
 @Generated("com.querydsl.codegen.EntitySerializer")
 public class QCaterer extends EntityPathBase<Caterer> {
 
-	private static final long serialVersionUID = -1591563141L;
-
-	private static final PathInits INITS = PathInits.DIRECT2;
-
 	public static final QCaterer caterer = new QCaterer("caterer");
-
+	private static final long serialVersionUID = -1591563141L;
+	private static final PathInits INITS = PathInits.DIRECT2;
 	public final QAddress address;
 
 	public final StringPath email = createString("email");

@@ -1,13 +1,17 @@
 package com.yuma.app.document;
 
-import static com.querydsl.core.types.PathMetadataFactory.*;
+import static com.querydsl.core.types.PathMetadataFactory.forVariable;
 
-import com.querydsl.core.types.dsl.*;
+import java.util.UUID;
 
-import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
+
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.PathMetadata;
+import com.querydsl.core.types.dsl.ComparablePath;
+import com.querydsl.core.types.dsl.EntityPathBase;
 import com.querydsl.core.types.dsl.PathInits;
+import com.querydsl.core.types.dsl.StringPath;
 
 
 /**
@@ -16,12 +20,9 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.EntitySerializer")
 public class QConsumer extends EntityPathBase<Consumer> {
 
-	private static final long serialVersionUID = 1582550987L;
-
-	private static final PathInits INITS = PathInits.DIRECT2;
-
 	public static final QConsumer consumer = new QConsumer("consumer");
-
+	private static final long serialVersionUID = 1582550987L;
+	private static final PathInits INITS = PathInits.DIRECT2;
 	public final StringPath firstName = createString("firstName");
 
 	public final StringPath lastName = createString("lastName");
@@ -32,7 +33,7 @@ public class QConsumer extends EntityPathBase<Consumer> {
 
 	public final StringPath timestamp = createString("timestamp");
 
-	public final ComparablePath<java.util.UUID> userId = createComparable("userId", java.util.UUID.class);
+	public final ComparablePath<UUID> userId = createComparable("userId", java.util.UUID.class);
 
 	public final StringPath workEmail = createString("workEmail");
 
