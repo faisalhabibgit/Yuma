@@ -71,6 +71,7 @@ public class MealServiceTest {
 		List<Meal> mealsWithPredicate = new ArrayList<>();
 
 		mealsWithPredicate.add(meal1);
+		mealsWithPredicate.add(meal2);
 		
 		Mockito.when(mealRepository.findAll(predicate)).thenReturn(mealsWithPredicate);
 		
