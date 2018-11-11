@@ -1,13 +1,10 @@
 package com.yuma.app.resources;
 
 import com.querydsl.core.types.Predicate;
-import com.yuma.app.document.Caterer;
 import com.yuma.app.document.QCaterer;
-import com.yuma.app.document.QMeal;
 import com.yuma.app.repository.CatererRepository;
 import com.yuma.app.service.CatererService;
-import com.yuma.app.to.CatererTo;
-import com.yuma.app.to.MealTo;
+import com.yuma.app.to.CatererTO;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,13 +34,13 @@ public class CatererResource {
 	}
 
 	@GetMapping("/get")
-	public List<CatererTo> getAll() {
+	public List<CatererTO> getAll() {
 		logger.info("retrieving caterer list from DB");
 		return this.catererService.list();
 	}
 
 	@GetMapping("/{specialty}")
-	public List<CatererTo> getByDescription(@PathVariable String specialty) {
+	public List<CatererTO> getByDescription(@PathVariable String specialty) {
 		QCaterer qCaterer = new QCaterer("caterer");
 		Predicate predicate = qCaterer.specialty.eq(specialty);
 		logger.info("retrieving caterer list from DB by specialty {}", specialty);
@@ -51,7 +48,7 @@ public class CatererResource {
 	}
 
 	@PutMapping()
-	public CatererTo update(@RequestBody CatererTo catererTo) {
+	public CatererTO update(@RequestBody CatererTO catererTo) {
 		logger.info("updating meal into the database");
 		return this.catererService.update(catererTo);
 	}

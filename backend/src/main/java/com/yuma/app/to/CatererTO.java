@@ -15,7 +15,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CatererTo {
+public class CatererTO {
 
 	private UUID userId;
 	private String name;
@@ -27,7 +27,7 @@ public class CatererTo {
 
 	@Override
 	public String toString() {
-		return "CatererTo{" +
+		return "CatererTO{" +
 			"userId=" + userId +
 			", name='" + name + '\'' +
 			", email='" + email + '\'' +

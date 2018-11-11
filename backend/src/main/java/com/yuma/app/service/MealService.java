@@ -28,7 +28,7 @@ public class MealService {
 
 
 		List<MealTO> mealTos = new ArrayList<>();
-		List<Meal> mealList = Helper.toList(mealRepository.findAll(predicate));
+		List<Meal> mealList = Helper.toMealList(mealRepository.findAll(predicate));
 
 		for (Meal meal: mealList) {
 			mealTos.add(conversionService.convert(meal, MealTO.class));

@@ -3,12 +3,12 @@ package com.yuma.app.converter;
 import org.springframework.core.convert.converter.Converter;
 
 import com.yuma.app.document.Caterer;
-import com.yuma.app.to.CatererTo;
+import com.yuma.app.to.CatererTO;
 
-public class CatererConverter implements Converter<CatererTo, Caterer> {
+public class CatererConverter implements Converter<CatererTO, Caterer> {
 	
 	@Override
-	public Caterer convert(CatererTo catererTo) {
+	public Caterer convert(CatererTO catererTo) {
 		Caterer caterer = new Caterer();
 		caterer.setName(catererTo.getName());
 		caterer.setAddress(catererTo.getAddress());

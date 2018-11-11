@@ -3,7 +3,7 @@ package com.yuma.app.service;
 import com.querydsl.core.types.Predicate;
 import com.yuma.app.document.Caterer;
 import com.yuma.app.repository.CatererRepository;
-import com.yuma.app.to.CatererTo;
+import com.yuma.app.to.CatererTO;
 import com.yuma.app.util.Helper;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
@@ -22,29 +22,29 @@ public class CatererService {
 		this.conversionService = conversionService;
 	}
 
-	public List<CatererTo> listByPredicate(Predicate predicate) {
+	public List<CatererTO> listByPredicate(Predicate predicate) {
 
-		List<CatererTo> catererTos = new ArrayList<>();
+		List<CatererTO> catererTos = new ArrayList<>();
 		List<Caterer> catererList = Helper.toCatererList(catererRepository.findAll(predicate));
 
 		for (Caterer caterer: catererList) {
-			catererTos.add(conversionService.convert(caterer, CatererTo.class));
+			catererTos.add(conversionService.convert(caterer, CatererTO.class));
 		}
 		return catererTos;
 	}
 
-	public List<CatererTo> list() {
+	public List<CatererTO> list() {
 
-		List<CatererTo> catererTos = new ArrayList<>();
+		List<CatererTO> catererTos = new ArrayList<>();
 		List<Caterer> catererList = catererRepository.findAll();
 
 		for (Caterer meal : catererList) {
-			catererTos.add(conversionService.convert(meal, CatererTo.class));
+			catererTos.add(conversionService.convert(meal, CatererTO.class));
 		}
 		return catererTos;
 	}
 
-	public CatererTo update(CatererTo catererTo) {
+	public CatererTO update(CatererTO catererTo) {
 
 		Caterer caterer = catererRepository.findOne(catererTo.getUserId());
 
@@ -55,7 +55,7 @@ public class CatererService {
 		Caterer catererToUpdate = conversionService.convert(catererTo, Caterer.class);
 		caterer.updateFrom(catererToUpdate);
 		caterer = catererRepository.save(caterer);
-		return conversionService.convert(caterer, CatererTo.class);
+		return conversionService.convert(caterer, CatererTO.class);
 	}
 
 	public void deleteCaterer(UUID catererId){
