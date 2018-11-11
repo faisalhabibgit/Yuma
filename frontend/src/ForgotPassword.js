@@ -37,7 +37,7 @@ class ForgotPassword extends Component {
   render() {
     return (
       <div className="Login">
-        <h3>...so you couldn't even remember a password</h3>
+        <h3>Forgot password?</h3>
        
         <form onSubmit={this.handleSubmit}>
            {
