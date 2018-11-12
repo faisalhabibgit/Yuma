@@ -46,7 +46,7 @@
                         </goals>
                         <phase>generate-resources</phase>
                         <configuration>
-                            <arguments>build</arguments>
+                            <arguments>CI="" build</arguments>
                         </configuration>
                     </execution>
                 </executions>
