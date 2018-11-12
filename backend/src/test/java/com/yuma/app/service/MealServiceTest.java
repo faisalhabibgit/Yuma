@@ -17,6 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 @RunWith(SpringRunner.class)
@@ -42,10 +43,11 @@ public class MealServiceTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		meal1 = new Meal(new ArrayList<>(), UUID.randomUUID(), "chicken", true);
-		meal2 = new Meal(new ArrayList<>(), UUID.randomUUID(), "chicken", false);
-		meal3 = new Meal(new ArrayList<>(), UUID.randomUUID(), "mutton", true);
-		mealTO = new MealTO(new ArrayList<>(),meal1.getMealId(),"chicken and veg",false);
+		
+		meal1 = new Meal(new ArrayList<>(), UUID.randomUUID(), "chicken", true,new HashSet<>());
+		meal2 = new Meal(new ArrayList<>(), UUID.randomUUID(), "chicken", false,new HashSet<>());
+		meal3 = new Meal(new ArrayList<>(), UUID.randomUUID(), "mutton", true,new HashSet<>());
+		mealTO = new MealTO(new ArrayList<>(),meal1.getMealId(),"chicken and veg",false,new HashSet<>());
 		
 		MockitoAnnotations.initMocks(this);
 	}
@@ -90,10 +92,10 @@ public class MealServiceTest {
 		Mockito.when(mealRepository.findOne(uuid)).thenReturn(meal1);
 		Mockito.when(mealRepository.save(meal1)).thenReturn(meal1);
 		
-		MealTO mealTONew = mealService.update(mealTO);
+		mealTO = mealService.update(mealTO);
 		
-		Assert.assertEquals(mealTONew.getDescription(), meal1.getDescription());
-		Assert.assertEquals(mealTONew.isAvailable(), meal1.isAvailable());
+		Assert.assertEquals(mealTO.getDescription(), meal1.getDescription());
+		Assert.assertEquals(mealTO.isAvailable(), meal1.isAvailable());
 		
 		
 	}
