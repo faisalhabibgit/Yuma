@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
-class LoginCaterer extends Component {
+class Registration extends Component {
   constructor() {
     super();
     this.state = {
       username: '',
+      email: '',
       password: '',
+      confirmPassword: '',
       error: '',
     };
 
     this.handlePassChange = this.handlePassChange.bind(this);
+    this.handleConfirmPassword = this.handleConfirmPassword.bind(this);
     this.handleUserChange = this.handleUserChange.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.dismissError = this.dismissError.bind(this);
   }
@@ -27,9 +29,17 @@ class LoginCaterer extends Component {
     if (!this.state.username) {
       return this.setState({ error: 'Username is required' });
     }
+    
+    if (!this.state.email) {
+      return this.setState({ error: 'Email is required' });
+    }
 
     if (!this.state.password) {
       return this.setState({ error: 'Password is required' });
+    }
+    
+    if (this.state.confirmPassword !== this.state.password) {
+      return this.setState({ error: 'Password does not match' });
     }
 
     return this.setState({ error: '' });
@@ -40,10 +50,22 @@ class LoginCaterer extends Component {
       username: evt.target.value,
     });
   };
+  
+  handleEmailChange(evt) {
+    this.setState({
+      email: evt.target.value,
+    });
+  };
 
   handlePassChange(evt) {
     this.setState({
       password: evt.target.value,
+    });
+  };
+  
+  handleConfirmPassword(evt) {
+    this.setState({
+      confirmPassword: evt.target.value,
     });
   }
 
@@ -52,7 +74,7 @@ class LoginCaterer extends Component {
     // but you don't need to target those (any css-selector will work)
 
     return (
-      <div className="Login">
+      <div className="Registration">
         <form onSubmit={this.handleSubmit}>
           {
             this.state.error &&
@@ -61,24 +83,23 @@ class LoginCaterer extends Component {
               {this.state.error}
             </h3>
           }
-          
           <label>User Name</label>
           <input type="text" data-test="username" value={this.state.username} onChange={this.handleUserChange} />
-          
-          <br />
-          
+          <br/>
+          <label>Email</label>
+          <input type="email" data-test="email" value={this.state.email} onChange={this.handleEmailChange} />
+          <br/>
           <label>Password</label>
           <input type="password" data-test="password" value={this.state.password} onChange={this.handlePassChange} />
-          
-          <br />
-          <input type="submit" value="Log In" data-test="submit" />
-          
-          <Link to="/ForgotPassword">ForgotPassword</Link>
-          
+          <br/>
+          <label>Confirm Password</label>
+          <input type="password" data-test="confirmPassword" value={this.state.confirmPassword} onChange={this.handleConfirmPassword} />
+          <br/>
+          <input type="submit" value="Register Now" data-test="submit" />
         </form>
       </div>
     );
   }
 }
 
-export default LoginCaterer;
+export default Registration;
