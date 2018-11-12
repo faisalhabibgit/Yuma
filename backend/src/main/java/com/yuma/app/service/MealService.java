@@ -2,6 +2,7 @@ package com.yuma.app.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,9 @@ public class MealService {
 
 	public List<MealTO> listByPredicate(Predicate predicate) {
 
+
 		List<MealTO> mealTos = new ArrayList<>();
-		List<Meal> mealList = Helper.toList(mealRepository.findAll(predicate));
+		List<Meal> mealList = Helper.toMealList(mealRepository.findAll(predicate));
 
 		for (Meal meal : mealList) {
 			mealTos.add(conversionService.convert(meal, MealTO.class));
@@ -57,5 +59,9 @@ public class MealService {
 		meal.updateFrom(mealToUpdate);
 		meal = mealRepository.save(meal);
 		return conversionService.convert(meal, MealTO.class);
+	}
+	
+	public void deleteMeal(UUID mealId){
+		 mealRepository.delete(mealRepository.findOne(mealId));
 	}
 }
