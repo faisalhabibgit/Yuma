@@ -6,7 +6,7 @@ import java.util.UUID;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.yuma.app.TO.MealTO;
+import com.yuma.app.to.MealTO;
 import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
 
@@ -31,7 +31,7 @@ public class MealConverterTest {
 	public MealTO prepareMealTO() {
 		MealTO mealTO = new MealTO();
 		mealTO.setMealId(UUID.randomUUID());
-		mealTO.setDescription("this is a meal TO description");
+		mealTO.setDescription("this is a meal to description");
 		mealTO.setAvailable(true);
 		mealTO.setIngredients(new ArrayList<Ingredients>() {
 			{
