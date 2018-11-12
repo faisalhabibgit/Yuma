@@ -1,4 +1,4 @@
-package com.yuma.app.TO;
+package com.yuma.app.to;
 
 import java.util.HashSet;
 import java.util.List;
