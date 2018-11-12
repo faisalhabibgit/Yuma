@@ -8,7 +8,7 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
 import com.querydsl.core.types.Predicate;
-import com.yuma.app.TO.MealTO;
+import com.yuma.app.to.MealTO;
 import com.yuma.app.document.Meal;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.util.Helper;

@@ -6,7 +6,7 @@ import java.util.UUID;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.yuma.app.TO.MealTO;
+import com.yuma.app.to.MealTO;
 import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
 

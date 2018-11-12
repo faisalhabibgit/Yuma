@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.querydsl.core.types.Predicate;
-import com.yuma.app.TO.MealTO;
+import com.yuma.app.to.MealTO;
 import com.yuma.app.document.QMeal;
 import com.yuma.app.service.MealService;
 
