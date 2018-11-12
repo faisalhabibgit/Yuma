@@ -18,5 +18,5 @@ public class Preferences {
 	private int numOfMeals;
 	private boolean extraVeggies;
 	private boolean extraProtein;
-	private HashSet<String> preferences;
+	private HashSet<String> details;
 }
