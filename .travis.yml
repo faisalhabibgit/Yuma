@@ -7,6 +7,6 @@ jobs:
     - stage: Install
       script: ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
     - stage: Package
-      script: ./mvnw package
+      script: ./mvnw package -DskipTests=true -Dmaven.javadoc.skip=true -B -V
     - stage: Test
       script: ./mvnw test
