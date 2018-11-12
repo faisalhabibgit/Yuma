@@ -6,38 +6,38 @@ import java.util.UUID;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.yuma.app.TO.MealTO;
 import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
-import com.yuma.app.to.MealTo;
 
 public class MealConverterTest {
 
 	@Test
 	public void testMealConverter() {
 
-		MealTo mealTo = prepareMealTo();
+		MealTO mealTO = prepareMealTO();
 
 		MealConverter mealConverter = new MealConverter();
 
-		Meal meal = mealConverter.convert(mealTo);
+		Meal meal = mealConverter.convert(mealTO);
 
-		Assert.assertEquals(meal.getMealId(), mealTo.getMealId());
-		Assert.assertEquals(meal.getDescription(), mealTo.getDescription());
-		Assert.assertEquals(meal.isAvailable(), mealTo.isAvailable());
-		Assert.assertEquals(meal.getIngredients().size(), mealTo.getIngredients().size());
+		Assert.assertEquals(meal.getMealId(), mealTO.getMealId());
+		Assert.assertEquals(meal.getDescription(), mealTO.getDescription());
+		Assert.assertEquals(meal.isAvailable(), mealTO.isAvailable());
+		Assert.assertEquals(meal.getIngredients().size(), mealTO.getIngredients().size());
 
 	}
 
-	public MealTo prepareMealTo() {
-		MealTo mealTo = new MealTo();
-		mealTo.setMealId(UUID.randomUUID());
-		mealTo.setDescription("this is a meal to description");
-		mealTo.setAvailable(true);
-		mealTo.setIngredients(new ArrayList<Ingredients>() {
+	public MealTO prepareMealTO() {
+		MealTO mealTO = new MealTO();
+		mealTO.setMealId(UUID.randomUUID());
+		mealTO.setDescription("this is a meal TO description");
+		mealTO.setAvailable(true);
+		mealTO.setIngredients(new ArrayList<Ingredients>() {
 			{
 				add(new Ingredients("Tomatoes", 30, 30, 30));
 			}
 		});
-		return mealTo;
+		return mealTO;
 	}
 }
