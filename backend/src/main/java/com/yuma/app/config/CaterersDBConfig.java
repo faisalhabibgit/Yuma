@@ -2,7 +2,7 @@ package com.yuma.app.config;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,7 +44,6 @@ public class CaterersDBConfig {
 		return strings -> {
 			catererRepository.save(new Caterer(UUID.randomUUID(), "OrelMoisa", "orelmoisa@gmail.com", new Address(5601, "smart", "CSL", "QC", "Canada", "H4W2m4"), "chinese", new ArrayList<>(), "234"));
 
-
 		};
 	}
 
@@ -58,8 +57,8 @@ public class CaterersDBConfig {
 		ingredientsList.add(ingredient4);
 
 		return strings -> {
-			mealRepository.save(new Meal(ingredientsList, UUID.randomUUID(), "chicken anshit", true));
-			mealRepository.save(new Meal(ingredientsList, UUID.randomUUID(), "Beef nshiet", true));
+			mealRepository.save(new Meal(ingredientsList, UUID.randomUUID(), "chicken anshit", true, new HashSet<>()));
+			mealRepository.save(new Meal(ingredientsList, UUID.randomUUID(), "Beef nshiet", true, new HashSet<>()));
 
 		};
 	}
@@ -68,9 +67,9 @@ public class CaterersDBConfig {
 	CommandLineRunner commandLineRunner3(ConsumersRepository consumersRepository) {
 		logger.info("this is logging stuff into the DB");
 		return strings -> {
-			consumersRepository.save(new Consumer(UUID.randomUUID(), "Ahmad", "baiazid", "ahmad.lego@gmail.com", "ahmad.lego@work.com", new Preferences(2, true, false, new HashMap<>()), "20190807"));
+			consumersRepository.save(new Consumer(UUID.randomUUID(), "Ahmad", "baiazid", "ahmad.lego@gmail.com", "ahmad.lego@work.com", new Preferences(2, true, false, new HashSet<>()), "20190807"));
 
-			consumersRepository.save(new Consumer(UUID.randomUUID(), "Nate", "Lego", "nate.lego@gmail.com", "nate.lego@work.com", new Preferences(2, true, false, new HashMap<>()), "20190807"));
+			consumersRepository.save(new Consumer(UUID.randomUUID(), "Nate", "Lego", "nate.lego@gmail.com", "nate.lego@work.com", new Preferences(2, true, false, new HashSet<>()), "20190807"));
 		};
 	}
 }

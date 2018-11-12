@@ -1,6 +1,6 @@
 package com.yuma.app.document;
 
-import java.util.HashMap;
+import java.util.HashSet;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,5 +18,5 @@ public class Preferences {
 	private int numOfMeals;
 	private boolean extraVeggies;
 	private boolean extraProtein;
-	private HashMap<String, Boolean> preferences;
+	private HashSet<String> preferences;
 }

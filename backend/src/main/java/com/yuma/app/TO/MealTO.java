@@ -1,5 +1,6 @@
-package com.yuma.app.to;
+package com.yuma.app.TO;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,12 +15,14 @@ import com.yuma.app.document.Ingredients;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MealTo {
+public class MealTO {
 
 	protected List<Ingredients> ingredients;
 	private UUID mealId;
 	private String description;
 	private boolean isAvailable;
+	private HashSet<String> flags;
+
 
 	@Override
 	public String toString() {
@@ -28,6 +31,7 @@ public class MealTo {
 			", description='" + description + '\'' +
 			", isAvailable=" + isAvailable +
 			", ingredients=" + ingredients +
+			", flags=" + flags +
 			'}';
 	}
 
