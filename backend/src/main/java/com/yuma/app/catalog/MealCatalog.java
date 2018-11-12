@@ -31,8 +31,6 @@ public class MealCatalog {
 		for(Consumer consumer : activeConsumers){
 			generatePossibleMeals(availableMeals, consumer);
 		}
-		
-		
 
 		return null;
 	}
