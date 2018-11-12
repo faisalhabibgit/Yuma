@@ -9,6 +9,28 @@ export default class Meal extends React.Component{
       mealArray: [],
     }
   }
+  //lifecycle method fetch + api call
+    componentDidMount() {
+      fetch('https://randomuser.me/api/?results=500').then(results => {
+        return results.json();    //result is a json
+      }).then(data => {
+        let pictures = data.results.map((pic) => {    //map over the data
+          return(
+            <div key={meals.mealId}>        //setting the key
+              <ul>                          //setting display
+                <li>{meals.mealId}</li>
+                <li>{meals.description}</li>
+                <li>{meals.ingredients}</li>
+                <li>{meals.available}</li>
+              </ul>
+            </div>
+          )
+        })
+        this.setState({mealArray: mealArray});  //set the state with this.setState
+      })
+    }
+
+
 
   //the following code will change once we have api calls that gets meal from specific chef
   // showModifyForm(){
