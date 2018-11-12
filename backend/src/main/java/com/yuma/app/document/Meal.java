@@ -1,5 +1,6 @@
 package com.yuma.app.document;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,14 +24,16 @@ public class Meal {
 	private UUID mealId;
 	private String description;
 	private boolean isAvailable;
+	private HashSet<String> flags;
 
 	@Override
 	public String toString() {
 		return "Meal{" +
-			"mealId=" + mealId +
+			"ingredients=" + ingredients +
+			", mealId=" + mealId +
 			", description='" + description + '\'' +
 			", isAvailable=" + isAvailable +
-			", ingredients=" + ingredients +
+			", flags=" + flags +
 			'}';
 	}
 
@@ -38,5 +41,7 @@ public class Meal {
 		this.setDescription(mealToUpdate.getDescription());
 		this.setAvailable(mealToUpdate.isAvailable());
 		this.setIngredients(mealToUpdate.getIngredients());
+		this.setFlags(mealToUpdate.getFlags());
+
 	}
 }
