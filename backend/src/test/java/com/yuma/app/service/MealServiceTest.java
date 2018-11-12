@@ -3,7 +3,7 @@ import com.querydsl.core.types.Predicate;
 import com.yuma.app.document.Meal;
 import com.yuma.app.document.QMeal;
 import com.yuma.app.repository.MealRepository;
-import com.yuma.app.TO.MealTO;
+import com.yuma.app.to.MealTO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
