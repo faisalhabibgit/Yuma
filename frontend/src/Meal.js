@@ -32,10 +32,9 @@ export default class Meal extends React.Component{
 
     render() {
       return {
-        <div className="container">
+        <div>
           {this.state.mealArray}
         </div>
-
       }
     }
   //the following code will change once we have api calls that gets meal from specific chef
