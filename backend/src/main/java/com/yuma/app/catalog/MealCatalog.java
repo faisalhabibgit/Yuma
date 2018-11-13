@@ -1,58 +1,55 @@
 package com.yuma.app.catalog;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Meal;
 
+@Slf4j
 @Document
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class MealCatalog {
-	private HashMap<Meal, Integer> possibleMeals;
+	private HashMap<Meal, Integer> mealsMap = new HashMap<>();
 	private ArrayList<Meal> meals;
 	private ArrayList<Consumer> consumers;
+	private Logger logger = LoggerFactory.getLogger("caterer logger");
 
-	public MealCatalog(ArrayList<Meal> meals, ArrayList<Consumer> consumers) {
-		this.possibleMeals = new HashMap<>();
-		this.meals = meals;
-		this.consumers = consumers;
-	}
-
-	public ArrayList<Meal> getWeeklyCombination(ArrayList<Meal> availableMeals, ArrayList<Consumer> activeConsumers) {
-		for(Consumer consumer : activeConsumers){
+	public List<Meal> getWeeklyCombination(List<Meal> availableMeals, List<Consumer> activeConsumers) {
+		List<Meal> possibleMeals = new ArrayList<>();
+		logger.info("generating combo meals");
+		
+		for (Consumer consumer : activeConsumers) {
 			generatePossibleMeals(availableMeals, consumer);
 		}
-		
-		
+		mealsMap = sortByValue(mealsMap);
 
-		return null;
-	}
-	
-	private void generatePossibleMeals(ArrayList<Meal> meals,Consumer consumer){
-		int i = 0;
-		while (i<4){
-			for (Meal meal : meals) {
-				if (equals(meal.getFlags(), consumer.getPreferences().getDetails())){
-					if (possibleMeals.get(meal) != null){
-						int mealReps = possibleMeals.get(meal);
-						possibleMeals.put(meal, mealReps++);
-					}
-					else {
-						possibleMeals.put(meal, 1);
-					}
-				}
-			}
-			i++;
-		}
+		logger.info("creting meals arraylist");
+
+		possibleMeals.addAll(mealsMap.keySet());
+
+		return possibleMeals;
 	}
 
 	private static int randomIntGenerator(int upperBound) {
@@ -61,17 +58,56 @@ public class MealCatalog {
 		return rand.nextInt(upperBound);
 	}
 
-	public static boolean equals(HashSet<?> set1, HashSet<?> set2){
+	private boolean equals(HashSet<?> set1, HashSet<?> set2) {
 
-		if(set1 == null || set2 ==null){
+		if (set1 == null || set2 == null) {
 			return false;
 		}
 
-		if(set1.size()!=set2.size()){
+		if (set1.size() != set2.size()) {
 			return false;
 		}
 
 		return set1.containsAll(set2);
 
 	}
+
+	private HashMap<Meal, Integer> sortByValue(HashMap<Meal, Integer> pm) {
+		// Create a list from elements of HashMap 
+		logger.info("sorting hashmap");
+
+		List<Map.Entry<Meal, Integer>> list = new LinkedList<>(pm.entrySet());
+
+		// Sort the list 
+		Collections.sort(list, new Comparator<Map.Entry<Meal, Integer>>() {
+			public int compare(Map.Entry<Meal, Integer> o1, Map.Entry<Meal, Integer> o2) {
+				return (o2.getValue()).compareTo(o1.getValue());
+			}
+		});
+
+		// put data from sorted list to hashmap
+		HashMap<Meal, Integer> temp = new LinkedHashMap<>();
+		for (Map.Entry<Meal, Integer> aa : list) {
+			temp.put(aa.getKey(), aa.getValue());
+		}
+		return temp;
+	}
+
+	private void generatePossibleMeals(List<Meal> meals, Consumer consumer) {
+		logger.info("inside generate possible meals");
+		int i = 0;
+		while (i < 4) {
+			Meal meal = meals.get(randomIntGenerator(meals.size()));
+			if (equals(meal.getFlags(), consumer.getPreferences().getDetails())) {
+				if (mealsMap.get(meal) != null) {
+					int mealReps = mealsMap.get(meal);
+					mealsMap.put(meal, mealReps++);
+				} else {
+					mealsMap.put(meal, 1);
+				}
+			}
+			i++;
+		}
+	}
+	
 }

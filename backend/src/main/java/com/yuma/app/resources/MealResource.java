@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.querydsl.core.types.Predicate;
-import com.yuma.app.to.MealTO;
 import com.yuma.app.document.QMeal;
 import com.yuma.app.service.MealService;
+import com.yuma.app.to.MealTO;
 
 @Slf4j
 @RestController
@@ -46,6 +46,11 @@ public class MealResource {
 		Predicate predicate = qMeal.description.eq(description);
 		logger.info("retrieving meals list from DB by description {}", description);
 		return this.mealService.listByPredicate(predicate);
+	}
+	
+	@GetMapping("/weeklyCombo")
+	public List<MealTO> getWeeklyCombo(){
+		return this.mealService.weeklyCombo();
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
