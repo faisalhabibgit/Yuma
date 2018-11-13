@@ -44,5 +44,14 @@ public class Caterer {
 
 	}
 
+	public void updateFrom(Caterer catererToUpdate) {
+		this.setName(catererToUpdate.getName());
+		this.setEmail(catererToUpdate.getEmail());
+		this.setAddress(catererToUpdate.getAddress());
+		this.setSpecialty(catererToUpdate.getSpecialty());
+		this.setMeals(catererToUpdate.getMeals());
+		this.setTimestamp(catererToUpdate.getTimestamp());
+	}
+
 
 }
