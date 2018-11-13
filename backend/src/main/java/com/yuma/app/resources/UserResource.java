@@ -15,7 +15,7 @@ import com.yuma.app.repository.ConsumersRepository;
 
 @Slf4j
 @RestController
-@RequestMapping("/rest")
+@RequestMapping("api/rest")
 public class UserResource {
 
 	final Logger logger = LoggerFactory.getLogger("initial Logger");
