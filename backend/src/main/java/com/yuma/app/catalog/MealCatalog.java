@@ -45,9 +45,11 @@ public class MealCatalog {
 		}
 		mealsMap = sortByValue(mealsMap);
 
-		logger.info("creting meals arraylist");
+		logger.info("creating meals arraylist");
 
 		possibleMeals.addAll(mealsMap.keySet());
+		
+		possibleMeals = filterList(possibleMeals);
 
 		return possibleMeals;
 	}
@@ -100,8 +102,8 @@ public class MealCatalog {
 			Meal meal = meals.get(randomIntGenerator(meals.size()));
 			if (equals(meal.getFlags(), consumer.getPreferences().getDetails())) {
 				if (mealsMap.get(meal) != null) {
-					int mealReps = mealsMap.get(meal);
-					mealsMap.put(meal, mealReps++);
+					Integer mealReps = mealsMap.get(meal) + 1;
+					mealsMap.put(meal, mealReps);
 				} else {
 					mealsMap.put(meal, 1);
 				}
@@ -110,4 +112,14 @@ public class MealCatalog {
 		}
 	}
 	
+	private List<Meal> filterList(List<Meal> mealList){
+		List<Meal> filteredList = new ArrayList<>();
+		
+		for(int i=0; i<3; i++){
+			filteredList.add(mealList.get(i));
+		}
+		
+		return filteredList;
+		
+	}
 }

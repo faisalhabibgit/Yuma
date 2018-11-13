@@ -47,9 +47,9 @@ public class MealResource {
 		logger.info("retrieving meals list from DB by description {}", description);
 		return this.mealService.listByPredicate(predicate);
 	}
-	
+
 	@GetMapping("/weeklyCombo")
-	public List<MealTO> getWeeklyCombo(){
+	public List<MealTO> getWeeklyCombo() {
 		return this.mealService.weeklyCombo();
 	}
 
@@ -60,8 +60,8 @@ public class MealResource {
 	}
 
 	@DeleteMapping("/delete/{mealId}")
-	public void deleteMeal(@PathVariable UUID mealId){
+	public void deleteMeal(@PathVariable UUID mealId) {
 		logger.info("deleting meal with mealId {}", mealId);
-		 this.mealService.deleteMeal(mealId);
+		this.mealService.deleteMeal(mealId);
 	}
 }

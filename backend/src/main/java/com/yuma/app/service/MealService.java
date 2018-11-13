@@ -28,12 +28,9 @@ public class MealService {
 		this.mealRepository = mealRepository;
 		this.consumersRepository = consumersRepository;
 		this.conversionService = conversionService;
-		this.mealCatalog = mealCatalog;
 	}
 
 	public List<MealTO> listByPredicate(Predicate predicate) {
-
-
 		List<MealTO> mealTos = new ArrayList<>();
 		List<Meal> mealList = Helper.toMealList(mealRepository.findAll(predicate));
 
@@ -44,7 +41,6 @@ public class MealService {
 	}
 
 	public List<MealTO> list() {
-
 		List<MealTO> mealTos = new ArrayList<>();
 		List<Meal> mealList = mealRepository.findAll();
 
@@ -55,7 +51,6 @@ public class MealService {
 	}
 
 	public MealTO update(MealTO mealTo) {
-
 		Meal meal = mealRepository.findOne(mealTo.getMealId());
 
 		if (meal == null) {
@@ -67,27 +62,23 @@ public class MealService {
 		meal = mealRepository.save(meal);
 		return conversionService.convert(meal, MealTO.class);
 	}
-	
-	public List<MealTO> weeklyCombo(){
+
+	public List<MealTO> weeklyCombo() {
 		List<MealTO> mealTOS = new ArrayList<>();
 		List<Meal> mealList = mealRepository.findAll();
 		List<Consumer> consumerList = consumersRepository.findAll();
-		//List<ConsumerTO> consumersTOs = new ArrayList<>();
-//		for (Consumer consumerTO: consumerList){
-//			consumersTOs.add(conversionService.convert(consumerTO, ConsumerTO.class));
-//		}
-		
+
 		mealList = mealCatalog.getWeeklyCombination(mealList, consumerList);
 
 		for (Meal meal : mealList) {
 			mealTOS.add(conversionService.convert(meal, MealTO.class));
 		}
-		
+
 		return mealTOS;
-		
+
 	}
-	
-	public void deleteMeal(UUID mealId){
-		 mealRepository.delete(mealRepository.findOne(mealId));
+
+	public void deleteMeal(UUID mealId) {
+		mealRepository.delete(mealRepository.findOne(mealId));
 	}
 }
