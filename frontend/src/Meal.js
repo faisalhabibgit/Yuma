@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 export default class Meal extends React.Component{
   constructor(props){
@@ -11,13 +12,17 @@ export default class Meal extends React.Component{
   }
   //lifecycle method fetch + api call
     componentDidMount() {
-      fetch('https://randomuser.me/api/?results=500').then(results => {
+      fetch('http://localhost:9000/meals').then(results => {
+        console.log("results is the following");
+        console.log(results)
         return results.json();    //result is a json
       }).then(data => {
-        let pictures = data.results.map((pic) => {    //map over the data
+        let mealArray = data.results.map((meals) => {    //map over the data
+          // console.log("logging stuff !!!!!")
+          // console.log(meals);
           return(
-            <div key={meals.mealId}>        //setting the key
-              <ul>                          //setting display
+            <div key={meals.mealId}>        {/*setting the key*/}
+              <ul>                          {/*setting display*/}
                 <li>{meals.mealId}</li>
                 <li>{meals.description}</li>
                 <li>{meals.ingredients}</li>
@@ -31,11 +36,13 @@ export default class Meal extends React.Component{
     }
 
     render() {
-      return {
-        <div>
-          {this.state.mealArray}
+      return (
+        <div className="Container">
+          <div className="Meals">
+            {this.state.mealArray}
+          </div>
         </div>
-      }
+      )
     }
   //the following code will change once we have api calls that gets meal from specific chef
   // showModifyForm(){
