@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @Slf4j
 @RestController
-@RequestMapping("/caterer")
+@RequestMapping("api/caterer")
 public class CatererResource {
 
 	final Logger logger = LoggerFactory.getLogger("caterer Logger");
