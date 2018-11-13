@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Registration from './Registration';
 
 class LoginCaterer extends Component {
   constructor() {
@@ -65,15 +66,26 @@ class LoginCaterer extends Component {
           <label>User Name</label>
           <input type="text" data-test="username" value={this.state.username} onChange={this.handleUserChange} />
           
-          <br />
+          <br/>
           
           <label>Password</label>
           <input type="password" data-test="password" value={this.state.password} onChange={this.handlePassChange} />
           
-          <br />
+          <br/>
           <input type="submit" value="Log In" data-test="submit" />
-          
+          <br/>
           <Link to="/ForgotPassword">ForgotPassword</Link>
+          
+          <Link style={{ margin:25}} to="/Registration">Registration</Link>
+          <Route exact path="/Registration" component={Registration} />
+
+          <br/>
+          <br/>
+          <Link to="/App">
+            <button type="button">
+              Go back home
+            </button>
+          </Link>
           
         </form>
       </div>

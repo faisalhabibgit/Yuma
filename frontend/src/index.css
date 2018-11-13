@@ -21,3 +21,13 @@ label {
 input {
   margin: 5px;
 }
+
+.buttonSize{
+	height:75px;
+	width:150px;
+	margin: 50px;
+}
+
+.originInterface{
+	margin-top:25px;
+}
