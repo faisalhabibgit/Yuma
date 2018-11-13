@@ -52,7 +52,7 @@ public class MealResourceTest {
 	}
 
 	@Test
-	public void MealResourceGetAllTest() {
+	public void mealResourceGetAllTest() {
 		List<MealTO> actualMeals = new ArrayList<>();
 		actualMeals.add(mealTO1);
 		actualMeals.add(mealTO2);
@@ -63,7 +63,7 @@ public class MealResourceTest {
 	}
 
 	@Test
-	public void MealResourceUpdateTest() {
+	public void mealResourceUpdateTest() {
 		
 		Mockito.when(mealService.update(mealTO1)).thenReturn(mealTO1updated);
 		
