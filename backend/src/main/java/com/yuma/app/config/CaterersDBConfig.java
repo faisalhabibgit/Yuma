@@ -1,29 +1,12 @@
 package com.yuma.app.config;
 
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.UUID;
-
 import lombok.extern.slf4j.Slf4j;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import com.yuma.app.document.Address;
-import com.yuma.app.document.Caterer;
-import com.yuma.app.document.Consumer;
-import com.yuma.app.document.Ingredients;
-import com.yuma.app.document.Meal;
-import com.yuma.app.document.Preferences;
 import com.yuma.app.repository.CatererRepository;
-import com.yuma.app.repository.ConsumersRepository;
-import com.yuma.app.repository.MealRepository;
 
 @Slf4j
 @EnableMongoRepositories(basePackageClasses = CatererRepository.class)
@@ -44,7 +27,7 @@ public class CaterersDBConfig {
 //		return strings -> {
 //			catererRepository.save(new Caterer(UUID.randomUUID(), "OrelMoisa", "orelmoisa@gmail.com", new Address(5601, "smart", "CSL", "QC", "Canada", "H4W2m4"), "chinese", new ArrayList<>(), "234"));
 //			catererRepository.save(new Caterer(UUID.randomUUID(), "JohnSmith", "johnsmith@gmail.com", new Address(1601, "clever", "CSL", "QC", "Canada", "H4L7I8"), "greek", new ArrayList<>(), "20190807"));
-
+//
 //
 //		};
 //	}
