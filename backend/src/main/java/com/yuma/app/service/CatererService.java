@@ -38,8 +38,8 @@ public class CatererService {
 		List<CatererTO> catererTos = new ArrayList<>();
 		List<Caterer> catererList = catererRepository.findAll();
 
-		for (Caterer meal : catererList) {
-			catererTos.add(conversionService.convert(meal, CatererTO.class));
+		for (Caterer caterer : catererList) {
+			catererTos.add(conversionService.convert(caterer, CatererTO.class));
 		}
 		return catererTos;
 	}
