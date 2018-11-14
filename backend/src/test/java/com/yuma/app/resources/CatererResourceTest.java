@@ -52,7 +52,7 @@ public class CatererResourceTest {
 	}
 
 	@Test
-	public void mealResourceGetAllTest() {
+	public void catererResourceGetAllTest() {
 		List<CatererTO> actualCaterers = new ArrayList<>();
 		actualCaterers.add(catererTO1);
 		actualCaterers.add(catererTO2);
@@ -63,7 +63,7 @@ public class CatererResourceTest {
 	}
 
 	@Test
-	public void mealResourceUpdateTest() {
+	public void catererResourceUpdateTest() {
 
 		Mockito.when(catererService.update(catererTO1)).thenReturn(catererTO1updated);
 
