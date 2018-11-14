@@ -21,20 +21,41 @@ class App extends Component {
             <img src={logo} className="App-logo" alt="logo" />
             <h2>Welcome to Yuma Ops!</h2>
           </div>
-          <div className="navbar">
-            <Link className="navbutton" to="/">Home</Link>
-            <Link className="navbutton" to="/LoginCaterer">Login</Link>
-            <Link className="navbutton" to="/Registration">Registration</Link>
-            <Link className="navbutton" to="/meals">Meal</Link>
-            <Link className="navbutton" to="/TestMeals">testing Meal</Link>
-          </div>
-          <hr />
 
-          <Route exact path="/LoginCaterer" component={LoginCaterer} />
-          <Route exact path="/Registration" component={Registration} />
-          <Route exact path="/ForgotPassword" component={ForgotPassword} />
-          <Route exact path="/meals" component={Meal} />
-          <Route exact path="/testMeals" component={TestMeal} />
+          {/*<div className="navbar">*/}
+            {/*<Link className="navbutton" to="/">Home</Link>*/}
+            {/*<Link className="navbutton" to="/LoginCaterer">Login</Link>*/}
+            {/*<Link className="navbutton" to="/Registration">Registration</Link>*/}
+          {/*</div>*/}
+          {/*<hr />*/}
+
+          {/*<Route exact path="/LoginCaterer" component={LoginCaterer} />*/}
+
+          {/*<Route exact path="/ForgotPassword" component={ForgotPassword} />*/}
+            <center>
+              <h2>
+                Please Identify Yourself:
+              </h2>
+
+              <div className="originInterface">
+                <Link to="/LoginCaterer">
+                <button className="buttonSize" type="button">
+                  Caterer
+                </button>
+              </Link>
+              <Link to="/LoginCaterer" class="size">
+                <button className="buttonSize" type="button">
+                  Customers
+                </button>
+              </Link>
+                <Route exact path="/ForgotPassword" component={ForgotPassword} />
+                <Route exact path="/Registration" component={Registration} />
+                <Route exact path="/LoginCaterer" component={LoginCaterer} />
+                <Route exact path="/meals" component={Meals} />
+                <Route exact path="/mealsTest" component={TestMeal} />
+              </div>
+            </center>
+
 
         </div>
        </Router>

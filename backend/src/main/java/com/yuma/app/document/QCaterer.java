@@ -19,9 +19,10 @@ import com.querydsl.core.types.dsl.StringPath;
 @Generated("com.querydsl.codegen.EntitySerializer")
 public class QCaterer extends EntityPathBase<Caterer> {
 
-	public static final QCaterer caterer = new QCaterer("caterer");
 	private static final long serialVersionUID = -1591563141L;
 	private static final PathInits INITS = PathInits.DIRECT2;
+	public static final QCaterer caterer = new QCaterer("caterer");
+
 	public final QAddress address;
 
 	public final StringPath email = createString("email");

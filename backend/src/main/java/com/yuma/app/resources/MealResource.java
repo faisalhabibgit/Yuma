@@ -1,12 +1,14 @@
 package com.yuma.app.resources;
 
 import java.util.List;
+import java.util.UUID;
 
 import lombok.extern.slf4j.Slf4j;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,5 +52,11 @@ public class MealResource {
 	public MealTO update(@RequestBody MealTO mealTO) {
 		logger.info("updating meal into the database");
 		return this.mealService.update(mealTO);
+	}
+
+	@DeleteMapping("/delete/{mealId}")
+	public void deleteMeal(@PathVariable UUID mealId){
+		logger.info("deleting meal with mealId {}", mealId);
+		 this.mealService.deleteMeal(mealId);
 	}
 }
