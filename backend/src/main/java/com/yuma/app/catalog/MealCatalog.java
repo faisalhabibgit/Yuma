@@ -82,6 +82,7 @@ public class MealCatalog {
 
 		// Sort the list 
 		Collections.sort(list, new Comparator<Map.Entry<Meal, Integer>>() {
+			@Override
 			public int compare(Map.Entry<Meal, Integer> o1, Map.Entry<Meal, Integer> o2) {
 				return (o2.getValue()).compareTo(o1.getValue());
 			}

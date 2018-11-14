@@ -48,7 +48,7 @@ public class MealResource {
 		return this.mealService.listByPredicate(predicate);
 	}
 
-	@GetMapping("/weeklyCombo")
+	@GetMapping("/weeklycombo")
 	public List<MealTO> getWeeklyCombo() {
 		return this.mealService.weeklyCombo();
 	}

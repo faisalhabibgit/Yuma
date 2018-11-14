@@ -1,11 +1,13 @@
 package com.yuma.app.resources;
 
-import com.yuma.app.document.Consumer;
-import com.yuma.app.document.Preferences;
-import com.yuma.app.repository.ConsumersRepository;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.UUID;
+import java.util.logging.Logger;
+
 import org.junit.Assert;
 import org.junit.Before;
-import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -15,10 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.UUID;
-import java.util.logging.Logger;
+
+import com.yuma.app.document.Consumer;
+import com.yuma.app.document.Preferences;
+import com.yuma.app.repository.ConsumersRepository;
+import com.yuma.app.to.ConsumerTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -32,7 +35,7 @@ public class UserResourceTest {
 	
 
 	@Autowired
-	private UserResource userResource;
+	private ConsumerResource consumerResource;
 	
 	private Consumer consumer1;
 	private Consumer consumer2;
@@ -55,7 +58,7 @@ public class UserResourceTest {
 
 		Mockito.when(consumerRepository.findAll()).thenReturn(actualConsumers);
 
-		List<Consumer> expectedConsumers = userResource.getAll();
+		List<ConsumerTO> expectedConsumers = consumerResource.getAll();
 
 		Assert.assertEquals(expectedConsumers,actualConsumers);
 		
