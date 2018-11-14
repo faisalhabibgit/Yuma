@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import LoginCaterer from './LoginCaterer';
 import Registration from './Registration';
 import Meal from './Meal';
+import TestMeal from './TestMeal';
 
 import ForgotPassword from './ForgotPassword';
 
@@ -24,7 +25,8 @@ class App extends Component {
             <Link className="navbutton" to="/">Home</Link>
             <Link className="navbutton" to="/LoginCaterer">Login</Link>
             <Link className="navbutton" to="/Registration">Registration</Link>
-            <Link className="navbutton" to="/meals">testing Meal</Link>
+            <Link className="navbutton" to="/meals">Meal</Link>
+            <Link className="navbutton" to="/TestMeals">testing Meal</Link>
           </div>
           <hr />
 
@@ -32,6 +34,7 @@ class App extends Component {
           <Route exact path="/Registration" component={Registration} />
           <Route exact path="/ForgotPassword" component={ForgotPassword} />
           <Route exact path="/meals" component={Meal} />
+          <Route exact path="/testMeals" component={TestMeal} />
 
         </div>
        </Router>

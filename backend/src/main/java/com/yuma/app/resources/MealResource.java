@@ -21,7 +21,7 @@ import com.yuma.app.service.MealService;
 
 @Slf4j
 @RestController
-@RequestMapping("/meals")
+@RequestMapping("api/meals")
 public class MealResource {
 
 	final Logger logger = LoggerFactory.getLogger("meal Logger");
