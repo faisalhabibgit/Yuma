@@ -16,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.yuma.app.document.Consumer;
@@ -33,6 +34,8 @@ public class UserResourceTest {
 	@Mock
 	private Logger logger;
 	
+	@Mock
+	ConversionService conversionService;
 
 	@Autowired
 	private ConsumerResource consumerResource;
@@ -57,10 +60,12 @@ public class UserResourceTest {
 		actualConsumers.add(consumer2);
 
 		Mockito.when(consumerRepository.findAll()).thenReturn(actualConsumers);
+		Mockito.when(conversionService.convert(consumer1, ConsumerTO.class)).thenReturn(new ConsumerTO());
+		Mockito.when(conversionService.convert(consumer2, ConsumerTO.class)).thenReturn(new ConsumerTO());
 
 		List<ConsumerTO> expectedConsumers = consumerResource.getAll();
 
-		Assert.assertEquals(expectedConsumers,actualConsumers);
+		Assert.assertEquals(expectedConsumers.size(),actualConsumers.size());
 		
 		
 	}
