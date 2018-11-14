@@ -44,9 +44,6 @@ class App extends Component {
                   Customers
                 </button>
               </Link>
-                <Route exact path="/ForgotPassword" component={ForgotPassword} />
-                <Route exact path="/Registration" component={Registration} />
-                <Route exact path="/LoginCaterer" component={LoginCaterer} />
               </div>
             </center>
             
