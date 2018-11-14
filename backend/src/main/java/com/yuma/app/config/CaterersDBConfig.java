@@ -113,7 +113,7 @@ public class CaterersDBConfig {
 //		return strings -> {
 //			catererRepository.save(new Caterer(UUID.randomUUID(), "OrelMoisa", "orelmoisa@gmail.com", new Address(5601, "smart", "CSL", "QC", "Canada", "H4W2m4"), "chinese", new ArrayList<>(), "234"));
 //			catererRepository.save(new Caterer(UUID.randomUUID(), "JohnSmith", "johnsmith@gmail.com", new Address(1601, "clever", "CSL", "QC", "Canada", "H4L7I8"), "greek", new ArrayList<>(), "20190807"));
-
+//
 //
 //		};
 //	}

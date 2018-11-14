@@ -15,7 +15,7 @@ import com.yuma.app.to.ConsumerTO;
 
 @Slf4j
 @RestController
-@RequestMapping("/rest")
+@RequestMapping("api/rest")
 public class ConsumerResource {
 
 	final Logger logger = LoggerFactory.getLogger("initial Logger");

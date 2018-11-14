@@ -18,13 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.querydsl.core.types.Predicate;
 import com.yuma.app.document.QCaterer;
-import com.yuma.app.repository.CatererRepository;
 import com.yuma.app.service.CatererService;
 import com.yuma.app.to.CatererTO;
 
 @Slf4j
 @RestController
-@RequestMapping("/caterer")
+@RequestMapping("api/caterer")
 public class CatererResource {
 
 	final Logger logger = LoggerFactory.getLogger("caterer Logger");
@@ -33,12 +32,6 @@ public class CatererResource {
 	@Autowired
 	public CatererResource(CatererService catererService) {
 		this.catererService = catererService;
-	}
-
-	private CatererRepository catererRepository;
-
-	public CatererResource(CatererRepository catererRepository) {
-		this.catererRepository = catererRepository;
 	}
 
 	@GetMapping("/get")

@@ -23,7 +23,7 @@ import com.yuma.app.to.MealTO;
 
 @Slf4j
 @RestController
-@RequestMapping("/meals")
+@RequestMapping("api/meals")
 public class MealResource {
 
 	final Logger logger = LoggerFactory.getLogger("meal Logger");
