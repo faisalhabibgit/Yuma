@@ -1,22 +1,29 @@
 package com.yuma.app.resources;
 
-import com.querydsl.core.types.Predicate;
-import com.yuma.app.document.QCaterer;
-import com.yuma.app.repository.CatererRepository;
-import com.yuma.app.service.CatererService;
-import com.yuma.app.to.CatererTO;
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.UUID;
 
+import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.querydsl.core.types.Predicate;
+import com.yuma.app.document.QCaterer;
+import com.yuma.app.service.CatererService;
+import com.yuma.app.to.CatererTO;
+
 @Slf4j
 @RestController
-@RequestMapping("/caterer")
+@RequestMapping("api/caterer")
 public class CatererResource {
 
 	final Logger logger = LoggerFactory.getLogger("caterer Logger");
@@ -25,12 +32,6 @@ public class CatererResource {
 	@Autowired
 	public CatererResource(CatererService catererService) {
 		this.catererService = catererService;
-	}
-
-	private CatererRepository catererRepository;
-
-	public CatererResource(CatererRepository catererRepository) {
-		this.catererRepository = catererRepository;
 	}
 
 	@GetMapping("/get")
