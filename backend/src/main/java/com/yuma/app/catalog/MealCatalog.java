@@ -60,7 +60,7 @@ public class MealCatalog {
 		return rand.nextInt(upperBound);
 	}
 
-	private boolean equals(HashSet<?> set1, HashSet<?> set2) {
+	protected boolean equals(HashSet<?> set1, HashSet<?> set2) {
 
 		if (set1 == null || set2 == null) {
 			return false;
@@ -74,7 +74,7 @@ public class MealCatalog {
 
 	}
 
-	private HashMap<Meal, Integer> sortByValue(HashMap<Meal, Integer> pm) {
+	protected HashMap<Meal, Integer> sortByValue(HashMap<Meal, Integer> pm) {
 		// Create a list from elements of HashMap 
 		logger.info("sorting hashmap");
 
@@ -95,7 +95,7 @@ public class MealCatalog {
 		return temp;
 	}
 
-	private void generatePossibleMeals(List<Meal> meals, Consumer consumer) {
+	protected void generatePossibleMeals(List<Meal> meals, Consumer consumer) {
 		logger.info("inside generate possible meals");
 		int i = 0;
 		while (i < 4) {
@@ -112,7 +112,7 @@ public class MealCatalog {
 		}
 	}
 	
-	private List<Meal> filterList(List<Meal> mealList){
+	protected List<Meal> filterList(List<Meal> mealList) {
 		List<Meal> filteredList = new ArrayList<>();
 		
 		for(int i=0; i<3; i++){
