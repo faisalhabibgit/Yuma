@@ -48,10 +48,15 @@ class App extends Component {
                   Customers
                 </button>
               </Link>
+              <Link to="/mealsTest">
+              <button className="buttonSize" type="button">
+                mealsTest
+              </button>
+              </Link>
                 <Route exact path="/ForgotPassword" component={ForgotPassword} />
                 <Route exact path="/Registration" component={Registration} />
                 <Route exact path="/LoginCaterer" component={LoginCaterer} />
-                <Route exact path="/meals" component={Meals} />
+                <Route exact path="/meals" component={Meal} />
                 <Route exact path="/mealsTest" component={TestMeal} />
               </div>
             </center>

@@ -1,31 +1,38 @@
 import React, { Component } from 'react';
-
-const API = 'https://hn.algolia.com/api/v1/search?query=';
-const DEFAULT_QUERY = 'redux';
+const API = 'api/meals';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      hits: [],
+      mealsArray: [],
     };
   }
 
   componentDidMount() {
-    fetch(API + DEFAULT_QUERY)
+    console.log(fetch(API));
+    fetch(API)
       .then(response => response.json())
-      .then(data => this.setState({ hits: data.hits }));
+      .then(response => console.log(response))
+      .then(response => this.setState({ mealsArray: response })
+      .then(console.log(this.state.mealsArray))
+);
   }
-
   render() {
-    const { hits } = this.state;
+
+    const { mealsArray } = this.state;
 
     return (
       <ul>
-        {hits.map(hit =>
-          <li key={hit.objectID}>
-            <a href={hit.url}>{hit.title}</a>
+        {mealsArray.map(meals =>
+          <li key={meals.ingredients.mealId}>
+          <ul>
+          <li> { meals.ingredients.mealId } </li>
+          <li> { meals.ingredients.description } </li>
+          <li> { meals.ingredients.ingredients } </li>
+          <li> { meals.ingredients.available } </li>
+          </ul>
           </li>
         )}
       </ul>
