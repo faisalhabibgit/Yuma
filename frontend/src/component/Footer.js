@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, ListGroup, ListGroupItem} from 'reactstrap';
+import { Row, Col, ListGroup, ListGroupItem} from 'reactstrap';
 
 class Footer extends Component {
 
     render() {
         return (
-            <Container>
+            <div className="footer">
                 <hr/>
-                <Row>
+                <Row>        
                     <Col>
-                    <ListGroup flush>
+                    <ListGroup flush body outline color="success">
                         <ListGroupItem disabled tag="a" href="#">Yuma</ListGroupItem>
                         <ListGroupItem tag="a" href="#">About Us</ListGroupItem>
                         <ListGroupItem tag="a" href="#">Help</ListGroupItem>
@@ -42,7 +42,7 @@ class Footer extends Component {
                     </ListGroup>
                     </Col>
                 </Row>
-            </Container>
+            </div>
         );
     }
 }

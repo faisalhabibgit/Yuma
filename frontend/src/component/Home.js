@@ -6,23 +6,24 @@ import {
     CarouselControl,
     CarouselIndicators,
     CarouselCaption,
+    Container,
 } from 'reactstrap';
 
 const items = [
     {
-        src: 'http://images.dailyhive.com/20180605073010/Pulled-Chicken-Quesadilla.jpg',
+        src: 'https://www.yourerc.com/img/corporate-catering.jpg',
         altText: 'Slide 1',
-        caption: 'Pulled Chicken Quesadilla'
+        caption: 'Waffles and Jam'
     },
     {
-        src: 'http://www.gibraltartaxiassociation.com/wp-content/uploads/2017/05/gibraltar-food.jpg',
+        src: 'https://d1dwyql5lcncu.cloudfront.net/app/uploads/wideimage/775cc3d123dd35ff653bf55c6ae06005.jpeg',
         altText: 'Slide 2',
         caption: 'Gibraltar Shrimp'
     },
     {
-        src: 'https://learn.compactappliance.com/wp-content/uploads/2016/01/dehydrated-tomatoes.jpg',
+        src: 'https://www.spiritoftasmania.com.au/media/716956/2000x400_hero.jpg',
         altText: 'Slide 3',
-        caption: 'Dehydrated Tomatoes'
+        caption: 'Seafood Mix & Vegetables'
     }
 ];
 
