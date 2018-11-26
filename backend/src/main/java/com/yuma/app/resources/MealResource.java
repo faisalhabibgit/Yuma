@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.querydsl.core.types.Predicate;
-import com.yuma.app.to.MealTO;
 import com.yuma.app.document.QMeal;
 import com.yuma.app.service.MealService;
+import com.yuma.app.to.MealTO;
 
 @Slf4j
 @RestController
@@ -48,6 +48,11 @@ public class MealResource {
 		return this.mealService.listByPredicate(predicate);
 	}
 
+	@GetMapping("/weeklycombo")
+	public List<MealTO> getWeeklyCombo() {
+		return this.mealService.weeklyCombo();
+	}
+
 	@RequestMapping(method = RequestMethod.PUT)
 	public MealTO update(@RequestBody MealTO mealTO) {
 		logger.info("updating meal into the database");
@@ -55,8 +60,8 @@ public class MealResource {
 	}
 
 	@DeleteMapping("/delete/{mealId}")
-	public void deleteMeal(@PathVariable UUID mealId){
+	public void deleteMeal(@PathVariable UUID mealId) {
 		logger.info("deleting meal with mealId {}", mealId);
-		 this.mealService.deleteMeal(mealId);
+		this.mealService.deleteMeal(mealId);
 	}
 }
