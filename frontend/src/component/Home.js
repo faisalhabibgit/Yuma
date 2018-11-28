@@ -6,7 +6,6 @@ import {
     CarouselControl,
     CarouselIndicators,
     CarouselCaption,
-    Container,
 } from 'reactstrap';
 
 const items = [
