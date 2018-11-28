@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import LoginCaterer from './LoginCaterer';
 import Registration from './Registration';
 import Meal from './Meal';
-import TestMeal from './TestMeal';
 
 import ForgotPassword from './ForgotPassword';
 
@@ -48,7 +47,7 @@ class App extends Component {
                   Customers
                 </button>
               </Link>
-              <Link to="/mealsTest">
+              <Link to="/meals">
               <button className="buttonSize" type="button">
                 mealsTest
               </button>
@@ -57,7 +56,6 @@ class App extends Component {
                 <Route exact path="/Registration" component={Registration} />
                 <Route exact path="/LoginCaterer" component={LoginCaterer} />
                 <Route exact path="/meals" component={Meal} />
-                <Route exact path="/mealsTest" component={TestMeal} />
               </div>
             </center>
 

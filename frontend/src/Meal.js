@@ -1,89 +1,53 @@
-import React from 'react';
-import ReactDom from 'react-dom';
-// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React, { Component } from 'react';
+import MealComponent from './MealComponent';
+const API = 'api/meals';
 
-export default class Meal extends React.Component{
-  constructor(props){
+class Meal extends Component {
+  constructor(props) {
     super(props);
-    this.state={
-      meal:{chef: '', price: '', foodGroup: {}, description: '', availability: ''},
-      mealArray: [],
-      meals: [],
-    }
+
+    this.state = {
+      mealsArray: [],
+    };
+    this.setMeals = this.setMeals.bind(this);
   }
 
+componentDidMount(){
+  this.fetchData();
+}
 
-    // componentDidMount() {
-    //   fetch('api/meals')
-    //   .then(response => response.json())
-    //   .then(data => this.setState({ meals: data[0].meals}));
-    // }
+fetchData(){
+  fetch(API)
+  .then(response => response.json())
+  .then(this.setMeals);   //response gets passed into setMeals because javascript magic
+}
 
-  //lifecycle method fetch + api call
-    componentDidMount() {
-//fetch(<Router><Link className="apiCall" to="/meals"></Link></Router>).then(results => {
-      fetch('api/meals')
-        .then(results => {
-          if(results.ok){
-            console.log("results is the following");
-            console.log(results);
-            return results.json();
-          }else {
-            throw new Error('Something went Wrong with api/meals');
-          }
+setMeals(data){
 
-        return results;
-        // return results.json();    //result is a json
-      }).then(data => {
-        console.log(data.results);
-        let mealArray = data.results.map((ingredients) => {    //map over the data
-          // console.log("logging stuff !!!!!")
-          // console.log(meals);
+  this.setState({mealsArray:data})
+}
 
-          return(
-            <div key={ingredients.mealId}>        {/*setting the key*/}
-              <ul>                          {/*setting display*/}
-                <li>{ingredients.mealId}</li>
-                <li>{ingredients.description}</li>
-                <li>{ingredients.ingredients}</li>
-                <li>{ingredients.available}</li>
-              </ul>
-            </div>
-          )
-        })
-        this.setState({mealArray: mealArray});  //set the state with this.setState
-      })
-    }
-
-    render() {
-      return (
-        <div className="Container">
-          <div className="Meals">
-            {this.state.mealArray}
-          </div>
-        </div>
-      )
-    }
-  // the following code will change once we have api calls that gets meal from specific chef
-  // showModifyForm(){
-  //   let meal = {}
-  // }
-
-
+displayMeals(){
+  //this.state.mealsArray.map(meal=>console.log(meal));
+  return(
+  <ul>
+    {  this.state.mealsArray.map(meals =>
+      <MealComponent mealId={meals.mealId} description={meals.description} ingredients={meals.ingredients}/>
+    )}
+  </ul>
+  );
+}
 
   render() {
-    const { meals } = this.state;
 
+    //const {mealsArray}  = this.state;
+    console.log(this.state.mealsArray);
     return (
-      <ul>
-        {meals.map(ingredients =>
-          <li key={ingredients.ingredients.mealId}>
-            <li>{ingredients.ingredients.description}</li>
-            <li>{ingredients.ingredients.ingredients}</li>
-            <li>{ingredients.ingredients.available}</li>
-          </li>
-        )}
-      </ul>
+      <div>
+      {this.displayMeals()}
+      </div>
     );
   }
 }
+
+export default Meal;
