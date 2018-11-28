@@ -19,10 +19,10 @@ export default class MealComponent extends Component{
   render(){
     return(
       <li key={this.props.mealId}>
-      <ul>
-      <li> The Meal ID !!! { this.props.mealId } </li>
-      <li> Ingredients {this.displayIngredients()} </li>
-      <li> Description { this.props.description } </li>
+      <ul class="list-group">
+      <li class="card-header"> The Meal ID !!! { this.props.mealId } </li>
+      <li class="list-group-item"> Ingredients {this.displayIngredients()} </li>
+      <li class="list-group-item"> Description { this.props.description } </li>
       </ul>
       </li>
     )

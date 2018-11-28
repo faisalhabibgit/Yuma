@@ -43,7 +43,7 @@ displayMeals(){
     //const {mealsArray}  = this.state;
     console.log(this.state.mealsArray);
     return (
-      <div>
+      <div class="card">
       {this.displayMeals()}
       </div>
     );
