@@ -67,6 +67,11 @@ $ cd frontend
 $ ../mvnw frontend:install-node-and-yarn frontend:yarn
 ```
 
+###Front-end dependencies
+```
+$ npm i reactstrap
+````
+
 Once the above command finishes, you can start the frontend using the `yarn start` command.
 
 ## Hot reloading
