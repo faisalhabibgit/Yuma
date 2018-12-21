@@ -8,6 +8,7 @@ import Footer from './component/Footer'
 import Error from './component/Error'
 import Home from './component/Home'
 import Test from './component/Test'
+import NewMeal from './component/NewMeal'
 
 class App extends Component {
 
@@ -22,6 +23,7 @@ class App extends Component {
           <Route path="/LoginCaterer" component={LoginCaterer} />
           <Route path="/Registration" component={Registration} />
           <Route path="/Test" component={Test} />
+          <Route path="/NewMeal" component={NewMeal} />
           <Route component={Error} />
           </Switch>
           <Footer/>
