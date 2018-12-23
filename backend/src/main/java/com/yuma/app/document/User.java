@@ -34,11 +34,9 @@ public class User {
 	@DBRef
 	private Set<Role> roles;
 
-	public User(String uuid, String password, String email, boolean enabled) {
-		this.userId = uuid;
-		this.password = password;
+	public User(String email, String password) {
 		this.email = email;
-		this.enabled = enabled;
+		this.password = password;
 	}
 
 	@Override

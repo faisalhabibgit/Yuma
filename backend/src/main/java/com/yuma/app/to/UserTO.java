@@ -26,11 +26,9 @@ public class UserTO {
 	private String timestamp;
 	private Set<Role> roles;
 
-	public UserTO(String uuid,String password, String email, boolean enabled) {
-		this.userId = uuid;
-		this.password = password;
+	public UserTO(String email, String password) {
 		this.email = email;
-		this.enabled = enabled;
+		this.password = password;
 	}
 
 	@Override
