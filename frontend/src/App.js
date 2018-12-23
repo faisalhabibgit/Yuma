@@ -1,58 +1,37 @@
 import React, { Component } from 'react';
-import logo from './yuma.svg';
-import './App.css';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import LoginCaterer from './LoginCaterer';
-import Registration from './Registration';
+import LoginCaterer from './component/LoginCaterer';
+import Registration from './component/Registration';
+import Navigation from './component/Navigation'
+import Footer from './component/Footer'
+import Error from './component/Error'
+import Home from './component/Home'
+import Test from './component/Test'
+import Meal from './Meal';
 
-import ForgotPassword from './ForgotPassword';
+
+// import NavBar from './NavBar/NavBar.js';
 
 class App extends Component {
+
   render() {
     return (
-       <Router>
-        <div className="App">
-          <div className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h2>Welcome to Yuma Ops!</h2>
-          </div>
-          
-          {/*<div className="navbar">*/}
-            {/*<Link className="navbutton" to="/">Home</Link>*/}
-            {/*<Link className="navbutton" to="/LoginCaterer">Login</Link>*/}
-            {/*<Link className="navbutton" to="/Registration">Registration</Link>*/}
-          {/*</div>*/}
-          {/*<hr />*/}
-          
-          {/*<Route exact path="/LoginCaterer" component={LoginCaterer} />*/}
-          
-          {/*<Route exact path="/ForgotPassword" component={ForgotPassword} />*/}
-            <center>
-              <h2>
-                Please Identify Yourself:
-              </h2>
-              
-              <div className="originInterface">
-                <Link to="/LoginCaterer">
-                <button className="buttonSize" type="button">
-                  Caterer
-                </button>
-              </Link>
-              <Link to="/LoginCaterer" class="size">
-                <button className="buttonSize" type="button">
-                  Customers
-                </button>
-              </Link>
-                <Route exact path="/ForgotPassword" component={ForgotPassword} />
-                <Route exact path="/Registration" component={Registration} />
-                <Route exact path="/LoginCaterer" component={LoginCaterer} />
-              </div>
-            </center>
-            
-          
+      <BrowserRouter>
+        <div>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></link>
+          <Navigation />
+          <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/LoginCaterer" component={LoginCaterer} />
+          <Route path="/Registration" component={Registration} />
+          <Route path="/Test" component={Test} />
+          <Route path="/meals" component={Meal} />
+          <Route component={Error} />
+          </Switch>
+          <Footer/>
         </div>
-       </Router>
+      </BrowserRouter>
     );
   }
 }
