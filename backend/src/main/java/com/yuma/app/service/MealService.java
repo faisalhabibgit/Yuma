@@ -63,6 +63,14 @@ public class MealService {
 		return conversionService.convert(meal, MealTO.class);
 	}
 
+	public MealTO create(MealTO mealTo) {
+
+		mealTo.setMealId(UUID.randomUUID());
+		Meal mealToCreate = conversionService.convert(mealTo, Meal.class);
+		Meal meal = mealRepository.save(mealToCreate);
+		return conversionService.convert(meal, MealTO.class);
+	}
+
 	public List<MealTO> weeklyCombo() {
 		List<MealTO> mealTOS = new ArrayList<>();
 		List<Meal> mealList = mealRepository.findAll();
