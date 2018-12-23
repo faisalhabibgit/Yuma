@@ -1,9 +1,11 @@
 package com.yuma.app.service;
-import com.querydsl.core.types.Predicate;
-import com.yuma.app.document.Meal;
-import com.yuma.app.document.QMeal;
-import com.yuma.app.repository.MealRepository;
-import com.yuma.app.to.MealTO;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,10 +18,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.test.context.junit4.SpringRunner;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.UUID;
+
+import com.yuma.app.document.Meal;
+import com.yuma.app.repository.MealRepository;
+import com.yuma.app.to.MealTO;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MealServiceTest {
@@ -29,9 +31,6 @@ public class MealServiceTest {
 	
 	@Mock
 	private ConversionService conversionService;
-	
-	@Mock
-	private QMeal qMeal;
 	
 	@Autowired
 	private MealService mealService;
@@ -67,19 +66,15 @@ public class MealServiceTest {
 	@Test
 	public void MealServiceListByPredicateTest(){
 
-		QMeal qMeal = new QMeal("meal");
-		Predicate predicate = qMeal.description.eq("chicken");
-
-		List<Meal> mealsWithPredicate = new ArrayList<>();
-
-		mealsWithPredicate.add(meal1);
-		mealsWithPredicate.add(meal2);
+		String desc = "chicken";
+		Optional<Meal> optionalMeal = Optional.ofNullable(new Meal());
 		
-		Mockito.when(mealRepository.findAll(predicate)).thenReturn(mealsWithPredicate);
+		Mockito.when(mealRepository.findByDescription(desc)).thenReturn(optionalMeal);
+		Mockito.when(mealRepository.findByDescription(desc)).thenReturn(optionalMeal);
 		
-		List<MealTO> expectedMeals = mealService.listByPredicate(predicate);
+		MealTO expectedMeals = mealService.findByDescription(desc);
 
-		Assert.assertEquals(expectedMeals.size(), mealsWithPredicate.size());
+		Assert.assertNotNull(expectedMeals);
 		
 		
 	}

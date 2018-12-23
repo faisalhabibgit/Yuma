@@ -21,7 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.yuma.app.document.Consumer;
+import com.yuma.app.document.User;
 import com.yuma.app.document.Meal;
 
 @Slf4j
@@ -33,14 +33,14 @@ import com.yuma.app.document.Meal;
 public class MealCatalog {
 	private HashMap<Meal, Integer> mealsMap = new HashMap<>();
 	private ArrayList<Meal> meals;
-	private ArrayList<Consumer> consumers;
+	private ArrayList<User> consumers;
 	private Logger logger = LoggerFactory.getLogger("caterer logger");
 
-	public List<Meal> getWeeklyCombination(List<Meal> availableMeals, List<Consumer> activeConsumers) {
+	public List<Meal> getWeeklyCombination(List<Meal> availableMeals, List<User> activeUsers) {
 		List<Meal> possibleMeals = new ArrayList<>();
 		logger.info("generating combo meals");
 		
-		for (Consumer consumer : activeConsumers) {
+		for (User consumer : activeUsers) {
 			generatePossibleMeals(availableMeals, consumer);
 		}
 		mealsMap = sortByValue(mealsMap);
@@ -96,7 +96,7 @@ public class MealCatalog {
 		return temp;
 	}
 
-	protected void generatePossibleMeals(List<Meal> meals, Consumer consumer) {
+	protected void generatePossibleMeals(List<Meal> meals, User consumer) {
 		logger.info("inside generate possible meals");
 		int i = 0;
 		while (i < 4) {
