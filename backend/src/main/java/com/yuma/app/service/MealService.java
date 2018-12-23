@@ -2,6 +2,7 @@ package com.yuma.app.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.core.convert.ConversionService;
@@ -51,16 +52,16 @@ public class MealService {
 	}
 
 	public MealTO update(MealTO mealTo) {
-		Meal meal = mealRepository.findOne(mealTo.getMealId());
+		Optional<Meal> meal = mealRepository.findByMealId(mealTo.getMealId());
 
-		if (meal == null) {
+		if (!meal.isPresent()) {
 			throw new IllegalArgumentException("Entity doesn't exist in the database");
 		}
 
 		Meal mealToUpdate = conversionService.convert(mealTo, Meal.class);
-		meal.updateFrom(mealToUpdate);
-		meal = mealRepository.save(meal);
-		return conversionService.convert(meal, MealTO.class);
+		meal.get().updateFrom(mealToUpdate);
+		Meal newMealCreated = mealRepository.save(meal.get());
+		return conversionService.convert(newMealCreated, MealTO.class);
 	}
 
 	public MealTO create(MealTO mealTo) {

@@ -44,10 +44,10 @@ public class MealResourceTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		mealTO1 = new MealTO(new ArrayList<>(), UUID.randomUUID(), "chicken", false,new HashSet<>());
-		mealTO1updated = new MealTO(new ArrayList<>(), mealTO1.getMealId(), "chicken", true,new HashSet<>());
-		mealTO1Created = new MealTO(new ArrayList<>(), mealTO1.getMealId(), "chicken", false,new HashSet<>());
-		mealTO2 = new MealTO(new ArrayList<>(), UUID.randomUUID(), "mutton", true,new HashSet<>());
+		mealTO1 = new MealTO(new ArrayList<>(), UUID.randomUUID(), "chicken", "chicken", false,new HashSet<>());
+		mealTO1updated = new MealTO(new ArrayList<>(), mealTO1.getMealId(),"chicken", "chicken", true,new HashSet<>());
+		mealTO1Created = new MealTO(new ArrayList<>(), mealTO1.getMealId(), "chicken", "chicken", false,new HashSet<>());
+		mealTO2 = new MealTO(new ArrayList<>(), UUID.randomUUID(), "mutton", "mutton", true,new HashSet<>());
 		
 		MockitoAnnotations.initMocks(this);
 	}
