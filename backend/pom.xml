@@ -183,6 +183,7 @@
 					</generateGitPropertiesFilename>
 				</configuration>
 			</plugin>
+			<!-- Generation of qClasses plugin is used only needed when there are changes to the "document" files-->
 							<!--<plugin>-->
 							<!--<groupId>com.mysema.maven</groupId>-->
 							<!--<artifactId>apt-maven-plugin</artifactId>-->
