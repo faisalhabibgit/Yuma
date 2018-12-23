@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,12 +39,13 @@ public class UserService {
 
 	public void saveUser(UserTO userTO) {
 		userServiceLogger.info("saving user {}", userTO.getEmail());
+		
 		User user = conversionService.convert(userTO, User.class);
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setEnabled(true);
+		
 		Optional<Role> userRole = roleRepository.findByRole("ADMIN");
 		userRole.ifPresent(x -> userTO.setRoles(new HashSet<>(Collections.singletonList(x))));
-		user.setUserId(UUID.randomUUID());
 		userRepository.save(user);
 	}
 

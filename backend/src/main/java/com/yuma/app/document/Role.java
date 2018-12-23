@@ -1,7 +1,5 @@
 package com.yuma.app.document;
 
-import java.util.Set;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,10 +17,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 public class Role {
 	@Id
-	private Long id;
+	private String id;
 	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
-
 	private String role;
-	private Set<User> users;
-
 }

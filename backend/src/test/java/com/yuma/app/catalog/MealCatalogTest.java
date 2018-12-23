@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -142,7 +141,7 @@ public class MealCatalogTest {
 		Preferences preferences = new Preferences();
 		preferences.setNumOfMeals(1);
 		preferences.setDetails(prepareHashsetWithOnePreference());
-		User consumer = new User(UUID.randomUUID(),"jack","Sparrow", "baiazid", "ahmad.lego@gmail.com",new Preferences(2, true, false, new HashSet<>()), true,"20390807",new HashSet<>());
+		User consumer = new User("cxo","jack","Sparrow", "baiazid", "ahmad.lego@gmail.com",new Preferences(2, true, false, new HashSet<>()), true,"20390807",new HashSet<>());
 		return consumer;
 	}
 	

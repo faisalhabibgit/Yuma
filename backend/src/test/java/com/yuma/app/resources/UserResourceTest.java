@@ -3,7 +3,6 @@ package com.yuma.app.resources;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.UUID;
 import java.util.logging.Logger;
 
 import org.junit.Assert;
@@ -48,9 +47,9 @@ public class UserResourceTest {
 	public void setUp() throws Exception {
 
     //consumer1 = new User(UUID.randomUUID(), "Ahmad", "baiazid", "ahmad.lego@gmail.com", "ahmad.lego@work.com",new Preferences(2, true, false, new HashSet<>()), "20190807");
-    consumer1 = new User(UUID.randomUUID(),"pasword","Ahmad", "baiazid", "ahmad.lego@gmail.com",new Preferences(2, true, false, new HashSet<>()), true,"20190807",new HashSet<>());
+    consumer1 = new User("pl","pasword","Ahmad", "baiazid", "ahmad.lego@gmail.com",new Preferences(2, true, false, new HashSet<>()), true,"20190807",new HashSet<>());
     
-    consumer2 = new User(UUID.randomUUID(),"pasword2","Ahmad2", "baiazi2d", "ahmad.2lego@gmail.com",new Preferences(2, true, false, new HashSet<>()), true,"20190107",new HashSet<>());
+    consumer2 = new User("r","pasword2","Ahmad2", "baiazi2d", "ahmad.2lego@gmail.com",new Preferences(2, true, false, new HashSet<>()), true,"20190107",new HashSet<>());
     
 		MockitoAnnotations.initMocks(this);
 	}

@@ -1,7 +1,6 @@
 package com.yuma.app.to;
 
 import java.util.Set;
-import java.util.UUID;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +16,7 @@ import com.yuma.app.document.Role;
 @AllArgsConstructor
 public class UserTO {
 	
-	private UUID userId;
+	private String userId;
 	private String firstName;
 	private String password;
 	private String lastName;
@@ -27,8 +26,8 @@ public class UserTO {
 	private String timestamp;
 	private Set<Role> roles;
 
-	public UserTO(String password, String email, boolean enabled) {
-		this.userId = UUID.randomUUID();
+	public UserTO(String uuid,String password, String email, boolean enabled) {
+		this.userId = uuid;
 		this.password = password;
 		this.email = email;
 		this.enabled = enabled;

@@ -1,7 +1,6 @@
 package com.yuma.app.document;
 
 import java.util.Set;
-import java.util.UUID;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.IndexDirection;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -18,8 +20,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 public class User {
 
+
 	@Id
-	private UUID userId;
+	private String userId;
+	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
 	private String password;
 	private String firstName;
 	private String lastName;
@@ -27,10 +31,11 @@ public class User {
 	private Preferences preferences;
 	private boolean enabled;
 	private String timestamp;
+	@DBRef
 	private Set<Role> roles;
 
-	public User(String password, String email, boolean enabled) {
-		this.userId = UUID.randomUUID();
+	public User(String uuid, String password, String email, boolean enabled) {
+		this.userId = uuid;
 		this.password = password;
 		this.email = email;
 		this.enabled = enabled;
