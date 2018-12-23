@@ -12,7 +12,7 @@ import com.yuma.app.repository.UserRepository;
 @EnableMongoRepositories(basePackageClasses = UserRepository.class)
 
 @Configuration
-public class CaterersDBConfig {
+public class DBInputData {
 	
 	//DATA GENERATION STARTS HERE
 //	@Bean

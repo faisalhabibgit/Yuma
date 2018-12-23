@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -41,7 +42,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		user.setEnabled(true);
 		Optional<Role> userRole = roleRepository.findByRole("ADMIN");
 		userRole.ifPresent(x -> user.setRoles(new HashSet<>(Collections.singletonList(x))));
-		
+		user.setUserId(UUID.randomUUID());
 		userRepository.save(user);
 	}
 	
