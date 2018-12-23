@@ -19,6 +19,7 @@ public class UserTO {
 	
 	private UUID userId;
 	private String firstName;
+	private String password;
 	private String lastName;
 	private String email;
 	private Preferences preferences;

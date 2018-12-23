@@ -25,9 +25,9 @@ public class UserAccessResource {
 	private CustomUserDetailsService userService;
 	
 	@PostMapping("/register")
-	public HttpStatus register(@RequestBody UserTO userTO, BindingResult bindingResult){
+	public HttpStatus register(@RequestBody UserTO user, BindingResult bindingResult){
 		HttpStatus httpStatus;
-		Optional<User> optionalUser = userService.findUserByEmail(userTO.getEmail());
+		Optional<User> optionalUser = userService.findUserByEmail(user.getEmail());
 		if (optionalUser.isPresent()){
 			bindingResult.rejectValue("email", "error.user", "There's already a registered user with the email provided");
 		}
@@ -35,7 +35,7 @@ public class UserAccessResource {
 			httpStatus = HttpStatus.CONFLICT;
 		}
 		else {
-			userService.saveUser(userTO);
+			userService.saveUser(user);
 			httpStatus = HttpStatus.OK;
 		}
 		return httpStatus;

@@ -13,6 +13,7 @@ public class UserTOConverter implements Converter<User,UserTO> {
 		userTO.setFirstName(user.getFirstName());
 		userTO.setLastName(user.getLastName());
 		userTO.setEmail(user.getEmail());
+		userTO.setPassword(user.getPassword());
 		userTO.setPreferences(user.getPreferences());
 		userTO.setEnabled(user.isEnabled());
 		userTO.setTimestamp(user.getTimestamp());
