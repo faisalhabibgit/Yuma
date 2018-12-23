@@ -37,15 +37,16 @@ public class MealResourceTest {
 	private MealResource mealResource;
 
 	private MealTO mealTO1;
-	private MealTO mealTO1updated ;
+	private MealTO mealTO1updated;
+	private MealTO mealTO1Created;
 	private MealTO mealTO2;
 	
-
 	@Before
 	public void setUp() throws Exception {
 		
 		mealTO1 = new MealTO(new ArrayList<>(), UUID.randomUUID(), "chicken", false,new HashSet<>());
 		mealTO1updated = new MealTO(new ArrayList<>(), mealTO1.getMealId(), "chicken", true,new HashSet<>());
+		mealTO1Created = new MealTO(new ArrayList<>(), mealTO1.getMealId(), "chicken", false,new HashSet<>());
 		mealTO2 = new MealTO(new ArrayList<>(), UUID.randomUUID(), "mutton", true,new HashSet<>());
 		
 		MockitoAnnotations.initMocks(this);
@@ -74,6 +75,15 @@ public class MealResourceTest {
 		Assert.assertEquals(mealTO1updated.isAvailable(),mealT0actual.isAvailable());	
 		
 	}
-	
-	
+
+	@Test
+	public void mealResourceCreateTest() {
+
+		Mockito.when(mealService.create(mealTO1)).thenReturn(mealTO1Created);
+
+		mealResource.create(mealTO1);
+		
+		Mockito.verify(mealService).create(mealTO1);
+
+	}
 }

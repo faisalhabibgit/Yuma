@@ -96,8 +96,19 @@ public class MealServiceTest {
 		
 		Assert.assertEquals(mealTO.getDescription(), meal1.getDescription());
 		Assert.assertEquals(mealTO.isAvailable(), meal1.isAvailable());
+	}
+
+	@Test
+	public void MealServiceCreateTest(){
 		
-		
+		Mockito.when(conversionService.convert(mealTO, Meal.class)).thenReturn(meal1);
+		Mockito.when(mealRepository.save(meal1)).thenReturn(meal1);
+		Mockito.when(conversionService.convert(meal1, MealTO.class)).thenReturn(mealTO);
+
+		mealService.create(mealTO);
+
+		Assert.assertEquals(mealTO.getDescription(), "chicken and veg");
+		Assert.assertEquals(mealTO.isAvailable(), false);
 	}
 	
 }
