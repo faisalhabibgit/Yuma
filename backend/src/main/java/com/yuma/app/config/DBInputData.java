@@ -1,18 +1,45 @@
 package com.yuma.app.config;
 
 
+import java.util.Optional;
+
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import com.yuma.app.repository.UserRepository;
+import com.yuma.app.document.Role;
+import com.yuma.app.repository.RoleRepository;
 
 @Slf4j
-@EnableMongoRepositories(basePackageClasses = UserRepository.class)
+@EnableMongoRepositories(basePackageClasses = RoleRepository.class)
 
 @Configuration
 public class DBInputData {
+
+	@Bean
+	CommandLineRunner init(RoleRepository roleRepository) {
+
+		return args -> {
+
+			Optional<Role> adminRole = roleRepository.findByRole("ADMIN");
+			if (!adminRole.isPresent()) {
+				Role newAdminRole = new Role();
+				newAdminRole.setRole("ADMIN");
+				roleRepository.save(newAdminRole);
+			}
+
+			Optional<Role> userRole = roleRepository.findByRole("USER");
+			if (!userRole.isPresent()) {
+				Role newUserRole = new Role();
+				newUserRole.setRole("USER");
+				roleRepository.save(newUserRole);
+			}
+		};
+
+	}
 
 	//DATA GENERATION STARTS HERE
 //	@Bean

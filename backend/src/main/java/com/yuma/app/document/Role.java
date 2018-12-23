@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "Sequence")
+@Document(collection = "role")
 @Getter
 @Setter
 @NoArgsConstructor
