@@ -8,14 +8,16 @@ import com.yuma.app.to.UserTO;
 public class UserTOConverter implements Converter<User,UserTO> {
 
 	@Override
-	public UserTO convert(User consumer) {
-		UserTO consumerTO = new UserTO();
-		consumerTO.setFirstName(consumer.getFirstName());
-		consumerTO.setLastName(consumer.getLastName());
-		consumerTO.setWorkEmail(consumer.getEmail());
-		consumerTO.setPreferences(consumer.getPreferences());
-		consumerTO.setTimestamp(consumer.getTimestamp());
-		consumerTO.setUserId(consumer.getUserId());
+	public UserTO convert(User user) {
+		UserTO userTO = new UserTO();
+		userTO.setFirstName(user.getFirstName());
+		userTO.setLastName(user.getLastName());
+		userTO.setEmail(user.getEmail());
+		userTO.setPreferences(user.getPreferences());
+		userTO.setEnabled(user.isEnabled());
+		userTO.setTimestamp(user.getTimestamp());
+		userTO.setRoles(user.getRoles());
+		userTO.setUserId(user.getUserId());
 		return null;
 	}
 }

@@ -1,5 +1,6 @@
 package com.yuma.app.to;
 
+import java.util.Set;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import com.yuma.app.document.Preferences;
+import com.yuma.app.document.Role;
 
 @Getter
 @Setter
@@ -18,10 +20,11 @@ public class UserTO {
 	private UUID userId;
 	private String firstName;
 	private String lastName;
-	private String personalEmail;
-	private String workEmail;
+	private String email;
 	private Preferences preferences;
+	private boolean enabled;
 	private String timestamp;
+	private Set<Role> roles;
 
 	@Override
 	public String toString() {
@@ -29,10 +32,11 @@ public class UserTO {
 			"userId=" + userId +
 			", firstName='" + firstName + '\'' +
 			", lastName='" + lastName + '\'' +
-			", personalEmail='" + personalEmail + '\'' +
-			", workEmail='" + workEmail + '\'' +
+			", email='" + email + '\'' +
 			", preferences=" + preferences +
+			", enabled=" + enabled +
 			", timestamp='" + timestamp + '\'' +
+			", roles=" + roles +
 			'}';
 	}
 }
