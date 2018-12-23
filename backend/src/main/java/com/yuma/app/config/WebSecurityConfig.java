@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.yuma.app.service.CustomUserDetailsService;
+import com.yuma.app.service.AuthenticationService;
 
 @ComponentScan
 @Configuration
@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public UserDetailsService mongoUserDetails() {
-		return new CustomUserDetailsService();
+		return new AuthenticationService();
 	}
 
 	@Override

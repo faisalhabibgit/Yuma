@@ -5,21 +5,22 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
-import com.querydsl.core.types.Predicate;
 import com.yuma.app.catalog.MealCatalog;
 import com.yuma.app.document.Meal;
 import com.yuma.app.document.User;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.repository.UserRepository;
 import com.yuma.app.to.MealTO;
-import com.yuma.app.util.Helper;
 
 @Service
 public class MealService {
 
+	private Logger mealServiceLogger = LoggerFactory.getLogger("Meal Service");
 	private MealRepository mealRepository;
 	private UserRepository userRepository;
 	private ConversionService conversionService;
@@ -30,18 +31,10 @@ public class MealService {
 		this.userRepository = userRepository;
 		this.conversionService = conversionService;
 	}
-
-	public List<MealTO> listByPredicate(Predicate predicate) {
-		List<MealTO> mealTos = new ArrayList<>();
-		List<Meal> mealList = Helper.toMealList(mealRepository.findAll());
-
-		for (Meal meal : mealList) {
-			mealTos.add(conversionService.convert(meal, MealTO.class));
-		}
-		return mealTos;
-	}
-
+	
 	public List<MealTO> list() {
+		mealServiceLogger.info("fetching list of meals");
+		
 		List<MealTO> mealTos = new ArrayList<>();
 		List<Meal> mealList = mealRepository.findAll();
 
@@ -52,6 +45,8 @@ public class MealService {
 	}
 	
 	public MealTO update(MealTO mealTo) {
+		mealServiceLogger.info("updating meal with description: ", mealTo.getDescription());
+
 		Meal meal = mealRepository.findOne(mealTo.getMealId());
 
 		if (meal == null) {
@@ -65,6 +60,8 @@ public class MealService {
 	}
 
 	public List<MealTO> weeklyCombo() {
+		mealServiceLogger.info("generating optimal weekly combo");
+		
 		List<MealTO> mealTOS = new ArrayList<>();
 		List<Meal> mealList = mealRepository.findAll();
 		List<User> consumerList = userRepository.findAll();
@@ -80,10 +77,14 @@ public class MealService {
 	}
 
 	public void deleteMeal(UUID mealId) {
+		mealServiceLogger.info("service deleting meal");
+
 		mealRepository.delete(mealRepository.findOne(mealId));
 	}
 
 	public MealTO findByDescription(String description) {
+		mealServiceLogger.info("fetching meal from repo");
+
 		Optional<Meal> optionalMeal = mealRepository.findByDescription(description);
 		if (!optionalMeal.isPresent()){
 			throw new IllegalArgumentException();

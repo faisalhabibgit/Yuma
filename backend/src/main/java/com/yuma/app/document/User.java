@@ -29,6 +29,13 @@ public class User {
 	private String timestamp;
 	private Set<Role> roles;
 
+	public User(String password, String email, boolean enabled) {
+		this.userId = UUID.randomUUID();
+		this.password = password;
+		this.email = email;
+		this.enabled = enabled;
+	}
+
 	@Override
 	public String toString() {
 		return "User{" +
