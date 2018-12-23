@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,10 +22,13 @@ import com.yuma.app.document.Role;
 import com.yuma.app.document.User;
 import com.yuma.app.repository.RoleRepository;
 import com.yuma.app.repository.UserRepository;
+import com.yuma.app.to.UserTO;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+	@Autowired
+	private ConversionService conversionService;
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
@@ -37,11 +41,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 		return optionalUser;
 	}
 
-	public void saveUser(User user) {
+	public void saveUser(UserTO userTO) {
+		User user = conversionService.convert(userTO, User.class);
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setEnabled(true);
 		Optional<Role> userRole = roleRepository.findByRole("ADMIN");
-		userRole.ifPresent(x -> user.setRoles(new HashSet<>(Collections.singletonList(x))));
+		userRole.ifPresent(x -> userTO.setRoles(new HashSet<>(Collections.singletonList(x))));
 		user.setUserId(UUID.randomUUID());
 		userRepository.save(user);
 	}
