@@ -183,23 +183,23 @@
 					</generateGitPropertiesFilename>
 				</configuration>
 			</plugin>
-			<!--<plugin>-->
-			<!--<groupId>com.mysema.maven</groupId>-->
-			<!--<artifactId>apt-maven-plugin</artifactId>-->
-			<!--<version>1.1.3</version>-->
-			<!--<executions>-->
-			<!--<execution>-->
-			<!--<goals>-->
-			<!--<goal>process</goal>-->
-			<!--</goals>-->
-			<!--<configuration>-->
-			<!--<outputDirectory>${project.parent.basedir}/backend/src/main/java/qClasses</outputDirectory>-->
-			<!--&lt;!&ndash;<processor>org.springframework.data.mongodb.repository.support.MongoAnnotationProcessor</processor>&ndash;&gt;-->
-			<!--<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>-->
-			<!--</configuration>-->
-			<!--</execution>-->
-			<!--</executions>-->
-			<!--</plugin>-->
+							<!--<plugin>-->
+							<!--<groupId>com.mysema.maven</groupId>-->
+							<!--<artifactId>apt-maven-plugin</artifactId>-->
+							<!--<version>1.1.3</version>-->
+							<!--<executions>-->
+							<!--<execution>-->
+							<!--<goals>-->
+							<!--<goal>process</goal>-->
+							<!--</goals>-->
+							<!--<configuration>-->
+							<!--<outputDirectory>${project.parent.basedir}/backend/src/main/java/qClasses</outputDirectory>-->
+							<!--&lt;!&ndash;<processor>org.springframework.data.mongodb.repository.support.MongoAnnotationProcessor</processor>&ndash;&gt;-->
+							<!--<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>-->
+							<!--</configuration>-->
+							<!--</execution>-->
+							<!--</executions>-->
+							<!--</plugin>-->
 		</plugins>
 	</build>
 </project>
