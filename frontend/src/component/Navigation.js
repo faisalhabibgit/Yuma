@@ -45,6 +45,9 @@ class Navigation extends Component {
                             <NavLink tag={Link} to="/Registration">Register</NavLink>
                         </NavItem>
                         <NavItem>
+                            <NavLink tag={Link} to="/meals">Meals</NavLink>
+                        </NavItem>
+                        <NavItem>
                             <NavLink href="https://github.com/faisalhabibgit/Yuma">GitHub</NavLink>
                         </NavItem>
                         <UncontrolledDropdown nav inNavbar>
