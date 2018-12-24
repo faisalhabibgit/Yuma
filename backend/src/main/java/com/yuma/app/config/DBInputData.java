@@ -6,13 +6,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import com.yuma.app.repository.CatererRepository;
+import com.yuma.app.repository.ConsumersRepository;
 
 @Slf4j
-@EnableMongoRepositories(basePackageClasses = CatererRepository.class)
+@EnableMongoRepositories(basePackageClasses = ConsumersRepository.class)
 
 @Configuration
-public class CaterersDBConfig {
+public class DBInputData {
 	
 	//DATA GENERATION STARTS HERE
 //	@Bean

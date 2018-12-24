@@ -22,6 +22,7 @@ public class Meal {
 	protected List<Ingredients> ingredients;
 	@Id
 	private UUID mealId;
+	private String name;
 	private String description;
 	private boolean isAvailable;
 	private HashSet<String> flags;
@@ -38,6 +39,7 @@ public class Meal {
 	}
 
 	public void updateFrom(Meal mealToUpdate) {
+		this.setName(mealToUpdate.getName());
 		this.setDescription(mealToUpdate.getDescription());
 		this.setAvailable(mealToUpdate.isAvailable());
 		this.setIngredients(mealToUpdate.getIngredients());
