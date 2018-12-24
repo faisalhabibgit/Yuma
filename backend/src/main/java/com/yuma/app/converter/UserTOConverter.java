@@ -19,6 +19,6 @@ public class UserTOConverter implements Converter<User,UserTO> {
 		userTO.setTimestamp(user.getTimestamp());
 		userTO.setRoles(user.getRoles());
 		userTO.setUserId(user.getUserId());
-		return null;
+		return userTO;
 	}
 }
