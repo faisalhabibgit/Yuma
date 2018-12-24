@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 
+import Retriever from '../middleware/Retriever'
+
 class Test extends Component {
+
   render() {
     return (
+      <div>
+        <Retriever />
     <Table>
         <thead>
           <tr>
@@ -34,6 +39,7 @@ class Test extends Component {
           </tr>
         </tbody>
       </Table>
+      </div>
     );
   }
 }
