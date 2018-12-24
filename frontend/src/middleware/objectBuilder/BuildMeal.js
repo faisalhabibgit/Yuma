@@ -20,7 +20,16 @@ class BuildMeal extends Component {
             console.log("Description: " + obj.description);
             console.log("Flags: " + obj.flags);
             console.log("Any left?: " + obj.available);
-            console.log("Ingredients: " + obj.ingredients);
+            
+            for (var j in obj.ingredients) {
+
+                var ingredientObj = obj.ingredients[j];
+                
+                console.log("Name: " + ingredientObj.name);
+                console.log("Weight: " + ingredientObj.weight);
+                console.log("Calories: " + ingredientObj.calories);
+                console.log("Price: " + ingredientObj.price);
+            }
         }
 
         });
