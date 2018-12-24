@@ -4,13 +4,20 @@ class Retriever extends Component {
 
     constructor(apiPath) {
         super()
-        
+        this.jsonDump=[];
+
         fetch(apiPath)
         .then(function(response) {
         return response.json();
         })
         .then(function(myJson) {
-        console.log(JSON.stringify(myJson));
+        //console.log(JSON.stringify(myJson));
+        
+        for(var i = 0; i < myJson.length; i++) {
+            var obj = myJson[i];
+            console.log(obj.mealId);
+        }
+
         });
     }
 
