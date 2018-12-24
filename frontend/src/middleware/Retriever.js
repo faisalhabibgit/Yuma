@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
+import BuildMeal from './objectBuilder/BuildMeal';
 
 class Retriever extends Component {
 
     constructor(apiPath) {
         super()
-        this.jsonDump=[];
 
-        fetch(apiPath)
-        .then(function(response) {
-        return response.json();
-        })
-        .then(function(myJson) {
-        //console.log(JSON.stringify(myJson));
+        switch(apiPath) {
+            case 'api/meals':
+            console.log('switch statement: api/meals');
+                const x = new BuildMeal();
+                break;
+            case 'aaa':
+                // code block
+                break;
+            default:
+                // code block
+          } 
         
-        for(var i = 0; i < myJson.length; i++) {
-            var obj = myJson[i];
-            console.log(obj.mealId);
-        }
-
-        });
     }
 
     toString(){
