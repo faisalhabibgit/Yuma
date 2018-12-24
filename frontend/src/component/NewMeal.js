@@ -15,8 +15,11 @@ class NewMeal extends Component{
       name: '',
       description: '',
       ingredients: '',
-      flags: [],
-      nuts: ''
+      nuts: 'false',
+      dairy: 'false',
+      gluten: 'false',
+      shellfish: 'false',
+      soy: 'false'
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,7 +27,16 @@ class NewMeal extends Component{
   }
 
   handleSubmit(event) {
-    alert('the name is ' + this.state.name +'\nthe description is: '+this.state.description+'\n nuts are: '+this.state.nuts);
+    
+    if(this.state.name.length<1){
+      alert('Please enter a name.');
+    } else if (this.state.description.length<1){
+      alert('Please enter a description');
+    } else if (this.state.ingredients.length<1){
+      alert('Please enter the ingredients');
+    } else{
+      alert('\n Allergies in this meal: nuts: '+this.state.nuts+'\ndairy: '+this.state.dairy+'\ngluten: '+this.state.gluten+'\nshellfish: '+this.state.shellfish+'\nsoy: '+this.state.soy);
+    }
     event.preventDefault();
   }
   
@@ -75,7 +87,7 @@ class NewMeal extends Component{
                   <Input
                     type="text"
                     name="Ingredients"
-                    id="Ingredients"
+                    id="ingredients"
                     placeholder="tomatoes, chicken, garlic"
                     onChange={this.handleChange}
                   />
