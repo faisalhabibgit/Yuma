@@ -29,13 +29,13 @@ class NewMeal extends Component{
   }
   
   handleChange(event){
-    let newState = {};
     
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const id = target.id;
     
+    this.setState({[id]:value});
     
-    newState[event.target.id] = event.target.value;
-    
-    this.setState(newState);
   }
   
   render(){
