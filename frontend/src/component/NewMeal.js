@@ -8,6 +8,36 @@ import {
 
 
 class NewMeal extends Component{
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      description: '',
+      ingredients: '',
+      flags: [],
+      nuts: ''
+    };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleSubmit(event) {
+    alert('the name is ' + this.state.name +'\nthe description is: '+this.state.description+'\n nuts are: '+this.state.nuts);
+    event.preventDefault();
+  }
+  
+  handleChange(event){
+    let newState = {};
+    
+    
+    
+    newState[event.target.id] = event.target.value;
+    
+    this.setState(newState);
+  }
+  
   render(){
     return(
         <Container>
@@ -16,15 +46,27 @@ class NewMeal extends Component{
             
             <br/>
             
-            <Form className="form">
+            <Form className="form" onSubmit={this.handleSubmit}>
               <Col >
                 <FormGroup>
+                  <Label>Name</Label>
+                  <Input
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Chicken Parmesan"
+                    onChange={this.handleChange}
+                  />
+
+                  <br/>
+                  
                   <Label>Meal Description</Label>
                   <Input
                     type="text"
                     name="description"
                     id="description"
-                    placeholder="A tasty meal with X sauce."
+                    placeholder="Chicken basted in tomato sauce."
+                    onChange={this.handleChange}
                   />
                   
                   <br/>
@@ -35,6 +77,7 @@ class NewMeal extends Component{
                     name="Ingredients"
                     id="Ingredients"
                     placeholder="tomatoes, chicken, garlic"
+                    onChange={this.handleChange}
                   />
                   
                   <br/>
@@ -45,27 +88,27 @@ class NewMeal extends Component{
                     <Col sm={{ size: 10 }}>
                       <FormGroup check>
                         <Label>
-                          <Input type="checkbox" id="nuts" />{' '}
+                          <Input type="checkbox" id="nuts" onChange={this.handleChange}/>
                           Tree Nuts
                         </Label>
                         <br/>
                         <Label>
-                          <Input type="checkbox" id="dairy" />{' '}
+                          <Input type="checkbox" id="dairy" onChange={this.handleChange}/>
                           Dairy
                         </Label>
                         <br/>
                         <Label>
-                          <Input type="checkbox" id="gluten" />{' '}
+                          <Input type="checkbox" id="gluten"onChange={this.handleChange}/>
                           Gluten
                         </Label>
                         <br/>
                         <Label>
-                          <Input type="checkbox" id="shellfish" />{' '}
+                          <Input type="checkbox" id="shellfish" onChange={this.handleChange}/>
                           Shellfish
                         </Label>
                         <br/>
                         <Label>
-                          <Input type="checkbox" id="soy" />{' '}
+                          <Input type="checkbox" id="soy" onChange={this.handleChange}/>
                           Soy
                         </Label>
                       </FormGroup>
@@ -74,7 +117,7 @@ class NewMeal extends Component{
                   
                 </FormGroup>
               </Col>
-              <Button>Submit</Button>
+              <Button type="submit" value="Submit">Submit</Button>
             </Form>
           </Col>
         
