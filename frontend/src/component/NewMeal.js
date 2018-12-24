@@ -31,15 +31,46 @@ class NewMeal extends Component{
                   
                   <Label>Ingredients</Label>
                   <Input
-                    type="password"
-                    name="password"
-                    id="examplePassword"
-                    placeholder="********"
+                    type="text"
+                    name="Ingredients"
+                    id="Ingredients"
+                    placeholder="tomatoes, chicken, garlic"
                   />
                   
                   <br/>
+
+                  <Label style={{fontWeight: "bold"}}> Possible Food Allergies </Label>
                   
-                  <Label>Allergies</Label>
+                  <FormGroup row>
+                    <Col sm={{ size: 10 }}>
+                      <FormGroup check>
+                        <Label>
+                          <Input type="checkbox" id="nuts" />{' '}
+                          Tree Nuts
+                        </Label>
+                        <br/>
+                        <Label>
+                          <Input type="checkbox" id="dairy" />{' '}
+                          Dairy
+                        </Label>
+                        <br/>
+                        <Label>
+                          <Input type="checkbox" id="gluten" />{' '}
+                          Gluten
+                        </Label>
+                        <br/>
+                        <Label>
+                          <Input type="checkbox" id="shellfish" />{' '}
+                          Shellfish
+                        </Label>
+                        <br/>
+                        <Label>
+                          <Input type="checkbox" id="soy" />{' '}
+                          Soy
+                        </Label>
+                      </FormGroup>
+                    </Col>
+                  </FormGroup>
                   
                 </FormGroup>
               </Col>
