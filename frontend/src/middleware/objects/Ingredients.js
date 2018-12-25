@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class Ingredients extends Component { 
 
     constructor(name, weight, calories, price) {
+      super();
       this.name = name;
       this.weight = weight;
       this.calories = calories;
@@ -10,7 +11,7 @@ class Ingredients extends Component {
     }
   
     toString() {
-      console.log(this.name + this.weight + this.calories + this.price);
+      return this.name + this.weight + this.calories + this.price;
     }
 }
 

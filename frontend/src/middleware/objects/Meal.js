@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class Meal extends Component {
 
     constructor(mealId, description, isAvailable, flags, ingredients) {
+      super();
       this.mealId = mealId;
       this.description = description;
       this.isAvailable = isAvailable;
@@ -11,7 +12,7 @@ class Meal extends Component {
     }
   
     toString() {
-      console.log(this.mealId + this.description + this.isAvailable + this.flags);
+      return this.mealId + this.description + this.isAvailable + this.flags;
     }
 }
 
