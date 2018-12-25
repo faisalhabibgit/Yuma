@@ -1,4 +1,6 @@
-class Ingredients { 
+import React, { Component } from 'react';
+
+class Ingredients extends Component { 
 
     constructor(name, weight, calories, price) {
       this.name = name;
@@ -11,3 +13,5 @@ class Ingredients {
       console.log(this.name + this.weight + this.calories + this.price);
     }
 }
+
+export default Ingredients;

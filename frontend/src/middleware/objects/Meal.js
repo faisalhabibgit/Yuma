@@ -1,4 +1,6 @@
-class Meal { 
+import React, { Component } from 'react';
+
+class Meal extends Component {
 
     constructor(mealId, description, isAvailable, flags, ingredients) {
       this.mealId = mealId;
@@ -12,3 +14,5 @@ class Meal {
       console.log(this.mealId + this.description + this.isAvailable + this.flags);
     }
 }
+
+export default Meal;
