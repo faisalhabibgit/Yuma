@@ -4,16 +4,28 @@ import Retriever from '../middleware/Retriever'
 
 class Test extends Component {
 
-  render() {
+  constructor() {
+    super();
 
+    this.state = {
+      apiObject: null,
+    }
+
+  }
+
+  componentDidMount() {
     const retriever = new Retriever('api/meals');
     retriever.getEntityPromise()
-      .then((obj) => {console.log(obj)})
+      .then((obj) => {
+        this.setState({ apiObject: obj });
+      });
+  }
+
+  render() {
+    console.log(this.state.apiObject);
 
     return (
-      <div>
-        <p>hi</p>
-      </div>
+      <p>Hello</p>
     );
   }
 }
