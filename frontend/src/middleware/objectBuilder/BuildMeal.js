@@ -40,7 +40,6 @@ class BuildMeal {
                 }
                 return mealList;
             })
-            .then((object) => { return object });
     }
 
 }

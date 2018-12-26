@@ -3,13 +3,12 @@ import BuildMeal from './objectBuilder/BuildMeal';
 class Retriever {
 
     constructor(apiPath) {
-        this.builtEntity;
+        this.entityPromise;
 
         switch (apiPath) {
             case 'api/meals':
                 const mealBuilder = new BuildMeal();
-                mealBuilder.getMealPromiseObj()
-                    .then((obj) => { console.log(obj) });
+                this.entityPromise = mealBuilder.getMealPromiseObj();
                 break;
             case 'aaa':
                 // code block
@@ -20,15 +19,9 @@ class Retriever {
 
     }
 
-    getEntity(){
-        return this.builtEntity;
+    getEntityPromise(){
+        return this.entityPromise;
     }
-
-    toString() {
-        console.log("Inside the Retriever class, a call to toString");
-        return "This is the toString function";
-    }
-
 }
 
 export default Retriever;

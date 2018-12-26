@@ -7,7 +7,8 @@ class Test extends Component {
   render() {
 
     const retriever = new Retriever('api/meals');
-    console.log(retriever.getEntity());
+    retriever.getEntityPromise()
+      .then((obj) => {console.log(obj)})
 
     return (
       <div>
