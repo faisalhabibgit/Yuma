@@ -6,11 +6,12 @@ class Test extends Component {
 
   render() {
 
-    const x = new Retriever('api/meals');
+    const retriever = new Retriever('api/meals');
+    console.log(retriever.getEntity());
 
     return (
       <div>
-        <p>{x.toString()}</p>
+        <p>hi</p>
       </div>
     );
   }

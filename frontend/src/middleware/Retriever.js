@@ -1,38 +1,33 @@
-import React, { Component } from 'react';
 import BuildMeal from './objectBuilder/BuildMeal';
 
-class Retriever extends Component {
+class Retriever {
 
     constructor(apiPath) {
-        super()
+        this.builtEntity;
 
-        switch(apiPath) {
+        switch (apiPath) {
             case 'api/meals':
-            console.log('switch statement: api/meals');
-                const x = new BuildMeal();
+                const mealBuilder = new BuildMeal();
+                mealBuilder.getMealPromiseObj()
+                    .then((obj) => { console.log(obj) });
                 break;
             case 'aaa':
                 // code block
                 break;
             default:
-                // code block
-          } 
-        
+            // code block
+        }
+
     }
 
-    toString(){
+    getEntity(){
+        return this.builtEntity;
+    }
+
+    toString() {
         console.log("Inside the Retriever class, a call to toString");
         return "This is the toString function";
     }
-
-    render() {
-        
-        return (
-            <div>
-                <h1>Check the console.</h1>
-            </div>
-        );
-      }
 
 }
 

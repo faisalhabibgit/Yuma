@@ -1,9 +1,6 @@
-import React, { Component } from 'react';
-
-class Ingredients extends Component { 
+class Ingredients { 
 
     constructor(name, weight, calories, price) {
-      super();
       this.name = name;
       this.weight = weight;
       this.calories = calories;
