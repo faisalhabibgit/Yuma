@@ -35,7 +35,24 @@ class NewMeal extends Component{
     } else if (this.state.ingredients.length<1){
       alert('Please enter the ingredients');
     } else{
-      alert('\n Allergies in this meal: nuts: '+this.state.nuts+'\ndairy: '+this.state.dairy+'\ngluten: '+this.state.gluten+'\nshellfish: '+this.state.shellfish+'\nsoy: '+this.state.soy);
+      //alert('\n Allergies in this meal: nuts: '+this.state.nuts+'\ndairy: '+this.state.dairy+'\ngluten: '+this.state.gluten+'\nshellfish: '+this.state.shellfish+'\nsoy: '+this.state.soy);
+      //enter request here
+      let promise = fetch('api/meals', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ingredients: null,
+          name: this.state.name,
+          description: this.state.description,
+          flags: null,
+          available: false
+        })
+      })
+      
+      alert(promise.valueOf());
     }
     event.preventDefault();
   }
