@@ -21,8 +21,7 @@ class NewMeal extends Component{
       dairy: 'false',
       gluten: 'false',
       shellfish: 'false',
-      soy: 'false',
-      flags: []
+      soy: 'false'
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,10 +39,9 @@ class NewMeal extends Component{
     } else if (this.state.ingredients.length<1){
       alert('Please enter the ingredients');
     } else{
-      alert(this.state.nuts);
-      this.setFlags();
-      this.postMeal();
-      //alert("Success, "+this.state.name+" created.");
+      
+      let array = this.setFlags();
+      this.postMeal(array);
       
       //redirect to home
       this.props.history.push(REDIRECTHOME);
@@ -62,7 +60,7 @@ class NewMeal extends Component{
     
   }
   
-  postMeal(){
+  postMeal(array){
     
     fetch(API, {
       method: 'POST',
@@ -74,7 +72,7 @@ class NewMeal extends Component{
         ingredients: null,
         name: this.state.name,
         description: this.state.description,
-        flags: this.state.flags,
+        flags: array,
         available: false
       })
     })
@@ -83,17 +81,29 @@ class NewMeal extends Component{
   
   setFlags(){
     
-    if(this.state.nuts === 'true')
-      alert("NUTS ARE TRUE");
-    if(this.state.dairy === 'true')
-      this.setState({flags: this.state.flags.concat("dairy")});
-    if(this.state.gluten === 'true')
-      this.setState({flags: this.state.flags.concat("gluten")});
-    if(this.state.shellfish === 'true')
-      this.setState({flags: this.state.flags.concat("shellfish")});
-    if(this.state.soy === 'true')
-      this.setState({flags: this.state.flags.concat("soy")});
+    let array = [];
     
+    if(this.state.nuts===true){
+      array.push("nuts");
+    }
+ 
+    if(this.state.dairy === true){
+      array.push("dairy");
+    }
+    
+    if(this.state.gluten === true){
+      array.push("gluten");
+    }
+    
+    if(this.state.shellfish === true){
+      array.push("shellfish");
+    }
+    
+    if(this.state.soy === true){
+      array.push("soy");
+    }
+    
+    return array;
   }
   
   render(){
