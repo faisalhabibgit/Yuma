@@ -6,6 +6,8 @@ import {
   Container,
 } from 'reactstrap';
 
+const API = 'api/meals';
+const REDIRECTHOME = '/';
 
 class NewMeal extends Component{
 
@@ -19,11 +21,14 @@ class NewMeal extends Component{
       dairy: 'false',
       gluten: 'false',
       shellfish: 'false',
-      soy: 'false'
+      soy: 'false',
+      flags: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.postMeal = this.postMeal.bind(this);
+    this.setFlags = this.setFlags.bind(this);
   }
 
   handleSubmit(event) {
@@ -35,24 +40,14 @@ class NewMeal extends Component{
     } else if (this.state.ingredients.length<1){
       alert('Please enter the ingredients');
     } else{
-      //alert('\n Allergies in this meal: nuts: '+this.state.nuts+'\ndairy: '+this.state.dairy+'\ngluten: '+this.state.gluten+'\nshellfish: '+this.state.shellfish+'\nsoy: '+this.state.soy);
-      //enter request here
-      let promise = fetch('api/meals', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ingredients: null,
-          name: this.state.name,
-          description: this.state.description,
-          flags: null,
-          available: false
-        })
-      })
+      alert(this.state.nuts);
+      this.setFlags();
+      this.postMeal();
+      //alert("Success, "+this.state.name+" created.");
       
-      alert(promise.valueOf());
+      //redirect to home
+      this.props.history.push(REDIRECTHOME);
+      
     }
     event.preventDefault();
   }
@@ -64,6 +59,40 @@ class NewMeal extends Component{
     const id = target.id;
     
     this.setState({[id]:value});
+    
+  }
+  
+  postMeal(){
+    
+    fetch(API, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ingredients: null,
+        name: this.state.name,
+        description: this.state.description,
+        flags: this.state.flags,
+        available: false
+      })
+    })
+    
+  }
+  
+  setFlags(){
+    
+    if(this.state.nuts === 'true')
+      alert("NUTS ARE TRUE");
+    if(this.state.dairy === 'true')
+      this.setState({flags: this.state.flags.concat("dairy")});
+    if(this.state.gluten === 'true')
+      this.setState({flags: this.state.flags.concat("gluten")});
+    if(this.state.shellfish === 'true')
+      this.setState({flags: this.state.flags.concat("shellfish")});
+    if(this.state.soy === 'true')
+      this.setState({flags: this.state.flags.concat("soy")});
     
   }
   
