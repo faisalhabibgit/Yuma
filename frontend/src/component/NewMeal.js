@@ -16,7 +16,7 @@ class NewMeal extends Component{
     this.state = {
       name: '',
       description: '',
-      ingredients: '',
+      ingredients: [{name:"",age:""}],
       nuts: 'false',
       dairy: 'false',
       gluten: 'false',
@@ -31,6 +31,8 @@ class NewMeal extends Component{
   }
 
   handleSubmit(event) {
+    
+    event.preventDefault();
     
     if(this.state.name.length<1){
       alert('Please enter a name.');
@@ -47,18 +49,34 @@ class NewMeal extends Component{
       this.props.history.push(REDIRECTHOME);
       
     }
-    event.preventDefault();
+  
   }
   
-  handleChange(event){
+  handleChange(event) {
+
+    if(["name", "age"].includes(event.target.className)){
+
+      let ingredients = [...this.state.ingredients];
+      ingredients[event.target.dataset.id][event.target.className] = event.target.value;
+      this.setState({ ingredients }, () => console.log(this.state.ingredients));
+      
+    } else {
     
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const id = target.id;
-    
-    this.setState({[id]:value});
-    
+
+    this.setState({[id]: value});
+    }
   }
+  
+  addIngredient = (e) => {
+    e.preventDefault();
+    this.setState((prevState) => ({
+      ingredients: [...prevState.ingredients, {name:"", age:""}],
+    }));
+  };
+  
   
   postMeal(array){
     
@@ -69,7 +87,7 @@ class NewMeal extends Component{
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        ingredients: null,
+        ingredients: this.state.ingredients,
         name: this.state.name,
         description: this.state.description,
         flags: array,
@@ -140,13 +158,36 @@ class NewMeal extends Component{
                   <br/>
                   
                   <Label>Ingredients</Label>
-                  <Input
-                    type="text"
-                    name="Ingredients"
-                    id="ingredients"
-                    placeholder="tomatoes, chicken, garlic"
-                    onChange={this.handleChange}
-                  />
+                  <button onClick={this.addIngredient}>Add new ingredient</button>
+                  {
+                    this.state.ingredients.map((val, idx)=> {
+                      let ingredientId = `cat-${idx}`, ageId = `age-${idx}`
+                      return (
+                        <div key={idx}>
+                          <label htmlFor={ingredientId}>{`Ingredient #${idx + 1}`}</label>
+                          <input
+                            type="text"
+                            name={ingredientId}
+                            data-id={idx}
+                            id={ingredientId}
+                            value={this.state.ingredients[idx].name}
+                            onChange={this.handleChange}
+                            className="name"
+                          />
+                          <label htmlFor={ageId}>Age</label>
+                          <input
+                            type="text"
+                            name={ageId}
+                            data-id={idx}
+                            id={ageId}
+                            value={this.state.ingredients[idx].age}
+                            onChange={this.handleChange}
+                            className="age"
+                          />
+                        </div>
+                      )
+                    })
+                  }
                   
                   <br/>
 
