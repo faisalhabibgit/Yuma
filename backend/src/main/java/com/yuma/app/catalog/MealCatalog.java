@@ -21,8 +21,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Meal;
-import com.yuma.app.document.User;
 
 @Slf4j
 @Document
@@ -33,20 +33,14 @@ import com.yuma.app.document.User;
 public class MealCatalog {
 	private HashMap<Meal, Integer> mealsMap = new HashMap<>();
 	private ArrayList<Meal> meals;
-	private ArrayList<User> consumers;
+	private ArrayList<Consumer> consumers;
 	private Logger logger = LoggerFactory.getLogger("caterer logger");
 
-	private static int randomIntGenerator(int upperBound) {
-		Random rand = new Random();
-
-		return rand.nextInt(upperBound);
-	}
-
-	public List<Meal> getWeeklyCombination(List<Meal> availableMeals, List<User> activeUsers) {
+	public List<Meal> getWeeklyCombination(List<Meal> availableMeals, List<Consumer> activeConsumers) {
 		List<Meal> possibleMeals = new ArrayList<>();
 		logger.info("generating combo meals");
-
-		for (User consumer : activeUsers) {
+		
+		for (Consumer consumer : activeConsumers) {
 			generatePossibleMeals(availableMeals, consumer);
 		}
 		mealsMap = sortByValue(mealsMap);
@@ -54,10 +48,16 @@ public class MealCatalog {
 		logger.info("creating meals arraylist");
 
 		possibleMeals.addAll(mealsMap.keySet());
-
+		
 		possibleMeals = filterList(possibleMeals);
 
 		return possibleMeals;
+	}
+
+	private static int randomIntGenerator(int upperBound) {
+		Random rand = new Random();
+
+		return rand.nextInt(upperBound);
 	}
 
 	protected boolean equals(HashSet<?> set1, HashSet<?> set2) {
@@ -96,7 +96,7 @@ public class MealCatalog {
 		return temp;
 	}
 
-	protected void generatePossibleMeals(List<Meal> meals, User consumer) {
+	protected void generatePossibleMeals(List<Meal> meals, Consumer consumer) {
 		logger.info("inside generate possible meals");
 		int i = 0;
 		while (i < 4) {
@@ -112,15 +112,15 @@ public class MealCatalog {
 			i++;
 		}
 	}
-
+	
 	protected List<Meal> filterList(List<Meal> mealList) {
 		List<Meal> filteredList = new ArrayList<>();
-
-		for (int i = 0; i < 3; i++) {
+		
+		for(int i=0; i<3; i++){
 			filteredList.add(mealList.get(i));
 		}
-
+		
 		return filteredList;
-
+		
 	}
 }

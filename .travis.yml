@@ -1,7 +1,5 @@
 language: java
 jdk: oraclejdk8
-services:
-  - mongodb
 jobs:
   include:
     - stage: Clean
