@@ -11,4 +11,5 @@ import com.yuma.app.document.Meal;
 public interface MealRepository extends MongoRepository<Meal, UUID>, CrudRepository<Meal, UUID> {
 
 	Optional<Meal> findByDescription(String description);
+	Optional<Meal> findByMealId(UUID mealID);
 }

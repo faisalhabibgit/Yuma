@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yuma.app.service.MealService;
@@ -60,7 +61,13 @@ public class MealResource {
 		return this.mealService.update(mealTO);
 	}
 
-	@DeleteMapping("/delete/{mealId}")
+	@RequestMapping(method = RequestMethod.POST)
+	public MealTO create(@RequestBody MealTO mealTO) {
+		logger.info("creating meal into the database");
+		return this.mealService.create(mealTO);
+	}
+
+	@DeleteMapping("/{mealId}")
 	public void deleteMeal(@PathVariable UUID mealId) {
 		logger.info("deleting meal with mealId {}", mealId);
 

@@ -1,11 +1,9 @@
 package com.yuma.app.service;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,13 +39,13 @@ public class MealServiceTest {
 	private MealTO mealTO;
 	
 	@Before
-	public void setUp() {
-		
-		meal1 = new Meal(new ArrayList<>(), UUID.randomUUID(), "chicken", true,new HashSet<>());
-		meal2 = new Meal(new ArrayList<>(), UUID.randomUUID(), "chicken", false,new HashSet<>());
-		meal3 = new Meal(new ArrayList<>(), UUID.randomUUID(), "mutton", true,new HashSet<>());
-		mealTO = new MealTO(new ArrayList<>(),meal1.getMealId(),"chicken and veg",false,new HashSet<>());
-		
+	public void setUp() throws Exception {
+
+		meal1 = new Meal(new ArrayList<>(), UUID.randomUUID(), "chicken","chicken", true,new HashSet<>());
+		meal2 = new Meal(new ArrayList<>(), UUID.randomUUID(),"chicken", "chicken", false,new HashSet<>());
+		meal3 = new Meal(new ArrayList<>(), UUID.randomUUID(), "mutton", "mutton", true,new HashSet<>());
+		mealTO = new MealTO(new ArrayList<>(),meal1.getMealId(), "chicken and veg", "chicken and veg",false,new HashSet<>());
+
 		MockitoAnnotations.initMocks(this);
 	}
 	
@@ -84,15 +82,28 @@ public class MealServiceTest {
 		
 		UUID uuid = mealTO.getMealId();
 
-		Mockito.when(mealRepository.findOne(uuid)).thenReturn(meal1);
+		Optional<Meal> meal = Optional.of(meal1);
+
+		Mockito.when(mealRepository.findByMealId(uuid)).thenReturn(meal);
 		Mockito.when(mealRepository.save(meal1)).thenReturn(meal1);
-		
+
 		mealTO = mealService.update(mealTO);
-		
+
 		Assert.assertEquals(mealTO.getDescription(), meal1.getDescription());
 		Assert.assertEquals(mealTO.isAvailable(), meal1.isAvailable());
-		
-		
+	}
+
+	@Test
+	public void MealServiceCreateTest(){
+
+		Mockito.when(conversionService.convert(mealTO, Meal.class)).thenReturn(meal1);
+		Mockito.when(mealRepository.save(meal1)).thenReturn(meal1);
+		Mockito.when(conversionService.convert(meal1, MealTO.class)).thenReturn(mealTO);
+
+		mealService.create(mealTO);
+
+		Assert.assertEquals(mealTO.getDescription(), "chicken and veg");
+		Assert.assertEquals(mealTO.isAvailable(), false);
 	}
 	
 }

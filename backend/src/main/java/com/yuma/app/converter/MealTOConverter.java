@@ -10,6 +10,7 @@ public class MealTOConverter implements Converter<Meal, MealTO> {
 	public MealTO convert(Meal meal) {
 		MealTO mealTO = new MealTO();
 		mealTO.setMealId(meal.getMealId());
+		mealTO.setName(meal.getName());
 		mealTO.setDescription(meal.getDescription());
 		mealTO.setAvailable(meal.isAvailable());
 		mealTO.setIngredients(meal.getIngredients());
