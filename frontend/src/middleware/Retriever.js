@@ -3,7 +3,7 @@ import BuildMeal from './objectBuilder/BuildMeal';
 class Retriever {
 
     constructor(apiPath) {
-        this.entityPromise;
+        this.entityPromise = null;
 
         switch (apiPath) {
             case 'api/meals':
