@@ -166,14 +166,17 @@ class NewMeal extends Component{
                   <br/>
                   
                   <Label>Ingredients</Label>
-                  <button onClick={this.addIngredient}>Add new ingredient</button>
+                  <button style={{marginLeft:40}}onClick={this.addIngredient}>Add new ingredient</button>
+                  <br/><br/>
                   {
                     this.state.ingredients.map((val, idx)=> {
                       let ingredientId = `name-${idx}`, weightId = `weight-${idx}`, caloriesId= `calories-${idx}`, priceId=`price-${idx}`;
                       return (
                         <div key={idx}>
+                          <br/>
                           <label htmlFor={ingredientId}>{`Ingredient #${idx + 1}`}</label>
                           <input
+                            style={{marginLeft: 25}}
                             type="text"
                             name={ingredientId}
                             data-id={idx}
@@ -185,6 +188,7 @@ class NewMeal extends Component{
                           <br/>
                           <label htmlFor={weightId}>Weight</label>
                           <input
+                            style={{marginLeft: 70}}
                             type="text"
                             name={weightId}
                             data-id={idx}
@@ -196,6 +200,7 @@ class NewMeal extends Component{
                           <br/>
                           <label htmlFor={caloriesId}>Calories</label>
                           <input
+                            style={{marginLeft: 65}}
                             type="text"
                             name={caloriesId}
                             data-id={idx}
@@ -207,6 +212,7 @@ class NewMeal extends Component{
                           <br/>
                           <label htmlFor={priceId}>Price</label>
                           <input
+                            style={{marginLeft: 86}}
                             type="text"
                             name={priceId}
                             data-id={idx}
