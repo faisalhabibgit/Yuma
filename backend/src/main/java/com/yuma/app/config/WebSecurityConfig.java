@@ -31,9 +31,6 @@ import com.yuma.app.service.CustomUserDetailsService;
 	prePostEnabled = true
 )
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	@Autowired
-	CustomizeAuthenticationSuccessHandler customizeAuthenticationSuccessHandler;
 
 	@Autowired
 	private JwtAuthEntryPoint unauthorizedHandler;
