@@ -21,35 +21,34 @@ import com.yuma.app.to.UserTO;
 @RestController
 @RequestMapping("user")
 public class AuthenticationResource {
-	
-	private UserService userService;
+
 	final Logger logger = LoggerFactory.getLogger("auth resource");
+	private UserService userService;
 
 
-	public AuthenticationResource(UserService userService){
+	public AuthenticationResource(UserService userService) {
 		this.userService = userService;
 	}
-	
+
 	@PostMapping("/register")
-	public HttpStatus register(@RequestBody UserTO user, BindingResult bindingResult){
+	public HttpStatus register(@RequestBody UserTO user, BindingResult bindingResult) {
 		logger.info("attempting to register user with email: {}", user.getEmail());
-		
+
 		HttpStatus httpStatus;
 		Optional<User> optionalUser = userService.findUserByEmail(user.getEmail());
-		
-		if (optionalUser.isPresent()){
+
+		if (optionalUser.isPresent()) {
 			logger.info("user with email: {} already exists", user.getEmail());
 			bindingResult.rejectValue("email", "error.user", "There's already a registered user with the email provided");
 		}
-		if (bindingResult.hasErrors()){
+		if (bindingResult.hasErrors()) {
 			httpStatus = HttpStatus.CONFLICT;
-		}
-		else {
+		} else {
 			userService.saveUser(user);
 			httpStatus = HttpStatus.OK;
 			logger.info("user with email: {} registered successfully", user.getEmail());
 		}
-		
+
 		return httpStatus;
 	}
 }

@@ -18,7 +18,7 @@ import com.yuma.app.service.AuthenticationService;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 

@@ -20,15 +20,15 @@ import com.yuma.app.repository.UserRepository;
 
 @Service
 public class AuthenticationService implements UserDetailsService {
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
 		Optional<User> user = userRepository.findByEmail(email);
-		if(user != null) {
+		if (user != null) {
 			List<GrantedAuthority> authorities = getUserAuthority(user.get().getRoles());
 			return buildUserForAuthentication(user.get(), authorities);
 		} else {
@@ -49,5 +49,5 @@ public class AuthenticationService implements UserDetailsService {
 	private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
 	}
-	
+
 }

@@ -21,8 +21,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.yuma.app.document.User;
 import com.yuma.app.document.Meal;
+import com.yuma.app.document.User;
 
 @Slf4j
 @Document
@@ -36,10 +36,16 @@ public class MealCatalog {
 	private ArrayList<User> consumers;
 	private Logger logger = LoggerFactory.getLogger("caterer logger");
 
+	private static int randomIntGenerator(int upperBound) {
+		Random rand = new Random();
+
+		return rand.nextInt(upperBound);
+	}
+
 	public List<Meal> getWeeklyCombination(List<Meal> availableMeals, List<User> activeUsers) {
 		List<Meal> possibleMeals = new ArrayList<>();
 		logger.info("generating combo meals");
-		
+
 		for (User consumer : activeUsers) {
 			generatePossibleMeals(availableMeals, consumer);
 		}
@@ -48,16 +54,10 @@ public class MealCatalog {
 		logger.info("creating meals arraylist");
 
 		possibleMeals.addAll(mealsMap.keySet());
-		
+
 		possibleMeals = filterList(possibleMeals);
 
 		return possibleMeals;
-	}
-
-	private static int randomIntGenerator(int upperBound) {
-		Random rand = new Random();
-
-		return rand.nextInt(upperBound);
 	}
 
 	protected boolean equals(HashSet<?> set1, HashSet<?> set2) {
@@ -112,15 +112,15 @@ public class MealCatalog {
 			i++;
 		}
 	}
-	
+
 	protected List<Meal> filterList(List<Meal> mealList) {
 		List<Meal> filteredList = new ArrayList<>();
-		
-		for(int i=0; i<3; i++){
+
+		for (int i = 0; i < 3; i++) {
 			filteredList.add(mealList.get(i));
 		}
-		
+
 		return filteredList;
-		
+
 	}
 }

@@ -15,7 +15,7 @@ import com.yuma.app.document.Role;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserTO {
-	
+
 	private String userId;
 	private String firstName;
 	private String password;

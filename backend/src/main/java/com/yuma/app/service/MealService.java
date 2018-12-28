@@ -31,10 +31,10 @@ public class MealService {
 		this.userRepository = userRepository;
 		this.conversionService = conversionService;
 	}
-	
+
 	public List<MealTO> list() {
 		mealServiceLogger.info("fetching list of meals");
-		
+
 		List<MealTO> mealTos = new ArrayList<>();
 		List<Meal> mealList = mealRepository.findAll();
 
@@ -43,7 +43,7 @@ public class MealService {
 		}
 		return mealTos;
 	}
-	
+
 	public MealTO update(MealTO mealTo) {
 		mealServiceLogger.info("updating meal with description: ", mealTo.getDescription());
 
@@ -61,7 +61,7 @@ public class MealService {
 
 	public List<MealTO> weeklyCombo() {
 		mealServiceLogger.info("generating optimal weekly combo");
-		
+
 		List<MealTO> mealTOS = new ArrayList<>();
 		List<Meal> mealList = mealRepository.findAll();
 		List<User> consumerList = userRepository.findAll();
@@ -86,10 +86,9 @@ public class MealService {
 		mealServiceLogger.info("fetching meal from repo");
 
 		Optional<Meal> optionalMeal = mealRepository.findByDescription(description);
-		if (!optionalMeal.isPresent()){
+		if (!optionalMeal.isPresent()) {
 			throw new IllegalArgumentException();
-		}
-		else {
+		} else {
 			return conversionService.convert(optionalMeal.get(), MealTO.class);
 		}
 	}

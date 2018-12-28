@@ -5,7 +5,7 @@ import org.springframework.core.convert.converter.Converter;
 import com.yuma.app.document.User;
 import com.yuma.app.to.UserTO;
 
-public class UserConverter implements Converter<UserTO, User>{
+public class UserConverter implements Converter<UserTO, User> {
 
 	@Override
 	public User convert(UserTO userTO) {

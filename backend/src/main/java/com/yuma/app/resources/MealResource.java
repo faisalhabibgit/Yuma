@@ -35,35 +35,35 @@ public class MealResource {
 	@GetMapping("/all")
 	public List<MealTO> getAll() {
 		logger.info("retrieving meals list from DB");
-		
+
 		return this.mealService.list();
 	}
 
 	@GetMapping("/{description}")
 	public MealTO getByDescription(@PathVariable String description) {
 		logger.info("retrieving meals list from DB by description {}", description);
-		
+
 		return this.mealService.findByDescription(description);
 	}
 
 	@GetMapping("/weeklycombo")
 	public List<MealTO> getWeeklyCombo() {
 		logger.info("retrieving optimal weekly Combo");
-		
+
 		return this.mealService.weeklyCombo();
 	}
 
 	@PutMapping("/update")
 	public MealTO update(@RequestBody MealTO mealTO) {
 		logger.info("updating meal into the database");
-		
+
 		return this.mealService.update(mealTO);
 	}
 
 	@DeleteMapping("/delete/{mealId}")
 	public void deleteMeal(@PathVariable UUID mealId) {
 		logger.info("deleting meal with mealId {}", mealId);
-		
+
 		this.mealService.deleteMeal(mealId);
 	}
 }

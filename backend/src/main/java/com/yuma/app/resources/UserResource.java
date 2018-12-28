@@ -31,6 +31,6 @@ public class UserResource {
 		logger.info("retrieving user list from DB");
 		return this.userService.list();
 	}
-	
-	
+
+
 }

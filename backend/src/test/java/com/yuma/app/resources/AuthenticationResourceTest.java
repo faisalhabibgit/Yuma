@@ -1,24 +1,24 @@
 package com.yuma.app.resources;
 
-import com.yuma.app.document.User;
-import com.yuma.app.service.UserService;
-import com.yuma.app.to.UserTO;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.slf4j.Logger;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.validation.BindingResult;
 
-import java.util.Optional;
-
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import com.yuma.app.document.User;
+import com.yuma.app.service.UserService;
+import com.yuma.app.to.UserTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,9 +26,6 @@ public class AuthenticationResourceTest {
 
 	@Mock
 	private UserService userService;
-
-	@Mock
-	private Logger logger;
 
 	@Mock
 	BindingResult bindingResult;

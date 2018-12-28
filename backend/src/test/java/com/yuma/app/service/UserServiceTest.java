@@ -1,65 +1,55 @@
 package com.yuma.app.service;
 
-import com.yuma.app.document.Role;
-import com.yuma.app.document.User;
-import com.yuma.app.repository.RoleRepository;
-import com.yuma.app.repository.UserRepository;
-import com.yuma.app.to.UserTO;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.slf4j.Logger;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import static org.mockito.Mockito.*;
+import com.yuma.app.document.Role;
+import com.yuma.app.document.User;
+import com.yuma.app.repository.RoleRepository;
+import com.yuma.app.repository.UserRepository;
+import com.yuma.app.to.UserTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserServiceTest {
 
+	private Optional<Role> role;
 	@Mock
 	private UserRepository userRepository;
-	
 	@Mock
 	private RoleRepository roleRepository;
-
 	@Mock
 	private ConversionService conversionService;
-	
-	@Mock
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-	@Mock
-	private Logger logger;
-
 	@InjectMocks
 	private UserService userService;
-	
-	Optional<Role> role;
-	
+	private String adminRole = "ADMIN";
+
 	@Before
 	public void setUp() throws Exception {
 		role = Optional.of(new Role());
 	}
-	
-	private String adminRole = "ADMIN";
 
 	@Test
 	public void givenUserWhenSaveUserCalledThenShouldSaveTheUserRecord() {
-		
+
 		UserTO userTO = prepareUserTo();
 		User user = prepareUser();
-		
+
 		when(conversionService.convert(userTO, User.class)).thenReturn(user);
 		when(roleRepository.findByRole(adminRole)).thenReturn(role);
 
@@ -93,20 +83,19 @@ public class UserServiceTest {
 
 	@Test
 	public void givenEmailWhenFindByEmailCalledThenShouldReturnUserWithThatEmail() {
-		
+
 		String email = "example@email.com";
-		
+
 		User user = new User();
 		user.setEmail(email);
-		
-		when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
-		
-		userService.findUserByEmail(email);
-		
-		Assert.assertEquals(user.getEmail(), email);
-		
-	}
 
+		when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
+
+		userService.findUserByEmail(email);
+
+		Assert.assertEquals(user.getEmail(), email);
+
+	}
 
 
 	private UserTO prepareUserTo() {
@@ -129,7 +118,7 @@ public class UserServiceTest {
 	}
 
 	private List<User> prepareUserList() {
-		
+
 		List<User> users = new ArrayList<User>() {
 			{
 				add(new User());

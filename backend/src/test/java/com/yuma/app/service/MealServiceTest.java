@@ -41,7 +41,7 @@ public class MealServiceTest {
 	private MealTO mealTO;
 	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		
 		meal1 = new Meal(new ArrayList<>(), UUID.randomUUID(), "chicken", true,new HashSet<>());
 		meal2 = new Meal(new ArrayList<>(), UUID.randomUUID(), "chicken", false,new HashSet<>());

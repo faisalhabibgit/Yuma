@@ -5,10 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.converter.ConverterRegistry;
 
-import com.yuma.app.converter.UserConverter;
-import com.yuma.app.converter.UserTOConverter;
 import com.yuma.app.converter.MealConverter;
 import com.yuma.app.converter.MealTOConverter;
+import com.yuma.app.converter.UserConverter;
+import com.yuma.app.converter.UserTOConverter;
 
 @Configuration
 public class ConverterConfiguration {
@@ -19,7 +19,7 @@ public class ConverterConfiguration {
 		ConverterRegistry registry = (ConverterRegistry) conversionService;
 
 		registry.addConverter(new MealConverter());
-    registry.addConverter(new MealTOConverter());
+		registry.addConverter(new MealTOConverter());
 		registry.addConverter(new UserConverter());
 		registry.addConverter(new UserTOConverter());
 

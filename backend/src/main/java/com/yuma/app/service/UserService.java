@@ -28,7 +28,7 @@ public class UserService {
 	private ConversionService conversionService;
 	private RoleRepository roleRepository;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 
 	public UserService(UserRepository userRepository, ConversionService conversionService, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
 		this.userRepository = userRepository;
@@ -39,11 +39,11 @@ public class UserService {
 
 	public void saveUser(UserTO userTO) {
 		userServiceLogger.info("saving user {}", userTO.getEmail());
-		
+
 		User user = conversionService.convert(userTO, User.class);
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setEnabled(true);
-		
+
 		Optional<Role> userRole = roleRepository.findByRole("ADMIN");
 		userRole.ifPresent(x -> userTO.setRoles(new HashSet<>(Collections.singletonList(x))));
 		userRepository.save(user);
@@ -54,14 +54,14 @@ public class UserService {
 
 		List<UserTO> consumerTOS = new ArrayList<>();
 		List<User> consumerList = userRepository.findAll();
-		
-		for (User consumer: consumerList){
+
+		for (User consumer : consumerList) {
 			consumerTOS.add(conversionService.convert(consumer, UserTO.class));
 		}
-		
+
 		return consumerTOS;
 	}
-	
+
 	public Optional<User> findUserByEmail(String email) {
 		userServiceLogger.info("fetching user by email: {}", email);
 
