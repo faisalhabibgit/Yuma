@@ -3,12 +3,11 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import LoginCaterer from './component/LoginCaterer';
 import Registration from './component/Registration';
-import Navigation from './component/Navigation'
-import Footer from './component/Footer'
-import Error from './component/Error'
-import Home from './component/Home'
-import Test from './component/Test'
-import Meal from './Meal';
+import Navigation from './component/Navigation';
+import Footer from './component/Footer';
+import Error from './component/Error';
+import Home from './component/Home';
+import Test from './component/Test';
 
 
 // import NavBar from './NavBar/NavBar.js';
@@ -26,7 +25,6 @@ class App extends Component {
           <Route path="/LoginCaterer" component={LoginCaterer} />
           <Route path="/Registration" component={Registration} />
           <Route path="/Test" component={Test} />
-          <Route path="/meals" component={Meal} />
           <Route component={Error} />
           </Switch>
           <Footer/>
