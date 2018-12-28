@@ -1,9 +1,9 @@
 package com.yuma.app.service;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import com.querydsl.core.types.Predicate;
+import com.yuma.app.document.Meal;
+import com.yuma.app.document.QMeal;
+import com.yuma.app.repository.MealRepository;
+import com.yuma.app.to.MealTO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,19 +17,21 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.yuma.app.document.Meal;
-import com.yuma.app.repository.MealRepository;
-import com.yuma.app.to.MealTO;
+import java.util.*;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MealServiceTest {
-	
+
 	@MockBean
 	private MealRepository mealRepository;
-	
+
 	@Mock
 	private ConversionService conversionService;
-	
+
+	@Mock
+	private QMeal qMeal;
+
 	@Autowired
 	private MealService mealService;
 
@@ -37,7 +39,7 @@ public class MealServiceTest {
 	private Meal meal2;
 	private Meal meal3;
 	private MealTO mealTO;
-	
+
 	@Before
 	public void setUp() throws Exception {
 
@@ -48,7 +50,7 @@ public class MealServiceTest {
 
 		MockitoAnnotations.initMocks(this);
 	}
-	
+
 	@Test
 	public void MealServiceListTest() {
 		List<Meal> actualMeals = new ArrayList<>();
@@ -60,26 +62,30 @@ public class MealServiceTest {
 
 		Assert.assertEquals(expectedMeals.size(), actualMeals.size());
 	}
-	
+
 	@Test
 	public void MealServiceListByPredicateTest(){
 
-		String desc = "chicken";
-		Optional<Meal> optionalMeal = Optional.ofNullable(new Meal());
-		
-		Mockito.when(mealRepository.findByDescription(desc)).thenReturn(optionalMeal);
-		Mockito.when(mealRepository.findByDescription(desc)).thenReturn(optionalMeal);
-		
-		MealTO expectedMeals = mealService.findByDescription(desc);
+		QMeal qMeal = new QMeal("meal");
+		Predicate predicate = qMeal.description.eq("chicken");
 
-		Assert.assertNotNull(expectedMeals);
-		
-		
+		List<Meal> mealsWithPredicate = new ArrayList<>();
+
+		mealsWithPredicate.add(meal1);
+		mealsWithPredicate.add(meal2);
+
+		Mockito.when(mealRepository.findAll(predicate)).thenReturn(mealsWithPredicate);
+
+		List<MealTO> expectedMeals = mealService.listByPredicate(predicate);
+
+		Assert.assertEquals(expectedMeals.size(), mealsWithPredicate.size());
+
+
 	}
-	
+
 	@Test 
 	public void MealServiceUpdateTest(){
-		
+
 		UUID uuid = mealTO.getMealId();
 
 		Optional<Meal> meal = Optional.of(meal1);
@@ -105,5 +111,5 @@ public class MealServiceTest {
 		Assert.assertEquals(mealTO.getDescription(), "chicken and veg");
 		Assert.assertEquals(mealTO.isAvailable(), false);
 	}
-	
+
 }
