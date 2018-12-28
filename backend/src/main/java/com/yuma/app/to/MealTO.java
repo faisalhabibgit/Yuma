@@ -19,6 +19,7 @@ public class MealTO {
 
 	protected List<Ingredients> ingredients;
 	private UUID mealId;
+	private String name;
 	private String description;
 	private boolean isAvailable;
 	private HashSet<String> flags;
@@ -28,6 +29,7 @@ public class MealTO {
 	public String toString() {
 		return "Meal{" +
 			"mealId=" + mealId +
+			"name=" + name +
 			", description='" + description + '\'' +
 			", isAvailable=" + isAvailable +
 			", ingredients=" + ingredients +
