@@ -16,7 +16,7 @@ class NewMeal extends Component{
     this.state = {
       name: '',
       description: '',
-      ingredients: [{name:"",age:""}],
+      ingredients: [{name:"",weight:"", calories:"",price:""}],
       nuts: 'false',
       dairy: 'false',
       gluten: 'false',
@@ -45,6 +45,8 @@ class NewMeal extends Component{
       let array = this.setFlags();
       this.postMeal(array);
       
+      
+      alert("Meal created!");
       //redirect to home
       this.props.history.push(REDIRECTHOME);
       
@@ -54,7 +56,7 @@ class NewMeal extends Component{
   
   handleChange(event) {
 
-    if(["name", "age"].includes(event.target.className)){
+    if(["name", "weight","calories","price"].includes(event.target.className)){
 
       let ingredients = [...this.state.ingredients];
       ingredients[event.target.dataset.id][event.target.className] = event.target.value;
@@ -73,8 +75,14 @@ class NewMeal extends Component{
   addIngredient = (e) => {
     e.preventDefault();
     this.setState((prevState) => ({
-      ingredients: [...prevState.ingredients, {name:"", age:""}],
+      ingredients: [...prevState.ingredients, {name:"", weight:"", calories:"", price:""}],
     }));
+  };
+  
+  removeIngredient(e,index) {
+    e.preventDefault();
+    this.state.ingredients.splice(index,1);
+    this.setState({ingredients: this.state.ingredients});
   };
   
   
@@ -91,7 +99,7 @@ class NewMeal extends Component{
         name: this.state.name,
         description: this.state.description,
         flags: array,
-        available: false
+        available: true
       })
     })
     
@@ -161,7 +169,7 @@ class NewMeal extends Component{
                   <button onClick={this.addIngredient}>Add new ingredient</button>
                   {
                     this.state.ingredients.map((val, idx)=> {
-                      let ingredientId = `cat-${idx}`, ageId = `age-${idx}`
+                      let ingredientId = `name-${idx}`, weightId = `weight-${idx}`, caloriesId= `calories-${idx}`, priceId=`price-${idx}`;
                       return (
                         <div key={idx}>
                           <label htmlFor={ingredientId}>{`Ingredient #${idx + 1}`}</label>
@@ -174,16 +182,42 @@ class NewMeal extends Component{
                             onChange={this.handleChange}
                             className="name"
                           />
-                          <label htmlFor={ageId}>Age</label>
+                          <br/>
+                          <label htmlFor={weightId}>Weight</label>
                           <input
                             type="text"
-                            name={ageId}
+                            name={weightId}
                             data-id={idx}
-                            id={ageId}
-                            value={this.state.ingredients[idx].age}
+                            id={weightId}
+                            value={this.state.ingredients[idx].weight}
                             onChange={this.handleChange}
-                            className="age"
+                            className="weight"
                           />
+                          <br/>
+                          <label htmlFor={caloriesId}>Calories</label>
+                          <input
+                            type="text"
+                            name={caloriesId}
+                            data-id={idx}
+                            id={caloriesId}
+                            value={this.state.ingredients[idx].calories}
+                            onChange={this.handleChange}
+                            className="calories"
+                          />
+                          <br/>
+                          <label htmlFor={priceId}>Price</label>
+                          <input
+                            type="text"
+                            name={priceId}
+                            data-id={idx}
+                            id={priceId}
+                            value={this.state.ingredients[idx].price}
+                            onChange={this.handleChange}
+                            className="price"
+                          />
+                        <br/>
+                        <br/>
+                        <button onClick={(e) => {this.removeIngredient(e,idx)}}> Remove </button>  
                         </div>
                       )
                     })
