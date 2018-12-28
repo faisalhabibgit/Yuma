@@ -1,4 +1,4 @@
-package com.yuma.app.resources;
+package com.yuma.app.controller;
 
 import java.util.List;
 
@@ -16,13 +16,13 @@ import com.yuma.app.to.UserTO;
 @Slf4j
 @RestController
 @RequestMapping("api/rest")
-public class UserResource {
+public class UserController {
 
 	final Logger logger = LoggerFactory.getLogger("initial Logger");
 
 	private UserService userService;
 
-	public UserResource(UserService consumerService) {
+	public UserController(UserService consumerService) {
 		this.userService = consumerService;
 	}
 

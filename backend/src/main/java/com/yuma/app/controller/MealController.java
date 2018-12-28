@@ -1,4 +1,4 @@
-package com.yuma.app.resources;
+package com.yuma.app.controller;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,13 +23,13 @@ import com.yuma.app.to.MealTO;
 @Slf4j
 @RestController
 @RequestMapping("api/meals")
-public class MealResource {
+public class MealController {
 
 	final Logger logger = LoggerFactory.getLogger("meal Logger");
 	private MealService mealService;
 
 	@Autowired
-	public MealResource(MealService mealService) {
+	public MealController(MealService mealService) {
 		this.mealService = mealService;
 	}
 

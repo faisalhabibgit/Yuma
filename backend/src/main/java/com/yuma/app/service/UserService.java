@@ -11,11 +11,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.yuma.app.document.Role;
 import com.yuma.app.document.User;
+import com.yuma.app.payload.SignUpRequest;
 import com.yuma.app.repository.RoleRepository;
 import com.yuma.app.repository.UserRepository;
 import com.yuma.app.to.UserTO;
@@ -27,26 +28,25 @@ public class UserService {
 	private UserRepository userRepository;
 	private ConversionService conversionService;
 	private RoleRepository roleRepository;
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	private PasswordEncoder passwordEncoder;
 
-
-	public UserService(UserRepository userRepository, ConversionService conversionService, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+	public UserService(UserRepository userRepository, ConversionService conversionService, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
 		this.userRepository = userRepository;
 		this.conversionService = conversionService;
 		this.roleRepository = roleRepository;
-		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+		this.passwordEncoder = passwordEncoder;
 	}
 
-	public void saveUser(UserTO userTO) {
-		userServiceLogger.info("saving user {}", userTO.getEmail());
+	public User saveUser(SignUpRequest req) {
+		userServiceLogger.info("saving user {}", req.getEmail());
 
-		User user = conversionService.convert(userTO, User.class);
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		User user = conversionService.convert(req, User.class);
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setEnabled(true);
 
 		Optional<Role> userRole = roleRepository.findByRole("ADMIN");
-		userRole.ifPresent(x -> userTO.setRoles(new HashSet<>(Collections.singletonList(x))));
-		userRepository.save(user);
+		userRole.ifPresent(x -> user.setRoles(new HashSet<>(Collections.singletonList(x))));
+		return userRepository.save(user);
 	}
 
 	public List<UserTO> list() {
@@ -66,5 +66,9 @@ public class UserService {
 		userServiceLogger.info("fetching user by email: {}", email);
 
 		return userRepository.findByEmail(email);
+	}
+	
+	public boolean existsByEmail(String email){
+		return userRepository.existsByEmail(email);
 	}
 }

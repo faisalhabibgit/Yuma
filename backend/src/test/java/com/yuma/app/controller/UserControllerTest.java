@@ -1,4 +1,4 @@
-package com.yuma.app.resources;
+package com.yuma.app.controller;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,7 +25,7 @@ import com.yuma.app.to.UserTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserResourceTest {
+public class UserControllerTest {
 
 	@MockBean
 	UserRepository consumerRepository;
@@ -37,7 +37,7 @@ public class UserResourceTest {
 	ConversionService conversionService;
 
 	@Autowired
-	private UserResource consumerResource;
+	private UserController consumerResource;
 	
 	private User consumer1;
 	private User consumer2;

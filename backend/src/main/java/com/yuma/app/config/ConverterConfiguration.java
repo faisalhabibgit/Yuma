@@ -7,6 +7,7 @@ import org.springframework.core.convert.converter.ConverterRegistry;
 
 import com.yuma.app.converter.MealConverter;
 import com.yuma.app.converter.MealTOConverter;
+import com.yuma.app.converter.SignupRequestConverter;
 import com.yuma.app.converter.UserConverter;
 import com.yuma.app.converter.UserTOConverter;
 
@@ -22,6 +23,7 @@ public class ConverterConfiguration {
 		registry.addConverter(new MealTOConverter());
 		registry.addConverter(new UserConverter());
 		registry.addConverter(new UserTOConverter());
+		registry.addConverter(new SignupRequestConverter());
 
 	}
 }

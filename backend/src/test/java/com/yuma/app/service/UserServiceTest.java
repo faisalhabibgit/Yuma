@@ -16,11 +16,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.yuma.app.document.Role;
 import com.yuma.app.document.User;
+import com.yuma.app.payload.SignUpRequest;
 import com.yuma.app.repository.RoleRepository;
 import com.yuma.app.repository.UserRepository;
 import com.yuma.app.to.UserTO;
@@ -37,8 +38,9 @@ public class UserServiceTest {
 	@Mock
 	private ConversionService conversionService;
 	@Mock
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+	private PasswordEncoder passwordEncoder;
+
+
 	@InjectMocks
 	private UserService userService;
 	private String adminRole = "ADMIN";
@@ -51,16 +53,16 @@ public class UserServiceTest {
 	@Test
 	public void givenUserWhenSaveUserCalledThenShouldSaveTheUserRecord() {
 
-		UserTO userTO = prepareUserTo();
+		SignUpRequest signUpRequest = prepareSignupReq();
 		User user = prepareUser();
 
-		when(conversionService.convert(userTO, User.class)).thenReturn(user);
+		when(conversionService.convert(signUpRequest, User.class)).thenReturn(user);
 		when(roleRepository.findByRole(adminRole)).thenReturn(role);
 
 
-		userService.saveUser(userTO);
+		userService.saveUser(signUpRequest);
 
-		verify(conversionService, times(1)).convert(userTO, User.class);
+		verify(conversionService, times(1)).convert(signUpRequest, User.class);
 		verify(roleRepository, times(1)).findByRole(adminRole);
 		verify(userRepository, times(1)).save(user);
 	}
@@ -102,23 +104,22 @@ public class UserServiceTest {
 	}
 
 
-	private UserTO prepareUserTo() {
-		UserTO userTO = new UserTO();
-		userTO.setUserId("123");
-		userTO.setFirstName("first name");
-		userTO.setLastName("last name");
-		userTO.setEmail("example@email.com");
-		userTO.setPassword("myPass");
-		return userTO;
+	private SignUpRequest prepareSignupReq() {
+		SignUpRequest signUpRequest = new SignUpRequest();
+		signUpRequest.setFirstName("first name");
+		signUpRequest.setLastName("last name");
+		signUpRequest.setEmail("example@email.com");
+		signUpRequest.setPassword("myPass");
+		return signUpRequest;
 	}
 
 
 	private User prepareUser() {
 		User user = new User();
-		user.setUserId("123");
 		user.setFirstName("first name");
 		user.setLastName("last name");
 		user.setEmail("example@email.com");
+		user.setPassword("myPass");
 		return user;
 	}
 

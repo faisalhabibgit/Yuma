@@ -3,7 +3,6 @@ package com.yuma.app.service;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,27 +12,40 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.yuma.app.document.Role;
 import com.yuma.app.document.User;
 import com.yuma.app.repository.UserRepository;
+import com.yuma.app.security.UserPrincipal;
 
 @Service
-public class AuthenticationService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
 
 	@Override
+	@Transactional
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-		Optional<User> user = userRepository.findByEmail(email);
-		if (user != null) {
-			List<GrantedAuthority> authorities = getUserAuthority(user.get().getRoles());
-			return buildUserForAuthentication(user.get(), authorities);
-		} else {
-			throw new UsernameNotFoundException("username not found");
-		}
+		User user = userRepository.findByEmail(email)
+			.orElseThrow(() ->
+				new UsernameNotFoundException("User not found with username or email : " + email)
+			);
+
+		return UserPrincipal.create(user);
+	}
+
+
+	// This method is used by JWTAuthenticationFilter
+	@Transactional
+	public UserDetails loadUserById(String id) {
+		User user = userRepository.findByUserId(id).orElseThrow(
+			() -> new UsernameNotFoundException("User not found with id : " + id)
+		);
+
+		return UserPrincipal.create(user);
 	}
 
 	private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
