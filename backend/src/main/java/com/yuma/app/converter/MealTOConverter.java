@@ -2,8 +2,8 @@ package com.yuma.app.converter;
 
 import org.springframework.core.convert.converter.Converter;
 
-import com.yuma.app.document.Meal;
 import com.yuma.app.to.MealTO;
+import com.yuma.app.document.Meal;
 
 public class MealTOConverter implements Converter<Meal, MealTO> {
 	@Override
