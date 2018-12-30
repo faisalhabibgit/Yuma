@@ -1,4 +1,4 @@
-package com.yuma.app.resources;
+package com.yuma.app.controller;
 
 import java.util.List;
 
@@ -10,25 +10,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yuma.app.service.ConsumerService;
-import com.yuma.app.to.ConsumerTO;
+import com.yuma.app.service.UserService;
+import com.yuma.app.to.UserTO;
 
 @Slf4j
 @RestController
 @RequestMapping("api/rest")
-public class ConsumerResource {
+public class UserController {
 
 	final Logger logger = LoggerFactory.getLogger("initial Logger");
 
-	private ConsumerService consumersService;
+	private UserService userService;
 
-	public ConsumerResource(ConsumerService consumerService) {
-		this.consumersService = consumerService;
+	public UserController(UserService consumerService) {
+		this.userService = consumerService;
 	}
 
 	@GetMapping("/all")
-	public List<ConsumerTO> getAll() {
-		logger.info("retrieving consumers list from DB");
-		return this.consumersService.list();
+	public List<UserTO> getAll() {
+		logger.info("retrieving user list from DB");
+		return this.userService.list();
 	}
+
+
 }
