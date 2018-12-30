@@ -8,9 +8,7 @@ import Footer from './component/Footer';
 import Error from './component/Error';
 import Home from './component/Home';
 import Test from './component/Test';
-
-
-// import NavBar from './NavBar/NavBar.js';
+import NewMeal from './component/NewMeal';
 
 class App extends Component {
 
@@ -24,7 +22,8 @@ class App extends Component {
           <Route path="/" component={Home} exact />
           <Route path="/LoginCaterer" component={LoginCaterer} />
           <Route path="/Registration" component={Registration} />
-          <Route path="/Test" component={Test} />
+          <Route path="/NewMeal" component={NewMeal} />
+          <Route path="/Test" component={Meal} />
           <Route component={Error} />
           </Switch>
           <Footer/>

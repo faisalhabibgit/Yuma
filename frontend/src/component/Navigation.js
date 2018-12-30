@@ -44,6 +44,9 @@ class Navigation extends Component {
                         <NavItem>
                             <NavLink tag={Link} to="/Registration">Register</NavLink>
                         </NavItem>
+                      <NavItem>
+                        <NavLink tag={Link} to="/newMeal">New Meal</NavLink>
+                      </NavItem>
                         <NavItem>
                             <NavLink tag={Link} to="/Test">Meals</NavLink>
                         </NavItem>
