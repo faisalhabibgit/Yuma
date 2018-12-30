@@ -1,13 +1,19 @@
 package com.yuma.app.catalog;
 
-import com.yuma.app.document.Consumer;
-import com.yuma.app.document.Meal;
-import com.yuma.app.document.Preferences;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.*;
+import com.yuma.app.document.Meal;
+import com.yuma.app.document.Preferences;
+import com.yuma.app.document.User;
 
 public class MealCatalogTest {
 	
@@ -20,12 +26,12 @@ public class MealCatalogTest {
 
 	//will find a better way to test this method since the output can't be predicted because of randomly picked meal
 //	@Test
-//	public void givenMealListAndConsumerWhenGeneratePossibleMealsCalledShouldReturnPossibleMeals() {
+//	public void givenMealListAndUserWhenGeneratePossibleMealsCalledShouldReturnPossibleMeals() {
 //
 //		HashSet<String> flags = prepareHashsetWithOnePreference();
 //		Meal meal = new Meal(new ArrayList<>(), UUID.randomUUID(), "description", true, flags);
 //
-//		Consumer consumer = prepareAConsumer();
+//		User consumer = prepareAUser();
 //		
 //		List<Meal> mealList = new ArrayList<Meal>() {
 //			{
@@ -130,13 +136,12 @@ public class MealCatalogTest {
 		Assert.assertEquals(meals.size(), 3);
 	}
 	
-	private Consumer prepareAConsumer() {
+	private User prepareAUser() {
 
 		Preferences preferences = new Preferences();
 		preferences.setNumOfMeals(1);
 		preferences.setDetails(prepareHashsetWithOnePreference());
-		Consumer consumer = new Consumer(UUID.randomUUID(), "Jack", "Sparrow",
-			"jacksparrow@caribbean.com", "workemail@gmail.com", preferences, "");
+		User consumer = new User("cxo","jack","Sparrow", "baiazid", "ahmad.lego@gmail.com",new Preferences(2, true, false, new HashSet<>()), true,"20390807",new HashSet<>());
 		return consumer;
 	}
 	
