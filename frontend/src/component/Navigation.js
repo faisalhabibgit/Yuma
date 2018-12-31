@@ -58,12 +58,12 @@ class Navigation extends Component {
                                 Options
                                         </DropdownToggle>
                             <DropdownMenu right>
-                                <DropdownItem>
-                                    Option 1
-                                            </DropdownItem>
+                                <DropdownItem tag={Link} to="/TestApiView">
+                                    Test Api
+                                </DropdownItem>
                                 <DropdownItem>
                                     Option 2
-                                            </DropdownItem>
+                                </DropdownItem>
                                 <DropdownItem divider />
                                 <DropdownItem>
                                     Reset
