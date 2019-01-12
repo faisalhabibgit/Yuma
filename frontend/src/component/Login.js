@@ -54,9 +54,11 @@ class Login extends Component {
     return (
       <Container>
         <Col sm="12" md={{ size: 6, offset: 3 }}>
-          <h2>Sign In</h2>
+          <br/>
+          <h2 style={{textAlign:'center'}}>Sign In</h2>
           <Form className="form" onSubmit={this.handleSubmit}>
             <Col>
+              <br/>
               <FormGroup>
                 <Label>Email</Label>
                 <Input
@@ -66,7 +68,7 @@ class Login extends Component {
                   placeholder="myemail@email.com"
                   onChange={this.handleChange}
                 />
-            
+              <br/>
                 <Label>Password</Label>
                 <Input
                   type="password"
@@ -75,9 +77,11 @@ class Login extends Component {
                   placeholder=""
                   onChange={this.handleChange}
                 />
+                <br/>
+                <Button style={{textAlign: 'right',alignSelf: 'stretch'}}type="submit" value="Submit">Submit</Button>
               </FormGroup>
             </Col>
-            <Button type="submit" value="Submit">Submit</Button>
+            <br/>
           </Form>
         </Col>
       </Container>
