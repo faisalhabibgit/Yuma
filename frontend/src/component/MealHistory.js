@@ -29,6 +29,20 @@ class MealHistory extends Component{
       <Col sm="12" md={{ size:6, offset: 3 }}>
   <h2>Meal Combination History</h2>
     <Form className="form-inline">
+
+      <Col >
+      <FormGroup>
+      <Label>User Name</Label>
+    <Input
+    type="text"
+    name="userName"
+    id="userName"
+    placeholder=""
+    onChange={this.handleChange}
+    />
+
+    </FormGroup>
+    </Col>
       <Col >
       <FormGroup>
       <Label>From: </Label>
@@ -45,9 +59,10 @@ class MealHistory extends Component{
     selected={this.state.startDate}
     onChange={this.handleChange}
     />
+      
     </FormGroup>
     </Col>
-
+      
     <Button>View</Button>
     </Form>
     </Col>
