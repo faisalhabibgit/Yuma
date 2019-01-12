@@ -1,5 +1,6 @@
 import Meal from '../objects/Meal';
 import Ingredients from '../objects/Ingredients';
+import ApiToken from '../ApiToken';
 
 class BuildMeal {
 
@@ -13,7 +14,18 @@ class BuildMeal {
         var ingredientsList = [];
         var ingredients;
 
-        return fetch('api/meals')
+        const apiToken = new ApiToken();
+
+        var obj = {
+            method: 'GET',
+            headers: {
+                'cache-control': "no-cache",
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer '+ apiToken.getCookie('yuma-token')
+            }
+        }
+
+        return fetch('http://localhost:2020/api/meals/all', obj)
             .then((response) => {
                 if (response.ok) {
                     return response.json();
@@ -39,7 +51,7 @@ class BuildMeal {
                     ingredientsList = [];
                 }
                 return mealList;
-            })
+            });
     }
 
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import ApiToken from '../middleware/ApiToken';
 import Retriever from '../middleware/Retriever'
 import {
   ListGroup, ListGroupItem,
@@ -25,10 +25,18 @@ class Test extends Component {
 
   componentDidMount() {
     const retriever = new Retriever('api/meals');
-    retriever.getEntityPromise()
-      .then((obj) => {
-        this.setState({ apiObject: obj });
-      });
+    const apiToken = new ApiToken();
+    apiToken.getToken('http://localhost:2020/api/auth/signin',
+      {
+        email: 'whatsup1@email.com',
+        password: 'idk1'
+      })
+      .then(
+        retriever.getEntityPromise()
+          .then((obj) => {
+            this.setState({ apiObject: obj });
+          })
+      );
   }
 
   handleQueryChange(event) {
