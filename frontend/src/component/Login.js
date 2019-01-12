@@ -6,7 +6,7 @@ import {
   Container,
 } from 'reactstrap';
 
-class LoginCaterer extends Component {
+class Login extends Component {
   render() {
     return (
       <Container>
@@ -44,4 +44,4 @@ class LoginCaterer extends Component {
   }
 }
 
-export default LoginCaterer;
+export default Login;

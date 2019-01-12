@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import LoginCaterer from './component/LoginCaterer';
+import Login from './component/Login';
 import Registration from './component/Registration';
 import Navigation from './component/Navigation';
 import Footer from './component/Footer';
@@ -21,7 +21,7 @@ class App extends Component {
           <Navigation />
           <Switch>
           <Route path="/" component={Home} exact />
-          <Route path="/LoginCaterer" component={LoginCaterer} />
+          <Route path="/Login" component={Login} />
           <Route path="/Registration" component={Registration} />
           <Route path="/NewMeal" component={NewMeal} />
           <Route path="/Test" component={Test} />
