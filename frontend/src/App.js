@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import ApiToken from './middleware/ApiToken';
-
 import Login from './component/Login';
 import Logout from './component/Logout';
 import Registration from './component/Registration';
