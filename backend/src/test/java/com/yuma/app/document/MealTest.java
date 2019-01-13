@@ -28,8 +28,8 @@ public class MealTest {
 		meal.setAvailable(true);
 		meal.setIngredients(new ArrayList<Ingredients>() {
 			{
-				add(new Ingredients("Tomatoes", 20, 21, 32));
-				add(new Ingredients("Peppers", 20, 40, 23));
+				add(new Ingredients("Tomatoes", 20, 21, 32, false));
+				add(new Ingredients("Peppers", 20, 40, 23, false));
 			}
 		});
 		return meal;
