@@ -35,7 +35,7 @@ public class MealTOConverterTest {
 		meal.setAvailable(false);
 		meal.setIngredients(new ArrayList<Ingredients>() {
 			{
-				add(new Ingredients("Tomatoes", 20, 21, 32));
+				add(new Ingredients("Tomatoes", 20, 21, 32, false));
 			}
 		});
 		return meal;
