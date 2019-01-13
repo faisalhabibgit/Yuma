@@ -1,5 +1,6 @@
 package com.yuma.app.repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -12,4 +13,5 @@ public interface MealRepository extends MongoRepository<Meal, UUID>, CrudReposit
 
 	Optional<Meal> findByDescription(String description);
 	Optional<Meal> findByMealId(UUID mealID);
+	Optional<List<Meal>> findAllByAvailable(boolean isAvailable);
 }

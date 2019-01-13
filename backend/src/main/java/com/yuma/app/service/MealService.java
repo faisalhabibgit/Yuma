@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.yuma.app.catalog.MealCatalog;
 import com.yuma.app.document.Meal;
 import com.yuma.app.document.User;
+import com.yuma.app.exception.ResourceNotFoundException;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.repository.UserRepository;
 import com.yuma.app.to.MealTO;
@@ -20,7 +21,7 @@ import com.yuma.app.to.MealTO;
 @Service
 public class MealService {
 
-	private Logger mealServiceLogger = LoggerFactory.getLogger("Meal Service");
+	private Logger mealServiceLogger = LoggerFactory.getLogger(MealService.class);
 	private MealRepository mealRepository;
 	private UserRepository userRepository;
 	private ConversionService conversionService;
@@ -35,12 +36,7 @@ public class MealService {
 	public List<MealTO> list() {
 		mealServiceLogger.info("fetching list of meals");
 
-		List<MealTO> mealTos = new ArrayList<>();
-		List<Meal> mealList = mealRepository.findAll();
-
-		for (Meal meal : mealList) {
-			mealTos.add(conversionService.convert(meal, MealTO.class));
-		}
+		List<MealTO> mealTos = convertMealToMealTO(mealRepository.findAll());
 		return mealTos;
 	}
 
@@ -83,6 +79,15 @@ public class MealService {
 		return mealTOS;
 
 	}
+	
+	public List<MealTO> availableMeals(){
+		mealServiceLogger.info("service deleting meal");
+		
+		List<Meal> availableMeals = mealRepository.findAllByAvailable(true).orElseThrow(() -> new ResourceNotFoundException("Meal", "isAvailable", true));
+		List<MealTO> mealTOS = convertMealToMealTO(availableMeals);
+		return mealTOS;
+
+	}
 
 	public void deleteMeal(UUID mealId) {
 		mealServiceLogger.info("service deleting meal");
@@ -99,5 +104,16 @@ public class MealService {
 		} else {
 			return conversionService.convert(optionalMeal.get(), MealTO.class);
 		}
+	}
+	
+	protected List<MealTO> convertMealToMealTO(List<Meal> meals){
+		List<MealTO> mealTos = new ArrayList<>();
+		List<Meal> mealList = meals;
+
+		for (Meal meal : mealList) {
+			mealTos.add(conversionService.convert(meal, MealTO.class));
+		}
+		
+		return mealTos;
 	}
 }
