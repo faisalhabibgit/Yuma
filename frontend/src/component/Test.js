@@ -5,10 +5,22 @@ import {
   Container, Col, Form, FormGroup, Label, Input
 } from 'reactstrap';
 
+import ApiToken from '../middleware/ApiToken';
+
+
+
 class Test extends Component {
 
   constructor(props) {
     super(props);
+
+    const apiToken = new ApiToken();
+    if(!apiToken.isAuthenticated()){
+      console.log('Check Authentification TestMeal: FAIL');
+      this.props.history.push(`/Login`)
+    }else{
+      console.log('Check Authentification TestMeal: PASS');
+    }
 
     this.state = {
       value: '',
@@ -58,7 +70,6 @@ class Test extends Component {
   }
 
   render() {
-    //console.log(this.state.apiObject);
 
     return (
       <Container>

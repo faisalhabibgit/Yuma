@@ -1,13 +1,15 @@
-import React from 'react';
-import { Alert } from 'reactstrap';
+import React, { Component } from 'react';
 
-const Error = () => {
+class Error extends Component {
+  
+  
+  render() {
     return (
-        <Alert color="danger">
-            Error 404 - Bruh, you lost?
-        </Alert>
-
+      <div>
+          <p>You're lost. Put down the drink, and make use of a GPS.</p>
+      </div>
     );
-};
+  }
+}
 
 export default Error;

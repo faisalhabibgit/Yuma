@@ -50,11 +50,9 @@ class Login extends Component {
         email: this.state.email,
         password: this.state.password
       })
-      .then(
-        console.log("Login Success")
-      ).catch(
-        error => console.error("Login Failed")
-      );
+      .then(msg => console.log(msg))
+      .then(x => console.log('Attempting to Redirect...'))
+      .then(y => this.props.history.push(`/`));
   }
   
   render() {

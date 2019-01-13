@@ -17,10 +17,12 @@ class ApiToken {
             .then(response => response.json()) // parses response to JSON
             .then(data => data.accessToken)
             .then(token => this.set15mCookie(token)) // sets the token as cookie with a 15mins expiry
+            .then(x => {return 'Token Process Complete'})
             .catch(error => console.error("Inside ApiToken: " + error));
     }
 
     set15mCookie(token) {
+        console.log('Cookie is set');
         var d = new Date();
         d.setTime(d.getTime() + (900000));
         var expires = "expires=" + d.toUTCString();
@@ -46,6 +48,15 @@ class ApiToken {
 
     clearCookie() {
         document.cookie = "yuma-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+
+    isAuthenticated() {
+        console.log(this.getCookie('yuma-token'));
+        if(this.getCookie('yuma-token') === ""){
+            return false;
+        }else{
+            return true;
+        }
     }
 
 }
