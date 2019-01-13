@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import ApiToken from '../middleware/ApiToken';
-import Retriever from '../middleware/Retriever'
+import Retriever from '../middleware/Retriever';
 import {
   ListGroup, ListGroupItem,
   Container, Col, Form, FormGroup, Label, Input
@@ -25,18 +24,10 @@ class Test extends Component {
 
   componentDidMount() {
     const retriever = new Retriever('api/meals');
-    const apiToken = new ApiToken();
-    apiToken.getToken('http://localhost:2020/api/auth/signin',
-      {
-        email: 'whatsup1@email.com',
-        password: 'idk1'
+    retriever.getEntityPromise()
+      .then((obj) => {
+        this.setState({ apiObject: obj });
       })
-      .then(
-        retriever.getEntityPromise()
-          .then((obj) => {
-            this.setState({ apiObject: obj });
-          })
-      );
   }
 
   handleQueryChange(event) {

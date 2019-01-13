@@ -5,6 +5,7 @@ import {
   Button,
   Container,
 } from 'reactstrap';
+import ApiToken from '../middleware/ApiToken';
 
 //const REDIRECTDASHBOARD='/';
 
@@ -39,15 +40,21 @@ class Login extends Component {
       alert('Please enter a password');
     }else{
       this.postLogin();
-      //this.props.history.push(REDIRECTDASHBOARD);
     }
   }
   
   postLogin(){
-    
-    console.log(this.state.email+ ' '+this.state.password);
-    //nathys add your stuff here
-    
+    const apiToken = new ApiToken();
+    apiToken.getToken('http://localhost:2020/api/auth/signin',
+      {
+        email: this.state.email,
+        password: this.state.password
+      })
+      .then(
+        console.log("Login Success")
+      ).catch(
+        error => console.error("Login Failed")
+      );
   }
   
   render() {

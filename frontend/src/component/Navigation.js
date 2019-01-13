@@ -39,9 +39,6 @@ class Navigation extends Component {
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <NavLink tag={Link} to="/Login">Login</NavLink>
-                        </NavItem>
-                        <NavItem>
                             <NavLink tag={Link} to="/Registration">Register</NavLink>
                         </NavItem>
                       <NavItem>
@@ -51,7 +48,7 @@ class Navigation extends Component {
                             <NavLink tag={Link} to="/Test">Meals</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="https://github.com/faisalhabibgit/Yuma">GitHub</NavLink>
+                            <NavLink tag={Link} to="/Logout">Logout</NavLink>
                         </NavItem>
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret>
