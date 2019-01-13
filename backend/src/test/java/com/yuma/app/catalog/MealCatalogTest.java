@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.yuma.app.document.Meal;
-import com.yuma.app.document.Preferences;
+import com.yuma.app.document.Plan;
 import com.yuma.app.document.User;
 
 public class MealCatalogTest {
@@ -138,10 +138,10 @@ public class MealCatalogTest {
 	
 	private User prepareAUser() {
 
-		Preferences preferences = new Preferences();
-		preferences.setNumOfMeals(1);
-		preferences.setDetails(prepareHashsetWithOnePreference());
-		User consumer = new User("cxo","jack","Sparrow", "baiazid", "ahmad.lego@gmail.com",new Preferences(2, true, false, new HashSet<>()), true,"20390807",new HashSet<>());
+		Plan plan = new Plan();
+		plan.setNumOfMeals(1);
+		plan.setDetails(prepareHashsetWithOnePreference());
+		User consumer = new User("cxo","jack","Sparrow", "baiazid", "ahmad.lego@gmail.com",new Plan(2, true, false, new HashSet<>()), true,"20390807",new HashSet<>());
 		return consumer;
 	}
 	

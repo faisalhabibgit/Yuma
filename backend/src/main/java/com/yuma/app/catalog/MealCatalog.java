@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
 import com.yuma.app.document.User;
 
@@ -45,8 +46,8 @@ public class MealCatalog {
 		List<Meal> possibleMeals = new ArrayList<>();
 		logger.info("generating combo meals");
 
-		for (User consumer : activeUsers) {
-			generatePossibleMeals(availableMeals, consumer);
+		for (User user : activeUsers) {
+			generatePossibleMealsForUser(availableMeals, user, user.getPlan().getNumOfMeals(), 0);
 		}
 		mealsMap = sortByValue(mealsMap);
 
@@ -54,7 +55,7 @@ public class MealCatalog {
 
 		possibleMeals.addAll(mealsMap.keySet());
 
-		possibleMeals = filterList(possibleMeals);
+		//possibleMeals = filterList(possibleMeals);
 
 		return possibleMeals;
 	}
@@ -100,7 +101,7 @@ public class MealCatalog {
 		int i = 0;
 		while (i < 4) {
 			Meal meal = meals.get(randomIntGenerator(meals.size()));
-			if (equals(meal.getFlags(), consumer.getPreferences().getDetails())) {
+			if (equals(meal.getFlags(), consumer.getPlan().getDetails())) {
 				if (mealsMap.get(meal) != null) {
 					Integer mealReps = mealsMap.get(meal) + 1;
 					mealsMap.put(meal, mealReps);
@@ -110,6 +111,48 @@ public class MealCatalog {
 			}
 			i++;
 		}
+	}
+	
+	protected void generatePossibleMealsForUser(List<Meal> mealList, User user, int numOfMeals, int mealCounter){
+		logger.info("inside generate possible meals for that user");
+
+		if (numOfMeals == mealCounter) {
+			return;
+		}
+		
+		for(Meal meal: mealList){
+			if(checkIfMealWorks(meal, user)){
+				mealCounter++;
+			}
+			if(mealCounter == numOfMeals) break;
+		}
+
+		if (mealCounter != numOfMeals){
+			generatePossibleMealsForUser(mealList, user, numOfMeals, mealCounter);
+		}
+	}
+	
+	protected boolean checkIfMealWorks(Meal meal, User user){
+		List<String> userDislikesList = user.getDislikesList();
+		List<Ingredients> toRemove = new ArrayList<>();
+		Meal newMeal = meal;
+		for (Ingredients ingredient : newMeal.getIngredients()){ 
+			if (userDislikesList.contains(ingredient.getName())){
+				if (!ingredient.isOptional()){
+					return false;
+				}
+				else {
+					toRemove.add(ingredient);
+				}
+			}
+		}
+		newMeal.getIngredients().removeAll(toRemove);
+		user.getMealList().add(newMeal);
+		if (mealsMap.containsKey(newMeal)){
+			int mealReps = mealsMap.get(newMeal) + 1;
+			mealsMap.put(newMeal, mealReps);
+		}
+		return true;
 	}
 
 	protected List<Meal> filterList(List<Meal> mealList) {

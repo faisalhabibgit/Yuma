@@ -14,11 +14,13 @@ public class UserTOConverter implements Converter<User, UserTO> {
 		userTO.setLastName(user.getLastName());
 		userTO.setEmail(user.getEmail());
 		userTO.setPassword(user.getPassword());
-		userTO.setPreferences(user.getPreferences());
+		userTO.setPlan(user.getPlan());
 		userTO.setEnabled(user.isActive());
 		userTO.setTimestamp(user.getTimestamp());
 		userTO.setRoles(user.getRoles());
 		userTO.setUserId(user.getUserId());
+		userTO.setMealList(user.getMealList());
+		userTO.setDislikesList(user.getDislikesList());
 		return userTO;
 	}
 }

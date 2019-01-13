@@ -83,30 +83,30 @@ public class DBInputData {
 //			mealRepository.save(new Meal(ingredientsList, UUID.randomUUID(), "fish", true, shellfish));
 //			mealRepository.save(new Meal(ingredientsList, UUID.randomUUID(), "dishMadeWithSoy", true, soy));
 //
-//			userRepository.save(new User(UUID.randomUUID(), "Ahmad", "baiazid", "ahmad.lego@gmail.com", "ahmad.lego@work.com", new Preferences(2, true, false, allAllergies), "20190807"));
-//			userRepository.save(new User(UUID.randomUUID(), "Nate", "Lego", "nate.lego@gmail.com", "nate.lego@work.com", new Preferences(2, true, false, allAllergies), "20190807"));
-//			userRepository.save(new User(UUID.randomUUID(), "AhmadsBrother", "LegoEat", "na.lego@gmail.com", "nate.lego@wor.com", new Preferences(2, true, false, allAllergies), "20190807"));
-//			userRepository.save(new User(UUID.randomUUID(), "gio", "ego", "natelego@gmail.com", "nate.leg@work.com", new Preferences(2, true, false, allAllergies), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "Ahmad", "baiazid", "ahmad.lego@gmail.com", "ahmad.lego@work.com", new Plan(2, true, false, allAllergies), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "Nate", "Lego", "nate.lego@gmail.com", "nate.lego@work.com", new Plan(2, true, false, allAllergies), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "AhmadsBrother", "LegoEat", "na.lego@gmail.com", "nate.lego@wor.com", new Plan(2, true, false, allAllergies), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "gio", "ego", "natelego@gmail.com", "nate.leg@work.com", new Plan(2, true, false, allAllergies), "20190807"));
 //
-//			userRepository.save(new User(UUID.randomUUID(), "dad", "baiazid", "ahmad.lego@gmail.com", "ahmad.lego@work.com", new Preferences(2, true, false, dairy), "20190807"));
-//			userRepository.save(new User(UUID.randomUUID(), "mom", "Lego", "nate.lego@gmail.com", "nate.lego@work.com", new Preferences(2, true, false, dairy), "20190807"));
-//			userRepository.save(new User(UUID.randomUUID(), "Brother", "LegoEat", "na.lego@gmail.com", "nate.lego@wor.com", new Preferences(2, true, false, dairy), "20190807"));
-//			userRepository.save(new User(UUID.randomUUID(), "sister", "ego", "natelego@gmail.com", "nate.leg@work.com", new Preferences(2, true, false, dairy), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "dad", "baiazid", "ahmad.lego@gmail.com", "ahmad.lego@work.com", new Plan(2, true, false, dairy), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "mom", "Lego", "nate.lego@gmail.com", "nate.lego@work.com", new Plan(2, true, false, dairy), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "Brother", "LegoEat", "na.lego@gmail.com", "nate.lego@wor.com", new Plan(2, true, false, dairy), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "sister", "ego", "natelego@gmail.com", "nate.leg@work.com", new Plan(2, true, false, dairy), "20190807"));
 //
-//			userRepository.save(new User(UUID.randomUUID(), "Ahmad", "baiazid", "ahmad.lego@gmail.com", "ahmad.lego@work.com", new Preferences(2, true, false, nuts), "20190807"));
-//			userRepository.save(new User(UUID.randomUUID(), "Nate", "Lego", "nate.lego@gmail.com", "nate.lego@work.com", new Preferences(2, true, false, nuts), "20190807"));
-//			userRepository.save(new User(UUID.randomUUID(), "AhmadsBrother", "LegoEat", "na.lego@gmail.com", "nate.lego@wor.com", new Preferences(2, true, false, nuts), "20190807"));
-//			userRepository.save(new User(UUID.randomUUID(), "gio", "ego", "natelego@gmail.com", "nate.leg@work.com", new Preferences(2, true, false, nuts), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "Ahmad", "baiazid", "ahmad.lego@gmail.com", "ahmad.lego@work.com", new Plan(2, true, false, nuts), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "Nate", "Lego", "nate.lego@gmail.com", "nate.lego@work.com", new Plan(2, true, false, nuts), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "AhmadsBrother", "LegoEat", "na.lego@gmail.com", "nate.lego@wor.com", new Plan(2, true, false, nuts), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "gio", "ego", "natelego@gmail.com", "nate.leg@work.com", new Plan(2, true, false, nuts), "20190807"));
 //
-//			userRepository.save(new User(UUID.randomUUID(), "dad", "baiazid", "ahmad.lego@gmail.com", "ahmad.lego@work.com", new Preferences(2, true, false, soy), "20190807"));
-//			userRepository.save(new User(UUID.randomUUID(), "mom", "Lego", "nate.lego@gmail.com", "nate.lego@work.com", new Preferences(2, true, false, soy), "20190807"));
-//			userRepository.save(new User(UUID.randomUUID(), "Brother", "LegoEat", "na.lego@gmail.com", "nate.lego@wor.com", new Preferences(2, true, false, soy), "20190807"));
-//			userRepository.save(new User(UUID.randomUUID(), "sister", "ego", "natelego@gmail.com", "nate.leg@work.com", new Preferences(2, true, false, soy), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "dad", "baiazid", "ahmad.lego@gmail.com", "ahmad.lego@work.com", new Plan(2, true, false, soy), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "mom", "Lego", "nate.lego@gmail.com", "nate.lego@work.com", new Plan(2, true, false, soy), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "Brother", "LegoEat", "na.lego@gmail.com", "nate.lego@wor.com", new Plan(2, true, false, soy), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "sister", "ego", "natelego@gmail.com", "nate.leg@work.com", new Plan(2, true, false, soy), "20190807"));
 //
-//			userRepository.save(new User(UUID.randomUUID(), "cousin1", "baiazid", "ahmad.lego@gmail.com", "ahmad.lego@work.com", new Preferences(2, true, false, shellfish), "20190807"));
-//			userRepository.save(new User(UUID.randomUUID(), "cousin2", "Lego", "nate.lego@gmail.com", "nate.lego@work.com", new Preferences(2, true, false, shellfish), "20190807"));
-//			userRepository.save(new User(UUID.randomUUID(), "cousin3", "LegoEat", "na.lego@gmail.com", "nate.lego@wor.com", new Preferences(2, true, false, shellfish), "20190807"));
-//			userRepository.save(new User(UUID.randomUUID(), "cousin4", "ego", "natelego@gmail.com", "nate.leg@work.com", new Preferences(2, true, false, shellfish), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "cousin1", "baiazid", "ahmad.lego@gmail.com", "ahmad.lego@work.com", new Plan(2, true, false, shellfish), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "cousin2", "Lego", "nate.lego@gmail.com", "nate.lego@work.com", new Plan(2, true, false, shellfish), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "cousin3", "LegoEat", "na.lego@gmail.com", "nate.lego@wor.com", new Plan(2, true, false, shellfish), "20190807"));
+//			userRepository.save(new User(UUID.randomUUID(), "cousin4", "ego", "natelego@gmail.com", "nate.leg@work.com", new Plan(2, true, false, shellfish), "20190807"));
 //		};
 //
 //	}

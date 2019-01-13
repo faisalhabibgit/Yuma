@@ -37,8 +37,6 @@ public class UserController {
 		logger.info("retrieving active users list from DB");
 		return this.userService.activeUsers();
 	}
-	
-	
 
 
 }

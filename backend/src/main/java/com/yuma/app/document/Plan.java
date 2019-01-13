@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Preferences {
+public class Plan {
 	private int numOfMeals;
 	private boolean extraVeggies;
 	private boolean extraProtein;

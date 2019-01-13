@@ -18,7 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.yuma.app.document.Preferences;
+import com.yuma.app.document.Plan;
 import com.yuma.app.document.User;
 import com.yuma.app.repository.UserRepository;
 import com.yuma.app.to.UserTO;
@@ -46,10 +46,10 @@ public class UserControllerTest {
 	@Before
 	public void setUp() throws Exception {
 
-    //consumer1 = new User(UUID.randomUUID(), "Ahmad", "baiazid", "ahmad.lego@gmail.com", "ahmad.lego@work.com",new Preferences(2, true, false, new HashSet<>()), "20190807");
-    consumer1 = new User("pl","pasword","Ahmad", "baiazid", "ahmad.lego@gmail.com",new Preferences(2, true, false, new HashSet<>()), true,"20190807",new HashSet<>());
+    //consumer1 = new User(UUID.randomUUID(), "Ahmad", "baiazid", "ahmad.lego@gmail.com", "ahmad.lego@work.com",new Plan(2, true, false, new HashSet<>()), "20190807");
+    consumer1 = new User("pl","pasword","Ahmad", "baiazid", "ahmad.lego@gmail.com",new Plan(2, true, false, new HashSet<>()), true,"20190807",new HashSet<>());
     
-    consumer2 = new User("r","pasword2","Ahmad2", "baiazi2d", "ahmad.2lego@gmail.com",new Preferences(2, true, false, new HashSet<>()), true,"20190107",new HashSet<>());
+    consumer2 = new User("r","pasword2","Ahmad2", "baiazi2d", "ahmad.2lego@gmail.com",new Plan(2, true, false, new HashSet<>()), true,"20190107",new HashSet<>());
     
 		MockitoAnnotations.initMocks(this);
 	}

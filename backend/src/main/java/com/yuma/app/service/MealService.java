@@ -69,9 +69,9 @@ public class MealService {
 
 		List<MealTO> mealTOS;
 		List<Meal> mealList = mealRepository.findAllByAvailable(true).orElseThrow(() -> new ResourceNotFoundException("Meals", "isAvailable",true));
-		List<User> consumerList = userRepository.findAll();
+		List<User> userList = userRepository.findUserByActive(true).orElseThrow(() -> new ResourceNotFoundException("User", "isActive", true));
 
-		mealList = mealCatalog.getWeeklyCombination(mealList, consumerList);
+		mealList = mealCatalog.getWeeklyCombination(mealList, userList);
 		mealTOS = convertMealToMealTO(mealList);
 
 		return mealTOS;
