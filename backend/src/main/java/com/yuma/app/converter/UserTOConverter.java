@@ -15,7 +15,7 @@ public class UserTOConverter implements Converter<User, UserTO> {
 		userTO.setEmail(user.getEmail());
 		userTO.setPassword(user.getPassword());
 		userTO.setPreferences(user.getPreferences());
-		userTO.setEnabled(user.isEnabled());
+		userTO.setEnabled(user.isActive());
 		userTO.setTimestamp(user.getTimestamp());
 		userTO.setRoles(user.getRoles());
 		userTO.setUserId(user.getUserId());

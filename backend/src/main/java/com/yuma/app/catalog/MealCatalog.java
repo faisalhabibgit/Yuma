@@ -1,7 +1,6 @@
 package com.yuma.app.catalog;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -34,7 +33,7 @@ public class MealCatalog {
 	private HashMap<Meal, Integer> mealsMap = new HashMap<>();
 	private ArrayList<Meal> meals;
 	private ArrayList<User> consumers;
-	private Logger logger = LoggerFactory.getLogger("caterer logger");
+	private Logger logger = LoggerFactory.getLogger(MealCatalog.class);
 
 	private static int randomIntGenerator(int upperBound) {
 		Random rand = new Random();
@@ -80,14 +79,14 @@ public class MealCatalog {
 
 		List<Map.Entry<Meal, Integer>> list = new LinkedList<>(pm.entrySet());
 
-		// Sort the list 
-		Collections.sort(list, new Comparator<Map.Entry<Meal, Integer>>() {
+		// Sort the list
+		list.sort(new Comparator<Map.Entry<Meal, Integer>>() {
 			@Override
 			public int compare(Map.Entry<Meal, Integer> o1, Map.Entry<Meal, Integer> o2) {
 				return (o2.getValue()).compareTo(o1.getValue());
 			}
 		});
-
+		
 		// put data from sorted list to hashmap
 		HashMap<Meal, Integer> temp = new LinkedHashMap<>();
 		for (Map.Entry<Meal, Integer> aa : list) {

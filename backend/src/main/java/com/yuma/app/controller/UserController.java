@@ -32,5 +32,13 @@ public class UserController {
 		return this.userService.list();
 	}
 
+	@GetMapping("/active")
+	public List<UserTO> getActiveUsers() {
+		logger.info("retrieving active users list from DB");
+		return this.userService.activeUsers();
+	}
+	
+	
+
 
 }

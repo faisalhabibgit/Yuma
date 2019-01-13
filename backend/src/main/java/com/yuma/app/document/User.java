@@ -29,7 +29,7 @@ public class User {
 	private String lastName;
 	private String email;
 	private Preferences preferences;
-	private boolean enabled;
+	private boolean isActive;
 	private String timestamp;
 	@DBRef
 	private Set<Role> roles;
@@ -55,7 +55,7 @@ public class User {
 			", lastName='" + lastName + '\'' +
 			", email='" + email + '\'' +
 			", preferences=" + preferences +
-			", enabled=" + enabled +
+			", isActive=" + isActive +
 			", timestamp='" + timestamp + '\'' +
 			", roles=" + roles +
 			'}';

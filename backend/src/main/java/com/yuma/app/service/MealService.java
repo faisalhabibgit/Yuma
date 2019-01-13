@@ -34,14 +34,14 @@ public class MealService {
 	}
 
 	public List<MealTO> list() {
-		mealServiceLogger.info("fetching list of meals");
+		mealServiceLogger.info("fetching list of all meals in %s", MealService.class);
 
 		List<MealTO> mealTos = convertMealToMealTO(mealRepository.findAll());
 		return mealTos;
 	}
 
 	public MealTO update(MealTO mealTo) {
-		mealServiceLogger.info("updating meal with description: ", mealTo.getDescription());
+		mealServiceLogger.info("updating meal with description %s, in %s", mealTo.getDescription(), MealService.class);
 
 		Optional<Meal> meal = mealRepository.findByMealId(mealTo.getMealId());
 
@@ -56,6 +56,7 @@ public class MealService {
 	}
 
 	public MealTO create(MealTO mealTo) {
+		mealServiceLogger.info("creating Meal in %s",MealService.class);
 
 		mealTo.setMealId(UUID.randomUUID());
 		Meal mealToCreate = conversionService.convert(mealTo, Meal.class);
@@ -64,24 +65,21 @@ public class MealService {
 	}
 
 	public List<MealTO> weeklyCombo() {
-		mealServiceLogger.info("generating optimal weekly combo");
+		mealServiceLogger.info("generating optimal weekly combo in %s", MealService.class);
 
-		List<MealTO> mealTOS = new ArrayList<>();
-		List<Meal> mealList = mealRepository.findAll();
+		List<MealTO> mealTOS;
+		List<Meal> mealList = mealRepository.findAllByAvailable(true).orElseThrow(() -> new ResourceNotFoundException("Meals", "isAvailable",true));
 		List<User> consumerList = userRepository.findAll();
 
 		mealList = mealCatalog.getWeeklyCombination(mealList, consumerList);
-
-		for (Meal meal : mealList) {
-			mealTOS.add(conversionService.convert(meal, MealTO.class));
-		}
+		mealTOS = convertMealToMealTO(mealList);
 
 		return mealTOS;
 
 	}
 	
 	public List<MealTO> availableMeals(){
-		mealServiceLogger.info("service deleting meal");
+		mealServiceLogger.info("retrieving available meals in %s", MealService.class);
 		
 		List<Meal> availableMeals = mealRepository.findAllByAvailable(true).orElseThrow(() -> new ResourceNotFoundException("Meal", "isAvailable", true));
 		List<MealTO> mealTOS = convertMealToMealTO(availableMeals);
@@ -90,13 +88,13 @@ public class MealService {
 	}
 
 	public void deleteMeal(UUID mealId) {
-		mealServiceLogger.info("service deleting meal");
+		mealServiceLogger.info("deleting meal in %s", MealService.class);
 
 		mealRepository.delete(mealRepository.findOne(mealId));
 	}
 
 	public MealTO findByDescription(String description) {
-		mealServiceLogger.info("fetching meal from repo");
+		mealServiceLogger.info("fetching with description %s in %s", description, MealService.class);
 
 		Optional<Meal> optionalMeal = mealRepository.findByDescription(description);
 		if (!optionalMeal.isPresent()) {
@@ -107,6 +105,8 @@ public class MealService {
 	}
 	
 	protected List<MealTO> convertMealToMealTO(List<Meal> meals){
+		mealServiceLogger.info("converting Meal List to MealTO list with description %s in %s", MealService.class);
+
 		List<MealTO> mealTos = new ArrayList<>();
 		List<Meal> mealList = meals;
 

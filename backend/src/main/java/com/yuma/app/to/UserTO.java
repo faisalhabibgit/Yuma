@@ -39,7 +39,7 @@ public class UserTO {
 			", lastName='" + lastName + '\'' +
 			", email='" + email + '\'' +
 			", preferences=" + preferences +
-			", enabled=" + enabled +
+			", active=" + enabled +
 			", timestamp='" + timestamp + '\'' +
 			", roles=" + roles +
 			'}';
