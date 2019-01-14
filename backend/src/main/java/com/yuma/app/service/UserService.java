@@ -69,10 +69,10 @@ public class UserService {
 		return userRepository.findByEmail(email);
 	}
 	
-	public boolean deleteUserByUserID(String uuid){
+	public void deleteUserByUserID(String uuid){
 		this.userServiceLogger.info("deleting user by email: {}", uuid);
 		
-		return userRepository.deleteUserByUserId(uuid);
+		userRepository.delete(uuid);
 	}
 	
 	public UserTO updateUser(UserTO userTO){

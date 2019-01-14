@@ -9,6 +9,5 @@ import com.yuma.app.document.User;
 public interface UserRepository extends MongoRepository<User, String> {
 	Optional<User> findByEmail(String email);
 	Optional<User> findByUserId(String userID);
-	Boolean deleteUserByUserId(String userID);
 	Boolean existsByEmail(String email);
 }

@@ -35,10 +35,10 @@ public class UserController {
 	}
 	
 	@PutMapping("/{uuid}")
-	public boolean deleteUserByUserID(@PathVariable String uuid){
+	public void deleteUserByUserID(@PathVariable String uuid){
 		this.logger.info("deleting user from DB in controller");
 
-		return this.userService.deleteUserByUserID(uuid);
+		this.userService.deleteUserByUserID(uuid);
 	}
 	
 	@PutMapping("/update")
