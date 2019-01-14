@@ -7,6 +7,7 @@ import {
     CarouselIndicators,
     CarouselCaption,
 } from 'reactstrap';
+import ApiToken from '../middleware/ApiToken';
 
 const items = [
     {
@@ -29,6 +30,15 @@ const items = [
 class Home extends Component {
     constructor(props) {
         super(props);
+
+        const apiToken = new ApiToken();
+        if(!apiToken.isAuthenticated()){
+          console.log('Check Authentification: FAIL');
+          this.props.history.push(`/Login`)
+        }else{
+          console.log('Check Authentification: PASS');
+        }
+
         this.state = { activeIndex: 0 };
         this.next = this.next.bind(this);
         this.previous = this.previous.bind(this);
