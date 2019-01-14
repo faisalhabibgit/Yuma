@@ -83,15 +83,4 @@ public class mealApiTest {
 			.statusCode(200);
 		
 	}
-	
-	
-//	@After
-//	public void release(){
-//		RestAssuredMockMvc
-//			.given()
-//			.when()
-//			.delete("/api/meals/{UUID}", mealId)
-//			.then()
-//			.statusCode(204);
-//	}
 }
