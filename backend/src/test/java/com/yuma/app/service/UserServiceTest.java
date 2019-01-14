@@ -103,7 +103,6 @@ public class UserServiceTest {
 
 	}
 
-
 	private SignUpRequest prepareSignupReq() {
 		SignUpRequest signUpRequest = new SignUpRequest();
 		signUpRequest.setFirstName("first name");

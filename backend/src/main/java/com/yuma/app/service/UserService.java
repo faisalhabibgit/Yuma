@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.yuma.app.document.Role;
 import com.yuma.app.document.User;
+import com.yuma.app.exception.ResourceNotFoundException;
 import com.yuma.app.payload.SignUpRequest;
 import com.yuma.app.repository.RoleRepository;
 import com.yuma.app.repository.UserRepository;
@@ -38,7 +39,7 @@ public class UserService {
 	}
 
 	public User saveUser(SignUpRequest req) {
-		userServiceLogger.info("saving user {}", req.getEmail());
+		this.userServiceLogger.info("saving user {}", req.getEmail());
 
 		User user = conversionService.convert(req, User.class);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -50,7 +51,7 @@ public class UserService {
 	}
 
 	public List<UserTO> list() {
-		userServiceLogger.info("fetching users list");
+		this.userServiceLogger.info("fetching users list");
 
 		List<UserTO> consumerTOS = new ArrayList<>();
 		List<User> consumerList = userRepository.findAll();
@@ -63,9 +64,26 @@ public class UserService {
 	}
 
 	public Optional<User> findUserByEmail(String email) {
-		userServiceLogger.info("fetching user by email: {}", email);
+		this.userServiceLogger.info("fetching user by email: {}", email);
 
 		return userRepository.findByEmail(email);
+	}
+	
+	public boolean deleteUserByUserID(String uuid){
+		this.userServiceLogger.info("deleting user by email: {}", uuid);
+		
+		return userRepository.deleteUserByUserId(uuid);
+	}
+	
+	public UserTO updateUser(UserTO userTO){
+		this.userServiceLogger.info("fetching user from DB to update");
+		User user = userRepository.findByUserId(userTO.getUserId()).orElseThrow(() -> new ResourceNotFoundException("User", "userId", userTO.getUserId()));
+		
+		User userToUpdate = conversionService.convert(userTO, User.class);
+		user.updateFrom(userToUpdate);
+		User updatedUser = userRepository.save(user);
+		return conversionService.convert(updatedUser, UserTO.class);
+		
 	}
 	
 	public boolean existsByEmail(String email){

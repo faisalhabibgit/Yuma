@@ -46,6 +46,14 @@ public class User {
 		this.password = password;
 	}
 
+	public void updateFrom(User userToUpdate) {
+		this.setFirstName(userToUpdate.getFirstName());
+		this.setLastName(userToUpdate.getLastName());
+		this.setEmail(userToUpdate.getEmail());
+		this.setPreferences(userToUpdate.getPreferences());
+
+	}
+
 	@Override
 	public String toString() {
 		return "User{" +
