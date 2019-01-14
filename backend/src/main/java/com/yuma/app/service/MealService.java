@@ -68,8 +68,9 @@ public class MealService {
 		mealServiceLogger.info("generating optimal weekly combo in %s", MealService.class);
 
 		List<MealTO> mealTOS;
-		List<Meal> mealList = mealRepository.findAllByAvailable(true).orElseThrow(() -> new ResourceNotFoundException("Meals", "isAvailable",true));
-		List<User> userList = userRepository.findUserByActive(true).orElseThrow(() -> new ResourceNotFoundException("User", "isActive", true));
+		//List<Meal> mealList = mealRepository.findAll();
+		List<Meal> mealList = mealRepository.findByIsAvailableIsTrue().orElseThrow(() -> new ResourceNotFoundException("Meals", "isAvailable",true));
+		List<User> userList = userRepository.findByIsActiveIsTrue().orElseThrow(() -> new ResourceNotFoundException("User", "isActive", true));
 
 		mealList = mealCatalog.getWeeklyCombination(mealList, userList);
 		mealTOS = convertMealToMealTO(mealList);
@@ -81,7 +82,7 @@ public class MealService {
 	public List<MealTO> availableMeals(){
 		mealServiceLogger.info("retrieving available meals in %s", MealService.class);
 		
-		List<Meal> availableMeals = mealRepository.findAllByAvailable(true).orElseThrow(() -> new ResourceNotFoundException("Meal", "isAvailable", true));
+		List<Meal> availableMeals = mealRepository.findByIsAvailableIsTrue().orElseThrow(() -> new ResourceNotFoundException("Meal", "isAvailable", true));
 		List<MealTO> mealTOS = convertMealToMealTO(availableMeals);
 		return mealTOS;
 

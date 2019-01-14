@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,10 +45,12 @@ public class MealCatalog {
 
 	public List<Meal> getWeeklyCombination(List<Meal> availableMeals, List<User> activeUsers) {
 		List<Meal> possibleMeals = new ArrayList<>();
+		mealsMap.clear();
 		logger.info("generating combo meals");
-
+		
 		for (User user : activeUsers) {
 			generatePossibleMealsForUser(availableMeals, user, user.getPlan().getNumOfMeals(), 0);
+			
 		}
 		mealsMap = sortByValue(mealsMap);
 
@@ -136,6 +139,7 @@ public class MealCatalog {
 		List<String> userDislikesList = user.getDislikesList();
 		List<Ingredients> toRemove = new ArrayList<>();
 		Meal newMeal = meal;
+		
 		for (Ingredients ingredient : newMeal.getIngredients()){ 
 			if (userDislikesList.contains(ingredient.getName())){
 				if (!ingredient.isOptional()){
@@ -146,11 +150,22 @@ public class MealCatalog {
 				}
 			}
 		}
-		newMeal.getIngredients().removeAll(toRemove);
+		if (toRemove.size() != 0){
+			newMeal = new Meal(meal);
+			newMeal.getIngredients().removeAll(toRemove);
+			newMeal.setMealId(UUID.randomUUID());
+		}
+		
+		if (user.getMealList() == null){
+			user.setMealList(new ArrayList<>());
+		}
+		
 		user.getMealList().add(newMeal);
-		if (mealsMap.containsKey(newMeal)){
-			int mealReps = mealsMap.get(newMeal) + 1;
+		if (mealsMap.get(newMeal) != null) {
+			Integer mealReps = mealsMap.get(newMeal) + 1;
 			mealsMap.put(newMeal, mealReps);
+		} else {
+			mealsMap.put(newMeal, 1);
 		}
 		return true;
 	}

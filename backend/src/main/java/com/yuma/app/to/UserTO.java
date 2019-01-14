@@ -28,7 +28,7 @@ public class UserTO {
 	private String timestamp;
 	private Set<Role> roles;
 	private List<Meal> mealList;
-	private List<Dislikes> dislikesList;
+	private List<String> dislikesList;
 
 	public UserTO(String email, String password) {
 		this.email = email;

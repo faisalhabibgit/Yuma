@@ -72,7 +72,7 @@ public class UserService {
 	
 	public List<UserTO> activeUsers(){
 		userServiceLogger.info("fetching users list");
-		List<User> userList = userRepository.findUserByActive(true).orElseThrow(() -> new ResourceNotFoundException("User", "isActive", true));
+		List<User> userList = userRepository.findByIsActiveIsTrue().orElseThrow(() -> new ResourceNotFoundException("User", "isActive", true));
 		
 		return convertUserListToUserTOList(userList);
 

@@ -11,5 +11,5 @@ public interface UserRepository extends MongoRepository<User, String> {
 	Optional<User> findByEmail(String email);
 	Optional<User> findByUserId(String userID);
 	Boolean existsByEmail(String email);
-	Optional<List<User>> findUserByActive(boolean isActive);
+	Optional<List<User>> findByIsActiveIsTrue();
 }
