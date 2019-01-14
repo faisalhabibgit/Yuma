@@ -6,7 +6,7 @@ class Meal {
       this.isAvailable = isAvailable;
       this.flags = flags;
       this.ingredients = ingredients;
-    }
+      }
   
     toString() {
       return this.mealId + this.description + this.isAvailable + this.flags;

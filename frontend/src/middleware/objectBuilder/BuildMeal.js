@@ -2,6 +2,7 @@ import Meal from '../objects/Meal';
 import Ingredients from '../objects/Ingredients';
 import ApiToken from '../ApiToken';
 
+
 class BuildMeal {
 
     constructor() {
