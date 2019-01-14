@@ -30,11 +30,6 @@ public class UserTO {
 	private List<Meal> mealList;
 	private List<String> dislikesList;
 
-	public UserTO(String email, String password) {
-		this.email = email;
-		this.password = password;
-	}
-
 	@Override
 	public String toString() {
 		return "UserTO{" +
