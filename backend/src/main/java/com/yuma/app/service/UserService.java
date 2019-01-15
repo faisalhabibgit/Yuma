@@ -1,10 +1,6 @@
 package com.yuma.app.service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -70,9 +66,17 @@ public class UserService {
 	}
 	
 	public void deleteUserByUserID(String uuid){
-		this.userServiceLogger.info("deleting user by email: {}", uuid);
+		this.userServiceLogger.info("deleting user by uuid: {}", uuid);
 		
 		userRepository.delete(uuid);
+	}
+
+	public UserTO create(UserTO userTO) {
+
+		userTO.setUserId(UUID.randomUUID().toString());
+		User userToCreate = conversionService.convert(userTO, User.class);
+		User user = userRepository.save(userToCreate);
+		return conversionService.convert(user, UserTO.class);
 	}
 	
 	public UserTO updateUser(UserTO userTO){
