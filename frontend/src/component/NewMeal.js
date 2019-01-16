@@ -17,10 +17,10 @@ class NewMeal extends Component{
 
     const apiToken = new ApiToken();
     if(!apiToken.isAuthenticated()){
-      console.log('Check Authentification NewMeal: FAIL');
+      console.log('User Not Logged');
       this.props.history.push(`/Login`)
     }else{
-      console.log('Check Authentification NewMeal: PASS');
+      console.log('User Login Success');
     }
 
     this.state = {
