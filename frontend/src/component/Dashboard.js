@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 class Dashboard extends Component {
-  
+
 
   render() {
     return (
@@ -32,7 +32,7 @@ class Dashboard extends Component {
               <div className="card-body">
               </div>
             </div>
-            
+
             <div className="card">
               <div className="card-header">Header</div>
               <div className="card-body">
