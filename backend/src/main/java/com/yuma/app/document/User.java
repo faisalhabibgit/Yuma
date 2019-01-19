@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.IndexDirection;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -23,7 +21,6 @@ public class User {
 
 	@Id
 	private String userId;
-	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
 	private String password;
 	private String firstName;
 	private String lastName;
@@ -44,6 +41,14 @@ public class User {
 	public User(String email, String password) {
 		this.email = email;
 		this.password = password;
+	}
+
+	public void updateFrom(User userToUpdate) {
+		this.setFirstName(userToUpdate.getFirstName());
+		this.setLastName(userToUpdate.getLastName());
+		this.setEmail(userToUpdate.getEmail());
+		this.setPreferences(userToUpdate.getPreferences());
+
 	}
 
 	@Override
