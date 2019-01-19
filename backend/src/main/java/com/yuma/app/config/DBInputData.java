@@ -50,7 +50,7 @@
 //		};
 //
 //	}
-//	
+//
 //	@Bean
 //	CommandLineRunner generateData (MealRepository mealRepository, UserRepository userRepository){
 //		ArrayList<Ingredients> ingredientsList1 = new ArrayList<>();
