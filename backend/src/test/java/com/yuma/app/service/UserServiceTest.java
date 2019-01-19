@@ -1,9 +1,5 @@
 package com.yuma.app.service;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,8 +23,9 @@ import com.yuma.app.repository.RoleRepository;
 import com.yuma.app.repository.UserRepository;
 import com.yuma.app.to.UserTO;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+import static org.mockito.Mockito.*;
+
+@RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
 
 	private Optional<Role> role;
@@ -43,6 +41,7 @@ public class UserServiceTest {
 
 	@InjectMocks
 	private UserService userService;
+	
 	private String adminRole = "ADMIN";
 
 	@Before
@@ -102,7 +101,59 @@ public class UserServiceTest {
 		Assert.assertEquals(user.getEmail(), email);
 
 	}
+	
+	@Test
+	public void testDeleteUser() {
+		
+		String userId = "123";
+		
+		doNothing().when(userRepository).delete(userId);
+		
+		userService.deleteUserByUserID(userId);
+		
+		
+	}
 
+	@Test
+	public void testCreateUser() {
+
+		UserTO userTO = prepareUserTo();
+		User user = prepareUser();
+		
+		when(conversionService.convert(userTO, User.class)).thenReturn(user);
+		when(userRepository.save(user)).thenReturn(user);
+		when(conversionService.convert(user, UserTO.class)).thenReturn(userTO);
+
+		userService.create(userTO);
+		
+	}
+
+	@Test
+	public void testUserUpdate() {
+
+		UserTO userTO = prepareUserTo();
+		userTO.setUserId("234");
+		User user = prepareUser();
+
+		when(userRepository.findByUserId(userTO.getUserId())).thenReturn(Optional.of(user));
+		when(conversionService.convert(userTO, User.class)).thenReturn(user);
+		when(userRepository.save(user)).thenReturn(user);
+		when(conversionService.convert(user, UserTO.class)).thenReturn(userTO);
+
+		userService.updateUser(userTO);
+
+	}
+	
+	@Test
+	public void testExistByEmail() {
+		
+		String email = "example@gmail.com";
+		when(userRepository.existsByEmail(email)).thenReturn(true);
+		
+		userService.existsByEmail(email);
+		
+		verify(userRepository).existsByEmail(email);
+	}
 
 	private SignUpRequest prepareSignupReq() {
 		SignUpRequest signUpRequest = new SignUpRequest();
@@ -143,5 +194,11 @@ public class UserServiceTest {
 			}
 		};
 		return userTOs;
+	}
+	
+	private UserTO prepareUserTo(){
+		
+		UserTO userTO = new UserTO();
+		return userTO;
 	}
 }

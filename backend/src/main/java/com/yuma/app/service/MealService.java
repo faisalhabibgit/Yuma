@@ -43,15 +43,11 @@ public class MealService {
 	public MealTO update(MealTO mealTo) {
 		mealServiceLogger.info("updating meal with description %s, in %s", mealTo.getDescription(), MealService.class);
 
-		Optional<Meal> meal = mealRepository.findByMealId(mealTo.getMealId());
-
-		if (!meal.isPresent()) {
-			throw new IllegalArgumentException("Entity doesn't exist in the database");
-		}
+		Meal meal = mealRepository.findByMealId(mealTo.getMealId()).orElseThrow(() -> new ResourceNotFoundException("Meal", "mealID", mealTo.getName()));
 
 		Meal mealToUpdate = conversionService.convert(mealTo, Meal.class);
-		meal.get().updateFrom(mealToUpdate);
-		Meal newMealCreated = mealRepository.save(meal.get());
+		meal.updateFrom(mealToUpdate);
+		Meal newMealCreated = mealRepository.save(meal);
 		return conversionService.convert(newMealCreated, MealTO.class);
 	}
 

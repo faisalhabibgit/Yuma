@@ -1,10 +1,6 @@
 package com.yuma.app.service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,7 +35,7 @@ public class UserService {
 	}
 
 	public User saveUser(SignUpRequest req) {
-		userServiceLogger.info("saving user {}", req.getEmail());
+		this.userServiceLogger.info("saving user {}", req.getEmail());
 
 		User user = conversionService.convert(req, User.class);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -51,7 +47,7 @@ public class UserService {
 	}
 
 	public List<UserTO> list() {
-		userServiceLogger.info("fetching users list");
+		this.userServiceLogger.info("fetching users list");
 
 		List<User> userList = userRepository.findAll();
 		return convertUserListToUserTOList(userList);
@@ -63,6 +59,31 @@ public class UserService {
 		User user = userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
 		
 		return conversionService.convert(user, UserTO.class);
+		
+	}
+	
+	public void deleteUserByUserID(String uuid){
+		this.userServiceLogger.info("deleting user by uuid: {}", uuid);
+		
+		userRepository.delete(uuid);
+	}
+
+	public UserTO create(UserTO userTO) {
+
+		userTO.setUserId(UUID.randomUUID().toString());
+		User userToCreate = conversionService.convert(userTO, User.class);
+		User user = userRepository.save(userToCreate);
+		return conversionService.convert(user, UserTO.class);
+	}
+	
+	public UserTO updateUser(UserTO userTO){
+		this.userServiceLogger.info("fetching user from DB to update");
+		User user = userRepository.findByUserId(userTO.getUserId()).orElseThrow(() -> new ResourceNotFoundException("User", "userId", userTO.getUserId()));
+		
+		User userToUpdate = conversionService.convert(userTO, User.class);
+		user.updateFrom(userToUpdate);
+		User updatedUser = userRepository.save(user);
+		return conversionService.convert(updatedUser, UserTO.class);
 		
 	}
 	
