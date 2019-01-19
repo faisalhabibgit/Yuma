@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.yuma.app.document.Ingredients;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -135,14 +136,81 @@ public class MealCatalogTest {
 
 		Assert.assertEquals(meals.size(), 3);
 	}
+	
+	@Test
+	public void testTwoMealFlagHashSetAreEqual() {
+		HashSet<String> flag1 = new HashSet<>();
+		flag1.add("onion");
+		HashSet<String> flag2 = new HashSet<>();
+		flag2.add("onion");
+		Assert.assertTrue(mealCatalog.equals(flag1, flag2));
+		
+	}
 
-	private User prepareAUser() {
+	@Test
+	public void testTwoMealFlagHashSetAreNotEqual() {
+		HashSet<String> flag1 = new HashSet<>();
+		flag1.add("onion");
+		HashSet<String> flag2 = new HashSet<>();
+		Assert.assertFalse(mealCatalog.equals(flag1, flag2));
 
-		Plan plan = new Plan();
-		plan.setNumOfMeals(1);
-		plan.setDetails(prepareHashsetWithOnePreference());
-		User consumer = new User("ahmad", "baiazid", "ahmad.baiz@got.com", "passs");
-		return consumer;
+	}
+	
+	@Test
+	public void givenMealAndNonMatchingUserLikesWhenCheckIfMealWorksThenShouldReturnFalse() {
+		Meal meal = prepareAndReturnMeal();
+		User user = prepareAndReturnUser();
+		
+		boolean result = mealCatalog.checkIfMealWorks(meal, user);
+		
+		Assert.assertFalse(result);
+	}
+
+	@Test
+	public void givenMealAndMatchingUserLikesWhenCheckIfMealWorksThenShouldReturnTrue() {
+		Meal meal = prepareAndReturnMeal();
+		User user = prepareAndReturnUser();
+		user.getDislikesList().clear();
+
+		boolean result = mealCatalog.checkIfMealWorks(meal, user);
+
+		Assert.assertTrue(result);
+	}
+
+	@Test
+	public void givenMealWithOptionalIngredientWhenCheckIfMealWorksThenShouldReturnTrue() {
+		Meal meal = prepareAndReturnMeal();
+		meal.getIngredients().get(0).setOptional(true);
+		User user = prepareAndReturnUser();
+
+		boolean result = mealCatalog.checkIfMealWorks(meal, user);
+
+		Assert.assertTrue(result);
+	}
+
+	@Test
+	public void givenMealListWhenGenerateMealsThenShouldSuccessfullyGenerate() {
+		int numOfMeals = 3;
+		Meal meal = prepareAndReturnMeal();
+		meal.getIngredients().get(0).setOptional(true);
+		List<Meal> meals = new ArrayList<Meal>(){
+			{
+				add(meal);
+			}
+		};
+		User user = prepareAndReturnUser();
+
+		mealCatalog.generatePossibleMealsForUser(meals,
+			user, numOfMeals, 0);
+
+		Assert.assertTrue(mealCatalog.getMealsMap().size() == 3);
+	}
+
+	private User prepareAndReturnUser() {
+
+		User user = new User("ahmad", "baiazid", "ahmad.baiz@got.com", "passs");
+		user.setDislikesList(prepareAndReturnDislikesList());
+		return user;
 	}
 
 	private HashSet<String> prepareHashsetWithOnePreference() {
@@ -150,5 +218,29 @@ public class MealCatalogTest {
 		flags.add("dairy");
 		return flags;
 	}
+	
+	Meal prepareAndReturnMeal() {
+		
+		Meal meal = new Meal();
+		meal.setName("meal name");
+		meal.setIngredients(prepareAndReturnIngredientsList());
+		
+		return meal;
+	}
 
+	private List<Ingredients> prepareAndReturnIngredientsList() {
+
+		List<Ingredients> ingredients = new ArrayList<>();
+		Ingredients ingredients1 = new Ingredients();
+		ingredients1.setName("onions");
+		ingredients.add(ingredients1);
+		
+		return ingredients;
+	}
+	
+	private List<String> prepareAndReturnDislikesList() {
+		List<String> dislikes = new ArrayList<>();
+		dislikes.add("onions");
+		return dislikes;
+	}
 }
