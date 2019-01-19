@@ -9,7 +9,9 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1",
-    "reactstrap": "^6.5.0"
+    "reactstrap": "^6.5.0",
+    "react-available-times" : "^1.2.1",
+    "react-calendar" : "^2.17.5"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"
