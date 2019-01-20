@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 import ApiToken from "../middleware/ApiToken";
 
+import {
+  Card, Button, CardHeader, CardFooter, CardBody,
+  CardTitle, CardText, Col, CardDeck
+} from 'reactstrap';
+
 class Dashboard extends Component {
 
 
@@ -15,71 +20,92 @@ class Dashboard extends Component {
       console.log('Check Authentification Dashboard: PASS');
     }
   }
-  
+
   render() {
     return (
-      <div style={{background: '#696969'}}>
-
-        <div>
-
-          <div className="card-deck" style={{padding: '12px', height: '300px'}}>
-            <div className="card">
-              <div className="card-header">Best Meal Combo</div>
-              <div className="card-body">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div className="card-deck" style={{padding: '12px', height: '300px'}}>
-            <div className="card">
-              <div className="card-header">Header</div>
-
-              <div className="card-body">
-              </div>
-
-            </div>
-            <div className="card">
-              <div className="card-header">Header</div>
-              <div className="card-body">
-              </div>
-            </div>
-
-            <div className="card">
-              <div className="card-header">Header</div>
-              <div className="card-body">
-
-              </div>
-
-            </div>
-          </div>
+      <div style={{background: '#ADB7BF'}}>
+       
+        <CardDeck style={{padding:'12px', height:'300px'}}>
+            <Card>
+              <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
+                <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Meal Combo</h5>
+              </CardHeader>
+              <CardBody>
+              </CardBody>
+            </Card>
+          
+        </CardDeck>
 
 
-        </div>
+        <CardDeck style={{padding:'12px', height:'450px'}}>
+            <Card>
+              <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
+                <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Available Meals</h5>
+              </CardHeader>
+              <CardBody>
+              </CardBody>
+            </Card>
+
+          <Card>
+            <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
+              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Active Users</h5>
+            </CardHeader>
+            <CardBody>
+            </CardBody>
+          </Card>
+       
+        </CardDeck>
 
 
-        <div>
-          <div className="card-deck" style={{padding: '12px', height: '200px'}}>
-            <div className="card">
-              <div className="card-header">Header</div>
-              <div className="card-body">
-              </div>
-            </div>
-            <div className="card">
-              <div className="card-header">Header</div>
-              <div className="card-body">
-              </div>
-            </div>
+        <CardDeck style={{padding:'12px', height:'250px'}}>
+            <Card>
+              <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
+                <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Header</h5>
+              </CardHeader>
+              <CardBody>
+              </CardBody>
+            </Card>
 
-          </div>
+          <Card>
+            <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
+              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Header</h5>
+            </CardHeader>
+            <CardBody>
+            </CardBody>
+          </Card>
 
-
-        </div>
-
+          <Card>
+            <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
+              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Header</h5>
+            </CardHeader>
+            <CardBody>
+            </CardBody>
+          </Card>
+            
+        </CardDeck>
+        
+        
+      <CardDeck style={{padding:'12px', height:'275px'}}>
+            <Card>
+              <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
+                <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Header</h5>
+              </CardHeader>
+              <CardBody>
+              </CardBody>
+            </Card>
+         
+          
+            <Card>
+              <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
+                <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}>Header</h5>
+              </CardHeader>
+              <CardBody>
+              </CardBody>
+            </Card>
+ 
+      </CardDeck>
+     
       </div>
-
-
     );
 
   }
