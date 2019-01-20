@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import ApiToken from "../middleware/ApiToken";
 
 import {
-  Card, Button, CardHeader, CardFooter, CardBody,
-  CardTitle, CardText, Col, CardDeck
+  Card, CardHeader,  CardBody,
+   CardDeck
 } from 'reactstrap';
 
 class Dashboard extends Component {
