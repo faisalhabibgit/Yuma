@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.yuma.app.catalog.MealCatalog;
 import com.yuma.app.document.Meal;
 import com.yuma.app.document.User;
+import com.yuma.app.exception.ResourceNotFoundException;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.repository.UserRepository;
 import com.yuma.app.to.MealTO;
@@ -47,15 +48,11 @@ public class MealService {
 	public MealTO update(MealTO mealTo) {
 		mealServiceLogger.info("updating meal with description: ", mealTo.getDescription());
 
-		Optional<Meal> meal = mealRepository.findByMealId(mealTo.getMealId());
-
-		if (!meal.isPresent()) {
-			throw new IllegalArgumentException("Entity doesn't exist in the database");
-		}
+		Meal meal = mealRepository.findByMealId(mealTo.getMealId()).orElseThrow(() -> new ResourceNotFoundException("Meal", "mealID", mealTo.getName()));
 
 		Meal mealToUpdate = conversionService.convert(mealTo, Meal.class);
-		meal.get().updateFrom(mealToUpdate);
-		Meal newMealCreated = mealRepository.save(meal.get());
+		meal.updateFrom(mealToUpdate);
+		Meal newMealCreated = mealRepository.save(meal);
 		return conversionService.convert(newMealCreated, MealTO.class);
 	}
 
