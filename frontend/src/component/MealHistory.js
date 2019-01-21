@@ -25,10 +25,10 @@ class MealHistory extends Component{
   }
   render() {
     return (
-      <Container>
-      <Col sm="12" md={{ size:6, offset: 3 }}>
-  <h2>Meal Combination History</h2>
-    <Form className="form-inline">
+    <Container>
+      <Col sm="12" md={{ size:20, offset: 15 }}>
+      <h2>Meal Combination History</h2>
+        <Form className="form-inline">
 
       <Col >
       <FormGroup>
@@ -66,6 +66,7 @@ class MealHistory extends Component{
     <Button>View</Button>
     </Form>
     </Col>
+  
     </Container>
   );
   }
