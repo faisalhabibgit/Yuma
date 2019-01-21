@@ -21,7 +21,7 @@ import com.yuma.app.to.UserTO;
 @Slf4j
 @Service
 public class UserService {
-	private Logger userServiceLogger = LoggerFactory.getLogger("User Service");
+	private Logger userServiceLogger = LoggerFactory.getLogger(UserService.class);
 	private UserRepository userRepository;
 	private ConversionService conversionService;
 	private RoleRepository roleRepository;
@@ -39,7 +39,7 @@ public class UserService {
 
 		User user = conversionService.convert(req, User.class);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user.setEnabled(true);
+		user.setActive(true);
 
 		Optional<Role> userRole = roleRepository.findByRole("ADMIN");
 		userRole.ifPresent(x -> user.setRoles(new HashSet<>(Collections.singletonList(x))));
@@ -49,20 +49,17 @@ public class UserService {
 	public List<UserTO> list() {
 		this.userServiceLogger.info("fetching users list");
 
-		List<UserTO> consumerTOS = new ArrayList<>();
-		List<User> consumerList = userRepository.findAll();
-
-		for (User consumer : consumerList) {
-			consumerTOS.add(conversionService.convert(consumer, UserTO.class));
-		}
-
-		return consumerTOS;
+		List<User> userList = userRepository.findAll();
+		return convertUserListToUserTOList(userList);
+		
 	}
 
-	public Optional<User> findUserByEmail(String email) {
-		this.userServiceLogger.info("fetching user by email: {}", email);
-
-		return userRepository.findByEmail(email);
+	public UserTO findUserByEmail(String email) {
+		userServiceLogger.info("fetching user by email: %s", email);
+		User user = userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
+		
+		return conversionService.convert(user, UserTO.class);
+		
 	}
 	
 	public void deleteUserByUserID(String uuid){
@@ -92,5 +89,22 @@ public class UserService {
 	
 	public boolean existsByEmail(String email){
 		return userRepository.existsByEmail(email);
+	}
+	
+	public List<UserTO> activeUsers(){
+		userServiceLogger.info("fetching users list");
+		List<User> userList = userRepository.findByIsActiveIsTrue().orElseThrow(() -> new ResourceNotFoundException("User", "isActive", true));
+		
+		return convertUserListToUserTOList(userList);
+
+	}
+	
+	protected List<UserTO> convertUserListToUserTOList(List<User> userList){
+		List<UserTO> userTOS = new ArrayList<>();
+
+		for (User consumer : userList) {
+			userTOS.add(conversionService.convert(consumer, UserTO.class));
+		}
+		return userTOS;
 	}
 }
