@@ -1,3 +1,5 @@
+Travis: [![Build Status](https://travis-ci.com/faisalhabibgit/Yuma.svg?token=Mv3RFmyPQwmuAjmUYuib&branch=master)](https://travis-ci.com/faisalhabibgit/Yuma)
+
 # Yuma
 
 Yuma is a trusted personal caterer who can prepare your weekly meals for you, or your enterprise. Find meals that meet your diet and budget to benefit from having your weekly meals on hand.
@@ -10,8 +12,6 @@ This project provides productive setup for building Spring Boot React applicatio
 
 1. `backend`: This contains Java code of the application.
 2. `frontend`: This contains all react JavaScript code of the application.
-
-Travis: https://api.travis-ci.com/faisalhabibgit/Yuma.svg?token=Mv3RFmyPQwmuAjmUYuib&branch=master
 
 ## Running the full application
 
