@@ -11,6 +11,8 @@ This project provides productive setup for building Spring Boot React applicatio
 1. `backend`: This contains Java code of the application.
 2. `frontend`: This contains all react JavaScript code of the application.
 
+Travis: https://api.travis-ci.com/faisalhabibgit/Yuma.svg?token=Mv3RFmyPQwmuAjmUYuib&branch=master
+
 ## Running the full application
 
 You can build the package as a single artifact by running the `./mvnw clean install` in UNIX, or mvn clean install in Windows.
