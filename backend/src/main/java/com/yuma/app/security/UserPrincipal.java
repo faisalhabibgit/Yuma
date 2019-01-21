@@ -99,7 +99,8 @@ public class UserPrincipal implements UserDetails {
 	public boolean isCredentialsNonExpired() {
 		return isActive;
 	}
-
+	
+	@Override
 	public boolean isEnabled() {
 		return isActive;
 	}
