@@ -31,10 +31,14 @@ public class UserController {
 	}
 	
 	@DeleteMapping("/{uuid}")
-	public void deleteUserByUserID(@PathVariable String uuid){
+	public void deleteUserByUserID(@PathVariable String uuid) {
 		this.logger.info("deleting user from DB in controller");
-
 		this.userService.deleteUserByUserID(uuid);
+	}
+	@GetMapping("/active")
+	public List<UserTO> getActiveUsers() {
+		logger.info("retrieving active users list from DB");
+		return this.userService.activeUsers();
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -43,6 +47,7 @@ public class UserController {
 
 		return this.userService.create(userTO);
 	}
+	
 	@RequestMapping(method = RequestMethod.PUT)
 	public UserTO updateUser(@RequestBody UserTO userTO){
 		this.logger.info("updating user from DB in controller");
