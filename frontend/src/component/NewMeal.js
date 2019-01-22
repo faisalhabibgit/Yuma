@@ -5,6 +5,7 @@ import {
   Button,
   Container,
 } from 'reactstrap';
+import ApiToken from '../middleware/ApiToken';
 
 const API = 'api/meals';
 const REDIRECTHOME = '/';
@@ -13,6 +14,15 @@ class NewMeal extends Component{
 
   constructor(props) {
     super(props);
+
+    const apiToken = new ApiToken();
+    if(!apiToken.isAuthenticated()){
+      console.log('Check Authentification NewMeal: FAIL');
+      this.props.history.push(`/Login`)
+    }else{
+      console.log('Check Authentification NewMeal: PASS');
+    }
+
     this.state = {
       name: '',
       description: '',
@@ -87,12 +97,14 @@ class NewMeal extends Component{
   
   
   postMeal(array){
+    const apiToken = new ApiToken();
     
     fetch(API, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+ apiToken.getCookie('yuma-token')
       },
       body: JSON.stringify({
         ingredients: this.state.ingredients,

@@ -18,6 +18,7 @@ public class Ingredients {
 	private double weight;
 	private double calories;
 	private double price;
+	private boolean optional;
 
 	@Override
 	public String toString() {
@@ -26,6 +27,7 @@ public class Ingredients {
 			", weight=" + weight +
 			", calories=" + calories +
 			", price=" + price +
+			", optional=" + optional +
 			'}';
 	}
 }

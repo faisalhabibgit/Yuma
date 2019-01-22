@@ -1,10 +1,6 @@
 package com.yuma.app.service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.yuma.app.document.Role;
 import com.yuma.app.document.User;
+import com.yuma.app.exception.ResourceNotFoundException;
 import com.yuma.app.payload.SignUpRequest;
 import com.yuma.app.repository.RoleRepository;
 import com.yuma.app.repository.UserRepository;
@@ -24,7 +21,7 @@ import com.yuma.app.to.UserTO;
 @Slf4j
 @Service
 public class UserService {
-	private Logger userServiceLogger = LoggerFactory.getLogger("User Service");
+	private Logger userServiceLogger = LoggerFactory.getLogger(UserService.class);
 	private UserRepository userRepository;
 	private ConversionService conversionService;
 	private RoleRepository roleRepository;
@@ -38,11 +35,11 @@ public class UserService {
 	}
 
 	public User saveUser(SignUpRequest req) {
-		userServiceLogger.info("saving user {}", req.getEmail());
+		this.userServiceLogger.info("saving user {}", req.getEmail());
 
 		User user = conversionService.convert(req, User.class);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user.setEnabled(true);
+		user.setActive(true);
 
 		Optional<Role> userRole = roleRepository.findByRole("ADMIN");
 		userRole.ifPresent(x -> user.setRoles(new HashSet<>(Collections.singletonList(x))));
@@ -50,25 +47,64 @@ public class UserService {
 	}
 
 	public List<UserTO> list() {
-		userServiceLogger.info("fetching users list");
+		this.userServiceLogger.info("fetching users list");
 
-		List<UserTO> consumerTOS = new ArrayList<>();
-		List<User> consumerList = userRepository.findAll();
-
-		for (User consumer : consumerList) {
-			consumerTOS.add(conversionService.convert(consumer, UserTO.class));
-		}
-
-		return consumerTOS;
+		List<User> userList = userRepository.findAll();
+		return convertUserListToUserTOList(userList);
+		
 	}
 
-	public Optional<User> findUserByEmail(String email) {
-		userServiceLogger.info("fetching user by email: {}", email);
+	public UserTO findUserByEmail(String email) {
+		userServiceLogger.info("fetching user by email: %s", email);
+		User user = userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
+		
+		return conversionService.convert(user, UserTO.class);
+		
+	}
+	
+	public void deleteUserByUserID(String uuid){
+		this.userServiceLogger.info("deleting user by uuid: {}", uuid);
+		
+		userRepository.delete(uuid);
+	}
 
-		return userRepository.findByEmail(email);
+	public UserTO create(UserTO userTO) {
+
+		userTO.setUserId(UUID.randomUUID().toString());
+		User userToCreate = conversionService.convert(userTO, User.class);
+		User user = userRepository.save(userToCreate);
+		return conversionService.convert(user, UserTO.class);
+	}
+	
+	public UserTO updateUser(UserTO userTO){
+		this.userServiceLogger.info("fetching user from DB to update");
+		User user = userRepository.findByUserId(userTO.getUserId()).orElseThrow(() -> new ResourceNotFoundException("User", "userId", userTO.getUserId()));
+		
+		User userToUpdate = conversionService.convert(userTO, User.class);
+		user.updateFrom(userToUpdate);
+		User updatedUser = userRepository.save(user);
+		return conversionService.convert(updatedUser, UserTO.class);
+		
 	}
 	
 	public boolean existsByEmail(String email){
 		return userRepository.existsByEmail(email);
+	}
+	
+	public List<UserTO> activeUsers(){
+		userServiceLogger.info("fetching users list");
+		List<User> userList = userRepository.findByIsActiveIsTrue().orElseThrow(() -> new ResourceNotFoundException("User", "isActive", true));
+		
+		return convertUserListToUserTOList(userList);
+
+	}
+	
+	protected List<UserTO> convertUserListToUserTOList(List<User> userList){
+		List<UserTO> userTOS = new ArrayList<>();
+
+		for (User consumer : userList) {
+			userTOS.add(conversionService.convert(consumer, UserTO.class));
+		}
+		return userTOS;
 	}
 }

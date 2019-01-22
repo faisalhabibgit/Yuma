@@ -38,12 +38,6 @@ class Navigation extends Component {
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
-                        <NavItem>
-                            <NavLink tag={Link} to="/LoginCaterer">LoginCaterer</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink tag={Link} to="/Registration">Register</NavLink>
-                        </NavItem>
                       <NavItem>
                         <NavLink tag={Link} to="/newMeal">New Meal</NavLink>
                       </NavItem>
@@ -51,23 +45,25 @@ class Navigation extends Component {
                             <NavLink tag={Link} to="/Test">Meals</NavLink>
                         </NavItem>
                         <NavItem>
+
                         <NavLink tag={Link} to="/MealHistory">Meal History</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink href="https://github.com/faisalhabibgit/Yuma">GitHub</NavLink>
-                            <NavLink tag={Link} to="/Logout">Logout</NavLink>
+
+                           <NavLink tag={Link} to="/Logout">Logout</NavLink>
                         </NavItem>
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret>
                                 Options
                                         </DropdownToggle>
                             <DropdownMenu right>
-                                <DropdownItem>
-                                    Option 1
-                                            </DropdownItem>
+                                <DropdownItem tag={Link} to="/TestApiView">
+                                    Test Api
+                                </DropdownItem>
                                 <DropdownItem>
                                     Option 2
-                                            </DropdownItem>
+                                </DropdownItem>
                                 <DropdownItem divider />
                                 <DropdownItem>
                                     Reset

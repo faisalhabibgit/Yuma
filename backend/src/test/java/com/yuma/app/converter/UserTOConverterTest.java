@@ -20,7 +20,7 @@ public class UserTOConverterTest {
 		Assert.assertEquals(userTo.getFirstName(), user.getFirstName());
 		Assert.assertEquals(userTo.getLastName(), user.getLastName());
 		Assert.assertEquals(userTo.getPassword(), user.getPassword());
-		Assert.assertEquals(userTo.isEnabled(), user.isEnabled());
+		Assert.assertEquals(userTo.isEnabled(), user.isActive());
 
 	}
 
@@ -28,7 +28,7 @@ public class UserTOConverterTest {
 		User user = new User();
 		user.setEmail("test@gmail.com");
 		user.setUserId("id");
-		user.setEnabled(true);
+		user.setActive(true);
 		user.setFirstName("first name");
 		user.setLastName("last name");
 		user.setPassword("password");
