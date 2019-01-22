@@ -1,7 +1,6 @@
 package com.yuma.app.catalog;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
 import com.yuma.app.document.User;
 
@@ -34,7 +35,7 @@ public class MealCatalog {
 	private HashMap<Meal, Integer> mealsMap = new HashMap<>();
 	private ArrayList<Meal> meals;
 	private ArrayList<User> consumers;
-	private Logger logger = LoggerFactory.getLogger("caterer logger");
+	private Logger logger = LoggerFactory.getLogger(MealCatalog.class);
 
 	private static int randomIntGenerator(int upperBound) {
 		Random rand = new Random();
@@ -44,10 +45,12 @@ public class MealCatalog {
 
 	public List<Meal> getWeeklyCombination(List<Meal> availableMeals, List<User> activeUsers) {
 		List<Meal> possibleMeals = new ArrayList<>();
+		mealsMap.clear();
 		logger.info("generating combo meals");
-
-		for (User consumer : activeUsers) {
-			generatePossibleMeals(availableMeals, consumer);
+		
+		for (User user : activeUsers) {
+			generatePossibleMealsForUser(availableMeals, user, user.getPlan().getNumOfMeals(), 0);
+			
 		}
 		mealsMap = sortByValue(mealsMap);
 
@@ -55,7 +58,7 @@ public class MealCatalog {
 
 		possibleMeals.addAll(mealsMap.keySet());
 
-		possibleMeals = filterList(possibleMeals);
+		//possibleMeals = filterList(possibleMeals);
 
 		return possibleMeals;
 	}
@@ -80,14 +83,14 @@ public class MealCatalog {
 
 		List<Map.Entry<Meal, Integer>> list = new LinkedList<>(pm.entrySet());
 
-		// Sort the list 
-		Collections.sort(list, new Comparator<Map.Entry<Meal, Integer>>() {
+		// Sort the list
+		list.sort(new Comparator<Map.Entry<Meal, Integer>>() {
 			@Override
 			public int compare(Map.Entry<Meal, Integer> o1, Map.Entry<Meal, Integer> o2) {
 				return (o2.getValue()).compareTo(o1.getValue());
 			}
 		});
-
+		
 		// put data from sorted list to hashmap
 		HashMap<Meal, Integer> temp = new LinkedHashMap<>();
 		for (Map.Entry<Meal, Integer> aa : list) {
@@ -101,7 +104,7 @@ public class MealCatalog {
 		int i = 0;
 		while (i < 4) {
 			Meal meal = meals.get(randomIntGenerator(meals.size()));
-			if (equals(meal.getFlags(), consumer.getPreferences().getDetails())) {
+			if (equals(meal.getFlags(), consumer.getPlan().getDetails())) {
 				if (mealsMap.get(meal) != null) {
 					Integer mealReps = mealsMap.get(meal) + 1;
 					mealsMap.put(meal, mealReps);
@@ -111,6 +114,60 @@ public class MealCatalog {
 			}
 			i++;
 		}
+	}
+	
+	protected void generatePossibleMealsForUser(List<Meal> mealList, User user, int numOfMeals, int mealCounter){
+		logger.info("inside generate possible meals for that user");
+
+		if (numOfMeals == mealCounter) {
+			return;
+		}
+		
+		for(Meal meal: mealList){
+			if(checkIfMealWorks(meal, user)){
+				mealCounter++;
+			}
+			if(mealCounter == numOfMeals) break;
+		}
+
+		if (mealCounter != numOfMeals){
+			generatePossibleMealsForUser(mealList, user, numOfMeals, mealCounter);
+		}
+	}
+	
+	protected boolean checkIfMealWorks(Meal meal, User user){
+		List<String> userDislikesList = user.getDislikesList();
+		List<Ingredients> toRemove = new ArrayList<>();
+		Meal newMeal = meal;
+		
+		for (Ingredients ingredient : newMeal.getIngredients()){ 
+			if (userDislikesList.contains(ingredient.getName())){
+				if (!ingredient.isOptional()){
+					return false;
+				}
+				else {
+					toRemove.add(ingredient);
+				}
+			}
+		}
+		if (toRemove.size() != 0){
+			newMeal = new Meal(meal);
+			newMeal.getIngredients().removeAll(toRemove);
+			newMeal.setMealId(UUID.randomUUID());
+		}
+		
+		if (user.getMealList() == null){
+			user.setMealList(new ArrayList<>());
+		}
+		
+		user.getMealList().add(newMeal);
+		if (mealsMap.get(newMeal) != null) {
+			Integer mealReps = mealsMap.get(newMeal) + 1;
+			mealsMap.put(newMeal, mealReps);
+		} else {
+			mealsMap.put(newMeal, 1);
+		}
+		return true;
 	}
 
 	protected List<Meal> filterList(List<Meal> mealList) {

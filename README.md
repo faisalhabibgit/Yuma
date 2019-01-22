@@ -1,6 +1,8 @@
+Travis: [![Build Status](https://travis-ci.com/faisalhabibgit/Yuma.svg?token=Mv3RFmyPQwmuAjmUYuib&branch=master)](https://travis-ci.com/faisalhabibgit/Yuma)
+
 # Yuma
 
-Yuma is a trusted marketplace of personal caterers who can prepare your weekly meals for you. Find menus that meet your diet and budget to benefit from having your weekly meals on hand.
+Yuma is a trusted personal caterer who can prepare your weekly meals for you, or your enterprise. Find meals that meet your diet and budget to benefit from having your weekly meals on hand.
 
 -----
 
@@ -13,7 +15,7 @@ This project provides productive setup for building Spring Boot React applicatio
 
 ## Running the full application
 
-You can build the package as a single artifact by running the `./mvnw clean install`.
+You can build the package as a single artifact by running the `./mvnw clean install` in UNIX, or mvn clean install in Windows.
 Next, you can run the application by executing:
 
 ```bash
@@ -27,7 +29,7 @@ $ java -jar backend/target/backend-0.1.0-SNAPSHOT.jar
 $ export JAVA_HOME=`/usr/libexec/java_home -d 64 -v "1.8*"`
 ```
 
-The application will be accessible at `http://localhost:8080`.
+The application will be accessible at `http://localhost:2020`.
 
 ## Features
 
@@ -53,6 +55,7 @@ You can also run the application using Maven.
 $ cd backend
 $  ../mvnw spring-boot:run
 ```
+This launches the application on port 9000.
 
 ## Running the frontend for development mode
 
@@ -66,11 +69,18 @@ To install all the required binaries for your project, you can run following com
 $ cd frontend
 $ ../mvnw frontend:install-node-and-yarn frontend:yarn
 ```
+This launches the application on port 3000.
 
 ###Front-end dependencies
 ```
 $ npm i reactstrap
 ````
+For testing, we use Enzyme and Jest. By default, Jest is included with create-react-app. For Enzyme:
+
+`yarn add enzyme enzyme-adapter-react-16 react-test-renderer`
+
+Enzyme docs: https://facebook.github.io/create-react-app/docs/running-tests
+
 
 Once the above command finishes, you can start the frontend using the `yarn start` command.
 
@@ -80,7 +90,7 @@ Both the frontend and backend support hot reloading.
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+To run frontend tests, change directory to the frontend folder and execute `yarn test`. This launches the test watch mode.
 
 ### Break down into end to end tests
 

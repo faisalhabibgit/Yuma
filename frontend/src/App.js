@@ -11,6 +11,7 @@ import Error from './component/Error';
 import Test from './component/Test';
 import NewMeal from './component/NewMeal';
 import TestApiView from './component/TestApiView';
+import Dashboard from './component/Dashboard';
 
 class App extends Component {
 
@@ -28,6 +29,7 @@ class App extends Component {
           <Route path="/Test" component={Test} />
           <Route path="/TestApiView" component={TestApiView} />
           <Route path="/Logout" component={Logout} />
+          <Route path="/Dashboard" component={Dashboard} />
           <Route component={Error} />
           </Switch>
           <Footer/>
