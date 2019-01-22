@@ -55,6 +55,7 @@ class Navigation extends Component {
                         </NavItem>
                         <NavItem>
                             <NavLink href="https://github.com/faisalhabibgit/Yuma">GitHub</NavLink>
+                            <NavLink tag={Link} to="/Logout">Logout</NavLink>
                         </NavItem>
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret>
