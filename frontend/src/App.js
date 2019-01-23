@@ -28,13 +28,10 @@ class App extends Component {
           <Route path="/Registration" component={Registration} />
           <Route path="/NewMeal" component={NewMeal} />
           <Route path="/Test" component={Test} />
-          <Route path="/MealHistory" component={MealHistory}/>
-      
-      
+          <Route path="/MealHistory" component={MealHistory}/> 
           <Route path="/TestApiView" component={TestApiView} />
           <Route path="/Logout" component={Logout} />
           <Route path="/Dashboard" component={Dashboard} />
-      
           <Route component={Error} />
           </Switch>
           <Footer/>
