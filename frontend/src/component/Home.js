@@ -51,7 +51,7 @@ class Home extends Component {
                             <CardBody>
                                 <CardTitle>Meal History</CardTitle>
                                 <CardText>Find the dates</CardText>
-                                <Link to="/NewMeal"><Button>Find Now</Button></Link>
+                                <Link to="/MealHistory"><Button>Find Now</Button></Link>
                             </CardBody>
                         </Card>
                     </Col>
