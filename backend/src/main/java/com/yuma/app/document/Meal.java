@@ -26,6 +26,7 @@ public class Meal {
 	private String description;
 	private boolean isAvailable;
 	private HashSet<String> flags;
+	private int mealScore;
 
 	@Override
 	public String toString() {
@@ -35,6 +36,7 @@ public class Meal {
 			", description='" + description + '\'' +
 			", isAvailable=" + isAvailable +
 			", flags=" + flags +
+			", mealScore=" + mealScore +
 			'}';
 	}
 
@@ -44,6 +46,6 @@ public class Meal {
 		this.setAvailable(mealToUpdate.isAvailable());
 		this.setIngredients(mealToUpdate.getIngredients());
 		this.setFlags(mealToUpdate.getFlags());
-
+		this.setMealScore(mealToUpdate.getMealScore());
 	}
 }

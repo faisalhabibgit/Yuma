@@ -99,11 +99,9 @@ public class MealCatalogTest {
 		pm.put(meal2, 2);
 		pm.put(meal3, 3);
 		pm.put(meal4, 4);
-
-		HashMap<Meal, Integer> result = mealCatalog.sortByValue(pm);
 		
+		HashMap<Meal, Integer> result = mealCatalog.sortByValue(pm);
 		List<Integer> integers = new ArrayList<>();
-
 		//putting values into a list of integers so it's easy to verify the output
 		Iterator it = result.entrySet().iterator();
 		while (it.hasNext()) {

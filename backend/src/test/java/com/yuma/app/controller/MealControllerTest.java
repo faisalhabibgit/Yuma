@@ -25,16 +25,12 @@ import com.yuma.app.to.MealTO;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MealControllerTest {
-
-	@MockBean
-	private MealService mealService;
-
-	@Mock
-	private Logger logger;
-	
 	@Mock
 	MealRepository mealRepository;
-
+	@MockBean
+	private MealService mealService;
+	@Mock
+	private Logger logger;
 	@Autowired
 	private MealController mealResource;
 
@@ -42,50 +38,42 @@ public class MealControllerTest {
 	private MealTO mealTO1updated;
 	private MealTO mealTO1Created;
 	private MealTO mealTO2;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		
-		mealTO1 = new MealTO(new ArrayList<>(), UUID.randomUUID(), "chicken", "chicken", false,new HashSet<>());
-		mealTO1updated = new MealTO(new ArrayList<>(), mealTO1.getMealId(),"chicken", "chicken", true,new HashSet<>());
-		mealTO1Created = new MealTO(new ArrayList<>(), mealTO1.getMealId(), "chicken", "chicken", false,new HashSet<>());
-		mealTO2 = new MealTO(new ArrayList<>(), UUID.randomUUID(), "mutton", "mutton", true,new HashSet<>());
-		
+		mealTO1 = new MealTO(new ArrayList<>(), UUID.randomUUID(), "chicken", "chicken", false, new HashSet<>(), 30);
+		mealTO1updated = new MealTO(new ArrayList<>(), mealTO1.getMealId(), "chicken", "chicken", true, new HashSet<>(), 24);
+		mealTO1Created = new MealTO(new ArrayList<>(), mealTO1.getMealId(), "chicken", "chicken", false, new HashSet<>(), 5);
+		mealTO2 = new MealTO(new ArrayList<>(), UUID.randomUUID(), "mutton", "mutton", true, new HashSet<>(), 67);
 		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
 	public void mealResourceGetAllTest() {
 		List<MealTO> actualMeals = new ArrayList<>();
+		List<MealTO> expectedMeals;
 		actualMeals.add(mealTO1);
 		actualMeals.add(mealTO2);
 		Mockito.when(mealService.list()).thenReturn(actualMeals);
-		List<MealTO> expectedMeals = mealResource.getAll();
+		expectedMeals = mealResource.getAll();
 
 		Assert.assertEquals(expectedMeals.size(), actualMeals.size());
 	}
 
 	@Test
 	public void mealResourceUpdateTest() {
-		
 		Mockito.when(mealService.update(mealTO1)).thenReturn(mealTO1updated);
-		
 		MealTO mealT0actual = mealResource.update(mealTO1);
-		
-		Assert.assertEquals(mealTO1updated.getMealId(),mealT0actual.getMealId());
-		Assert.assertEquals(mealTO1updated.getDescription(),mealT0actual.getDescription());
-		Assert.assertEquals(mealTO1updated.isAvailable(),mealT0actual.isAvailable());	
-		
+
+		Assert.assertEquals(mealTO1updated.getMealId(), mealT0actual.getMealId());
+		Assert.assertEquals(mealTO1updated.getDescription(), mealT0actual.getDescription());
+		Assert.assertEquals(mealTO1updated.isAvailable(), mealT0actual.isAvailable());
 	}
 
 	@Test
 	public void mealResourceCreateTest() {
-
 		Mockito.when(mealService.create(mealTO1)).thenReturn(mealTO1Created);
-
 		mealResource.create(mealTO1);
-		
 		Mockito.verify(mealService).create(mealTO1);
-
 	}
 }

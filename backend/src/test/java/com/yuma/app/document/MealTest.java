@@ -6,21 +6,15 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class MealTest {
-
-
 	@Test
 	public void updateFromTest() {
-
 		Meal meal = new Meal();
-
 		meal.updateFrom(updatedMeal());
-
 		Assert.assertEquals(meal.getDescription(), updatedMeal().getDescription());
 		Assert.assertEquals(meal.isAvailable(), updatedMeal().isAvailable());
 		Assert.assertEquals(meal.getIngredients().size(), updatedMeal().getIngredients().size());
-
+		Assert.assertEquals(meal.getMealScore(), updatedMeal().getMealScore());
 	}
-
 
 	public Meal updatedMeal() {
 		Meal meal = new Meal();
@@ -32,8 +26,7 @@ public class MealTest {
 				add(new Ingredients("Peppers", 20, 40, 23, false));
 			}
 		});
+		meal.setMealScore(30);
 		return meal;
 	}
-
-
 }

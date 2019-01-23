@@ -15,9 +15,7 @@ import com.yuma.app.to.UserTO;
 @RestController
 @RequestMapping("api/rest")
 public class UserController {
-
-	final Logger logger = LoggerFactory.getLogger("initial Logger");
-
+	final Logger logger = LoggerFactory.getLogger(UserController.class);
 	private UserService userService;
 
 	public UserController(UserService consumerService) {
@@ -33,20 +31,18 @@ public class UserController {
 	@DeleteMapping("/{uuid}")
 	public void deleteUserByUserID(@PathVariable String uuid){
 		this.logger.info("deleting user from DB in controller");
-
 		this.userService.deleteUserByUserID(uuid);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public UserTO createUser(@RequestBody UserTO userTO){
 		this.logger.info("creating user from DB in controller");
-
 		return this.userService.create(userTO);
 	}
+	
 	@RequestMapping(method = RequestMethod.PUT)
 	public UserTO updateUser(@RequestBody UserTO userTO){
 		this.logger.info("updating user from DB in controller");
-
 		return this.userService.updateUser(userTO);
 	}
 }

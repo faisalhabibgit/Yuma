@@ -1,27 +1,24 @@
 package com.yuma.app.converter;
 
-import com.yuma.app.document.User;
-import com.yuma.app.to.UserTO;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.yuma.app.document.User;
+import com.yuma.app.to.UserTO;
 
 public class UserTOConverterTest {
 
 	@Test
 	public void testUserTOConverter() {
-
 		User user = prepareUser();
-
 		UserTOConverter userTOConverter = new UserTOConverter();
-
 		UserTO userTo = userTOConverter.convert(user);
-
+		
 		Assert.assertEquals(userTo.getUserId(), user.getUserId());
 		Assert.assertEquals(userTo.getFirstName(), user.getFirstName());
 		Assert.assertEquals(userTo.getLastName(), user.getLastName());
 		Assert.assertEquals(userTo.getPassword(), user.getPassword());
 		Assert.assertEquals(userTo.isEnabled(), user.isEnabled());
-
 	}
 
 	public User prepareUser() {

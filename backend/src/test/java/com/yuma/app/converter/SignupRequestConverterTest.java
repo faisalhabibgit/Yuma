@@ -1,18 +1,16 @@
 package com.yuma.app.converter;
 
 
-import com.yuma.app.document.User;
-import com.yuma.app.payload.SignUpRequest;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.yuma.app.document.User;
+import com.yuma.app.payload.SignUpRequest;
+
 public class SignupRequestConverterTest {
-	
 	@Test
 	public void testSignUpRequestToUserConverter() {
-		
 		SignUpRequest signUpRequest = prepareSignUpRequest();
-		
 		SignupRequestConverter signupRequestConverter = new SignupRequestConverter();
 		User user = signupRequestConverter.convert(signUpRequest);
 
@@ -23,9 +21,8 @@ public class SignupRequestConverterTest {
 	}
 
 	private SignUpRequest prepareSignUpRequest() {
-		
 		SignUpRequest signUpRequest = new SignUpRequest();
-		
+
 		signUpRequest.setFirstName("first name");
 		signUpRequest.setLastName("first name");
 		signUpRequest.setPassword("password");

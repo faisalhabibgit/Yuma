@@ -41,47 +41,43 @@ public class MealServiceTest {
 	@Before
 	public void setUp() throws Exception {
 
-		meal1 = new Meal(new ArrayList<>(), UUID.randomUUID(), "chicken","chicken", true,new HashSet<>());
-		meal2 = new Meal(new ArrayList<>(), UUID.randomUUID(),"chicken", "chicken", false,new HashSet<>());
-		meal3 = new Meal(new ArrayList<>(), UUID.randomUUID(), "mutton", "mutton", true,new HashSet<>());
-		mealTO = new MealTO(new ArrayList<>(),meal1.getMealId(), "chicken and veg", "chicken and veg",false,new HashSet<>());
-
+		meal1 = new Meal(new ArrayList<>(), UUID.randomUUID(), "chicken","chicken", true,new HashSet<>(), 34);
+		meal2 = new Meal(new ArrayList<>(), UUID.randomUUID(),"chicken", "chicken", false,new HashSet<>(),23);
+		meal3 = new Meal(new ArrayList<>(), UUID.randomUUID(), "mutton", "mutton", true,new HashSet<>(),45);
+		mealTO = new MealTO(new ArrayList<>(),meal1.getMealId(), "chicken and veg", "chicken and veg",false,new HashSet<>(),5);
 		MockitoAnnotations.initMocks(this);
 	}
 	
 	@Test
 	public void MealServiceListTest() {
 		List<Meal> actualMeals = new ArrayList<>();
+		List<MealTO> expectedMeals;
 		actualMeals.add(meal1);
 		actualMeals.add(meal2);
 		actualMeals.add(meal3);
+		
 		Mockito.when(mealRepository.findAll()).thenReturn(actualMeals);
-		List<MealTO> expectedMeals = mealService.list();
-
+		
+		expectedMeals = mealService.list();
 		Assert.assertEquals(expectedMeals.size(), actualMeals.size());
 	}
 	
 	@Test
 	public void MealServiceListByPredicateTest(){
-
 		String desc = "chicken";
+		MealTO expectedMeals;
 		Optional<Meal> optionalMeal = Optional.ofNullable(new Meal());
 		
 		Mockito.when(mealRepository.findByDescription(desc)).thenReturn(optionalMeal);
 		Mockito.when(mealRepository.findByDescription(desc)).thenReturn(optionalMeal);
 		
-		MealTO expectedMeals = mealService.findByDescription(desc);
-
+		expectedMeals = mealService.findByDescription(desc);
 		Assert.assertNotNull(expectedMeals);
-		
-		
 	}
 	
 	@Test 
 	public void MealServiceUpdateTest(){
-		
 		UUID uuid = mealTO.getMealId();
-
 		Optional<Meal> meal = Optional.of(meal1);
 
 		Mockito.when(mealRepository.findByMealId(uuid)).thenReturn(meal);
@@ -95,13 +91,10 @@ public class MealServiceTest {
 
 	@Test
 	public void MealServiceCreateTest(){
-
 		Mockito.when(conversionService.convert(mealTO, Meal.class)).thenReturn(meal1);
 		Mockito.when(mealRepository.save(meal1)).thenReturn(meal1);
 		Mockito.when(conversionService.convert(meal1, MealTO.class)).thenReturn(mealTO);
-
 		mealService.create(mealTO);
-
 		Assert.assertEquals(mealTO.getDescription(), "chicken and veg");
 		Assert.assertEquals(mealTO.isAvailable(), false);
 	}
