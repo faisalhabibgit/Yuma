@@ -3,8 +3,6 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import {  Container, Col, Form,  FormGroup, Label, Input,  Button,} from 'reactstrap';
 
-const API = 'api/meals';
-const REDIRECTHOME = '/';
 
 class MealHistory extends Component{
 
