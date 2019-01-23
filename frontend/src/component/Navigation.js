@@ -34,13 +34,12 @@ class Navigation extends Component {
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
+                         <Nav className="ml-auto" navbar>
                         <NavItem>
                             <NavLink tag={Link} to="/Login">Login</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="https://github.com/faisalhabibgit/Yuma">GitHub</NavLink>
-
-                           <NavLink tag={Link} to="/Logout">Logout</NavLink>
+                            <NavLink tag={Link} to="/Logout">Logout</NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>
