@@ -8,11 +8,7 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem
+    NavLink
 } from 'reactstrap';
 
 class Navigation extends Component {
@@ -38,11 +34,8 @@ class Navigation extends Component {
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
-                      <NavItem>
-                        <NavLink tag={Link} to="/newMeal">New Meal</NavLink>
-                      </NavItem>
                         <NavItem>
-                            <NavLink tag={Link} to="/Test">Meals</NavLink>
+                            <NavLink tag={Link} to="/Login">Login</NavLink>
                         </NavItem>
                         <NavItem>
 
@@ -53,23 +46,6 @@ class Navigation extends Component {
 
                            <NavLink tag={Link} to="/Logout">Logout</NavLink>
                         </NavItem>
-                        <UncontrolledDropdown nav inNavbar>
-                            <DropdownToggle nav caret>
-                                Options
-                                        </DropdownToggle>
-                            <DropdownMenu right>
-                                <DropdownItem tag={Link} to="/TestApiView">
-                                    Test Api
-                                </DropdownItem>
-                                <DropdownItem>
-                                    Option 2
-                                </DropdownItem>
-                                <DropdownItem divider />
-                                <DropdownItem>
-                                    Reset
-                                            </DropdownItem>
-                            </DropdownMenu>
-                        </UncontrolledDropdown>
                     </Nav>
                 </Collapse>
             </Navbar>

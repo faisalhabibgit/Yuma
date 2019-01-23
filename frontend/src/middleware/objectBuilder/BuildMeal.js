@@ -22,7 +22,7 @@ class BuildMeal {
             headers: {
                 'cache-control': "no-cache",
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer '+ apiToken.getCookie('yuma-token')
+                'Authorization': 'Bearer ' + apiToken.getCookie('yuma-token')
             }
         }
 
@@ -53,6 +53,31 @@ class BuildMeal {
                 }
                 return mealList;
             });
+    }
+
+    addMeal(someMeal) {
+
+        const apiToken = new ApiToken();
+        const API = 'api/meals';
+
+        console.log('Adding: ' + someMeal.toString());
+
+        fetch(API, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + apiToken.getCookie('yuma-token')
+            },
+            body: JSON.stringify({
+                ingredients: someMeal.ingredients,
+                name: someMeal.name,
+                description: someMeal.description,
+                flags: someMeal.flags,
+                available: true
+            })
+        })
+
     }
 
 }
