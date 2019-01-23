@@ -50,7 +50,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void givenUserWhenSaveUserCalledThenShouldSaveTheUserRecord() {
+	public void GivenUserWhenSaveUserCalledThenShouldSaveTheUserRecord() {
 
 		SignUpRequest signUpRequest = prepareSignupReq();
 		User user = prepareUser();
@@ -67,7 +67,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void whenListCalledThenShouldReturnListOfUsers() {
+	public void WhenListCalledThenShouldReturnListOfUsers() {
 
 		List<User> users = prepareUserList();
 		List<UserTO> userTOs = prepareUserTOList();
@@ -87,7 +87,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void givenEmailWhenFindByEmailCalledThenShouldReturnUserWithThatEmail() {
+	public void GivenEmailWhenFindByEmailCalledThenShouldReturnUserWithThatEmail() {
 
 		String email = "example@email.com";
 

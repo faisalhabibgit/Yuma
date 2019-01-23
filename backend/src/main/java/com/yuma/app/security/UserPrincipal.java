@@ -13,7 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.yuma.app.document.Preferences;
+import com.yuma.app.document.Plan;
 import com.yuma.app.document.User;
 
 @Setter
@@ -26,9 +26,9 @@ public class UserPrincipal implements UserDetails {
 
 	private String lastName;
 	
-	private Preferences preferences;
+	private Plan plan;
 
-	private boolean enabled;
+	private boolean isActive;
 	
 	private String timestamp;
 
@@ -40,14 +40,14 @@ public class UserPrincipal implements UserDetails {
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserPrincipal(String userId, String firstName, String lastName, String email, Preferences preferences, boolean enabled, String timestamp, String password, Collection<? extends GrantedAuthority> authorities) {
+	public UserPrincipal(String userId, String firstName, String lastName, String email, Plan plan, boolean isActive, String timestamp, String password, Collection<? extends GrantedAuthority> authorities) {
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.preferences = preferences;
-		this.enabled = enabled;
+		this.plan = plan;
+		this.isActive = isActive;
 		this.timestamp = timestamp;
 		this.authorities = authorities;
 	}
@@ -62,8 +62,8 @@ public class UserPrincipal implements UserDetails {
 			user.getFirstName(),
 			user.getLastName(),
 			user.getEmail(),
-			user.getPreferences(),
-			user.isEnabled(),
+			user.getPlan(),
+			user.isActive(),
 			user.getTimestamp(),
 			user.getPassword(),
 			authorities
@@ -87,22 +87,22 @@ public class UserPrincipal implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return enabled;
+		return isActive;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return enabled;
+		return isActive;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return enabled;
+		return isActive;
 	}
-
+	
 	@Override
 	public boolean isEnabled() {
-		return enabled;
+		return isActive;
 	}
 
 	@Override

@@ -40,6 +40,13 @@ public class MealController {
 		return this.mealService.list();
 	}
 
+	@GetMapping("/availablemeals")
+	public List<MealTO> getAvailableMeals() {
+		logger.info("retrieving available meals list from DB");
+
+		return this.mealService.availableMeals();
+	}
+
 	@GetMapping("/{description}")
 	public MealTO getByDescription(@PathVariable String description) {
 		logger.info("retrieving meals list from DB by description {}", description);

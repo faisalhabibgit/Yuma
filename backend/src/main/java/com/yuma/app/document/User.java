@@ -1,5 +1,6 @@
 package com.yuma.app.document;
 
+import java.util.List;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
@@ -21,15 +22,29 @@ public class User {
 
 	@Id
 	private String userId;
+
 	private String password;
 	private String firstName;
 	private String lastName;
 	private String email;
-	private Preferences preferences;
-	private boolean enabled;
+	private Plan plan;
+	private boolean isActive;
 	private String timestamp;
 	@DBRef
 	private Set<Role> roles;
+	private List<Meal> mealList;
+	private List<String> dislikesList;
+
+	public User(String userId,String firstName, String lastName, String email, String password, boolean isActive, Plan plan, List<String> dislikesList) {
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.isActive = isActive;
+		this.plan = plan;
+		this.dislikesList = dislikesList;
+	}
 
 	public User(String firstName, String lastName, String email, String password) {
 		this.firstName = firstName;
@@ -47,7 +62,7 @@ public class User {
 		this.setFirstName(userToUpdate.getFirstName());
 		this.setLastName(userToUpdate.getLastName());
 		this.setEmail(userToUpdate.getEmail());
-		this.setPreferences(userToUpdate.getPreferences());
+		this.setPlan(userToUpdate.getPlan());
 
 	}
 
@@ -59,8 +74,8 @@ public class User {
 			", firstName='" + firstName + '\'' +
 			", lastName='" + lastName + '\'' +
 			", email='" + email + '\'' +
-			", preferences=" + preferences +
-			", enabled=" + enabled +
+			", plan=" + plan +
+			", isActive=" + isActive +
 			", timestamp='" + timestamp + '\'' +
 			", roles=" + roles +
 			'}';

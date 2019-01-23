@@ -16,7 +16,7 @@ public class UserConverterTest {
 		Assert.assertEquals(user.getUserId(), userTo.getUserId());
 		Assert.assertEquals(user.getFirstName(), userTo.getFirstName());
 		Assert.assertEquals(user.getLastName(), userTo.getLastName());
-		Assert.assertEquals(user.isEnabled(), userTo.isEnabled());
+		Assert.assertEquals(user.isActive(), userTo.isEnabled());
 		Assert.assertEquals(user.getPassword(), userTo.getPassword());
 	}
 

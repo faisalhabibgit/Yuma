@@ -17,13 +17,14 @@ import com.yuma.app.document.Ingredients;
 @AllArgsConstructor
 public class MealTO {
 
-	protected List<Ingredients> ingredients;
 	private UUID mealId;
 	private String name;
 	private String description;
 	private boolean isAvailable;
 	private HashSet<String> flags;
 	private int mealScore;
+	protected List<Ingredients> ingredients;
+
 
 	@Override
 	public String toString() {

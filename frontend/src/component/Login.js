@@ -13,6 +13,15 @@ class Login extends Component {
   
   constructor(props){
     super(props);
+
+    const apiToken = new ApiToken();
+    if(!apiToken.isAuthenticated()){
+      console.log('User Not Logged');
+    }else{
+      console.log('User Login Success');
+      this.props.history.push(`/`)
+    }
+
     this.state = {
       email:'',
       password:''
