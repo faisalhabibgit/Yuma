@@ -5,8 +5,8 @@ class AvailabeMeals extends Component {
   render() {
     return (
       <span>
-	                <h1>Meals</h1>
-	            </span>
+		                <h1>Meals</h1>
+      </span>
     );
   }
 }
