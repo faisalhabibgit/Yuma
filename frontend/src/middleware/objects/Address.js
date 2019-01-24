@@ -6,7 +6,7 @@ class Address {
     this.city = city;
     this.state = state;
     this.country = country;
-    this.postalCode = postalcode;
+    this.postalCode = postalCode;
   }
 
   toString() {

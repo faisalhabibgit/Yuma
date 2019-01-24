@@ -1,7 +1,8 @@
 class Meal {
 
-    constructor(name, description, isAvailable, flags, ingredients) {   
-      console.log('inside meal constructor');   
+    constructor(mealId, name, description, isAvailable, flags, ingredients) {   
+      console.log('inside meal constructor'); 
+      this.mealId = mealId;
       this.name = name;
       this.description = description;
       this.isAvailable = isAvailable;
@@ -18,7 +19,7 @@ class Meal {
         ingredientsList.push(element.toString() + '\n');
       }
 
-      return this.name +', '+ this.description +', '+ this.isAvailable +', '+ this.flags + ', ' + ingredientsList.toString();
+      return (this.name +', '+ this.description +', '+ this.isAvailable +', '+ this.flags + ', ' + ingredientsList.toString());
     }
 }
 
