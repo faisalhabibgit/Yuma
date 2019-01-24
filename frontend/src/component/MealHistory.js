@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import ApiToken from "../middleware/ApiToken";
 import {  Container, Col, Form,  FormGroup, Label, Input,  Button,} from 'reactstrap';
 
 
@@ -8,6 +9,15 @@ class MealHistory extends Component{
 
   constructor(props) {
     super(props);
+    
+    const apiToken = new ApiToken();
+    if (!apiToken.isAuthenticated()) {
+      console.log('User Not Logged');
+      this.props.history.push(`/Login`)
+    } else {
+      console.log('User Login Success');
+    }
+    
     this.state = {
       startDate: new Date(),
       error: '',
