@@ -48,9 +48,10 @@ public class MealCatalog {
 		mealsMap.clear();
 		logger.info("generating combo meals");
 		
+		scoreMeals(availableMeals, activeUsers);
+		
 		for (User user : activeUsers) {
 			generatePossibleMealsForUser(availableMeals, user, user.getPlan().getNumOfMeals(), 0);
-			
 		}
 		mealsMap = sortByValue(mealsMap);
 
@@ -61,6 +62,28 @@ public class MealCatalog {
 		//possibleMeals = filterList(possibleMeals);
 
 		return possibleMeals;
+	}
+
+	public  List<Meal> scoreMeals(List<Meal> mealList, List<User> userList) {
+		boolean scorable = true;
+		for (User user: userList){
+			List<String> userDislikesList = user.getDislikesList();
+			for (Meal meal : mealList) {
+
+				for (Ingredients ingredient : meal.getIngredients()){
+					if (userDislikesList.contains(ingredient.getName())){
+						if (!ingredient.isOptional()){
+							scorable = false;
+							break;
+						}
+					}
+				}
+				if(scorable) {
+					meal.setMealScore(meal.getMealScore()+1);
+				}
+			}
+		}
+		return mealList;
 	}
 
 	protected boolean equals(HashSet<?> set1, HashSet<?> set2) {

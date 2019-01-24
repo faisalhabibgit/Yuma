@@ -183,6 +183,82 @@ public class MealCatalogTest {
 
 		Assert.assertTrue(mealCatalog.getMealsMap().size() == 3);
 	}
+	
+	@Test
+	public void givenMealListAndUserListWhenScoreMealCalledThenShouldReturnMealListWithScore() {
+		
+		List<Meal> meals = prepareMealList();
+		List<User> users = prepareUserList();
+		
+		List<Meal> mealsReturnedWithScore = mealCatalog.scoreMeals(meals, users);
+		
+		Assert.assertEquals(((Meal)mealsReturnedWithScore.get(0)).getName(), "meal1");
+		Assert.assertEquals(((Meal)mealsReturnedWithScore.get(1)).getName(), "meal2");
+		Assert.assertEquals(((Meal)mealsReturnedWithScore.get(2)).getName(), "meal3");
+		Assert.assertEquals(((Meal)mealsReturnedWithScore.get(0)).getMealScore(), 3);
+		Assert.assertEquals(((Meal)mealsReturnedWithScore.get(1)).getMealScore(), 2);
+		Assert.assertEquals(((Meal)mealsReturnedWithScore.get(2)).getMealScore(), 2);
+	}
+	
+	private List<Meal> prepareMealList() {
+		
+		List<Meal> meals = new ArrayList<>();
+		Meal meal1 = new Meal();
+		meal1.setName("meal1");
+		List<Ingredients> ingredientsList1 = new ArrayList<>();
+		Ingredients ingredients1 = new Ingredients();
+		ingredients1.setName("onions");
+		ingredients1.setOptional(true);
+		ingredientsList1.add(ingredients1);
+		meal1.setIngredients(ingredientsList1);
+		
+		Meal meal2 = new Meal();
+		meal2.setName("meal2");
+		List<Ingredients> ingredientsList2 = new ArrayList<>();
+		Ingredients ingredients2 = new Ingredients();
+		ingredients2.setName("tomatoes");
+		ingredients2.setOptional(false);
+		ingredientsList2.add(ingredients2);
+		meal2.setIngredients(ingredientsList2);
+		
+		Meal meal3 = new Meal();
+		meal3.setName("meal3");
+		List<Ingredients> ingredientsList3 = new ArrayList<>();
+		Ingredients ingredients3 = new Ingredients();
+		ingredients3.setName("mushrooms");
+		ingredients3.setOptional(false);
+		ingredientsList3.add(ingredients3);
+		meal3.setIngredients(ingredientsList3);
+
+		meals.add(meal1);
+		meals.add(meal2);
+		meals.add(meal3);
+		
+		return meals;
+	}
+
+	private List<User> prepareUserList() {
+		List<User> users = new ArrayList<>();
+		User user1 = new User();
+		List<String> dislikesList1 = new ArrayList<>();
+		dislikesList1.add("onions");
+		user1.setDislikesList(dislikesList1);
+		
+		User user2 = new User();
+		List<String> dislikesList2 = new ArrayList<>();
+		user2.setDislikesList(dislikesList2);
+		
+		User user3 = new User();
+		List<String> dislikesList3 = new ArrayList<>();
+		dislikesList3.add("tomatoes");
+		user3.setDislikesList(dislikesList3);
+
+		users.add(user1);
+		users.add(user2);
+		users.add(user3);
+		
+		return users;
+	}
 
 	private User prepareAndReturnUser() {
 

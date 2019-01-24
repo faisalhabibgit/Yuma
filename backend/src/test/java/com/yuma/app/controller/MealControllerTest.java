@@ -41,10 +41,10 @@ public class MealControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		mealTO1 = new MealTO(new ArrayList<>(), UUID.randomUUID(), "chicken", "chicken", false, new HashSet<>(), 30);
-		mealTO1updated = new MealTO(new ArrayList<>(), mealTO1.getMealId(), "chicken", "chicken", true, new HashSet<>(), 24);
-		mealTO1Created = new MealTO(new ArrayList<>(), mealTO1.getMealId(), "chicken", "chicken", false, new HashSet<>(), 5);
-		mealTO2 = new MealTO(new ArrayList<>(), UUID.randomUUID(), "mutton", "mutton", true, new HashSet<>(), 67);
+		mealTO1 = new MealTO(UUID.randomUUID(), "chicken", "chicken", false, new HashSet<>(), 30, new ArrayList<>());
+		mealTO1updated = new MealTO(mealTO1.getMealId(), "chicken", "chicken", true, new HashSet<>(), 24, new ArrayList<>());
+		mealTO1Created = new MealTO(mealTO1.getMealId(), "chicken", "chicken", false, new HashSet<>(), 5, new ArrayList<>());
+		mealTO2 = new MealTO(UUID.randomUUID(), "mutton", "mutton", true, new HashSet<>(), 67, new ArrayList<>());
 		MockitoAnnotations.initMocks(this);
 	}
 
