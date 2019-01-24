@@ -45,6 +45,16 @@ class Home extends Component {
                             </CardBody>
                         </Card>
                     </Col>
+                     <Col>
+                        <Card>
+                            <CardImg top width="100%" src="https://davidhoganwriter.files.wordpress.com/2018/02/greek-food.jpg?w=520&h=350&crop=1" alt="Card image cap" />
+                            <CardBody>
+                                <CardTitle>Meal History</CardTitle>
+                                <CardText>Find the dates</CardText>
+                                <Link to="/MealHistory"><Button>Find Now</Button></Link>
+                            </CardBody>
+                        </Card>
+                    </Col>
                     <Col>
                         <Card>
                             <CardImg top width="100%" src="https://i.imgur.com/QF3pQEZ.jpg" alt="Card image cap" />
