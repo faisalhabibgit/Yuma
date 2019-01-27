@@ -33,6 +33,7 @@ class Dashboard extends Component {
               <h5 style={{ color: 'black', fontFamily: 'Comic Sans MS' }}> Meal Combo</h5>
             </CardHeader>
             <CardBody>
+              <DisplayMeals />
             </CardBody>
           </Card>
 
@@ -45,7 +46,6 @@ class Dashboard extends Component {
               <h5 style={{ color: 'black', fontFamily: 'Comic Sans MS' }}> Available Meals</h5>
             </CardHeader>
             <CardBody>
-              <DisplayMeals />
             </CardBody>
           </Card>
 
