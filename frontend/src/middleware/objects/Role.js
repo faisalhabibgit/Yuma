@@ -1,10 +1,11 @@
 class Role{
-  constractor(id){
+  constructor(id, role){
     this.id = id;
+    this.role =role;
   }
 
   toString() {
-    return this.mealId
+    return (this.id + this.role);
   }
 }
-exports default Role;
+export default Role;
