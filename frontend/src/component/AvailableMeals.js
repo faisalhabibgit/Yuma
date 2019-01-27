@@ -13,24 +13,10 @@ class AvailableMeals extends Component {
 
   constructor(props) {
     super(props);
-
-    const apiToken = new ApiToken();
-    if(!apiToken.isAuthenticated()){
-      console.log('User Not Logged');
-      this.props.history.push(`/Login`)
-    }else{
-      console.log('User Login Success');
-    }
-
     this.state = {
-    
       Meals: {}
     }
-
-    
   }
-  
-
 
   componentDidMount() {
     const retriever = new Retriever('api/meals/availablemeals');
@@ -46,7 +32,6 @@ class AvailableMeals extends Component {
     for (var i = 0; i < this.state.Meals.length; i++) {
       {
         mealDescription.push(this.state.Meals[i].description.toString());
-      
       }
     }
     return mealDescription
@@ -58,7 +43,6 @@ class AvailableMeals extends Component {
     for (var i = 0; i < this.state.Meals.length; i++) {
       {
         mealNames.push(this.state.Meals[i].name.toString());
-
       }
     }
     return mealNames
@@ -71,16 +55,16 @@ class AvailableMeals extends Component {
     return(
       <Container>
      
-        <div> Number of available Meals <h4 style={{color:'blue'}}> {AvailableMealsName.length} </h4> </div>
+        <h4> Number of Available Meals: {AvailableMealsName.length} </h4>
 
-        <div style={{ width:'700px', height:'300px', overflow:'scroll'}}>
-          <Table striped bordered condensed >
+        <div style={{ maxWidth:'800px', maxHeight:'275px', overflow:'scroll'}}>
+          <Table striped bordered condensed>
 
             <thead>
             <th className="text-center">Name</th>
             <th className="text-center">Description</th>
             </thead>
-            <tbody>  
+            <tbody >  
             <td>
       {AvailableMealsName.map((item,index) =>
         
@@ -94,12 +78,11 @@ class AvailableMeals extends Component {
        <td>     
       {AvailableMealsDescription.map((item,index) =>
         
-          <tr key={index}>
+          <tr key={index} >
             {item}
           </tr>
         
       )}
-      
        </td>
             </tbody>
           </Table>
@@ -109,10 +92,5 @@ class AvailableMeals extends Component {
     );
 
   }
-
-
 }
-        
-
-
 export default AvailableMeals;
