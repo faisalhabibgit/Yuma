@@ -8,8 +8,7 @@ import {
 } from 'reactstrap';
 
 class AvailableMeals extends Component {
-
-
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -24,65 +23,56 @@ class AvailableMeals extends Component {
         this.setState({ Meals: obj });
       })
   }
- 
+
   Description() {
     var mealDescription = [];
-
     for (var i = 0; i < this.state.Meals.length; i++) {
-        mealDescription.push(this.state.Meals[i].description.toString());
+      mealDescription.push(this.state.Meals[i].description.toString());
     }
     return mealDescription
   }
 
   Name() {
     var mealNames = [];
-
     for (var i = 0; i < this.state.Meals.length; i++) {
-        mealNames.push(this.state.Meals[i].name.toString());
+      mealNames.push(this.state.Meals[i].name.toString());
     }
     return mealNames
   }
- 
+
   render () {
     var AvailableMealsDescription = this.Description();
     var AvailableMealsName = this.Name();
-    
+
     return(
       <Container>
-     
+
         <h4> Number of Available Meals: {AvailableMealsName.length} </h4>
 
         <div style={{ maxWidth:'800px', maxHeight:'275px', overflow:'scroll'}}>
           <Table striped bordered condensed>
-
             <thead>
             <th className="text-center">Name</th>
             <th className="text-center">Description</th>
             </thead>
-            <tbody >  
+            <tbody >
             <td>
-      {AvailableMealsName.map((item,index) =>
-        
-            <tr key={index}>
-            {item}
-          </tr>
-        
-      )}
+              {AvailableMealsName.map((item,index) =>
+                <tr key={index}>
+                  {item}
+                </tr>
+              )}
             </td>
-       
-       <td>     
-      {AvailableMealsDescription.map((item,index) =>
-        
-          <tr key={index} >
-            {item}
-          </tr>
-        
-      )}
-       </td>
+            <td>
+              {AvailableMealsDescription.map((item,index) =>
+                <tr key={index} >
+                  {item}
+                </tr>
+              )}
+            </td>
             </tbody>
           </Table>
-       
-      </div>
+        </div>
       </Container>
     );
 
