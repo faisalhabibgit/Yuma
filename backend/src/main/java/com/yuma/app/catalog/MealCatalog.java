@@ -19,11 +19,13 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
 import com.yuma.app.document.User;
+import com.yuma.app.repository.MealRepository;
 
 @Slf4j
 @Document
@@ -36,6 +38,13 @@ public class MealCatalog {
 	private ArrayList<Meal> meals;
 	private ArrayList<User> consumers;
 	private Logger logger = LoggerFactory.getLogger(MealCatalog.class);
+	private List<Meal> scoredMeals;
+	private ArrayList<ArrayList<User>> usersWithBlanksMap;
+	private ArrayList<User> userWithBlanks;
+	private ArrayList<List<Meal>> possibleCombinations;
+	
+	@Autowired
+	private MealRepository mealRepository;
 
 	private static int randomIntGenerator(int upperBound) {
 		Random rand = new Random();
@@ -43,24 +52,52 @@ public class MealCatalog {
 		return rand.nextInt(upperBound);
 	}
 
-	public List<Meal> getWeeklyCombination(List<Meal> availableMeals, List<User> activeUsers) {
+	public List<Meal> getWeeklyCombination(List<Meal> scoredMeals, List<User> activeUsers) {
+		this.scoredMeals = scoredMeals;
 		List<Meal> possibleMeals = new ArrayList<>();
-		mealsMap.clear();
-		logger.info("generating combo meals");
-		
+		setMealScores(scoredMeals, activeUsers);
+		int i = 0;
+
 		for (User user : activeUsers) {
-			generatePossibleMealsForUser(availableMeals, user, user.getPlan().getNumOfMeals(), 0);
-			
+			generatePossibleMealsForUser(scoredMeals, user, user.getPlan().getNumOfMeals(), 0);
 		}
+		possibleCombinations.add(scoredMeals);
+		
+		while(i < 3 && !(usersWithBlanksMap.get(i).isEmpty())){
+			tryReplacingLowestScore(i);
+			for (User user : activeUsers) {
+				generatePossibleMealsForUser(scoredMeals, user, user.getPlan().getNumOfMeals(), 0);
+			}
+			possibleCombinations.add(scoredMeals);
+			i++;
+		}
+		
 		mealsMap = sortByValue(mealsMap);
-
-		logger.info("creating meals arraylist");
-
+		logger.info("creating meals array list");
 		possibleMeals.addAll(mealsMap.keySet());
 
-		//possibleMeals = filterList(possibleMeals);
-
 		return possibleMeals;
+	}
+
+	public  void setMealScores(List<Meal> mealList, List<User> userList) {
+		boolean scorable = true;
+		
+		for (User user: userList){
+			List<String> userDislikesList = user.getDislikesList();
+			for (Meal meal : mealList) {
+				for (Ingredients ingredient : meal.getIngredients()){
+					if (userDislikesList.contains(ingredient.getName())){
+						if (!ingredient.isOptional()){
+							scorable = false;
+							break;
+						}
+					}
+				}
+				if(scorable) {
+					meal.setMealScore((meal.getMealScore()+1));
+				}
+			}
+		}
 	}
 
 	protected boolean equals(HashSet<?> set1, HashSet<?> set2) {
@@ -118,21 +155,56 @@ public class MealCatalog {
 	
 	protected void generatePossibleMealsForUser(List<Meal> mealList, User user, int numOfMeals, int mealCounter){
 		logger.info("inside generate possible meals for that user");
-
+		
 		if (numOfMeals == mealCounter) {
 			return;
 		}
 		
 		for(Meal meal: mealList){
-			if(checkIfMealWorks(meal, user)){
-				mealCounter++;
+			if (user.getMealList().size() < user.getPlan().getNumOfMeals()){
+				if(checkIfMealWorks(meal, user)){
+					mealCounter++;
+				}
 			}
-			if(mealCounter == numOfMeals) break;
+			else break;
 		}
-
-		if (mealCounter != numOfMeals){
-			generatePossibleMealsForUser(mealList, user, numOfMeals, mealCounter);
+		
+		//check if user got all the meals he wants
+		if(user.getMealList().size() != user.getPlan().getNumOfMeals()){
+			if (user.getPlan().getNumOfMeals() < mealList.size()){
+				// if the number of meals that the user wants is smaller than the number of meals
+				// available, and the algorithm didn't find the meals to satisfy the user, then add that
+				// user to list of unmet preferences.
+				userWithBlanks.add(user);
+			}
+			else if(user.getPlan().getNumOfMeals() > mealList.size()){
+				// if the number of meals that the user wants is larger than the number of meals available,
+				// then we can rerun the algorithm and generate duplicates.
+				generatePossibleMealsForUser(mealList, user, user.getPlan().getNumOfMeals(),mealCounter);
+			}
 		}
+	}
+	
+	private void tryReplacingLowestScore(int index){
+		List<Meal> highlyRankedMeals = mealRepository.findTop3ByOrderByMealScoreDesc(); //TODO: make sure the meals are not available
+		int lowestRankedIndex = getLowestRankedMeal();
+		Meal lowestRankedMeal = scoredMeals.get(lowestRankedIndex);
+		
+		if(lowestRankedMeal.getMealScore() <= highlyRankedMeals.get(index).getMealScore()){
+			scoredMeals.add(lowestRankedIndex, highlyRankedMeals.get(index));
+		}
+	}
+	
+	private int getLowestRankedMeal(){
+		int lowest = Integer.MIN_VALUE;
+		int index = 0;
+		for (Meal lowestRankedMeal : scoredMeals){
+			if (lowest < lowestRankedMeal.getMealScore()){
+				lowest = lowestRankedMeal.getMealScore();
+				index++;
+			}
+		}
+		return index;
 	}
 	
 	protected boolean checkIfMealWorks(Meal meal, User user){
@@ -150,7 +222,7 @@ public class MealCatalog {
 				}
 			}
 		}
-		if (toRemove.size() != 0){
+		if (toRemove.size() > 0){
 			newMeal = new Meal(meal);
 			newMeal.getIngredients().removeAll(toRemove);
 			newMeal.setMealId(UUID.randomUUID());

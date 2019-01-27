@@ -1,5 +1,6 @@
 package com.yuma.app.document;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -32,7 +33,7 @@ public class User {
 	private String timestamp;
 	@DBRef
 	private Set<Role> roles;
-	private List<Meal> mealList;
+	private List<Meal> mealList = new ArrayList<>();
 	private List<String> dislikesList;
 
 	public User(String userId,String firstName, String lastName, String email, String password, boolean isActive, Plan plan, List<String> dislikesList) {
