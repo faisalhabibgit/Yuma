@@ -3,7 +3,10 @@ import Retriever from '../middleware/Retriever';
 
 import ApiToken from "../middleware/ApiToken";
 
-
+import {
+  Container,
+  Table
+} from 'reactstrap';
 
 class AvailableMeals extends Component {
 
@@ -26,6 +29,8 @@ class AvailableMeals extends Component {
 
     
   }
+  
+
 
   componentDidMount() {
     const retriever = new Retriever('api/meals/availablemeals');
@@ -35,28 +40,79 @@ class AvailableMeals extends Component {
       })
   }
  
-  doSearch() {
-    var matchedArr = [];
+  Description() {
+    var mealDescription = [];
 
     for (var i = 0; i < this.state.Meals.length; i++) {
       {
-        matchedArr.push(this.state.Meals[i].description.toString());
+        mealDescription.push(this.state.Meals[i].description.toString());
+      
       }
     }
-    return matchedArr
+    return mealDescription
+  }
+
+  Name() {
+    var mealNames = [];
+
+    for (var i = 0; i < this.state.Meals.length; i++) {
+      {
+        mealNames.push(this.state.Meals[i].name.toString());
+
+      }
+    }
+    return mealNames
   }
  
   render () {
+    var AvailableMealsDescription = this.Description();
+    var AvailableMealsName = this.Name();
     
-    var Meals = this.doSearch()
-   
-    return (
+    return(
+      <Container>
+     
+        <div> Number of available Meals <h4 style={{color:'blue'}}> {AvailableMealsName.length} </h4> </div>
+
+        <div style={{ width:'700px', height:'300px', overflow:'scroll'}}>
+          <Table striped bordered condensed >
+
+            <thead>
+            <th className="text-center">Name</th>
+            <th className="text-center">Description</th>
+            </thead>
+            <tbody>  
+            <td>
+      {AvailableMealsName.map((item,index) =>
+        
+            <tr key={index}>
+            {item}
+          </tr>
+        
+      )}
+            </td>
+       
+       <td>     
+      {AvailableMealsDescription.map((item,index) =>
+        
+          <tr key={index}>
+            {item}
+          </tr>
+        
+      )}
       
-      <div> {Meals} </div>
+       </td>
+            </tbody>
+          </Table>
+       
+      </div>
+      </Container>
     );
+
   }
+
+
 }
-  
+        
 
 
 export default AvailableMeals;
