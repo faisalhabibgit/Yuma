@@ -11,9 +11,7 @@ class BuildMeal {
 
     getMealPromiseObj() {
         var mealList = [];
-        var meal;
         var ingredientsList = [];
-        var ingredients;
 
         const apiToken = new ApiToken();
 
@@ -26,7 +24,7 @@ class BuildMeal {
             }
         }
 
-        return fetch('http://localhost:2020/api/meals/all', obj)
+        return fetch('api/meals/all', obj)
             .then((response) => {
                 if (response.ok) {
                     return response.json();
@@ -41,13 +39,23 @@ class BuildMeal {
                     for (var j in obj.ingredients) {
                         var ingredientObj = obj.ingredients[j];
 
-                        ingredients = new Ingredients(ingredientObj.name, ingredientObj.weight,
-                            ingredientObj.calories, ingredientObj.price);
+                        var ingredients = new Ingredients();
+                        ingredients.setName(ingredientObj.name);
+                        ingredients.setWeight(ingredientObj.weight);
+                        ingredients.setCalories(ingredientObj.calories);
+                        ingredients.setPrice(ingredientObj.price);
+
                         ingredientsList.push(ingredients);
                     }
+                    
+                    var meal = new Meal();
+                    meal.setName(obj.name);
+                    meal.setDescription(obj.description);
+                    meal.setIsAvailable(obj.available);
+                    meal.setFlags(obj.flags)
+                    meal.setIngredients(ingredientsList);
+                    
 
-                    meal = new Meal(obj.mealId, obj.description, obj.available,
-                        obj.flags, ingredientsList);
                     mealList.push(meal);
                     ingredientsList = [];
                 }

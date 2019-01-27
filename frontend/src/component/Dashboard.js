@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ApiToken from "../middleware/ApiToken";
 
-import DisplayUsers from "./DisplayUsers";
+import DisplayMeals from "./DisplayMeals";
 
 import {
   Card, CardHeader, CardBody,
@@ -45,6 +45,7 @@ class Dashboard extends Component {
               <h5 style={{ color: 'black', fontFamily: 'Comic Sans MS' }}> Available Meals</h5>
             </CardHeader>
             <CardBody>
+              <DisplayMeals />
             </CardBody>
           </Card>
 
@@ -53,7 +54,6 @@ class Dashboard extends Component {
               <h5 style={{ color: 'black', fontFamily: 'Comic Sans MS' }}> Active Users</h5>
             </CardHeader>
             <CardBody>
-              <DisplayUsers />
             </CardBody>
           </Card>
 
