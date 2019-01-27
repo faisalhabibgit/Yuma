@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Retriever from '../middleware/Retriever';
 
-import ApiToken from "../middleware/ApiToken";
 
 import {
   Container,
@@ -30,9 +29,7 @@ class AvailableMeals extends Component {
     var mealDescription = [];
 
     for (var i = 0; i < this.state.Meals.length; i++) {
-      {
         mealDescription.push(this.state.Meals[i].description.toString());
-      }
     }
     return mealDescription
   }
@@ -41,9 +38,7 @@ class AvailableMeals extends Component {
     var mealNames = [];
 
     for (var i = 0; i < this.state.Meals.length; i++) {
-      {
         mealNames.push(this.state.Meals[i].name.toString());
-      }
     }
     return mealNames
   }
