@@ -5,88 +5,106 @@ import ApiToken from '../ApiToken';
 
 class BuildMeal {
 
-    constructor() {
-        console.log("Building Meal...");
+  constructor() {
+    console.log("Building Meal...");
+  }
+
+  getMealPromiseObj(apiPath) {
+    var mealList = [];
+    var ingredientsList = [];
+    var api;
+    const apiToken = new ApiToken();
+
+    var obj = {
+      method: 'GET',
+      headers: {
+        'cache-control': "no-cache",
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + apiToken.getCookie('yuma-token')
+      }
     }
 
-    getMealPromiseObj() {
-        var mealList = [];
-        var ingredientsList = [];
+    switch (apiPath) {
 
-        const apiToken = new ApiToken();
 
-        var obj = {
-            method: 'GET',
-            headers: {
-                'cache-control': "no-cache",
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + apiToken.getCookie('yuma-token')
-            }
+      case 'api/meals/all':
+
+        api = 'api/meals/all';
+        break;
+
+      case 'api/meals/availablemeals':
+
+        api = 'api/meals/availablemeals';
+
+        break;
+
+      default:
+
+    }
+
+    return fetch(api, obj)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Server response wasn\'t OK');
         }
+      })
+      .then((myJson) => {
+        for (var i = 0; i < myJson.length; i++) {
+          var obj = myJson[i];
 
-        return fetch('api/meals/all', obj)
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Server response wasn\'t OK');
-                }
-            })
-            .then((myJson) => {
-                for (var i = 0; i < myJson.length; i++) {
-                    var obj = myJson[i];
+          for (var j in obj.ingredients) {
+            var ingredientObj = obj.ingredients[j];
 
-                    for (var j in obj.ingredients) {
-                        var ingredientObj = obj.ingredients[j];
+            var ingredients = new Ingredients();
+            ingredients.setName(ingredientObj.name);
+            ingredients.setWeight(ingredientObj.weight);
+            ingredients.setCalories(ingredientObj.calories);
+            ingredients.setPrice(ingredientObj.price);
 
-                        var ingredients = new Ingredients();
-                        ingredients.setName(ingredientObj.name);
-                        ingredients.setWeight(ingredientObj.weight);
-                        ingredients.setCalories(ingredientObj.calories);
-                        ingredients.setPrice(ingredientObj.price);
+            ingredientsList.push(ingredients);
+          }
 
-                        ingredientsList.push(ingredients);
-                    }
-                    
-                    var meal = new Meal();
-                    meal.setName(obj.name);
-                    meal.setDescription(obj.description);
-                    meal.setIsAvailable(obj.available);
-                    meal.setFlags(obj.flags)
-                    meal.setIngredients(ingredientsList);
-                    
+          var meal = new Meal();
+          meal.setName(obj.name);
+          meal.setDescription(obj.description);
+          meal.setIsAvailable(obj.available);
+          meal.setFlags(obj.flags);
+          meal.setIngredients(ingredientsList);
 
-                    mealList.push(meal);
-                    ingredientsList = [];
-                }
-                return mealList;
-            });
-    }
 
-    addMeal(someMeal) {
+          mealList.push(meal);
+          ingredientsList = [];
+        }
+        return mealList;
+      });
+  }
 
-        const apiToken = new ApiToken();
-        const API = 'api/meals';
+  addMeal(someMeal) {
 
-        console.log('Adding: ' + someMeal.toString());
+    const apiToken = new ApiToken();
+    const API = 'api/meals';
 
-        fetch(API, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + apiToken.getCookie('yuma-token')
-            },
-            body: JSON.stringify({
-                ingredients: someMeal.ingredients,
-                name: someMeal.name,
-                description: someMeal.description,
-                flags: someMeal.flags,
-                available: true
-            })
-        })
+    console.log('Adding: ' + someMeal.toString());
 
-    }
+    fetch(API, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + apiToken.getCookie('yuma-token')
+      },
+      body: JSON.stringify({
+        ingredients: someMeal.ingredients,
+        name: someMeal.name,
+        description: someMeal.description,
+        flags: someMeal.flags,
+        available: true
+      })
+    })
+
+  }
 
 }
 

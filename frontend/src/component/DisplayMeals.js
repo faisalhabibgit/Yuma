@@ -16,7 +16,7 @@ class DisplayMeals extends Component {
   }
 
   componentDidMount() {
-    const retriever = new Retriever('api/meals');
+    const retriever = new Retriever('api/meals/all');
     retriever.getEntityPromise()
       .then((obj) => {
         var matchedArr = [];
