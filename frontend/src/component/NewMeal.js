@@ -10,8 +10,21 @@ import Ingredients from '../middleware/objects/Ingredients';
 import Meal from '../middleware/objects/Meal';
 import BuildMeal from '../middleware/objectBuilder/BuildMeal';
 
-const REDIRECTHOME = '/';
+import CustomLogging from '../CustomLogging';
+//
+const info = new CustomLogging ('info');
+const error = new CustomLogging('error');
+const alert = new CustomLogging('alert');
+//
+error.setBodyStyle({ color: 'red', size: '0.75rem' });
+info.setBodyStyle({ color: 'green', size: '0.75rem' });
 
+info.log('Ingredient is added!'); // sample
+error.log('something is not correct!'); // sample 
+
+
+
+const REDIRECTHOME = '/';
 class NewMeal extends Component {
 
   constructor(props) {
@@ -89,12 +102,15 @@ class NewMeal extends Component {
     this.setState((prevState) => ({
       ingredients: [...prevState.ingredients, { name: "", weight: "", calories: "", price: "" }],
     }));
-  };
+    info.log('Ingredient is added!');
+
+};
 
   removeIngredient(e, index) {
     e.preventDefault();
     this.state.ingredients.splice(index, 1);
     this.setState({ ingredients: this.state.ingredients });
+  info.log('Ingredient is removed!');
   };
 
 
