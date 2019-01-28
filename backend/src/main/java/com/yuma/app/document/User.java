@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,12 +19,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class User {
 
 
 	@Id
 	private String userId;
-
 	private String password;
 	private String firstName;
 	private String lastName;
@@ -36,35 +37,11 @@ public class User {
 	private List<Meal> mealList = new ArrayList<>();
 	private List<String> dislikesList;
 
-	public User(String userId,String firstName, String lastName, String email, String password, boolean isActive, Plan plan, List<String> dislikesList) {
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-		this.isActive = isActive;
-		this.plan = plan;
-		this.dislikesList = dislikesList;
-	}
-
-	public User(String firstName, String lastName, String email, String password) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-	}
-
-	public User(String email, String password) {
-		this.email = email;
-		this.password = password;
-	}
-
 	public void updateFrom(User userToUpdate) {
 		this.setFirstName(userToUpdate.getFirstName());
 		this.setLastName(userToUpdate.getLastName());
 		this.setEmail(userToUpdate.getEmail());
 		this.setPlan(userToUpdate.getPlan());
-
 	}
 
 	@Override

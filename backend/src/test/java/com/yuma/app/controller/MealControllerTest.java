@@ -1,18 +1,17 @@
 package com.yuma.app.controller;
 
+import static org.mockito.MockitoAnnotations.initMocks;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -25,12 +24,11 @@ import com.yuma.app.to.MealTO;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MealControllerTest {
-	@Mock
-	MealRepository mealRepository;
+
+	@MockBean
+	private MealRepository mealRepository;
 	@MockBean
 	private MealService mealService;
-	@Mock
-	private Logger logger;
 	@Autowired
 	private MealController mealResource;
 
@@ -40,12 +38,12 @@ public class MealControllerTest {
 	private MealTO mealTO2;
 
 	@Before
-	public void setUp() throws Exception {
-		mealTO1 = new MealTO(new ArrayList<>(), UUID.randomUUID(), "chicken", "chicken", false, new HashSet<>(), 30);
-		mealTO1updated = new MealTO(new ArrayList<>(), mealTO1.getMealId(), "chicken", "chicken", true, new HashSet<>(), 24);
-		mealTO1Created = new MealTO(new ArrayList<>(), mealTO1.getMealId(), "chicken", "chicken", false, new HashSet<>(), 5);
-		mealTO2 = new MealTO(new ArrayList<>(), UUID.randomUUID(), "mutton", "mutton", true, new HashSet<>(), 67);
-		MockitoAnnotations.initMocks(this);
+	public void setUp(){
+		mealTO1 = new MealTO(UUID.randomUUID(), "chicken", "chicken", false, new HashSet<>(), 30, new ArrayList<>());
+		mealTO1updated = new MealTO(mealTO1.getMealId(), "chicken", "chicken", true, new HashSet<>(), 24, new ArrayList<>());
+		mealTO1Created = new MealTO(mealTO1.getMealId(), "chicken", "chicken", false, new HashSet<>(), 5, new ArrayList<>());
+		mealTO2 = new MealTO(UUID.randomUUID(), "mutton", "mutton", true, new HashSet<>(), 67, new ArrayList<>());
+		initMocks(this);
 	}
 
 	@Test
