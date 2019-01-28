@@ -5,6 +5,7 @@ import {
   Card, CardHeader,  CardBody,
    CardDeck
 } from 'reactstrap';
+import AvailableMeals from "./AvailableMeals";
 
 class Dashboard extends Component {
 
@@ -43,6 +44,7 @@ class Dashboard extends Component {
                 <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Available Meals</h5>
               </CardHeader>
               <CardBody>
+                <AvailableMeals /> 
               </CardBody>
             </Card>
 
