@@ -33,8 +33,7 @@ public class MealCatalog {
 	public MealCatalog(MealRepository mealRepository) {
 		this.mealRepository = mealRepository;
 	}
-
-
+	
 	public List<CombinationReport> generateWeeklyCombination(List<Meal> availableMeals, List<User> activeUsers) {
 		int i = 0;
 		CombinationReport combinationReport;
@@ -107,7 +106,7 @@ public class MealCatalog {
 	}
 
 	private void replaceLowestScore(CombinationReport combinationReport, int index) {
-		List<Meal> highlyRankedMeals = mealRepository.findTop3ByOrderByIsAvailableIsFalseAndByMealScoreDesc();
+		List<Meal> highlyRankedMeals = mealRepository.findTop3ByOrderByMealScoreDesc();
 		int lowestRankedIndex = getLowestRankedMeal(combinationReport.getMealsList());
 		Meal lowestRankedMeal = combinationReport.getMealsList().get(lowestRankedIndex);
 
