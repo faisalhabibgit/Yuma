@@ -104,23 +104,22 @@ class NewMeal extends Component {
     var ingredientArr = [];
 
     for (let i = 0; i < this.state.ingredients.length; i++) {
-      const anIngredient = new Ingredients(
-        this.state.ingredients[i]['name'],
-        this.state.ingredients[i]['weight'],
-        this.state.ingredients[i]['calories'],
-        this.state.ingredients[i]['price']
-      );
+      var anIngredient = new Ingredients();
+
+      anIngredient.setName(this.state.ingredients[i]['name']);
+      anIngredient.setWeight(this.state.ingredients[i]['weight']);
+      anIngredient.setCalories(this.state.ingredients[i]['calories']);
+      anIngredient.setPrice(this.state.ingredients[i]['price']);
 
       ingredientArr.push(anIngredient);
     }
 
-    const aMeal = new Meal(
-      this.state.name,
-      this.state.description,
-      true,
-      array,
-      ingredientArr
-    );
+    var aMeal = new Meal();
+    aMeal.setName(this.state.name);
+    aMeal.setDescription(this.state.description);
+    aMeal.setIsAvailable(true);
+    aMeal.setFlags(array);
+    aMeal.setIngredients(ingredientArr);
 
     mealBuilder.addMeal(aMeal);
 

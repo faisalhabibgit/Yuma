@@ -4,15 +4,17 @@ class Retriever {
 
     constructor(apiPath) {
         this.entityPromise = null;
-
+      
         switch (apiPath) {
-            case 'api/meals':
-                const mealBuilder = new BuildMeal();
-                this.entityPromise = mealBuilder.getMealPromiseObj();
-                break;
-            case 'aaa':
-                // code block
-                break;
+          
+            case 'api/meals/all':
+              const mealBuilderAll = new BuildMeal();
+              this.entityPromise = mealBuilderAll.getMealPromiseObj(apiPath);
+              break;
+           case 'api/meals/availablemeals':
+             const mealBuilderAvailable = new BuildMeal();
+             this.entityPromise = mealBuilderAvailable.getMealPromiseObj(apiPath);
+             break;
             default:
             // code block
         }
