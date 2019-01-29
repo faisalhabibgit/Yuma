@@ -29,9 +29,12 @@ public class MealCatalog {
 	private Logger logger = LoggerFactory.getLogger(MealCatalog.class);
 	private MealRepository mealRepository;
 	private List<CombinationReport> possibleCombinations;
+	private List<Meal> addedMeals;
 
 	public MealCatalog(MealRepository mealRepository) {
 		this.mealRepository = mealRepository;
+		this.addedMeals = new ArrayList<>();
+		this.possibleCombinations = new ArrayList<>();
 	}
 	
 	public List<CombinationReport> generateWeeklyCombination(List<Meal> availableMeals, List<User> activeUsers) {
@@ -41,6 +44,10 @@ public class MealCatalog {
 		combinationReport = new CombinationReport(0, countCombinationScore(availableMeals), activeUsers, availableMeals);
 
 		runMealCombinationAlgorithm(combinationReport);
+		
+		if(!addedMeals.isEmpty()){
+			combinationReport.getMealsList().addAll(addedMeals);
+		}
 
 		while (i < 3 && (combinationReport.getNumberOfBlanks() != 0)) {
 			combinationReport = new CombinationReport(0, countCombinationScore(availableMeals), activeUsers, availableMeals);
@@ -81,12 +88,13 @@ public class MealCatalog {
 
 	protected void generatePossibleMealsForUser(CombinationReport combinationReport, User user, int numOfMeals, int mealCounter) {
 		logger.info("inside generate possible meals for that user");
+		List<Meal> meals = combinationReport.getMealsList();
 
 		if (numOfMeals == mealCounter) {
 			return;
 		}
 
-		for (Meal meal : combinationReport.getMealsList()) {
+		for (Meal meal : meals) {
 			if (user.getMealList().size() < user.getPlan().getNumOfMeals()) {
 				if (checkIfMealWorks(combinationReport, meal, user)) {
 					mealCounter++;
@@ -146,10 +154,10 @@ public class MealCatalog {
 
 		if (ingredientsToRemove.size() > 0) {
 			newMeal = generateNewMealWithModifiedIngredients(meal, ingredientsToRemove);
+			addedMeals.add(newMeal);
 		}
 
 		user.getMealList().add(newMeal);
-		combinationReport.getMealsList().add(newMeal);
 		return true;
 	}
 
