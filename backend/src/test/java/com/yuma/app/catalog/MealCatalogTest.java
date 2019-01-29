@@ -7,30 +7,38 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
 import com.yuma.app.document.User;
 import com.yuma.app.repository.MealRepository;
+import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.mockito.Mockito.*;
+
+@RunWith(MockitoJUnitRunner.class)
 public class MealCatalogTest {
+
+	@InjectMocks
+	private MealCatalog mealCatalog;
 	
 	@Mock
 	private MealRepository mealRepository;
 	
-	private MealCatalog mealCatalog;
 	private CombinationReport combinationReport;
 
 
 	@Before
 	public void setup() {
-		mealCatalog = new MealCatalog();
 		combinationReport = new CombinationReport(0, 0, new ArrayList<>(), new ArrayList<>());
 	}
 
 	@Test
 	public void givenMealAndNonMatchingUserLikesWhenCheckIfMealWorksThenShouldReturnFalse() {
+		
 		Meal meal = prepareAndReturnMeal();
 		User user = prepareAndReturnUser();
 		
@@ -40,6 +48,7 @@ public class MealCatalogTest {
 
 	@Test
 	public void givenMealAndMatchingUserLikesWhenCheckIfMealWorksThenShouldReturnTrue() {
+		
 		Meal meal = prepareAndReturnMeal();
 		User user = prepareAndReturnUser();
 		user.getDislikesList().clear();
@@ -52,6 +61,7 @@ public class MealCatalogTest {
 
 	@Test
 	public void givenMealWithOptionalIngredientWhenCheckIfMealWorksThenShouldReturnTrue() {
+		
 		Meal meal = prepareAndReturnMeal();
 		meal.getIngredients().get(0).setOptional(true);
 		User user = prepareAndReturnUser();
@@ -62,6 +72,7 @@ public class MealCatalogTest {
 
 	@Test
 	public void givenMealListAndUserListWhenScoreMealCalledThenShouldReturnMealListWithScore() {
+		
 		List<Meal> meals = prepareMealList();
 		List<User> users = prepareUserList();
 
@@ -74,8 +85,65 @@ public class MealCatalogTest {
 		Assert.assertEquals(((Meal)meals.get(1)).getMealScore(), 2);
 		Assert.assertEquals(((Meal)meals.get(2)).getMealScore(), 2);
 	}
+	
+	@Test
+	public void givenMealsWithScoresWhenCountCombinationScoreThenShouldReturnTotalScore() {
+		
+		List<Meal> meals = prepareMealList();
+		meals.get(0).setMealScore(2);
+		meals.get(1).setMealScore(2);
+		meals.get(2).setMealScore(3);
+		
+		int score = mealCatalog.countCombinationScore(meals);
+		
+		Assert.assertEquals(score, 7);
+	}
+	
+	@Test
+	public void testGenerateNewMealWithModifiedIngredients() {
+		
+		List<Ingredients> ingredients = prepareAndReturnIngredientsList();
+		Meal mealWithOnions = prepareAndReturnMeal();
+		
+		Meal resultMeal = mealCatalog.generateNewMealWithModifiedIngredients(mealWithOnions, mealWithOnions.getIngredients());
+		
+		//fix me
+		Assert.assertTrue(resultMeal.getIngredients().isEmpty());
+	}
+	
+	@Test
+	public void testGetLowestRankedMeal() {
+		
+		List<Meal> meals = prepareMealList();
+		meals.get(2).setMealScore(1);
+		meals.get(1).setMealScore(2);
+		meals.get(0).setMealScore(3);
+		
+		int result = mealCatalog.getLowestRankedMeal(meals);
+		
+		Assert.assertEquals(result, 2);
+		
+	}
+	
+	@Test
+	public void testReplaceLowestScore() {
+
+		List<Meal> meals = prepareMealList();
+		meals.get(0).setMealScore(1);
+		meals.get(1).setMealScore(2);
+		meals.get(2).setMealScore(3);
+
+		CombinationReport combinationReport = prepareAndReturnCombinationReport();
+
+		when(mealRepository.findTop3ByOrderByMealScoreDesc()).thenReturn(meals);
+
+		mealCatalog.replaceLowestScore(combinationReport, 1);
+		
+		System.out.println(combinationReport.getMealsList().toString());
+	}
 
 	private List<Meal> prepareMealList() {
+		
 		List<Meal> meals = new ArrayList<>();
 		Meal meal1 = new Meal();
 		meal1.setName("meal1");
@@ -112,6 +180,7 @@ public class MealCatalogTest {
 	}
 
 	private List<User> prepareUserList() {
+		
 		List<User> users = new ArrayList<>();
 		User user1 = new User();
 		List<String> dislikesList1 = new ArrayList<>();
@@ -135,6 +204,7 @@ public class MealCatalogTest {
 	}
 
 	private User prepareAndReturnUser() {
+		
 		User user = User.builder()
 			.firstName("ahmad")
 			.lastName("baiazid")
@@ -147,6 +217,7 @@ public class MealCatalogTest {
 	}
 
 	private HashSet<String> prepareHashsetWithOnePreference() {
+		
 		HashSet<String> flags = new HashSet<>();
 		flags.add("dairy");
 		return flags;
@@ -172,5 +243,18 @@ public class MealCatalogTest {
 		List<String> dislikes = new ArrayList<>();
 		dislikes.add("onions");
 		return dislikes;
+	}
+	
+	private CombinationReport prepareAndReturnCombinationReport() {
+		
+		List<Meal> meals = prepareMealList();
+		meals.get(0).setMealScore(1);
+		meals.get(1).setMealScore(2);
+		meals.get(2).setMealScore(3);
+		
+		CombinationReport combinationReport = new CombinationReport();
+		combinationReport.setMealsList(meals);
+		
+		return combinationReport;
 	}
 }

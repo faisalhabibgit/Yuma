@@ -1,13 +1,16 @@
 class User{
-  constructor( userId, firstName,  lastName,  email,  password,  isActive,  plan, dislikesList) {
+  constructor(userId, firstName, lastName, email, plan, isActive, timestamp, password, ) {
 
   this.userId = userId;
   this.firstName = firstName;
   this.lastName = lastName;
   this.email = email;
-  this.password = password;
-  this.isActive = isActive;
   this.plan = plan;
+  this.isActive = isActive;
+  this.timestamp = timestamp;
+  this.password = password;
+  
+  
   this.dislikesList = dislikesList;
     }
     

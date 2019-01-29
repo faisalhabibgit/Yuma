@@ -23,7 +23,7 @@ public class CombinationReport {
 	private List<Meal> mealsList;
 	
 	
-	public void updateCombinationScore(int previousMeal, int newMeal) {
-		this.combinationScore = combinationScore - previousMeal + newMeal;
+	public void updateCombinationScore(int previousMealScore, int newMealScore) {
+		this.combinationScore = combinationScore - previousMealScore + newMealScore;
 	}
 }

@@ -35,7 +35,7 @@ class Test extends Component {
   }
 
   componentDidMount() {
-    const retriever = new Retriever('api/meals');
+    const retriever = new Retriever('api/meals/all');
     retriever.getEntityPromise()
       .then((obj) => {
         this.setState({ apiObject: obj });

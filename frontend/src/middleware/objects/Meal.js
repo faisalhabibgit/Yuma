@@ -1,17 +1,21 @@
 class Meal {
 
-    constructor(mealId, name, description, isAvailable, flags, ingredients) {   
-      console.log('inside meal constructor'); 
-      this.mealId = mealId;
-      this.name = name;
-      this.description = description;
-      this.isAvailable = isAvailable;
-      this.flags = flags;
-      this.ingredients = ingredients;
-      }
+    constructor() {   
+      this.mealId = null;
+      this.name = null;
+      this.description = null;
+      this.isAvailable = null;
+      this.flags = null;
+      this.ingredients = null;
+    }
+
+    setName(name){this.name = name}
+    setDescription(description){this.description = description}
+    setIsAvailable(value){this.isAvailable = value}
+    setFlags(flags){this.flags = flags}
+    setIngredients(ingredients){this.ingredients = ingredients}
   
     toString() {
-      console.log('inside meal toString');   
       var ingredientsList = [];
       
       for (let index = 0; index < this.ingredients.length; index++) {
