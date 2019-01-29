@@ -1,6 +1,7 @@
 package com.yuma.app.catalog;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,7 +43,7 @@ public class MealCatalog {
 
 		runMealCombinationAlgorithm(combinationReport);
 
-		while (i < 3 && (combinationReport.getNumberOfBlanks() != 0)) {
+		while (i < 2 && (combinationReport.getNumberOfBlanks() != 0)) {
 			combinationReport = new CombinationReport(0, countCombinationScore(availableMeals), activeUsers, availableMeals);
 			replaceLowestScore(combinationReport, i);
 			runMealCombinationAlgorithm(combinationReport);
@@ -53,7 +54,7 @@ public class MealCatalog {
 
 	private void runMealCombinationAlgorithm(CombinationReport combinationReport) {
 		for (User user : combinationReport.getUserList()) {
-			generatePossibleMealsForUser(combinationReport, user, user.getPlan().getNumOfMeals(), 0);
+			generatePossibleMealsForUser(combinationReport, user, 0);
 		}
 		possibleCombinations.add(combinationReport);
 	}
@@ -79,10 +80,10 @@ public class MealCatalog {
 		}
 	}
 
-	protected void generatePossibleMealsForUser(CombinationReport combinationReport, User user, int numOfMeals, int mealCounter) {
+	protected void generatePossibleMealsForUser(CombinationReport combinationReport, User user, int mealCounter) {
 		logger.info("inside generate possible meals for that user");
 
-		if (numOfMeals == mealCounter) {
+		if (user.getPlan().getNumOfMeals() == mealCounter) {
 			return;
 		}
 
@@ -98,14 +99,14 @@ public class MealCatalog {
 
 		if (user.getMealList().size() != user.getPlan().getNumOfMeals()) {
 			if (user.getPlan().getNumOfMeals() < combinationReport.getMealsList().size()) {
-				combinationReport.setNumberOfBlanks(combinationReport.getCombinationScore() + 1);
+				combinationReport.setNumberOfBlanks(combinationReport.getNumberOfBlanks() + 1);
 			} else if (user.getPlan().getNumOfMeals() > combinationReport.getMealsList().size()) {
-				generatePossibleMealsForUser(combinationReport, user, user.getPlan().getNumOfMeals(), mealCounter);
+				generatePossibleMealsForUser(combinationReport, user, mealCounter);
 			}
 		}
 	}
 
-	private void replaceLowestScore(CombinationReport combinationReport, int index) {
+	protected void replaceLowestScore(CombinationReport combinationReport, int index) {
 		List<Meal> highlyRankedMeals = mealRepository.findTop3ByOrderByMealScoreDesc();
 		int lowestRankedIndex = getLowestRankedMeal(combinationReport.getMealsList());
 		Meal lowestRankedMeal = combinationReport.getMealsList().get(lowestRankedIndex);
@@ -116,17 +117,19 @@ public class MealCatalog {
 		}
 	}
 
-	private int getLowestRankedMeal(List<Meal> mealList) {
-		int lowest = Integer.MIN_VALUE;
-		int index = 0;
-		for (Meal lowestRankedMeal : mealList) {
-			if (lowest < lowestRankedMeal.getMealScore()) {
-				lowest = lowestRankedMeal.getMealScore();
-				index++;
-			}
+	protected int getLowestRankedMeal(List<Meal> mealList) {
+		
+		int lowestIndex = 0;
+		
+		List<Integer> integers = new ArrayList<>();
+		for (Meal meal : mealList) {
+			integers.add(meal.getMealScore());
 		}
+		
+		lowestIndex = integers.indexOf(Collections.min(integers));
 
-		return index;
+		return lowestIndex;
+		
 	}
 
 	protected boolean checkIfMealWorks(CombinationReport combinationReport, Meal meal, User user) {
@@ -143,29 +146,29 @@ public class MealCatalog {
 				}
 			}
 		}
-
+		
 		if (ingredientsToRemove.size() > 0) {
 			newMeal = generateNewMealWithModifiedIngredients(meal, ingredientsToRemove);
+			combinationReport.getMealsList().add(newMeal);
 		}
 
 		user.getMealList().add(newMeal);
-		combinationReport.getMealsList().add(newMeal);
 		return true;
 	}
 
-	private Meal generateNewMealWithModifiedIngredients(Meal meal, List<Ingredients> ingredientsToRemove) {
+	protected Meal generateNewMealWithModifiedIngredients(Meal meal, List<Ingredients> ingredientsToRemove) {
 		Meal newMeal = new Meal(meal);
 		newMeal.getIngredients().removeAll(ingredientsToRemove);
 		newMeal.setMealId(UUID.randomUUID());
 		return newMeal;
 	}
 
-	private int countCombinationScore(List<Meal> meals) {
+	protected int countCombinationScore(List<Meal> meals) {
 		int comboScore = 0;
 		for (Meal meal : meals) {
 			comboScore += meal.getMealScore();
 		}
-
+		
 		return comboScore;
 	}
 }
