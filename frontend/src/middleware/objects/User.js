@@ -1,16 +1,16 @@
 class User {
   constructor() {
 
-    this.userId = userId;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.plan = plan;
-    this.isActive = isActive;
-    this.timestamp = timestamp;
+    this.userId = null;
+    this.firstName = null;
+    this.lastName = null;
+    this.email = null;
+    this.plan = null;
+    this.isActive = null;
+    this.timestamp = null;
 
-
-    this.dislikesList = dislikesList;
+    this.mealList = null;
+    this.dislikesList = null;
   }
 
   setUserId(userId) { this.userId = userId }
@@ -20,6 +20,8 @@ class User {
   setPlan(plan) { this.plan = plan }
   setIsActive(isActive) { this.isActive = isActive }
   setTimestamp(timestamp) { this.timestamp = timestamp }
+  setMealList(mealList){this.mealList = mealList;}
+  setDislikesList(dislikesList){this.dislikesList = dislikesList}
 
   toString() {
     return (this.userId + this.firstName + this.lastName +
