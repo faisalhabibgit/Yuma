@@ -59,7 +59,7 @@ public class MealCatalog {
 		return possibleCombinations;
 	}
 
-	private void runMealCombinationAlgorithm(CombinationReport combinationReport) {
+	protected void runMealCombinationAlgorithm(CombinationReport combinationReport) {
 		for (User user : combinationReport.getUserList()) {
 			generatePossibleMealsForUser(combinationReport, user, 0);
 		}

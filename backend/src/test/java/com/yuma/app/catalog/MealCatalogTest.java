@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import com.yuma.app.document.Plan;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,10 +24,16 @@ import static org.mockito.Mockito.*;
 public class MealCatalogTest {
 
 	@InjectMocks
-	private MealCatalog mealCatalog;
+	private MealCatalog mealCatalog = new MealCatalog();
 	
 	@Mock
 	private MealRepository mealRepository;
+	
+	@Mock
+	private List<Meal> addedMeals;
+	
+	@Mock
+	List<CombinationReport> possibleCombinations;
 	
 	private CombinationReport combinationReport;
 
@@ -139,9 +146,35 @@ public class MealCatalogTest {
 
 		mealCatalog.replaceLowestScore(combinationReport, 1);
 		
-		System.out.println(combinationReport.getMealsList().toString());
+		Assert.assertEquals(combinationReport.getMealsList().get(0).getMealScore(), 2);
 	}
-
+	
+	@Test
+	public void testRunMealCombinationAlgorithm() {
+		CombinationReport combinationReport = new CombinationReport();
+		combinationReport.setUserList(new ArrayList<>());
+		
+		mealCatalog.runMealCombinationAlgorithm(combinationReport);
+		
+		Assert.assertTrue(!mealCatalog.getPossibleCombinations().isEmpty());
+	}
+	
+	@Test
+	public void testGeneratePossibleMealsForUser() {
+		
+		CombinationReport combinationReport = new CombinationReport();
+		combinationReport.setMealsList(prepareMealList());
+		User user = new User();
+		user.setDislikesList(new ArrayList<>());
+		Plan plan = new Plan();
+		plan.setNumOfMeals(4);
+		user.setPlan(plan);
+		
+		mealCatalog.generatePossibleMealsForUser(combinationReport, user, 0);
+		
+		Assert.assertEquals(user.getMealList().size(), 4);
+	}
+	
 	private List<Meal> prepareMealList() {
 		
 		List<Meal> meals = new ArrayList<>();
