@@ -10,10 +10,6 @@ import java.util.UUID;
 public interface MealServiceImp {
 
 
-	public MealService(MealRepository mealRepository, UserRepository userRepository, ConversionService conversionService) {
-
-	}
-
 	public List<MealTO> list() {
 
 	}

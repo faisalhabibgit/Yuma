@@ -11,15 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.List;
 
 public interface UserServiceImp {
-	public UserService(UserRepository userRepository, ConversionService conversionService, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
-
-
-	}
-
-	public User saveUser(SignUpRequest req) {
-		
-	}
-
+	
 	public List<UserTO> list() {
 		
 	}
