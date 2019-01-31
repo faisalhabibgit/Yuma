@@ -1,5 +1,6 @@
 package com.yuma.app.catalog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ public class CombinationReport {
 	private int numberOfBlanks;
 	private int combinationScore;
 	private List<User> userList;
-	private List<Meal> mealsList;
+	private List<Meal> mealsList = new ArrayList<>();
 	
 	
 	public void updateCombinationScore(int previousMealScore, int newMealScore) {
