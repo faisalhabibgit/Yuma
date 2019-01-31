@@ -16,8 +16,7 @@ public interface MealServiceInt {
 	public List<MealTO> availableMeals();
 	public void deleteMeal(UUID mealId);
 	public MealTO findByDescription(String description);	
-	public List<MealTO> convertMealToMealTO(List<Meal> meals);
-	
+	List<MealTO> convertMealToMealTO(List<Meal> meals);
 }
 	
 

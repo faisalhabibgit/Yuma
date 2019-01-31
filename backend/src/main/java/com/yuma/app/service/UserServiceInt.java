@@ -19,6 +19,6 @@ public interface UserServiceInt {
 	public UserTO updateUser(UserTO userTO);
 	public boolean existsByEmail(String email);
 	public List<UserTO> activeUsers();
-	public List<UserTO> convertUserListToUserTOList(List<User> userList);
+	List<UserTO> convertUserListToUserTOList(List<User> userList);
 
 	}
