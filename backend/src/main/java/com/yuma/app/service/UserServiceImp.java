@@ -20,7 +20,7 @@ import com.yuma.app.to.UserTO;
 
 @Slf4j
 @Service
-public class UserServiceImp {
+public class UserServiceImp implements UserServiceInt {
 	private Logger userServiceLogger = LoggerFactory.getLogger(UserServiceImp.class);
 	private UserRepository userRepository;
 	private ConversionService conversionService;

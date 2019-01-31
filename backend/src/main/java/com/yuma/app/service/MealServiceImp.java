@@ -19,7 +19,7 @@ import com.yuma.app.repository.UserRepository;
 import com.yuma.app.to.MealTO;
 
 @Service
-public class MealServiceImp {
+public class MealServiceImp  implements  MealServiceInt{
 
 	private Logger mealServiceLogger = LoggerFactory.getLogger(MealServiceImp.class);
 	private MealRepository mealRepository;
