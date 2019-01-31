@@ -34,7 +34,7 @@ public class MealServiceTest {
 	private ConversionService conversionService;
 
 	@Autowired
-	private MealService mealService;
+	private MealServiceImp mealService;
 
 	private Meal meal1;
 	private Meal meal2;

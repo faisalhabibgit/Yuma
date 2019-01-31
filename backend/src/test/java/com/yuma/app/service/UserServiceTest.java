@@ -11,10 +11,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import com.yuma.app.document.Role;
 import com.yuma.app.document.User;
@@ -40,7 +38,7 @@ public class UserServiceTest {
 
 
 	@InjectMocks
-	private UserService userService;
+	private UserServiceImp userService;
 	
 	private String adminRole = "ADMIN";
 

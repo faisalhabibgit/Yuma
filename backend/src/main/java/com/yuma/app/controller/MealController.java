@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yuma.app.service.MealService;
+import com.yuma.app.service.MealServiceImp;
 import com.yuma.app.to.MealTO;
 
 @Slf4j
@@ -26,10 +26,10 @@ import com.yuma.app.to.MealTO;
 public class MealController {
 
 	final Logger logger = LoggerFactory.getLogger("meal Logger");
-	private MealService mealService;
+	private MealServiceImp mealService;
 
 	@Autowired
-	public MealController(MealService mealService) {
+	public MealController(MealServiceImp mealService) {
 		this.mealService = mealService;
 	}
 

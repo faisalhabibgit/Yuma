@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
-import com.yuma.app.service.UserService;
+import com.yuma.app.service.UserServiceImp;
 import com.yuma.app.to.UserTO;
 
 @Slf4j
@@ -18,9 +18,9 @@ public class UserController {
 
 	final Logger logger = LoggerFactory.getLogger("initial Logger");
 
-	private UserService userService;
+	private UserServiceImp userService;
 
-	public UserController(UserService consumerService) {
+	public UserController(UserServiceImp consumerService) {
 		this.userService = consumerService;
 	}
 

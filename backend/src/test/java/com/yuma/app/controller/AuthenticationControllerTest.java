@@ -3,7 +3,7 @@ package com.yuma.app.controller;
 import com.yuma.app.payload.LoginRequest;
 import com.yuma.app.payload.SignUpRequest;
 import com.yuma.app.security.JwtTokenProvider;
-import com.yuma.app.service.UserService;
+import com.yuma.app.service.UserServiceImp;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +29,7 @@ public class AuthenticationControllerTest {
 	AuthenticationManager authenticationManager;
 
 	@Mock
-	UserService userService;
+	UserServiceImp userService;
 
 	@Mock
 	JwtTokenProvider jwtTokenProvider;
