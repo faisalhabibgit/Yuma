@@ -58,7 +58,7 @@ public class MealCatalog {
 		return possibleCombinations;
 	}
 
-	private void runMealCombinationAlgorithm(CombinationReport combinationReport) {
+	protected void runMealCombinationAlgorithm(CombinationReport combinationReport) {
 		logger.info("running meal combo Algorithm");
 		for (User user : combinationReport.getUserList()) {
 			generatePossibleMealsForUser(combinationReport, user, 0);
@@ -185,6 +185,7 @@ public class MealCatalog {
 			newMeal = generateNewMealWithModifiedIngredients(meal, ingredientsToRemove);
 			addedMeals.add(newMeal);
 		}
+
 		user.getMealList().add(newMeal);
 		return true;
 	}
