@@ -99,7 +99,7 @@ public class UserServiceImp implements UserServiceInt {
 
 	}
 	
-	protected List<UserTO> convertUserListToUserTOList(List<User> userList){
+	 public List<UserTO> convertUserListToUserTOList(List<User> userList){
 		List<UserTO> userTOS = new ArrayList<>();
 
 		for (User consumer : userList) {

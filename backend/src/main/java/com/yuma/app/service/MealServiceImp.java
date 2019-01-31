@@ -101,7 +101,7 @@ public class MealServiceImp  implements  MealServiceInt{
 		}
 	}
 	
-	protected List<MealTO> convertMealToMealTO(List<Meal> meals){
+	public List<MealTO> convertMealToMealTO(List<Meal> meals){
 		mealServiceLogger.info("converting Meal List to MealTO list with description %s in %s", MealServiceImp.class);
 
 		List<MealTO> mealTos = new ArrayList<>();
