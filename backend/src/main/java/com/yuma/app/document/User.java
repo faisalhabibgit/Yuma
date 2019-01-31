@@ -36,6 +36,7 @@ public class User {
 	private Set<Role> roles;
 	private List<Meal> mealList = new ArrayList<>();
 	private List<String> dislikesList;
+	private List<String> likes;
 
 	public void updateFrom(User userToUpdate) {
 		this.setFirstName(userToUpdate.getFirstName());
