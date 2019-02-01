@@ -27,7 +27,7 @@ import com.yuma.app.payload.JwtAuthenticationResponse;
 import com.yuma.app.payload.LoginRequest;
 import com.yuma.app.payload.SignUpRequest;
 import com.yuma.app.security.JwtTokenProvider;
-import com.yuma.app.service.UserService;
+import com.yuma.app.service.UserServiceImp;
 
 @Slf4j
 @RestController
@@ -40,7 +40,7 @@ public class AuthenticationController {
 	AuthenticationManager authenticationManager;
 	
 	@Autowired
-	UserService userService;
+	UserServiceImp userService;
 
 	@Autowired
 	JwtTokenProvider tokenProvider;

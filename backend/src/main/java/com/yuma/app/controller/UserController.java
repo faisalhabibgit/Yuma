@@ -8,17 +8,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
-import com.yuma.app.service.UserService;
+import com.yuma.app.service.UserServiceImp;
 import com.yuma.app.to.UserTO;
 
 @Slf4j
 @RestController
 @RequestMapping("api/rest")
 public class UserController {
-	final Logger logger = LoggerFactory.getLogger(UserController.class);
-	private UserService userService;
 
-	public UserController(UserService consumerService) {
+	final Logger logger = LoggerFactory.getLogger(UserController.class);
+	private UserServiceImp userService;
+
+
+	public UserController(UserServiceImp consumerService) {
 		this.userService = consumerService;
 	}
 
