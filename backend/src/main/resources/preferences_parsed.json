@@ -1,0 +1,3350 @@
+{
+	"users": {
+		"5b7569f65b4e94000438c4fb": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "Don't like cooked fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "plant-based-protein"
+			}
+		],
+		"5b7590925b4e94000438c503": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			}
+		],
+		"5b7590955b4e94000438c504": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "lamb"
+			}
+		],
+		"5b75aad35b4e94000438c514": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			}
+		],
+		"5ab158fb7222ff0004ab3670": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"allergy": "gluten"
+			},
+			{
+				"allergy": "dairy"
+			},
+			{
+				"allergy": "peanuts"
+			},
+			{
+				"allergy": "soy"
+			},
+			{
+				"allergy": "tree-nuts"
+			}
+		],
+		"5a0e8666d3acb10004d33214": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"plan": "5"
+			},
+			{
+				"general": "plant-based-protein"
+			}
+		],
+		"5b47937179f75e00042adcb2": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"other": "Allergic to fresh parsley and fresh coriander."
+			}
+		],
+		"5bd0a5400d494d00049aedd0": [
+			{
+				"plan": "4"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"other": "No soy, low carb. carbs should only be sweet potato, brown rice or quinoa. please bring one meal of the swedish meatball, cauliflower mash and green beans, this is great!"
+			}
+		],
+		"5a7cc275ff99ad0004501140": [
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "5"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"addition": "snack"
+			}
+		],
+		"5b75b8fc5b4e94000438c528": [
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"allergy": "soy"
+			},
+			{
+				"allergy": "dairy"
+			},
+			{
+				"plan": "4"
+			},
+			{
+				"other": "No carbs in meals."
+			},
+			{
+				"addition": "low-carbs-more-protein"
+			}
+		],
+		"5b75baa35b4e94000438c539": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"general": "plant-based-protein"
+			}
+		],
+		"5b78aee244aaf500042daec7": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"other": "No beef and pork"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"general": "plant-based-protein"
+			}
+		],
+		"5b7d6db47273e100041fbc21": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5b7fa62b5535510004276dfc": [
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"other": "Ham, (incl bacon) beef, red and green pepper. I eat chicken, fish and sea food. My preference is always to have a healthy option"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "5"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			}
+		],
+		"5b8ef8b7789c020004b10f5b": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "poultry"
+			}
+		],
+		"5b96f722fa7f24000491bc50": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"plan": "5"
+			}
+		],
+		"5b9f9ef608706e0004834cc5": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"other": "beets and pickles"
+			},
+			{
+				"plan": "3"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			}
+		],
+		"5b9c106e29793d000450cd67": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "no pasta"
+			},
+			{
+				"addition": "snack"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			}
+		],
+		"5b9fe5fd08706e0004834cdb": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"other": "I unchecked fish but I still eat fish just prefer it when it is uncooked."
+			},
+			{
+				"plan": "2"
+			}
+		],
+		"5b9fe66b08706e0004834cdc": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5b9ff92508706e0004834cf1": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "low or no carbs please"
+			}
+		],
+		"5b9c160d29793d000450cd6e": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"other": "Anything heavy in carbs or dairy (don't like creamy sauces, or strong cheeses such as parmesan, feta, goat cheese etc.). Low sodium please. Fish: only salmon, trout or sole (the cod provided last time smelled quite strong warmed up)"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			}
+		],
+		"5ba29b568e7f3d0004d9a1e5": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"plan": "2"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5bad33c6fcf1d100046a6e38": [
+			{
+				"plan": "5"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "Spicy"
+			},
+			{
+				"addition": "snack"
+			}
+		],
+		"5bca00bbdbe64400045223ef": [
+			{
+				"general": "poultry"
+			},
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"addition": "low-carbs-more-protein"
+			}
+		],
+		"5baba13e76e2160004310752": [
+			{
+				"addition": "low-carbs-more-veggies"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "Milk. Mild lactose intolerence."
+			},
+			{
+				"plan": "4"
+			}
+		],
+		"5ba50aedf384e30004986c40": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "5"
+			}
+		],
+		"5ba50af1f384e30004986c41": [
+			{
+				"plan": "5"
+			},
+			{
+				"allergy": "dairy"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5ba50d89f384e30004986c58": [
+			{
+				"plan": "10"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"allergy": "tree-nuts"
+			}
+		],
+		"5ba50ff5f384e30004986c72": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "celery, carrots"
+			},
+			{
+				"plan": "2"
+			}
+		],
+		"5ba51820f384e30004986c7f": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"other": "unpeeled potato"
+			}
+		],
+		"5ba50aecf384e30004986c3f": [
+			{
+				"general": "vegan"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			},
+			{
+				"plan": "4"
+			},
+			{
+				"addition": "snack"
+			}
+		],
+		"5ba50a90f384e30004986c3e": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			}
+		],
+		"5ba53de1f384e30004986c95": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5ba5497bf384e30004986c9e": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"allergy": "dairy"
+			},
+			{
+				"allergy": "shellfish"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "-oignon!! I deeply hate it! And I'm really limited with garlic too. - Assure you that I don't get 'Black Bean Meatballs' no more: I really didn't liked it."
+			}
+		],
+		"5ba58e59f384e30004986cb3": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			}
+		],
+		"5ba670c7633e3d00042cc760": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"allergy": "tree-nuts"
+			}
+		],
+		"5ba8bd65bad1a90004b412b2": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"general": "poultry"
+			}
+		],
+		"5ba8ceebbad1a90004b412c3": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5ba9042bbad1a90004b412cd": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "lasagna"
+			}
+		],
+		"5ba91562bad1a90004b412d6": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"allergy": "gluten"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "beef"
+			}
+		],
+		"5ba513fdf384e30004986c7d": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"allergy": "shellfish"
+			}
+		],
+		"5baa36afd3eec7000486fd31": [
+			{
+				"general": "vegetarian"
+			},
+			{
+				"plan": "3"
+			}
+		],
+		"5baa61a1d3eec7000486fd33": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			}
+		],
+		"5ba1381a9b181a0004ba7c09": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "6"
+			},
+			{
+				"addition": "snack"
+			}
+		],
+		"5baa991649338b0004604eac": [
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "I can handle some dairy, but not cheese.  No cheese, please."
+			},
+			{
+				"plan": "3"
+			}
+		],
+		"5baa988749338b0004604ea7": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"plan": "2"
+			}
+		],
+		"5baa99d949338b0004604eba": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "vegetarian"
+			},
+			{
+				"addition": "low-carbs-more-protein"
+			}
+		],
+		"5baa9ab449338b0004604ec4": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"other": "For the Beef and Lamb only that I would want it halal please."
+			},
+			{
+				"diet": "halal"
+			},
+			{
+				"general": "beef"
+			}
+		],
+		"5baaa13f49338b0004604ed7": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"plan": "2"
+			}
+		],
+		"5baaa96c49338b0004604ee9": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5baac45949338b0004604ef8": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			}
+		],
+		"5baad0d249338b0004604f02": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5bab87f176e216000431072b": [
+			{
+				"general": "fish"
+			},
+			{
+				"allergy": "gluten"
+			},
+			{
+				"allergy": "dairy"
+			},
+			{
+				"other": "I eat most vegetarian but also eat fish. Am not allergic to dairy but am sensitive (most fermented types of dairy are fine)"
+			},
+			{
+				"plan": "2"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"addition": "low-carbs-more-protein"
+			}
+		],
+		"5bab89a376e2160004310734": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"addition": "low-carbs-more-protein"
+			}
+		],
+		"5bab8a8f76e2160004310737": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			}
+		],
+		"5bab9e8b76e216000431074b": [
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"allergy": "shellfish"
+			},
+			{
+				"plan": "3"
+			}
+		],
+		"5baab5e749338b0004604ef4": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5baba52f76e216000431075d": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "vegan"
+			},
+			{
+				"other": "No animal products at all - strictly vegan"
+			},
+			{
+				"allergy": "dairy"
+			},
+			{
+				"allergy": "shellfish"
+			}
+		],
+		"5babadd276e216000431076e": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			}
+		],
+		"5baa99c549338b0004604eb7": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"other": "No pork,No alcohol"
+			}
+		],
+		"5baaa0af49338b0004604ed6": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"plan": "3"
+			}
+		],
+		"5baa987249338b0004604ea6": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"addition": "low-carbs-more-protein"
+			}
+		],
+		"5ba58e42f384e30004986cb2": [
+			{
+				"plan": "4"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"other": "Black olives."
+			}
+		],
+		"5bacd81ffcf1d100046a6e23": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"addition": "low-carbs-more-protein"
+			}
+		],
+		"5bae5f3054efbe000416621e": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "n/a"
+			},
+			{
+				"plan": "2"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			}
+		],
+		"5baac4ee49338b0004604ef9": [
+			{
+				"general": "beef"
+			},
+			{
+				"plan": "3"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			}
+		],
+		"5baa9bba49338b0004604ec5": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"allergy": "gluten"
+			},
+			{
+				"allergy": "dairy"
+			},
+			{
+				"allergy": "tree-nuts"
+			},
+			{
+				"plan": "5"
+			}
+		],
+		"5baf03ae54efbe0004166246": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			}
+		],
+		"5bb0d80cf7c83300041d2647": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "carbs"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			},
+			{
+				"addition": "snack"
+			}
+		],
+		"5bb0f89bf7c83300041d2650": [
+			{
+				"general": "vegetarian"
+			},
+			{
+				"plan": "2"
+			}
+		],
+		"5bb2430566a46700043d7c32": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5bb287d666a46700043d7c4b": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"allergy": "dairy"
+			},
+			{
+				"allergy": "gluten"
+			},
+			{
+				"allergy": "peanuts"
+			},
+			{
+				"allergy": "soy"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"plan": "2"
+			}
+		],
+		"5bad1503fcf1d100046a6e35": [
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			},
+			{
+				"plan": "5"
+			}
+		],
+		"5bb36694a2dd3900042182f4": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5bb3a3e0a2dd3900042182ff": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			}
+		],
+		"5b7b7e16847f870004805b0b": [
+			{
+				"plan": "5"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"other": "No sugar."
+			},
+			{
+				"allergy": "gluten"
+			}
+		],
+		"5bb3a6aea2dd390004218315": [
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"allergy": "dairy"
+			},
+			{
+				"allergy": "gluten"
+			},
+			{
+				"other": "Preference for low sodium brown rice if possible."
+			},
+			{
+				"plan": "2"
+			}
+		],
+		"5bb61e366871e60004e8dd9b": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5bb653e36871e60004e8dda9": [
+			{
+				"general": "vegan"
+			},
+			{
+				"plan": "2"
+			},
+			{
+				"addition": "low-carbs-more-protein"
+			}
+		],
+		"5bb66c625ce2d00004ae0708": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "vegetarian"
+			},
+			{
+				"diet": "kosher"
+			}
+		],
+		"5bb7a1250375dc000412a0cb": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"addition": "low-carbs-more-protein"
+			}
+		],
+		"5bba435f08007c0004de3ce3": [
+			{
+				"plan": "4"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "mushroom"
+			}
+		],
+		"5baa9cb049338b0004604ed3": [
+			{
+				"plan": "2"
+			},
+			{
+				"other": "Low-protein meals is what I am hoping for...ex: - pasta, with tomato sauce, basil - pasta w/ pesto - salads - etc..."
+			},
+			{
+				"general": "vegetarian"
+			}
+		],
+		"5bbfb2406e03b500046b641a": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "Mayonnaise or anything creamy. Gravy and peanut sauce is fine but anything white or light (sauce or cream) I don't eat."
+			},
+			{
+				"allergy": "shellfish"
+			}
+		],
+		"5bc4b1ed334f7200042f13e0": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			}
+		],
+		"5bb24f2466a46700043d7c3c": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			}
+		],
+		"5baab2ce49338b0004604ef2": [
+			{
+				"plan": "5"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"addition": "snack"
+			},
+			{
+				"other": "Sweet & savory dishes (no cranberry sauce, no honey sauce or glaze, no pineapple, no cranberry, no raisins...) Teriyaki is fine"
+			}
+		],
+		"5bc5ddf8f89b43000432bb82": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "5"
+			}
+		],
+		"5bc5e070f89b43000432bb8c": [
+			{
+				"general": "beef"
+			},
+			{
+				"plan": "3"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			}
+		],
+		"5bc5e02bf89b43000432bb8b": [
+			{
+				"plan": "5"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5bb694a35ce2d00004ae071b": [
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "3"
+			}
+		],
+		"5bc5ecb4f89b43000432bba6": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "vegan"
+			}
+		],
+		"5bc6122bf89b43000432bbb3": [
+			{
+				"plan": "6"
+			},
+			{
+				"general": "vegan"
+			}
+		],
+		"5bc67222f89b43000432bbbd": [
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "2"
+			},
+			{
+				"diet": "halal"
+			},
+			{
+				"addition": "low-carbs-more-protein"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			},
+			{
+				"allergy": "peanuts"
+			},
+			{
+				"other": "eggs"
+			}
+		],
+		"5bbe2d0bcccc340004c6e026": [
+			{
+				"plan": "4"
+			},
+			{
+				"general": "vegetarian"
+			}
+		],
+		"5bc73f48303dc80004270b42": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5bc73cb8303dc80004270b40": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			}
+		],
+		"5bc5e724f89b43000432bba5": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5ba50daef384e30004986c59": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "poultry"
+			}
+		],
+		"5baab43249338b0004604ef3": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"diet": "kosher"
+			}
+		],
+		"5bd0b5c70d494d00049aedd9": [
+			{
+				"plan": "5"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"other": "celery"
+			}
+		],
+		"5bb66c585ce2d00004ae0707": [
+			{
+				"plan": "4"
+			},
+			{
+				"other": "Can I have 2 meat and 2 vegetarian a week please!"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"addition": "snack"
+			}
+		],
+		"5be0c907df2bad0004a34609": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"allergy": "shellfish"
+			}
+		],
+		"5bd726137d39a0000480e832": [
+			{
+				"general": "pork"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"plan": "3"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "No veggies at all except if Caesar salad is an option. Very basic meals, butter chicken with white rice only, teriyaki chicken with white rice, Turkey or greek style meat is good with fries or white potatoes.  Chicken parmesan is good. No avocado. Cheese is good. meatballs are good."
+			}
+		],
+		"5baaa70a49338b0004604ee6": [
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"plan": "3"
+			},
+			{
+				"general": "fish"
+			}
+		],
+		"5bce014b66252f0004491490": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			}
+		],
+		"5bcf14ad2ad8240004d242a7": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5bcf38502ad8240004d242b4": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"other": "I do not eat raw fish and shellfish, or anything spicy. I have a hard time digesting corn. I prefer LOTS of veggies in my meals. I prefer whole grain (pasta, bread, etc). Preferably not too salty or not salty at all so I can adjust myself."
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			}
+		],
+		"5babb7cf76e216000431077b": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"other": "Mushrooms, cauliflower, brocoli"
+			},
+			{
+				"general": "pork"
+			}
+		],
+		"5bcf6fb02ad8240004d242c7": [
+			{
+				"plan": "5"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"addition": "snack"
+			}
+		],
+		"5bd36fc81f1c110004bfc2fc": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"other": "Low on carbs (1/2 portion and more vegetables). Also, please ensure meals are 10gr of fat or less (reduce sauce if needed)."
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			}
+		],
+		"5bd709e27d39a0000480e824": [
+			{
+				"plan": "4"
+			},
+			{
+				"general": "vegetarian"
+			},
+			{
+				"addition": "low-carbs-more-protein"
+			}
+		],
+		"5bd7020b7d39a0000480e823": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "Roasted peppers, pasta,"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			}
+		],
+		"5bd747fd7d39a0000480e839": [
+			{
+				"plan": "3"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "fish"
+			}
+		],
+		"5bd76adc7d39a0000480e848": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			},
+			{
+				"other": "I am on a keto Diet and cannot eat carbohydrates and sugar contained  meals. All veggies except: no peppers, no celeri. No tomatoes or no carrots ever."
+			}
+		],
+		"5bd848535de0000004eb9144": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5baaa1e749338b0004604ee2": [
+			{
+				"plan": "4"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5bd8882c5de0000004eb9162": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "vegetarian"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			},
+			{
+				"other": "Garlic Schezwan pepper I would like low carb and low sodium"
+			}
+		],
+		"5bd8a0e55de0000004eb9168": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "No asparagus or broccoli or squash. The only plant based protein I like is -  tofu and tempeh. Please make one of the meals vegetarian. No spicy meals please."
+			}
+		],
+		"5bd9ad12bca8170004f0204e": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"other": "sesame seeds, peanut butter (not allergic), pepper (green or red)"
+			},
+			{
+				"allergy": "tree-nuts"
+			}
+		],
+		"5bd9b34dbca8170004f02059": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "Coriander/Cilantro"
+			}
+		],
+		"5bdb1a0486142a000450f309": [
+			{
+				"plan": "2"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"other": "artichoke, olives"
+			}
+		],
+		"5bdb4a0f3579c00004aaf9ba": [
+			{
+				"plan": "4"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"other": "No Cilantro, please! Or Coriander for that matter..."
+			},
+			{
+				"allergy": "shellfish"
+			}
+		],
+		"5be46e737bd040000408e2bd": [
+			{
+				"plan": "3"
+			},
+			{
+				"general": "vegetarian"
+			},
+			{
+				"addition": "low-carbs-more-protein"
+			}
+		],
+		"5be1d8f3df2bad0004a3461a": [
+			{
+				"other": "Cilantro, Goat Cheese, Canned Tuna"
+			},
+			{
+				"plan": "2"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"addition": "snack"
+			}
+		],
+		"5baaa96c49338b0004604ee8": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"plan": "3"
+			}
+		],
+		"5be9b17f9acc5e00046e0a53": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"plan": "3"
+			},
+			{
+				"addition": "low-carbs-more-protein"
+			}
+		],
+		"5beb0b5a265c740004dac8d5": [
+			{
+				"allergy": "shellfish"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"plan": "2"
+			}
+		],
+		"5baa991e49338b0004604ead": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"plan": "2"
+			},
+			{
+				"addition": "snack"
+			}
+		],
+		"5b9fe08308706e0004834cd9": [
+			{
+				"other": "Onions when possible to exclude (for example, not added on top)"
+			},
+			{
+				"allergy": "dairy"
+			},
+			{
+				"allergy": "gluten"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "2"
+			}
+		],
+		"5bec610565ba8100040c2a3a": [
+			{
+				"general": "fish"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"other": "I only eat Halal food, I selected beef and chicken in the previous option because you guys have halal option, thank you!"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"diet": "halal"
+			},
+			{
+				"plan": "2"
+			}
+		],
+		"5bed9905f5616a000470552b": [
+			{
+				"general": "vegetarian"
+			},
+			{
+				"plan": "4"
+			}
+		],
+		"5bedc40af5616a000470552f": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"plan": "2"
+			}
+		],
+		"5beef642577c850004b774ef": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "3"
+			},
+			{
+				"addition": "low-carbs-more-veggies"
+			}
+		],
+		"5beef3b5577c850004b774ee": [
+			{
+				"other": "No fish or seafood."
+			},
+			{
+				"allergy": "shellfish"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"plan": "5"
+			},
+			{
+				"addition": "snack"
+			},
+			{
+				"addition": "low-carbs-more-protein"
+			}
+		],
+		"5bf18788538b3100043e2844": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"plan": "4"
+			}
+		],
+		"5bf2ebfeeeb9e900044f8ed7": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "2"
+			},
+			{
+				"general": "pork"
+			}
+		],
+		"5bf3172deeb9e900044f8ee8": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"plan": "3"
+			}
+		],
+		"5bf31787eeb9e900044f8ee9": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "4"
+			}
+		],
+		"5bf3184eeeb9e900044f8ef1": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "3"
+			}
+		],
+		"5bf319afeeb9e900044f8f03": [
+			{
+				"general": "pork"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"plan": "2"
+			}
+		],
+		"5bf316cfeeb9e900044f8ee7": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "5"
+			}
+		],
+		"5bf354c4eeb9e900044f8f14": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "4"
+			}
+		],
+		"5bf56129ac1b1a000432dcbd": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"plan": "2"
+			}
+		],
+		"5bd772037d39a0000480e854": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"plan": "3"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "shellfish"
+			}
+		],
+		"5bf5b11eac1b1a000432dcd5": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"plan": "3"
+			}
+		],
+		"5bf61c32ac1b1a000432dce3": [
+			{
+				"allergy": "peanuts"
+			},
+			{
+				"allergy": "tree-nuts"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "3"
+			}
+		],
+		"5bf6ce781f306d00043b157b": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "3"
+			}
+		],
+		"5bf6d8ee1f306d00043b1587": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "fish"
+			},
+			{
+				"general": "plant-based-protein"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "4"
+			}
+		],
+		"5bf6da881f306d00043b1588": [
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"plan": "10"
+			},
+			{
+				"addition": "snack"
+			}
+		],
+		"5bf5c3bfac1b1a000432dcd7": [
+			{
+				"allergy": "peanuts"
+			},
+			{
+				"general": "beef"
+			},
+			{
+				"general": "lamb"
+			},
+			{
+				"general": "pork"
+			},
+			{
+				"general": "poultry"
+			},
+			{
+				"general": "shellfish"
+			},
+			{
+				"plan": "3"
+			}
+		]
+	}
+}

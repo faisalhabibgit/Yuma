@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +19,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Meal {
 
 	@Id
@@ -26,6 +28,7 @@ public class Meal {
 	private String description;
 	private boolean isAvailable;
 	private HashSet<String> flags;
+	private int mealScore;
 	protected List<Ingredients> ingredients;
 
 	
@@ -45,6 +48,7 @@ public class Meal {
 			", description='" + description + '\'' +
 			", isAvailable=" + isAvailable +
 			", flags=" + flags +
+			", mealScore=" + mealScore +
 			'}';
 	}
 
@@ -54,6 +58,6 @@ public class Meal {
 		this.setAvailable(mealToUpdate.isAvailable());
 		this.setIngredients(mealToUpdate.getIngredients());
 		this.setFlags(mealToUpdate.getFlags());
-
+		this.setMealScore(mealToUpdate.getMealScore());
 	}
 }

@@ -1,11 +1,9 @@
 package com.yuma.app.service;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,13 +24,13 @@ import com.yuma.app.to.MealTO;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MealServiceTest {
-
+	
 	@MockBean
 	private MealRepository mealRepository;
-
+	
 	@Mock
 	private ConversionService conversionService;
-
+	
 	@Autowired
 	private MealService mealService;
 
@@ -98,49 +96,47 @@ public class MealServiceTest {
 		ingredientsList5.add(milk);
 		ingredientsList5.add(chicken);
 
-		meal1 = new Meal(UUID.randomUUID(), "chick broc", "chicken and broccolie topped with a touch of love", true, new HashSet<>(),ingredientsList1);
-		meal2 = new Meal(UUID.randomUUID(), "beef and rice", "beef and rice topped with a touch of love", true, new HashSet<>(), ingredientsList2);
-		meal3 = new Meal(UUID.randomUUID(), "fish and rice", "fish and rice topped with a touch of love", true, new HashSet<>(), ingredientsList3);
-		mealTO = new MealTO(meal1.getMealId(), "chicken and veg", "chicken and veg",false,new HashSet<>(), new ArrayList<>());
-		mealTO2 = new MealTO(meal2.getMealId(), "chick broc", "chicken and broccolie topped with a touch of love",true,new HashSet<>(), new ArrayList<>());
+		meal1 = new Meal(UUID.randomUUID(), "chick broc", "chicken and broccolie topped with a touch of love", true, new HashSet<>(),40,ingredientsList1);
+		meal2 = new Meal(UUID.randomUUID(), "beef and rice", "beef and rice topped with a touch of love", true, new HashSet<>(), 40,ingredientsList2);
+		meal3 = new Meal(UUID.randomUUID(), "fish and rice", "fish and rice topped with a touch of love", true, new HashSet<>(),40, ingredientsList3);
+		mealTO = new MealTO(meal1.getMealId(), "chicken and veg", "chicken and veg",false,new HashSet<>(),40, new ArrayList<>());
+		mealTO2 = new MealTO(meal2.getMealId(), "chick broc", "chicken and broccolie topped with a touch of love",true,new HashSet<>(),40, new ArrayList<>());
 
 
 		MockitoAnnotations.initMocks(this);
 	}
-
+	
 	@Test
 	public void MealServiceListTest() {
 		List<Meal> actualMeals = new ArrayList<>();
+		List<MealTO> expectedMeals;
 		actualMeals.add(meal1);
 		actualMeals.add(meal2);
 		actualMeals.add(meal3);
+		
 		Mockito.when(mealRepository.findAll()).thenReturn(actualMeals);
-		List<MealTO> expectedMeals = mealService.list();
-
+		
+		expectedMeals = mealService.list();
 		Assert.assertEquals(expectedMeals.size(), actualMeals.size());
 	}
-
+	
 	@Test
 	public void MealServiceListByPredicateTest(){
 
 		String desc = "chicken";
+		MealTO expectedMeals;
 		Optional<Meal> optionalMeal = Optional.ofNullable(new Meal());
-
+		
 		Mockito.when(mealRepository.findByDescription(desc)).thenReturn(optionalMeal);
 		Mockito.when(mealRepository.findByDescription(desc)).thenReturn(optionalMeal);
-
-		MealTO expectedMeals = mealService.findByDescription(desc);
-
+		
+		expectedMeals = mealService.findByDescription(desc);
 		Assert.assertNotNull(expectedMeals);
-
-
 	}
-
+	
 	@Test 
 	public void MealServiceUpdateTest(){
-
 		UUID uuid = mealTO.getMealId();
-
 		Optional<Meal> meal = Optional.of(meal1);
 
 		Mockito.when(mealRepository.findByMealId(uuid)).thenReturn(meal);
@@ -154,28 +150,12 @@ public class MealServiceTest {
 
 	@Test
 	public void MealServiceCreateTest(){
-
 		Mockito.when(conversionService.convert(mealTO, Meal.class)).thenReturn(meal1);
 		Mockito.when(mealRepository.save(meal1)).thenReturn(meal1);
 		Mockito.when(conversionService.convert(meal1, MealTO.class)).thenReturn(mealTO);
-
 		mealService.create(mealTO);
-
 		Assert.assertEquals(mealTO.getDescription(), "chicken and veg");
 		Assert.assertEquals(mealTO.isAvailable(), false);
 	}
-
-	@Test
-	public void MealServiceAvailableTest(){
-
-		Mockito.when(conversionService.convert(mealTO, Meal.class)).thenReturn(meal2);
-		Mockito.when(mealRepository.save(meal2)).thenReturn(meal2);
-		Mockito.when(conversionService.convert(meal2, MealTO.class)).thenReturn(mealTO2);
-
-		mealService.create(mealTO2);
-
-		Assert.assertEquals(mealTO2.getDescription(), "chicken and broccolie topped with a touch of love");
-		Assert.assertEquals(mealTO2.isAvailable(), true);
-	}
-
+	
 }

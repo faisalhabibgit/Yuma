@@ -16,6 +16,7 @@ public class MealConverter implements Converter<MealTO, Meal> {
 		meal.setAvailable(mealTO.isAvailable());
 		meal.setIngredients(mealTO.getIngredients());
 		meal.setFlags(mealTO.getFlags());
+		meal.setMealScore(mealTO.getMealScore());
 		return meal;
 	}
 }

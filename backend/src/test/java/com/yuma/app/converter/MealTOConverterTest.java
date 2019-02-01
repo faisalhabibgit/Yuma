@@ -11,24 +11,20 @@ import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
 
 public class MealTOConverterTest {
-
 	@Test
 	public void testMealToConverter() {
-
 		Meal meal = prepareMeal();
-
 		MealTOConverter mealToConverter = new MealTOConverter();
-
 		MealTO mealTO = mealToConverter.convert(meal);
-
+		
 		Assert.assertEquals(mealTO.getMealId(), meal.getMealId());
 		Assert.assertEquals(mealTO.getDescription(), meal.getDescription());
 		Assert.assertEquals(mealTO.isAvailable(), meal.isAvailable());
 		Assert.assertEquals(mealTO.getIngredients().size(), meal.getIngredients().size());
-
+		Assert.assertEquals(mealTO.getMealScore(), meal.getMealScore());
 	}
 
-	public Meal prepareMeal() {
+	private Meal prepareMeal() {
 		Meal meal = new Meal();
 		meal.setMealId(UUID.randomUUID());
 		meal.setDescription("this is a meal description");
@@ -38,6 +34,7 @@ public class MealTOConverterTest {
 				add(new Ingredients("Tomatoes", 20, 21, 32, false));
 			}
 		});
+		meal.setMealScore(30);
 		return meal;
 	}
 }
