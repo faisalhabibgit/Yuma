@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
+import com.yuma.app.service.MealServiceImp;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.yuma.app.repository.MealRepository;
-import com.yuma.app.service.MealService;
 import com.yuma.app.to.MealTO;
 
 @RunWith(SpringRunner.class)
@@ -28,7 +28,7 @@ public class MealControllerTest {
 	@MockBean
 	private MealRepository mealRepository;
 	@MockBean
-	private MealService mealService;
+	private MealServiceImp mealService;
 	@Autowired
 	private MealController mealResource;
 
