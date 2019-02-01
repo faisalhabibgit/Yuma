@@ -30,15 +30,18 @@ class DisplayUsers extends Component {
   }
 
     render() {
+    
       return(
         
         <Container>
         
-          <div style={{ maxWidth:'800px', maxHeight:'275px', overflow:'scroll'}}>
+          <div style={{ maxWidth:'1800px', maxHeight:'275px', overflow:'scroll'}}>
           <Table striped bordered condensed>
             <thead>
             <th className="text-center">First Name</th>
             <th className="text-center">Last Name</th>
+            <th className="text-center">Email</th>
+            <th className="text-center">isActive</th>
             </thead>
             <tbody >
             <td>
@@ -51,9 +54,20 @@ class DisplayUsers extends Component {
                 this.state.apiObject.map(x => <tr>{x.lastName.toString()}</tr>)
               }
             </td>
+            <td>
+              {
+                this.state.apiObject.map(x => <tr>{x.email.toString()}</tr>)
+              }
+            </td>
+            <td>
+              {
+                this.state.apiObject.map(x => <tr>{x.isActive.toString()}</tr>)
+              }
+            </td>
             </tbody>
           </Table>
         </div>
+          
       </Container>
     );
 
