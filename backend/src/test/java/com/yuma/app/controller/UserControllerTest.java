@@ -6,13 +6,13 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
+import com.yuma.app.service.UserServiceImp;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.yuma.app.service.UserService;
 import com.yuma.app.to.UserTO;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -21,7 +21,7 @@ public class UserControllerTest {
 	UserController userController;
 
 	@Mock
-	UserService userService;
+	UserServiceImp userService;
 
 	@Test
 	public void getAllTest() {
