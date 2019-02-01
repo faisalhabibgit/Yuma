@@ -33,6 +33,7 @@ public class MealServiceImp  implements  MealServiceInt{
 		this.conversionService = conversionService;
 	}
 
+	@Override
 	public List<MealTO> list() {
 		mealServiceLogger.info("fetching list of all meals in %s", MealServiceImp.class);
 
@@ -40,6 +41,7 @@ public class MealServiceImp  implements  MealServiceInt{
 		return mealTos;
 	}
 
+	@Override
 	public MealTO update(MealTO mealTo) {
 		mealServiceLogger.info("updating meal with description %s, in %s", mealTo.getDescription(), MealServiceImp.class);
 
@@ -51,6 +53,7 @@ public class MealServiceImp  implements  MealServiceInt{
 		return conversionService.convert(newMealCreated, MealTO.class);
 	}
 
+	@Override
 	public MealTO create(MealTO mealTo) {
 		mealServiceLogger.info("creating Meal in %s", MealServiceImp.class);
 
@@ -60,6 +63,7 @@ public class MealServiceImp  implements  MealServiceInt{
 		return conversionService.convert(meal, MealTO.class);
 	}
 
+	@Override
 	public List<MealTO> weeklyCombo() {
 		mealServiceLogger.info("generating optimal weekly combo in %s", MealServiceImp.class);
 
@@ -75,6 +79,7 @@ public class MealServiceImp  implements  MealServiceInt{
 
 	}
 	
+	@Override
 	public List<MealTO> availableMeals(){
 		mealServiceLogger.info("retrieving available meals in %s", MealServiceImp.class);
 		
@@ -84,12 +89,14 @@ public class MealServiceImp  implements  MealServiceInt{
 
 	}
 
+	@Override
 	public void deleteMeal(UUID mealId) {
 		mealServiceLogger.info("deleting meal in %s", MealServiceImp.class);
 
 		mealRepository.delete(mealRepository.findOne(mealId));
 	}
 
+	@Override
 	public MealTO findByDescription(String description) {
 		mealServiceLogger.info("fetching with description %s in %s", description, MealServiceImp.class);
 
@@ -101,6 +108,7 @@ public class MealServiceImp  implements  MealServiceInt{
 		}
 	}
 	
+	@Override
 	public List<MealTO> convertMealToMealTO(List<Meal> meals){
 		mealServiceLogger.info("converting Meal List to MealTO list with description %s in %s", MealServiceImp.class);
 

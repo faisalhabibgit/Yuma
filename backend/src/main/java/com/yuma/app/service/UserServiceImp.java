@@ -33,7 +33,8 @@ public class UserServiceImp implements UserServiceInt {
 		this.roleRepository = roleRepository;
 		this.passwordEncoder = passwordEncoder;
 	}
-
+	
+	@Override
 	public User saveUser(SignUpRequest req) {
 		this.userServiceLogger.info("saving user {}", req.getEmail());
 
@@ -46,6 +47,7 @@ public class UserServiceImp implements UserServiceInt {
 		return userRepository.save(user);
 	}
 
+	@Override
 	public List<UserTO> list() {
 		this.userServiceLogger.info("fetching users list");
 
@@ -54,6 +56,7 @@ public class UserServiceImp implements UserServiceInt {
 		
 	}
 
+	@Override
 	public UserTO findUserByEmail(String email) {
 		userServiceLogger.info("fetching user by email: %s", email);
 		User user = userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
@@ -61,13 +64,14 @@ public class UserServiceImp implements UserServiceInt {
 		return conversionService.convert(user, UserTO.class);
 		
 	}
-	
+	@Override
 	public void deleteUserByUserID(String uuid){
 		this.userServiceLogger.info("deleting user by uuid: {}", uuid);
 		
 		userRepository.delete(uuid);
 	}
 
+	@Override
 	public UserTO create(UserTO userTO) {
 
 		userTO.setUserId(UUID.randomUUID().toString());
@@ -75,7 +79,7 @@ public class UserServiceImp implements UserServiceInt {
 		User user = userRepository.save(userToCreate);
 		return conversionService.convert(user, UserTO.class);
 	}
-	
+	@Override
 	public UserTO updateUser(UserTO userTO){
 		this.userServiceLogger.info("fetching user from DB to update");
 		User user = userRepository.findByUserId(userTO.getUserId()).orElseThrow(() -> new ResourceNotFoundException("User", "userId", userTO.getUserId()));
@@ -86,7 +90,7 @@ public class UserServiceImp implements UserServiceInt {
 		return conversionService.convert(updatedUser, UserTO.class);
 		
 	}
-	
+	@Override
 	public boolean existsByEmail(String email){
 		return userRepository.existsByEmail(email);
 	}
@@ -98,7 +102,7 @@ public class UserServiceImp implements UserServiceInt {
 		return convertUserListToUserTOList(userList);
 
 	}
-	
+	@Override
 	 public List<UserTO> convertUserListToUserTOList(List<User> userList){
 		List<UserTO> userTOS = new ArrayList<>();
 

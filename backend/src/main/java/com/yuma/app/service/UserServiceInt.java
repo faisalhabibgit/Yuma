@@ -11,14 +11,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.List;
 
 public interface UserServiceInt {
-	
+
+	public User saveUser(SignUpRequest req);
 	public List<UserTO> list();
 	public UserTO findUserByEmail(String email);
 	public void deleteUserByUserID(String uuid);
 	public UserTO create(UserTO userTO);
 	public UserTO updateUser(UserTO userTO);
 	public boolean existsByEmail(String email);
-	public List<UserTO> activeUsers();
-	List<UserTO> convertUserListToUserTOList(List<User> userList);
+	public List<UserTO> convertUserListToUserTOList(List<User> userList);
 
 	}
