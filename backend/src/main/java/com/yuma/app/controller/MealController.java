@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.yuma.app.service.MealServiceImp;
+import com.yuma.app.catalog.CombinationReport;
 import com.yuma.app.to.MealTO;
 
 @Slf4j
@@ -55,10 +57,10 @@ public class MealController {
 	}
 
 	@GetMapping("/weeklycombo")
-	public List<MealTO> getWeeklyCombo() {
+	public List<CombinationReport> getWeeklyCombo() {
 		logger.info("retrieving optimal weekly Combo");
 
-		return this.mealService.weeklyCombo();
+		return this.mealService.generateWeeklyCombos();
 	}
 
 	@PutMapping("/update")

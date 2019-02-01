@@ -47,7 +47,7 @@ public class AuthenticationController {
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-
+		logger.info("processing sign in request");
 		Authentication authentication = authenticationManager.authenticate(
 			new UsernamePasswordAuthenticationToken(
 				loginRequest.getEmail(),
@@ -63,6 +63,7 @@ public class AuthenticationController {
 
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
+		logger.info("processing sign up request");
 		if(userService.existsByEmail(signUpRequest.getEmail())) {
 			return new ResponseEntity<>(new ApiResponse(false, "Username is already taken!"),
 				HttpStatus.BAD_REQUEST);

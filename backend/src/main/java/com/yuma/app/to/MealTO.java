@@ -22,6 +22,7 @@ public class MealTO {
 	private String description;
 	private boolean isAvailable;
 	private HashSet<String> flags;
+	private int mealScore;
 	protected List<Ingredients> ingredients;
 
 
@@ -34,7 +35,7 @@ public class MealTO {
 			", isAvailable=" + isAvailable +
 			", ingredients=" + ingredients +
 			", flags=" + flags +
+			", mealScore=" + mealScore +
 			'}';
 	}
-
 }

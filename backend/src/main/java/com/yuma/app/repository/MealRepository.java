@@ -10,8 +10,9 @@ import org.springframework.data.repository.CrudRepository;
 import com.yuma.app.document.Meal;
 
 public interface MealRepository extends MongoRepository<Meal, UUID>, CrudRepository<Meal, UUID> {
-
 	Optional<Meal> findByDescription(String description);
 	Optional<Meal> findByMealId(UUID mealID);
 	Optional<List<Meal>> findByIsAvailableIsTrue();
+	//List<Meal> findTop3ByOrderByIsAvailableIsFalseAndMealScoreDesc();
+	List<Meal> findTop3ByOrderByMealScoreDesc();
 }
