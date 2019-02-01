@@ -1,14 +1,8 @@
 package com.yuma.app.catalog;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
@@ -24,6 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
 import com.yuma.app.document.User;
+import com.yuma.app.repository.MealRepository;
 
 @Slf4j
 @Document
@@ -32,152 +27,184 @@ import com.yuma.app.document.User;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MealCatalog {
-	private HashMap<Meal, Integer> mealsMap = new HashMap<>();
-	private ArrayList<Meal> meals;
-	private ArrayList<User> consumers;
 	private Logger logger = LoggerFactory.getLogger(MealCatalog.class);
+	private MealRepository mealRepository;
+	private List<CombinationReport> possibleCombinations;
+	private List<Meal> addedMeals;
 
-	private static int randomIntGenerator(int upperBound) {
-		Random rand = new Random();
-
-		return rand.nextInt(upperBound);
-	}
-
-	public List<Meal> getWeeklyCombination(List<Meal> availableMeals, List<User> activeUsers) {
-		List<Meal> possibleMeals = new ArrayList<>();
-		mealsMap.clear();
-		logger.info("generating combo meals");
-		
-		for (User user : activeUsers) {
-			generatePossibleMealsForUser(availableMeals, user, user.getPlan().getNumOfMeals(), 0);
-			
-		}
-		mealsMap = sortByValue(mealsMap);
-
-		logger.info("creating meals arraylist");
-
-		possibleMeals.addAll(mealsMap.keySet());
-
-		//possibleMeals = filterList(possibleMeals);
-
-		return possibleMeals;
-	}
-
-	protected boolean equals(HashSet<?> set1, HashSet<?> set2) {
-
-		if (set1 == null || set2 == null) {
-			return false;
-		}
-
-		if (set1.size() != set2.size()) {
-			return false;
-		}
-
-		return set1.containsAll(set2);
-
-	}
-
-	protected HashMap<Meal, Integer> sortByValue(HashMap<Meal, Integer> pm) {
-		// Create a list from elements of HashMap 
-		logger.info("sorting hashmap");
-
-		List<Map.Entry<Meal, Integer>> list = new LinkedList<>(pm.entrySet());
-
-		// Sort the list
-		list.sort(new Comparator<Map.Entry<Meal, Integer>>() {
-			@Override
-			public int compare(Map.Entry<Meal, Integer> o1, Map.Entry<Meal, Integer> o2) {
-				return (o2.getValue()).compareTo(o1.getValue());
-			}
-		});
-		
-		// put data from sorted list to hashmap
-		HashMap<Meal, Integer> temp = new LinkedHashMap<>();
-		for (Map.Entry<Meal, Integer> aa : list) {
-			temp.put(aa.getKey(), aa.getValue());
-		}
-		return temp;
-	}
-
-	protected void generatePossibleMeals(List<Meal> meals, User consumer) {
-		logger.info("inside generate possible meals");
-		int i = 0;
-		while (i < 4) {
-			Meal meal = meals.get(randomIntGenerator(meals.size()));
-			if (equals(meal.getFlags(), consumer.getPlan().getDetails())) {
-				if (mealsMap.get(meal) != null) {
-					Integer mealReps = mealsMap.get(meal) + 1;
-					mealsMap.put(meal, mealReps);
-				} else {
-					mealsMap.put(meal, 1);
-				}
-			}
-			i++;
-		}
+	public MealCatalog(MealRepository mealRepository) {
+		this.mealRepository = mealRepository;
+		this.addedMeals = new ArrayList<>();
+		this.possibleCombinations = new ArrayList<>();
 	}
 	
-	protected void generatePossibleMealsForUser(List<Meal> mealList, User user, int numOfMeals, int mealCounter){
-		logger.info("inside generate possible meals for that user");
+	public List<CombinationReport> generateWeeklyCombination(List<Meal> availableMeals, List<User> activeUsers) {
+		logger.info("instantiating Combination Report in generate Weekly Combination");
 
-		if (numOfMeals == mealCounter) {
+		int i = 0;
+		CombinationReport combinationReport;
+		setMealScores(availableMeals, activeUsers);
+		combinationReport = new CombinationReport(0, countCombinationScore(availableMeals), activeUsers, availableMeals);
+		runMealCombinationAlgorithm(combinationReport);
+		combinationReport.getMealsList().addAll(addedMeals);
+
+		while (i < 2 && (combinationReport.getNumberOfBlanks() != 0)) {
+			combinationReport = new CombinationReport(0, countCombinationScore(availableMeals), activeUsers, availableMeals);
+			replaceLowestScore(combinationReport, i);
+			runMealCombinationAlgorithm(combinationReport);
+			combinationReport.getMealsList().addAll(addedMeals);
+			i++;
+		}
+		return possibleCombinations;
+	}
+
+	protected void runMealCombinationAlgorithm(CombinationReport combinationReport) {
+		logger.info("running meal combo Algorithm");
+		for (User user : combinationReport.getUserList()) {
+			generatePossibleMealsForUser(combinationReport, user, 0);
+		}
+		possibleCombinations.add(combinationReport);
+	}
+
+	protected void setMealScores(List<Meal> mealList, List<User> userList) {
+		logger.info("Setting meal scores");
+		
+		boolean scorable = true;
+		List<String> userDislikesList;
+		for (User user : userList) {
+			userDislikesList = user.getDislikesList();
+			for (Meal meal : mealList) {
+				for (Ingredients ingredient : meal.getIngredients()) {
+					if (userDislikesList.contains(ingredient.getName())) {
+						if (!ingredient.isOptional()) {
+							scorable = false;
+							break;
+						}
+					}
+				}
+				if (scorable) {
+					meal.setMealScore((meal.getMealScore() + 1));
+				}
+			}
+		}
+	}
+
+	protected void generatePossibleMealsForUser(CombinationReport combinationReport, User user, int mealCounter) {
+		logger.info("inside generate possible meals for that user");
+		int numOfBlanks;
+
+		for (Meal meal : combinationReport.getMealsList()) {
+			if (user.getMealList().size() < user.getPlan().getNumOfMeals()) {
+				if (checkIfMealWorks(meal, user)) {
+					mealCounter++;
+				} 
+			} else {
+				break; 
+			}
+		}
+
+		if (user.getPlan().getNumOfMeals() == mealCounter) {
 			return;
 		}
 		
-		for(Meal meal: mealList){
-			if(checkIfMealWorks(meal, user)){
-				mealCounter++;
+		if (user.getMealList().size() != user.getPlan().getNumOfMeals()) {
+			if (user.getPlan().getNumOfMeals() > combinationReport.getMealsList().size()) {
+				numOfBlanks = combinationReport.getMealsList().size() - user.getMealList().size();
+				if (numOfBlanks > 0) {
+					int timesToRun = user.getPlan().getNumOfMeals() - numOfBlanks - mealCounter;
+					generatePossibleMealsForUserWithBlanks(combinationReport, user, timesToRun);
+				} else {
+					generatePossibleMealsForUser(combinationReport, user, mealCounter);
+				}
 			}
-			if(mealCounter == numOfMeals) break;
 		}
-
-		if (mealCounter != numOfMeals){
-			generatePossibleMealsForUser(mealList, user, numOfMeals, mealCounter);
-		}
+		numOfBlanks = user.getPlan().getNumOfMeals() - user.getMealList().size();
+		combinationReport.setNumberOfBlanks(combinationReport.getNumberOfBlanks() + numOfBlanks);
 	}
 	
-	protected boolean checkIfMealWorks(Meal meal, User user){
-		List<String> userDislikesList = user.getDislikesList();
-		List<Ingredients> toRemove = new ArrayList<>();
-		Meal newMeal = meal;
+	protected void generatePossibleMealsForUserWithBlanks(CombinationReport combinationReport, User user, int timesToRun){
+		int timesRan = 0;
 		
-		for (Ingredients ingredient : newMeal.getIngredients()){ 
-			if (userDislikesList.contains(ingredient.getName())){
-				if (!ingredient.isOptional()){
-					return false;
+		for (Meal meal : combinationReport.getMealsList()) {
+			if (timesRan <= timesToRun) {
+				if (user.getMealList().size() < user.getPlan().getNumOfMeals()) {
+					checkIfMealWorks(meal, user);
+				} else {
+					break;
 				}
-				else {
-					toRemove.add(ingredient);
+				timesRan++;
+			}
+		}
+	}
+
+	protected void replaceLowestScore(CombinationReport combinationReport, int index) {
+		logger.info("replacing lowest scored meal with a higher one");
+		
+		List<Meal> highlyRankedMeals = mealRepository.findTop3ByOrderByMealScoreDesc();
+		int lowestRankedIndex = getLowestRankedMeal(combinationReport.getMealsList());
+		Meal lowestRankedMeal = combinationReport.getMealsList().get(lowestRankedIndex);
+
+		if (lowestRankedMeal.getMealScore() <= highlyRankedMeals.get(index).getMealScore()) {
+			combinationReport.getMealsList().add(lowestRankedIndex, highlyRankedMeals.get(index));
+			combinationReport.updateCombinationScore(lowestRankedMeal.getMealScore(), highlyRankedMeals.get(index).getMealScore());
+		}
+	}
+
+	protected int getLowestRankedMeal(List<Meal> mealList) {
+		int lowestIndex;
+		List<Integer> integers = new ArrayList<>();
+		for (Meal meal : mealList) {
+			integers.add(meal.getMealScore());
+		}
+		
+		lowestIndex = integers.indexOf(Collections.min(integers));
+
+		return lowestIndex;
+	}
+
+	protected boolean checkIfMealWorks(Meal meal, User user) {
+		logger.info("checking if: " + meal.getName() + " works for " + user.getFirstName());
+		
+		List<String> userDislikesList = user.getDislikesList();
+		List<Ingredients> ingredientsToRemove = new ArrayList<>();
+		Meal newMeal = meal;
+
+		for (Ingredients ingredient : newMeal.getIngredients()) {
+			if (userDislikesList.contains(ingredient.getName())) {
+				if (!ingredient.isOptional()) {
+					return false;
+				} else {
+					ingredientsToRemove.add(ingredient);
 				}
 			}
 		}
-		if (toRemove.size() != 0){
-			newMeal = new Meal(meal);
-			newMeal.getIngredients().removeAll(toRemove);
-			newMeal.setMealId(UUID.randomUUID());
-		}
+
+		if (ingredientsToRemove.size() > 0) {
+			logger.info(meal.getName() + "works for " + user.getFirstName() + " but some ingredients have to change");
 		
-		if (user.getMealList() == null){
-			user.setMealList(new ArrayList<>());
+			newMeal = generateNewMealWithModifiedIngredients(meal, ingredientsToRemove);
+			addedMeals.add(newMeal);
 		}
-		
+
 		user.getMealList().add(newMeal);
-		if (mealsMap.get(newMeal) != null) {
-			Integer mealReps = mealsMap.get(newMeal) + 1;
-			mealsMap.put(newMeal, mealReps);
-		} else {
-			mealsMap.put(newMeal, 1);
-		}
 		return true;
 	}
 
-	protected List<Meal> filterList(List<Meal> mealList) {
-		List<Meal> filteredList = new ArrayList<>();
+	protected Meal generateNewMealWithModifiedIngredients(Meal meal, List<Ingredients> ingredientsToRemove) {
+		logger.info("generating modified meal");
 
-		for (int i = 0; i < 3; i++) {
-			filteredList.add(mealList.get(i));
+		Meal newMeal = new Meal(meal);
+		newMeal.getIngredients().removeAll(ingredientsToRemove);
+		newMeal.setMealId(UUID.randomUUID());
+		return newMeal;
+	}
+
+	protected int countCombinationScore(List<Meal> meals) {
+		int comboScore = 0;
+		for (Meal meal : meals) {
+			comboScore += meal.getMealScore();
 		}
-
-		return filteredList;
-
+		
+		return comboScore;
 	}
 }

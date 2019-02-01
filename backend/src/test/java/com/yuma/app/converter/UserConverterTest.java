@@ -1,20 +1,16 @@
 package com.yuma.app.converter;
 
-import com.yuma.app.document.User;
-import com.yuma.app.to.UserTO;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.yuma.app.document.User;
+import com.yuma.app.to.UserTO;
+
 public class UserConverterTest {
-
-
 	@Test
 	public void testUserConverter() {
-
 		UserTO userTo = prepareUserTO();
-
 		UserConverter userConverter = new UserConverter();
-
 		User user = userConverter.convert(userTo);
 
 		Assert.assertEquals(user.getUserId(), userTo.getUserId());
@@ -22,10 +18,9 @@ public class UserConverterTest {
 		Assert.assertEquals(user.getLastName(), userTo.getLastName());
 		Assert.assertEquals(user.isActive(), userTo.isEnabled());
 		Assert.assertEquals(user.getPassword(), userTo.getPassword());
-
 	}
 
-	public UserTO prepareUserTO() {
+	private UserTO prepareUserTO() {
 		UserTO userTO = new UserTO();
 		userTO.setUserId("id");
 		userTO.setFirstName("first name");
@@ -33,7 +28,6 @@ public class UserConverterTest {
 		userTO.setPassword("password");
 		userTO.setEnabled(true);
 		userTO.setEmail("test@email.com");
-
 		return userTO;
 	}
 }
