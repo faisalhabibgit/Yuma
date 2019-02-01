@@ -9,16 +9,14 @@ import ApiToken from '../middleware/ApiToken';
 import Ingredients from '../middleware/objects/Ingredients';
 import Meal from '../middleware/objects/Meal';
 import BuildMeal from '../middleware/objectBuilder/BuildMeal';
-
 import CustomLogging from '../CustomLogging';
-//
+
 const info = new CustomLogging ('info');
 const error = new CustomLogging('error');
 const alert = new CustomLogging('alert');
-//
+
 error.setBodyStyle({ color: 'red', size: '0.75rem' });
 info.setBodyStyle({ color: 'green', size: '0.75rem' });
-
 info.log('Ingredient is added!'); // sample
 error.log('something is not correct!'); // sample 
 
@@ -103,7 +101,6 @@ class NewMeal extends Component {
       ingredients: [...prevState.ingredients, { name: "", weight: "", calories: "", price: "" }],
     }));
     info.log('Ingredient is added!');
-
 };
 
   removeIngredient(e, index) {
