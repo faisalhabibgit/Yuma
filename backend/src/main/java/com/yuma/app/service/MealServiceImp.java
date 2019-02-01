@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
+import com.yuma.app.catalog.CombinationReport;
 import com.yuma.app.catalog.MealCatalog;
 import com.yuma.app.document.Meal;
 import com.yuma.app.document.User;
@@ -64,20 +65,33 @@ public class MealServiceImp  implements  MealServiceInt{
 	}
 
 	@Override
-	public List<MealTO> weeklyCombo() {
-		mealServiceLogger.info("generating optimal weekly combo in %s", MealServiceImp.class);
-
-		List<MealTO> mealTOS;
-		//List<Meal> mealList = mealRepository.findAll();
-		List<Meal> mealList = mealRepository.findByIsAvailableIsTrue().orElseThrow(() -> new ResourceNotFoundException("Meals", "isAvailable",true));
-		List<User> userList = userRepository.findByIsActiveIsTrue().orElseThrow(() -> new ResourceNotFoundException("User", "isActive", true));
-
-		mealList = mealCatalog.getWeeklyCombination(mealList, userList);
-		mealTOS = convertMealToMealTO(mealList);
-
-		return mealTOS;
-
+	public List<CombinationReport> generateWeeklyCombos() {
+		this.mealServiceLogger.info("generating optimal weekly combo in %s", MealServiceImp.class);
+		List<Meal> mealList = mealRepository.
+			findByIsAvailableIsTrue()
+			.orElseThrow(() -> new ResourceNotFoundException("Meals", "isAvailable",true));
+		List<User> userList = userRepository.
+			findByIsActiveIsTrue()
+			.orElseThrow(() -> new ResourceNotFoundException("User", "isActive", true));
+		List<CombinationReport> possibleComboReports = mealCatalog.generateWeeklyCombination(mealList, userList);
+		return possibleComboReports;
 	}
+
+//	@Override
+//	public List<MealTO> weeklyCombo() {
+//		mealServiceLogger.info("generating optimal weekly combo in %s", MealServiceImp.class);
+//
+//		List<MealTO> mealTOS;
+//		//List<Meal> mealList = mealRepository.findAll();
+//		List<Meal> mealList = mealRepository.findByIsAvailableIsTrue().orElseThrow(() -> new ResourceNotFoundException("Meals", "isAvailable",true));
+//		List<User> userList = userRepository.findByIsActiveIsTrue().orElseThrow(() -> new ResourceNotFoundException("User", "isActive", true));
+//
+//		mealList = mealCatalog.getWeeklyCombination(mealList, userList);
+//		mealTOS = convertMealToMealTO(mealList);
+//
+//		return mealTOS;
+//
+//	}
 	
 	@Override
 	public List<MealTO> availableMeals(){

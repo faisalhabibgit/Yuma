@@ -1,4 +1,5 @@
 package com.yuma.app.service;
+import com.yuma.app.catalog.CombinationReport;
 import com.yuma.app.document.Meal;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.repository.UserRepository;
@@ -12,7 +13,8 @@ public interface MealServiceInt {
 	public List<MealTO> list();
 	public MealTO update(MealTO mealTo);
 	public MealTO create(MealTO mealTo);
-	public List<MealTO> weeklyCombo();
+	public List<CombinationReport> generateWeeklyCombos();
+	//public List<MealTO> weeklyCombo();
 	public List<MealTO> availableMeals();
 	public void deleteMeal(UUID mealId);
 	public MealTO findByDescription(String description);	
