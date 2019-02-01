@@ -26,12 +26,13 @@ public class MealServiceImp  implements  MealServiceInt{
 	private MealRepository mealRepository;
 	private UserRepository userRepository;
 	private ConversionService conversionService;
-	private MealCatalog mealCatalog = new MealCatalog();
+	private MealCatalog mealCatalog;
 
 	public MealServiceImp(MealRepository mealRepository, UserRepository userRepository, ConversionService conversionService) {
 		this.mealRepository = mealRepository;
 		this.userRepository = userRepository;
 		this.conversionService = conversionService;
+		this.mealCatalog = new MealCatalog(mealRepository);
 	}
 
 	@Override
@@ -56,8 +57,7 @@ public class MealServiceImp  implements  MealServiceInt{
 
 	@Override
 	public MealTO create(MealTO mealTo) {
-		mealServiceLogger.info("creating Meal in %s", MealServiceImp.class);
-
+		this.mealServiceLogger.info("creating Meal in %s", MealServiceImp.class);
 		mealTo.setMealId(UUID.randomUUID());
 		Meal mealToCreate = conversionService.convert(mealTo, Meal.class);
 		Meal meal = mealRepository.save(mealToCreate);
@@ -76,23 +76,6 @@ public class MealServiceImp  implements  MealServiceInt{
 		List<CombinationReport> possibleComboReports = mealCatalog.generateWeeklyCombination(mealList, userList);
 		return possibleComboReports;
 	}
-
-//	@Override
-//	public List<MealTO> weeklyCombo() {
-//		mealServiceLogger.info("generating optimal weekly combo in %s", MealServiceImp.class);
-//
-//		List<MealTO> mealTOS;
-//		//List<Meal> mealList = mealRepository.findAll();
-//		List<Meal> mealList = mealRepository.findByIsAvailableIsTrue().orElseThrow(() -> new ResourceNotFoundException("Meals", "isAvailable",true));
-//		List<User> userList = userRepository.findByIsActiveIsTrue().orElseThrow(() -> new ResourceNotFoundException("User", "isActive", true));
-//
-//		mealList = mealCatalog.getWeeklyCombination(mealList, userList);
-//		mealTOS = convertMealToMealTO(mealList);
-//
-//		return mealTOS;
-//
-//	}
-	
 	@Override
 	public List<MealTO> availableMeals(){
 		mealServiceLogger.info("retrieving available meals in %s", MealServiceImp.class);

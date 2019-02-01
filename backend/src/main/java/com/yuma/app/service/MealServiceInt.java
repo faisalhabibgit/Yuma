@@ -14,7 +14,6 @@ public interface MealServiceInt {
 	public MealTO update(MealTO mealTo);
 	public MealTO create(MealTO mealTo);
 	public List<CombinationReport> generateWeeklyCombos();
-	//public List<MealTO> weeklyCombo();
 	public List<MealTO> availableMeals();
 	public void deleteMeal(UUID mealId);
 	public MealTO findByDescription(String description);	
