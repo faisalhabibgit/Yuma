@@ -1,6 +1,6 @@
 class User {
   constructor() {
-
+    console.log('Creating user...');
     this.userId = null;
     this.firstName = null;
     this.lastName = null;
@@ -24,8 +24,8 @@ class User {
   setDislikesList(dislikesList){this.dislikesList = dislikesList}
 
   toString() {
-    return (this.userId + this.firstName + this.lastName +
-      this.email + this.password + this.isActive + this.plan + this.dislikesList);
+    return (this.userId +', '+ this.firstName +', '+ this.lastName +', '+ 
+      this.email +', '+ this.password +', '+ this.isActive +', '+ this.plan +', '+ this.dislikesList);
   }
 }
 

@@ -5,7 +5,7 @@ import {
 import Retriever from '../middleware/Retriever';
 
 
-class DisplayMeals extends Component {
+class DisplayUsers extends Component {
 
   constructor(props) {
     super(props);
@@ -16,7 +16,7 @@ class DisplayMeals extends Component {
   }
 
   componentDidMount() {
-    const retriever = new Retriever('api/meals/all');
+    const retriever = new Retriever('api/rest/all');
     retriever.getEntityPromise()
       .then((obj) => {
         var matchedArr = [];
@@ -30,7 +30,6 @@ class DisplayMeals extends Component {
   }
 
     render() {
-      
       return(
         
         <Container>
@@ -38,18 +37,18 @@ class DisplayMeals extends Component {
           <div style={{ maxWidth:'800px', maxHeight:'275px', overflow:'scroll'}}>
           <Table striped bordered condensed>
             <thead>
-            <th className="text-center">Name</th>
-            <th className="text-center">Description</th>
+            <th className="text-center">First Name</th>
+            <th className="text-center">Last Name</th>
             </thead>
             <tbody >
             <td>
               {
-                this.state.apiObject.map(x => <tr>{x.name.toString()}</tr>)
+                this.state.apiObject.map(x => <tr>{x.firstName.toString()}</tr>)
               }
             </td>
             <td>
               {
-                this.state.apiObject.map(x => <tr>{x.description.toString()}</tr>)
+                this.state.apiObject.map(x => <tr>{x.lastName.toString()}</tr>)
               }
             </td>
             </tbody>
@@ -61,4 +60,4 @@ class DisplayMeals extends Component {
     }
 }
 
-export default DisplayMeals;
+export default DisplayUsers;
