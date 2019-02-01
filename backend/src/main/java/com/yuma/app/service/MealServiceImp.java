@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
-
 import com.yuma.app.catalog.CombinationReport;
 import com.yuma.app.catalog.MealCatalog;
 import com.yuma.app.document.Meal;
@@ -38,7 +36,6 @@ public class MealServiceImp  implements  MealServiceInt{
 	@Override
 	public List<MealTO> list() {
 		mealServiceLogger.info("fetching list of all meals in %s", MealServiceImp.class);
-
 		List<MealTO> mealTos = convertMealToMealTO(mealRepository.findAll());
 		return mealTos;
 	}
@@ -46,9 +43,7 @@ public class MealServiceImp  implements  MealServiceInt{
 	@Override
 	public MealTO update(MealTO mealTo) {
 		mealServiceLogger.info("updating meal with description %s, in %s", mealTo.getDescription(), MealServiceImp.class);
-
 		Meal meal = mealRepository.findByMealId(mealTo.getMealId()).orElseThrow(() -> new ResourceNotFoundException("Meal", "mealID", mealTo.getName()));
-
 		Meal mealToUpdate = conversionService.convert(mealTo, Meal.class);
 		meal.updateFrom(mealToUpdate);
 		Meal newMealCreated = mealRepository.save(meal);
@@ -76,6 +71,7 @@ public class MealServiceImp  implements  MealServiceInt{
 		List<CombinationReport> possibleComboReports = mealCatalog.generateWeeklyCombination(mealList, userList);
 		return possibleComboReports;
 	}
+	
 	@Override
 	public List<MealTO> availableMeals(){
 		mealServiceLogger.info("retrieving available meals in %s", MealServiceImp.class);
@@ -83,7 +79,6 @@ public class MealServiceImp  implements  MealServiceInt{
 		List<Meal> availableMeals = mealRepository.findByIsAvailableIsTrue().orElseThrow(() -> new ResourceNotFoundException("Meal", "isAvailable", true));
 		List<MealTO> mealTOS = convertMealToMealTO(availableMeals);
 		return mealTOS;
-
 	}
 
 	@Override
@@ -115,7 +110,6 @@ public class MealServiceImp  implements  MealServiceInt{
 		for (Meal meal : mealList) {
 			mealTos.add(conversionService.convert(meal, MealTO.class));
 		}
-		
 		return mealTos;
 	}
 }

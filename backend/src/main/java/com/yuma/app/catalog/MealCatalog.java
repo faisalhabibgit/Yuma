@@ -1,20 +1,16 @@
 package com.yuma.app.catalog;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
 import com.yuma.app.document.User;
@@ -31,7 +27,7 @@ public class MealCatalog {
 	private MealRepository mealRepository;
 	private List<CombinationReport> possibleCombinations;
 	private List<Meal> addedMeals;
-
+	
 	public MealCatalog(MealRepository mealRepository) {
 		this.mealRepository = mealRepository;
 		this.addedMeals = new ArrayList<>();
@@ -40,7 +36,7 @@ public class MealCatalog {
 	
 	public List<CombinationReport> generateWeeklyCombination(List<Meal> availableMeals, List<User> activeUsers) {
 		logger.info("instantiating Combination Report in generate Weekly Combination");
-
+		
 		int i = 0;
 		CombinationReport combinationReport;
 		setMealScores(availableMeals, activeUsers);

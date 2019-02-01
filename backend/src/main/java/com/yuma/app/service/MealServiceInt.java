@@ -7,7 +7,6 @@ import com.yuma.app.to.MealTO;
 import org.springframework.core.convert.ConversionService;
 import java.util.List;
 import java.util.UUID;
-
 public interface MealServiceInt {
 
 	public List<MealTO> list();
