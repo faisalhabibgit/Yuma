@@ -1,9 +1,6 @@
 package com.yuma.app.service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -221,6 +218,8 @@ public class CombinationReportService {
 	}
 	
 	public void saveCombinationReport(int i){
-		this.combinationReportRepository.save(this.possibleCombinations.get(i));
+		CombinationReport combinationReport = this.possibleCombinations.get(i);
+		combinationReport.setDate(new Date());
+		this.combinationReportRepository.save(combinationReport);
 	}
 }

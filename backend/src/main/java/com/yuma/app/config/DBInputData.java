@@ -1,113 +1,93 @@
-//package com.yuma.app.config;
-//
-//
-//import com.yuma.app.document.*;
-//import com.yuma.app.repository.MealRepository;
-//import com.yuma.app.repository.RoleRepository;
-//import com.yuma.app.repository.UserRepository;
-//import lombok.extern.slf4j.Slf4j;
-//import org.json.simple.JSONArray;
-//import org.json.simple.JSONObject;
-//import org.json.simple.parser.JSONParser;
-//import org.json.simple.parser.ParseException;
-//import org.springframework.boot.CommandLineRunner;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-//
-//import java.io.FileReader;
-//import java.io.IOException;
-//import java.util.*;
-//
-//
-//@Slf4j
-//@EnableMongoRepositories(basePackageClasses = RoleRepository.class)
-//
-//@Configuration
-//public class DBInputData {
-//	
-//	private static List<User> parseJsonFileAndCreateAUserList() {
-//
-//		List<User> usersList = null;
-//			
-//		JSONParser parser = new JSONParser();
-//
-//		try {
-//			Object obj = parser.parse(new FileReader("/Users/faisal/Documents/Yuma/backend/src/main/resources/preferences_parsed.json"));
-//
-//			JSONObject jsonObject = (JSONObject) obj;
-//			JSONObject users = (JSONObject) jsonObject.get("users");
-//			
-//			usersList = new ArrayList<>();
-//			User user;
-//			Plan plan;
-//			JSONArray jsonArray;
-//
-//			for (Object key: users.keySet()) {
-//				user = new User();
-//				plan = new Plan();
-//				List<String> likes = new ArrayList<>();
-//				List<String> dislikes = new ArrayList<>();
-//				user.setLikes(likes);
-//				user.setDislikesList(dislikes);
-//				user.setPlan(plan);
-//				jsonArray = (JSONArray)users.get(key);
-//
-//				for (int i = 0; i < jsonArray.size(); i++) {
-//					JSONObject jsonobject = (JSONObject)jsonArray.get(i);
-//					
-//					String like = (String)jsonobject.get("general");
-//					if(like != null) {
-//						user.getLikes().add(like);
-//					}
-//					
-//					String numOfMeals = (String)jsonobject.get("plan");
-//					if(numOfMeals != null) {
-//						user.getPlan().setNumOfMeals(Integer.parseInt(numOfMeals));
-//					}
-//
-//					String dislike = (String)jsonobject.get("allergy");
-//					if(dislike != null) {
-//						user.getDislikesList().add(dislike);
-//					}
-//					
-//				}
-//				usersList.add(user);
-//			}
-//
-//			for (User userCreated: usersList) {
-//				System.out.println("user info: " + "number of meals: " + userCreated.getPlan().getNumOfMeals() + " likes: " + userCreated.getLikes().toString()
-//					+ " dislikes: " + userCreated.getLikes().toString());
-//			}
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return usersList;
-//	}
-//
-//	@Bean
-//	CommandLineRunner init(RoleRepository roleRepository) {
-//
-//		return args -> {
-//
-//			Optional<Role> adminRole = roleRepository.findByRole("ADMIN");
-//			if (!adminRole.isPresent()) {
-//				Role newAdminRole = new Role();
-//				newAdminRole.setRole("ADMIN");
-//				roleRepository.save(newAdminRole);
-//			}
-//
-//			Optional<Role> userRole = roleRepository.findByRole("USER");
-//			if (!userRole.isPresent()) {
-//				Role newUserRole = new Role();
-//				newUserRole.setRole("USER");
-//				roleRepository.save(newUserRole);
-//			}
-//		};
-//
-//	}
+package com.yuma.app.config;
+
+
+import com.yuma.app.document.Plan;
+import com.yuma.app.document.User;
+import com.yuma.app.repository.RoleRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+
+
+@Slf4j
+@EnableMongoRepositories(basePackageClasses = RoleRepository.class)
+
+@Configuration
+public class DBInputData {
+	
+	public static void main(String[] args) {
+		parseJsonFileAndCreateAUserList();
+	}
+
+	private static List<User> parseJsonFileAndCreateAUserList() {
+
+		List<User> usersList = null;
+
+		JSONParser parser = new JSONParser();
+
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader("backend/src/main/resources/preferences_parsed.json"));
+			Object obj = parser.parse(reader);
+
+			JSONObject jsonObject = (JSONObject) obj;
+			JSONObject users = (JSONObject) jsonObject.get("users");
+
+			usersList = new ArrayList<>();
+			User user;
+			Plan plan;
+			JSONArray jsonArray;
+
+			for (Object key: users.keySet()) {
+				user = new User();
+				plan = new Plan();
+				List<String> likes = new ArrayList<>();
+				List<String> dislikes = new ArrayList<>();
+				user.setLikes(likes);
+				user.setDislikesList(dislikes);
+				user.setPlan(plan);
+				jsonArray = (JSONArray)users.get(key);
+
+				for (int i = 0; i < jsonArray.size(); i++) {
+					JSONObject jsonobject = (JSONObject)jsonArray.get(i);
+
+					String like = (String)jsonobject.get("general");
+					if(like != null) {
+						user.getLikes().add(like);
+					}
+
+					String numOfMeals = (String)jsonobject.get("plan");
+					if(numOfMeals != null) {
+						user.getPlan().setNumOfMeals(Integer.parseInt(numOfMeals));
+					}
+
+					String dislike = (String)jsonobject.get("allergy");
+					if(dislike != null) {
+						user.getDislikesList().add(dislike);
+					}
+
+				}
+				usersList.add(user);
+			}
+
+			for (User userCreated: usersList) {
+				System.out.println("user info: " + "number of meals: " + userCreated.getPlan().getNumOfMeals() + " likes: " + userCreated.getLikes().toString()
+					+ " dislikes: " + userCreated.getLikes().toString());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return usersList;
+	}
 //
 //	@Bean
 //	CommandLineRunner generateData (MealRepository mealRepository, UserRepository userRepository){
@@ -223,4 +203,26 @@
 //
 //	}
 //
-//}
+//	@Bean
+//	CommandLineRunner init(RoleRepository roleRepository) {
+//
+//		return args -> {
+//
+//			Optional<Role> adminRole = roleRepository.findByRole("ADMIN");
+//			if (!adminRole.isPresent()) {
+//				Role newAdminRole = new Role();
+//				newAdminRole.setRole("ADMIN");
+//				roleRepository.save(newAdminRole);
+//			}
+//
+//			Optional<Role> userRole = roleRepository.findByRole("USER");
+//			if (!userRole.isPresent()) {
+//				Role newUserRole = new Role();
+//				newUserRole.setRole("USER");
+//				roleRepository.save(newUserRole);
+//			}
+//		};
+//
+//	}
+
+}

@@ -1,6 +1,7 @@
 package com.yuma.app.document;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -26,6 +27,7 @@ public class CombinationReport {
 	private int combinationScore;
 	private List<User> userList;
 	private List<Meal> mealsList = new ArrayList<>();
+	private Date date;
 
 	public CombinationReport(int numberOfBlanks, int combinationScore, List<User> activeUsers, List<Meal> availableMeals) {
 		this.numberOfBlanks = numberOfBlanks;
