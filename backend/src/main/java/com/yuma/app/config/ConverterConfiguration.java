@@ -17,7 +17,6 @@ public class ConverterConfiguration {
 
 	@Autowired
 	public void configureConverterService(final ConversionService conversionService) {
-
 		ConverterRegistry registry = (ConverterRegistry) conversionService;
 
 		registry.addConverter(new MealConverter());
@@ -26,6 +25,5 @@ public class ConverterConfiguration {
 		registry.addConverter(new UserTOConverter());
 		registry.addConverter(new SignupRequestConverter());
 		registry.addConverter(new CombinationReportTOConverter(conversionService));
-
 	}
 }
