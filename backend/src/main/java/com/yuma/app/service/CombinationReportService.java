@@ -1,42 +1,51 @@
-package com.yuma.app.catalog;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.mongodb.core.mapping.Document;
+package com.yuma.app.service;
+
+import com.yuma.app.document.CombinationReport;
 import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
 import com.yuma.app.document.User;
 import com.yuma.app.repository.MealRepository;
+import com.yuma.app.repository.UserRepository;
+import com.yuma.app.to.CombinationReportTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.stereotype.Service;
 
-@Slf4j
-@Document
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class MealCatalog {
-	private Logger logger = LoggerFactory.getLogger(MealCatalog.class);
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+@Service
+public class CombinationReportService {
+
+	private Logger logger = LoggerFactory.getLogger(CombinationReportService.class);
+	
+	@Autowired
 	private MealRepository mealRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 	private List<CombinationReport> possibleCombinations;
 	private List<Meal> addedMeals;
-	
-	public MealCatalog(MealRepository mealRepository) {
-		this.mealRepository = mealRepository;
+	private List<Meal> availableMeals;
+	private List<User> activeUsers;
+	private ConversionService conversionService;
+
+	public CombinationReportService(ConversionService conversionService) {
+		this.conversionService = conversionService;
 		this.addedMeals = new ArrayList<>();
 		this.possibleCombinations = new ArrayList<>();
 	}
-	
-	public List<CombinationReport> generateWeeklyCombination(List<Meal> availableMeals, List<User> activeUsers) {
+
+	public List<CombinationReportTO> generateWeeklyCombination() {
 		logger.info("instantiating Combination Report in generate Weekly Combination");
-		
+
+		this.availableMeals = mealRepository.findByIsAvailableIsTrue();
+		this.activeUsers = userRepository.findByIsActiveIsTrue();
 		int i = 0;
 		CombinationReport combinationReport;
 		setMealScores(availableMeals, activeUsers);
@@ -51,7 +60,9 @@ public class MealCatalog {
 			combinationReport.getMealsList().addAll(addedMeals);
 			i++;
 		}
-		return possibleCombinations;
+		
+		return possibleCombinations.stream().map(combinationReport1 ->
+			conversionService.convert(combinationReport1, CombinationReportTO.class)).collect(Collectors.toList());
 	}
 
 	protected void runMealCombinationAlgorithm(CombinationReport combinationReport) {
@@ -64,7 +75,7 @@ public class MealCatalog {
 
 	protected void setMealScores(List<Meal> mealList, List<User> userList) {
 		logger.info("Setting meal scores");
-		
+
 		boolean scorable = true;
 		List<String> userDislikesList;
 		for (User user : userList) {
@@ -93,16 +104,16 @@ public class MealCatalog {
 			if (user.getMealList().size() < user.getPlan().getNumOfMeals()) {
 				if (checkIfMealWorks(meal, user)) {
 					mealCounter++;
-				} 
+				}
 			} else {
-				break; 
+				break;
 			}
 		}
 
 		if (user.getPlan().getNumOfMeals() == mealCounter) {
 			return;
 		}
-		
+
 		if (user.getMealList().size() != user.getPlan().getNumOfMeals()) {
 			if (user.getPlan().getNumOfMeals() > combinationReport.getMealsList().size()) {
 				numOfBlanks = combinationReport.getMealsList().size() - user.getMealList().size();
@@ -117,10 +128,10 @@ public class MealCatalog {
 		numOfBlanks = user.getPlan().getNumOfMeals() - user.getMealList().size();
 		combinationReport.setNumberOfBlanks(combinationReport.getNumberOfBlanks() + numOfBlanks);
 	}
-	
+
 	protected void generatePossibleMealsForUserWithBlanks(CombinationReport combinationReport, User user, int timesToRun){
 		int timesRan = 0;
-		
+
 		for (Meal meal : combinationReport.getMealsList()) {
 			if (timesRan <= timesToRun) {
 				if (user.getMealList().size() < user.getPlan().getNumOfMeals()) {
@@ -135,7 +146,7 @@ public class MealCatalog {
 
 	protected void replaceLowestScore(CombinationReport combinationReport, int index) {
 		logger.info("replacing lowest scored meal with a higher one");
-		
+
 		List<Meal> highlyRankedMeals = mealRepository.findTop3ByOrderByMealScoreDesc();
 		int lowestRankedIndex = getLowestRankedMeal(combinationReport.getMealsList());
 		Meal lowestRankedMeal = combinationReport.getMealsList().get(lowestRankedIndex);
@@ -152,7 +163,7 @@ public class MealCatalog {
 		for (Meal meal : mealList) {
 			integers.add(meal.getMealScore());
 		}
-		
+
 		lowestIndex = integers.indexOf(Collections.min(integers));
 
 		return lowestIndex;
@@ -160,7 +171,7 @@ public class MealCatalog {
 
 	protected boolean checkIfMealWorks(Meal meal, User user) {
 		logger.info("checking if: " + meal.getName() + " works for " + user.getFirstName());
-		
+
 		List<String> userDislikesList = user.getDislikesList();
 		List<Ingredients> ingredientsToRemove = new ArrayList<>();
 		Meal newMeal = meal;
@@ -177,7 +188,7 @@ public class MealCatalog {
 
 		if (ingredientsToRemove.size() > 0) {
 			logger.info(meal.getName() + "works for " + user.getFirstName() + " but some ingredients have to change");
-		
+
 			newMeal = generateNewMealWithModifiedIngredients(meal, ingredientsToRemove);
 			addedMeals.add(newMeal);
 		}
@@ -200,7 +211,7 @@ public class MealCatalog {
 		for (Meal meal : meals) {
 			comboScore += meal.getMealScore();
 		}
-		
+
 		return comboScore;
 	}
 }

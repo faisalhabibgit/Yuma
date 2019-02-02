@@ -89,7 +89,7 @@ public class UserServiceImp implements UserServiceInt {
 	
 	public List<UserTO> activeUsers(){
 		userServiceLogger.info("fetching users list");
-		List<User> userList = userRepository.findByIsActiveIsTrue().orElseThrow(() -> new ResourceNotFoundException("User", "isActive", true));
+		List<User> userList = userRepository.findByIsActiveIsTrue();
 		
 		return convertUserListToUserTOList(userList);
 

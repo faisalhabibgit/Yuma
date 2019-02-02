@@ -1,36 +1,32 @@
 package com.yuma.app.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.core.convert.ConversionService;
-import org.springframework.stereotype.Service;
-import com.yuma.app.catalog.CombinationReport;
-import com.yuma.app.catalog.MealCatalog;
 import com.yuma.app.document.Meal;
-import com.yuma.app.document.User;
 import com.yuma.app.exception.ResourceNotFoundException;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.repository.UserRepository;
 import com.yuma.app.to.MealTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
-public class MealServiceImp  implements  MealServiceInt{
+public class MealServiceImp  implements  MealServiceInt {
 
 	private Logger mealServiceLogger = LoggerFactory.getLogger(MealServiceImp.class);
 	private MealRepository mealRepository;
 	private UserRepository userRepository;
 	private ConversionService conversionService;
-	private MealCatalog mealCatalog;
 
 	public MealServiceImp(MealRepository mealRepository, UserRepository userRepository, ConversionService conversionService) {
 		this.mealRepository = mealRepository;
 		this.userRepository = userRepository;
 		this.conversionService = conversionService;
-		this.mealCatalog = new MealCatalog(mealRepository);
 	}
 
 	@Override
@@ -58,25 +54,12 @@ public class MealServiceImp  implements  MealServiceInt{
 		Meal meal = mealRepository.save(mealToCreate);
 		return conversionService.convert(meal, MealTO.class);
 	}
-
-	@Override
-	public List<CombinationReport> generateWeeklyCombos() {
-		this.mealServiceLogger.info("generating optimal weekly combo in %s", MealServiceImp.class);
-		List<Meal> mealList = mealRepository.
-			findByIsAvailableIsTrue()
-			.orElseThrow(() -> new ResourceNotFoundException("Meals", "isAvailable",true));
-		List<User> userList = userRepository.
-			findByIsActiveIsTrue()
-			.orElseThrow(() -> new ResourceNotFoundException("User", "isActive", true));
-		List<CombinationReport> possibleComboReports = mealCatalog.generateWeeklyCombination(mealList, userList);
-		return possibleComboReports;
-	}
 	
 	@Override
 	public List<MealTO> availableMeals(){
 		mealServiceLogger.info("retrieving available meals in %s", MealServiceImp.class);
 		
-		List<Meal> availableMeals = mealRepository.findByIsAvailableIsTrue().orElseThrow(() -> new ResourceNotFoundException("Meal", "isAvailable", true));
+		List<Meal> availableMeals = mealRepository.findByIsAvailableIsTrue();
 		List<MealTO> mealTOS = convertMealToMealTO(availableMeals);
 		return mealTOS;
 	}
