@@ -50,12 +50,12 @@ class AvailableMeals extends Component {
         <h4> Number of Available Meals: {AvailableMealsName.length} </h4>
 
         <div style={{ maxWidth:'800px', maxHeight:'275px', overflow:'scroll'}}>
-          <Table striped bordered condensed>
-            <thead>
-            <th className="text-center">Name</th>
+          <Table bordered condensed>
+            <thead style={{background: '#599BE9',color:'white'}}>
+            <th className="text-center" >Name</th>
             <th className="text-center">Description</th>
             </thead>
-            <tbody >
+            <tbody style={{background:'#d3d3d3'}} >
             <td>
               {AvailableMealsName.map((item,index) =>
                 <tr key={index}>

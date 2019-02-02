@@ -13,6 +13,5 @@ public interface MealRepository extends MongoRepository<Meal, UUID>, CrudReposit
 	Optional<Meal> findByDescription(String description);
 	Optional<Meal> findByMealId(UUID mealID);
 	List<Meal> findByIsAvailableIsTrue();
-	//List<Meal> findTop3ByOrderByIsAvailableIsFalseAndMealScoreDesc();
 	List<Meal> findTop3ByOrderByMealScoreDesc();
 }

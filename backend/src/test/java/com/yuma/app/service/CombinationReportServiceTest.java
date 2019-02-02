@@ -1,26 +1,30 @@
 package com.yuma.app.service;
 
-import com.yuma.app.document.*;
-import com.yuma.app.repository.MealRepository;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.core.convert.ConversionService;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.core.convert.ConversionService;
+
+import com.yuma.app.document.CombinationReport;
+import com.yuma.app.document.Consumer;
+import com.yuma.app.document.Ingredients;
+import com.yuma.app.document.Meal;
+import com.yuma.app.document.Plan;
+import com.yuma.app.repository.MealRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CombinationReportServiceTest {
 
-	@InjectMocks
 	private CombinationReportService combinationReportService;
 	
 	@Mock
@@ -40,14 +44,16 @@ public class CombinationReportServiceTest {
 
 	@Before
 	public void setup() {
+		combinationReportService = new CombinationReportService(conversionService);
 		combinationReport = new CombinationReport(0, 0, new ArrayList<>(), new ArrayList<>());
+		initMocks(this);
 	}
 
 	@Test
 	public void givenMealAndNonMatchingUserLikesWhenCheckIfMealWorksThenShouldReturnFalse() {
 		
 		Meal meal = prepareAndReturnMeal();
-		User user = prepareAndReturnUser();
+		Consumer user = prepareAndReturnUser();
 		
 		boolean result = combinationReportService.checkIfMealWorks(meal, user);
 		Assert.assertFalse(result);
@@ -57,7 +63,7 @@ public class CombinationReportServiceTest {
 	public void givenMealAndMatchingUserLikesWhenCheckIfMealWorksThenShouldReturnTrue() {
 		
 		Meal meal = prepareAndReturnMeal();
-		User user = prepareAndReturnUser();
+		Consumer user = prepareAndReturnUser();
 		user.getDislikesList().clear();
 		combinationReport.setMealsList(prepareMealList());
 
@@ -71,7 +77,7 @@ public class CombinationReportServiceTest {
 		
 		Meal meal = prepareAndReturnMeal();
 		meal.getIngredients().get(0).setOptional(true);
-		User user = prepareAndReturnUser();
+		Consumer user = prepareAndReturnUser();
 		boolean result = combinationReportService.checkIfMealWorks(meal, user);
 
 		Assert.assertTrue(result);
@@ -81,7 +87,7 @@ public class CombinationReportServiceTest {
 	public void givenMealListAndUserListWhenScoreMealCalledThenShouldReturnMealListWithScore() {
 		
 		List<Meal> meals = prepareMealList();
-		List<User> users = prepareUserList();
+		List<Consumer> users = prepareUserList();
 
 		combinationReportService.setMealScores(meals, users);
 
@@ -118,51 +124,53 @@ public class CombinationReportServiceTest {
 		Assert.assertTrue(resultMeal.getIngredients().isEmpty());
 	}
 	
-//	@Test
-//	public void testGetLowestRankedMeal() {
-//		
-//		List<Meal> meals = prepareMealList();
-//		meals.get(2).setMealScore(1);
-//		meals.get(1).setMealScore(2);
-//		meals.get(0).setMealScore(3);
-//		
-//		int result = combinationReportService.getLowestRankedMeal(meals);
-//		
-//		Assert.assertEquals(result, 2);
-//		
-//	}
+	@Test
+	public void testGetLowestRankedMeal() {
+
+		List<Meal> meals = prepareMealList();
+		meals.get(2).setMealScore(1);
+		meals.get(1).setMealScore(2);
+		meals.get(0).setMealScore(3);
+
+		int result = combinationReportService.getLowestRankedMeal(meals);
+
+		Assert.assertEquals(result, 2);
+
+	}
 	
-//	@Test
-//	public void testReplaceLowestScore() {
-//
-//		List<Meal> meals = prepareMealList();
-//		meals.get(0).setMealScore(1);
-//		meals.get(1).setMealScore(2);
-//		meals.get(2).setMealScore(3);
-//
-//		CombinationReport combinationReport = prepareAndReturnCombinationReport();
-//
-//		when(mealRepository.findTop3ByOrderByMealScoreDesc()).thenReturn(meals);
-//
-//		combinationReportService.replaceLowestScore(combinationReport, 1);
-//		
-//		Assert.assertEquals(combinationReport.getMealsList().get(0).getMealScore(), 2);
-//	}
+	@Test
+	public void testReplaceLowestScore() {
+
+		List<Meal> meals = prepareMealList();
+		meals.get(0).setMealScore(1);
+		meals.get(1).setMealScore(2);
+		meals.get(2).setMealScore(3);
+
+		combinationReport.setMealsList(meals);
+
+		when(mealRepository.findTop3ByOrderByMealScoreDesc()).thenReturn(meals);
+
+		List<Meal> highlyRankedMeals = mealRepository.findTop3ByOrderByMealScoreDesc();
+
+		combinationReportService.replaceLowestScore(combinationReport, 0, highlyRankedMeals);
+
+		Assert.assertEquals(combinationReport.getMealsList().get(0).getMealScore(), 1);
+	}
 	
 	@Test
 	public void testGeneratePossibleMealsForUser() {
 		
 		CombinationReport combinationReport = new CombinationReport();
 		combinationReport.setMealsList(prepareMealList());
-		User user = new User();
-		user.setDislikesList(new ArrayList<>());
+		Consumer consumer = new Consumer();
+		consumer.setDislikesList(new ArrayList<>());
 		Plan plan = new Plan();
 		plan.setNumOfMeals(4);
-		user.setPlan(plan);
+		consumer.setPlan(plan);
 
-		combinationReportService.generatePossibleMealsForUser(combinationReport, user, 0);
+		combinationReportService.generatePossibleMealsForUser(combinationReport, consumer, 0);
 		
-		Assert.assertEquals(user.getMealList().size(), 4);
+		Assert.assertEquals(consumer.getMealList().size(), 4);
 	}
 	
 	private List<Meal> prepareMealList() {
@@ -202,19 +210,19 @@ public class CombinationReportServiceTest {
 		return meals;
 	}
 
-	private List<User> prepareUserList() {
+	private List<Consumer> prepareUserList() {
 		
-		List<User> users = new ArrayList<>();
-		User user1 = new User();
+		List<Consumer> users = new ArrayList<>();
+		Consumer user1 = new Consumer();
 		List<String> dislikesList1 = new ArrayList<>();
 		dislikesList1.add("onions");
 		user1.setDislikesList(dislikesList1);
 
-		User user2 = new User();
+		Consumer user2 = new Consumer();
 		List<String> dislikesList2 = new ArrayList<>();
 		user2.setDislikesList(dislikesList2);
 
-		User user3 = new User();
+		Consumer user3 = new Consumer();
 		List<String> dislikesList3 = new ArrayList<>();
 		dislikesList3.add("tomatoes");
 		user3.setDislikesList(dislikesList3);
@@ -226,9 +234,9 @@ public class CombinationReportServiceTest {
 		return users;
 	}
 
-	private User prepareAndReturnUser() {
+	private Consumer prepareAndReturnUser() {
 		
-		User user = User.builder()
+		Consumer user = Consumer.builder()
 			.firstName("ahmad")
 			.lastName("baiazid")
 			.email("ahmad.baiz@got.com")

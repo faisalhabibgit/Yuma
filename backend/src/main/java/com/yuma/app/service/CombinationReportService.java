@@ -13,9 +13,9 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
 import com.yuma.app.document.CombinationReport;
+import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
-import com.yuma.app.document.User;
 import com.yuma.app.repository.CombinationReportRepository;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.repository.UserRepository;
@@ -36,8 +36,6 @@ public class CombinationReportService {
 	private CombinationReportRepository combinationReportRepository;
 	private List<CombinationReport> possibleCombinations;
 	private List<Meal> addedMeals;
-	private List<Meal> availableMeals;
-	private List<User> activeUsers;
 	private ConversionService conversionService;
 
 	public CombinationReportService(ConversionService conversionService) {
@@ -48,19 +46,20 @@ public class CombinationReportService {
 
 	public List<CombinationReportTO> generateWeeklyCombination() {
 		logger.info("instantiating Combination Report in generate Weekly Combination");
-
-		this.availableMeals = mealRepository.findByIsAvailableIsTrue();
-		this.activeUsers = userRepository.findByIsActiveIsTrue();
+		List<Meal> availableMeals = mealRepository.findByIsAvailableIsTrue();
+		List<Consumer> activeUsers = userRepository.findByIsActiveIsTrue();
+		List<Meal> highlyRankedMeals;
 		int i = 0;
 		CombinationReport combinationReport;
 		setMealScores(availableMeals, activeUsers);
 		combinationReport = new CombinationReport(0, countCombinationScore(availableMeals), activeUsers, availableMeals);
 		runMealCombinationAlgorithm(combinationReport);
 		combinationReport.getMealsList().addAll(addedMeals);
+		highlyRankedMeals = mealRepository.findTop3ByOrderByMealScoreDesc();
 
 		while (i < 2 && (combinationReport.getNumberOfBlanks() != 0)) {
 			combinationReport = new CombinationReport(0, countCombinationScore(availableMeals), activeUsers, availableMeals);
-			replaceLowestScore(combinationReport, i);
+			replaceLowestScore(combinationReport, i, highlyRankedMeals);
 			runMealCombinationAlgorithm(combinationReport);
 			combinationReport.getMealsList().addAll(addedMeals);
 			i++;
@@ -72,18 +71,18 @@ public class CombinationReportService {
 
 	protected void runMealCombinationAlgorithm(CombinationReport combinationReport) {
 		logger.info("running meal combo Algorithm");
-		for (User user : combinationReport.getUserList()) {
+		for (Consumer user : combinationReport.getUserList()) {
 			generatePossibleMealsForUser(combinationReport, user, 0);
 		}
 		possibleCombinations.add(combinationReport);
 	}
 
-	protected void setMealScores(List<Meal> mealList, List<User> userList) {
+	protected void setMealScores(List<Meal> mealList, List<Consumer> userList) {
 		logger.info("Setting meal scores");
 
 		boolean scorable = true;
 		List<String> userDislikesList;
-		for (User user : userList) {
+		for (Consumer user : userList) {
 			userDislikesList = user.getDislikesList();
 			for (Meal meal : mealList) {
 				for (Ingredients ingredient : meal.getIngredients()) {
@@ -101,7 +100,7 @@ public class CombinationReportService {
 		}
 	}
 
-	protected void generatePossibleMealsForUser(CombinationReport combinationReport, User user, int mealCounter) {
+	protected void generatePossibleMealsForUser(CombinationReport combinationReport, Consumer user, int mealCounter) {
 		logger.info("inside generate possible meals for that user");
 		int numOfBlanks;
 
@@ -134,7 +133,7 @@ public class CombinationReportService {
 		combinationReport.setNumberOfBlanks(combinationReport.getNumberOfBlanks() + numOfBlanks);
 	}
 
-	protected void generatePossibleMealsForUserWithBlanks(CombinationReport combinationReport, User user, int timesToRun){
+	protected void generatePossibleMealsForUserWithBlanks(CombinationReport combinationReport, Consumer user, int timesToRun){
 		int timesRan = 0;
 
 		for (Meal meal : combinationReport.getMealsList()) {
@@ -149,10 +148,9 @@ public class CombinationReportService {
 		}
 	}
 
-	protected void replaceLowestScore(CombinationReport combinationReport, int index) {
+	protected void replaceLowestScore(CombinationReport combinationReport, int index, List<Meal> highlyRankedMeals) {
 		logger.info("replacing lowest scored meal with a higher one");
-
-		List<Meal> highlyRankedMeals = mealRepository.findTop3ByOrderByMealScoreDesc();
+		
 		int lowestRankedIndex = getLowestRankedMeal(combinationReport.getMealsList());
 		Meal lowestRankedMeal = combinationReport.getMealsList().get(lowestRankedIndex);
 
@@ -174,7 +172,7 @@ public class CombinationReportService {
 		return lowestIndex;
 	}
 
-	protected boolean checkIfMealWorks(Meal meal, User user) {
+	protected boolean checkIfMealWorks(Meal meal, Consumer user) {
 		logger.info("checking if: " + meal.getName() + " works for " + user.getFirstName());
 
 		List<String> userDislikesList = user.getDislikesList();

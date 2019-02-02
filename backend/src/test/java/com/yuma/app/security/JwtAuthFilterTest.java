@@ -1,6 +1,16 @@
 package com.yuma.app.security;
 
-import com.yuma.app.service.CustomUserDetailsService;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,16 +19,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.yuma.app.service.CustomUserDetailsService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class JwtAuthFilterTest {
@@ -93,8 +94,7 @@ public class JwtAuthFilterTest {
 	}
 	
 	UserPrincipal prepareUserPrincipal() {
-		UserPrincipal userPrincipal = new UserPrincipal(userId, "first name", "last name", null,
-			null, true, null, null, null);
+		UserPrincipal userPrincipal = new UserPrincipal(userId, "first name", "last name", null, true, null, null);
 		return userPrincipal;
 	}
 

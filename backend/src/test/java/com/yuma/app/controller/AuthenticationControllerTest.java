@@ -1,9 +1,9 @@
 package com.yuma.app.controller;
 
-import com.yuma.app.payload.LoginRequest;
-import com.yuma.app.payload.SignUpRequest;
-import com.yuma.app.security.JwtTokenProvider;
-import com.yuma.app.service.UserServiceImp;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,9 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.yuma.app.payload.LoginRequest;
+import com.yuma.app.payload.SignUpRequest;
+import com.yuma.app.security.JwtTokenProvider;
+import com.yuma.app.service.AdminService;
 
 @RunWith(MockitoJUnitRunner.class)
 
@@ -29,7 +30,7 @@ public class AuthenticationControllerTest {
 	AuthenticationManager authenticationManager;
 
 	@Mock
-	UserServiceImp userService;
+	AdminService adminService;
 
 	@Mock
 	JwtTokenProvider jwtTokenProvider;
@@ -50,7 +51,7 @@ public class AuthenticationControllerTest {
 
 		SignUpRequest signUpRequest = prepareSignUpRequest();
 
-		when(userService.existsByEmail(signUpRequest.getEmail())).thenReturn(true);
+		when(adminService.existsByEmail(signUpRequest.getEmail())).thenReturn(true);
 
 		ResponseEntity<?>  responseEntity = authenticationController.registerUser(signUpRequest);
 

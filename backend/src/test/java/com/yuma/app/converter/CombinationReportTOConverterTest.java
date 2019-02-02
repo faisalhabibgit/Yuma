@@ -1,11 +1,10 @@
 package com.yuma.app.converter;
 
-import com.yuma.app.document.CombinationReport;
-import com.yuma.app.document.Meal;
-import com.yuma.app.document.User;
-import com.yuma.app.to.CombinationReportTO;
-import com.yuma.app.to.MealTO;
-import com.yuma.app.to.UserTO;
+import static org.mockito.Mockito.verify;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,10 +12,12 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.core.convert.ConversionService;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.mockito.Mockito.*;
+import com.yuma.app.document.CombinationReport;
+import com.yuma.app.document.Consumer;
+import com.yuma.app.document.Meal;
+import com.yuma.app.to.CombinationReportTO;
+import com.yuma.app.to.MealTO;
+import com.yuma.app.to.UserTO;
 
 
 
@@ -77,13 +78,13 @@ public class CombinationReportTOConverterTest {
 		return meals;
 	}
 
-	private List<User> prepareUserList() {
+	private List<Consumer> prepareUserList() {
 		
-		List<User> users = new ArrayList<>();
+		List<Consumer> users = new ArrayList<>();
 
-		User user1 = new User();
+		Consumer user1 = new Consumer();
 		user1.setFirstName("user1 first name");
-		User user2 = new User();
+		Consumer user2 = new Consumer();
 		user2.setLastName("user2 first name");
 
 

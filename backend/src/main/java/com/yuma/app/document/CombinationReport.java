@@ -24,10 +24,10 @@ public class CombinationReport {
 	private String id;
 	private int numberOfBlanks;
 	private int combinationScore;
-	private List<User> userList;
+	private List<Consumer> userList;
 	private List<Meal> mealsList = new ArrayList<>();
 
-	public CombinationReport(int numberOfBlanks, int combinationScore, List<User> activeUsers, List<Meal> availableMeals) {
+	public CombinationReport(int numberOfBlanks, int combinationScore, List<Consumer> activeUsers, List<Meal> availableMeals) {
 		this.numberOfBlanks = numberOfBlanks;
 		this.combinationScore = combinationScore;
 		this.userList = activeUsers;
