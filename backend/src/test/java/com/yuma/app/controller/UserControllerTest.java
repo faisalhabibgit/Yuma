@@ -6,7 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
-import com.yuma.app.service.UserServiceImp;
+import com.yuma.app.service.ConsumerService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -21,7 +21,7 @@ public class UserControllerTest {
 	UserController userController;
 
 	@Mock
-	UserServiceImp userService;
+	ConsumerService userService;
 
 	@Test
 	public void getAllTest() {

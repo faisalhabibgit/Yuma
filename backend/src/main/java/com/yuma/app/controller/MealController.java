@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import com.yuma.app.service.MealServiceImp;
+import com.yuma.app.service.MealService;
 import com.yuma.app.catalog.CombinationReport;
 import com.yuma.app.to.MealTO;
 
@@ -28,10 +28,10 @@ import com.yuma.app.to.MealTO;
 public class MealController {
 
 	final Logger logger = LoggerFactory.getLogger("meal Logger");
-	private MealServiceImp mealService;
+	private MealService mealService;
 
 	@Autowired
-	public MealController(MealServiceImp mealService) {
+	public MealController(MealService mealService) {
 		this.mealService = mealService;
 	}
 

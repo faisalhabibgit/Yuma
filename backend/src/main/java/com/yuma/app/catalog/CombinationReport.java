@@ -9,8 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Meal;
-import com.yuma.app.document.User;
 
 @Setter
 @Getter
@@ -20,7 +20,7 @@ import com.yuma.app.document.User;
 public class CombinationReport {
 	private int numberOfBlanks;
 	private int combinationScore;
-	private List<User> userList;
+	private List<Consumer> consumerList;
 	private List<Meal> mealsList = new ArrayList<>();
 	
 	

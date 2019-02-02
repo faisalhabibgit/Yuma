@@ -1,46 +1,46 @@
 package com.yuma.app.security;
 
-import com.yuma.app.document.Role;
-import com.yuma.app.document.User;
+import java.util.HashSet;
+
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.HashSet;
+import com.yuma.app.document.Admin;
+import com.yuma.app.document.Role;
 
 public class UserPrincipalTest {
 	
 	@Test
 	public void testCreateUserPrincipal() {
 		
-		User user = prepareUser();
+		Admin consumer = prepareUser();
 		
-		UserPrincipal userPrincipal = UserPrincipal.create(user);
+		UserPrincipal userPrincipal = UserPrincipal.create(consumer);
 
-		Assert.assertEquals(userPrincipal.getUserId(), user.getUserId());
-		Assert.assertEquals(userPrincipal.getEmail(), user.getEmail());
-		Assert.assertEquals(userPrincipal.getPassword(), user.getPassword());
-		Assert.assertEquals(userPrincipal.getFirstName(), user.getFirstName());
-		Assert.assertEquals(userPrincipal.getLastName(), user.getLastName());
+		Assert.assertEquals(userPrincipal.getUserId(), consumer.getUserId());
+		Assert.assertEquals(userPrincipal.getEmail(), consumer.getEmail());
+		Assert.assertEquals(userPrincipal.getPassword(), consumer.getPassword());
+		Assert.assertEquals(userPrincipal.getFirstName(), consumer.getFirstName());
+		Assert.assertEquals(userPrincipal.getLastName(), consumer.getLastName());
 		
 	}
 	
-	User prepareUser() {
-		
+	private Admin prepareUser() {
 		Role role = new Role();
 		role.setRole("ADMIN");
 		
-		User user = new User();
-		user.setUserId("123");
-		user.setEmail("123");
-		user.setPassword("123");
-		user.setFirstName("123");
-		user.setLastName("123");
-		user.setRoles(new HashSet<Role>(){
+		Admin admin = new Admin();
+		admin.setUserId("123");
+		admin.setEmail("123");
+		admin.setPassword("123");
+		admin.setFirstName("123");
+		admin.setLastName("123");
+		admin.setRoles(new HashSet<Role>(){
 			{
 				add(role);
 			}
 		});
-		return user;
+		return admin;
 	}
 
 }
