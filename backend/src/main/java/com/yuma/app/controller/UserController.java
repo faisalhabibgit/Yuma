@@ -6,7 +6,14 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.yuma.app.service.UserService;
 import com.yuma.app.to.UserTO;
@@ -45,7 +52,7 @@ public class UserController {
 		return this.userService.create(userTO);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT)
+	@PutMapping("/update")
 	public UserTO updateUser(@RequestBody UserTO userTO){
 		this.logger.info("updating user from DB in controller");
 		return this.userService.updateUser(userTO);

@@ -1,5 +1,10 @@
 package com.yuma.app.service;
 
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,22 +16,18 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.junit4.SpringRunner;
 
+import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Role;
-import com.yuma.app.document.User;
 import com.yuma.app.payload.SignUpRequest;
 import com.yuma.app.repository.RoleRepository;
 import com.yuma.app.repository.UserRepository;
 import com.yuma.app.to.UserTO;
 
-import static org.mockito.Mockito.*;
-
 @RunWith(MockitoJUnitRunner.class)
-public class UserServiceTest {
+public class ConsumerServiceTest {
 
 	private Optional<Role> role;
 	@Mock
@@ -53,34 +54,34 @@ public class UserServiceTest {
 	public void GivenUserWhenSaveUserCalledThenShouldSaveTheUserRecord() {
 
 		SignUpRequest signUpRequest = prepareSignupReq();
-		User user = prepareUser();
+		Consumer consumer = prepareUser();
 
-		when(conversionService.convert(signUpRequest, User.class)).thenReturn(user);
+		when(conversionService.convert(signUpRequest, Consumer.class)).thenReturn(consumer);
 		when(roleRepository.findByRole(adminRole)).thenReturn(role);
 
 
 		userService.saveUser(signUpRequest);
 
-		verify(conversionService, times(1)).convert(signUpRequest, User.class);
+		verify(conversionService, times(1)).convert(signUpRequest, Consumer.class);
 		verify(roleRepository, times(1)).findByRole(adminRole);
-		verify(userRepository, times(1)).save(user);
+		verify(userRepository, times(1)).save(consumer);
 	}
 
 	@Test
 	public void WhenListCalledThenShouldReturnListOfUsers() {
 
-		List<User> users = prepareUserList();
+		List<Consumer> consumers = prepareUserList();
 		List<UserTO> userTOs = prepareUserTOList();
 
-		when(conversionService.convert(users.get(0), UserTO.class)).thenReturn(userTOs.get(0));
-		when(conversionService.convert(users.get(1), UserTO.class)).thenReturn(userTOs.get(1));
-		when(userRepository.findAll()).thenReturn(users);
+		when(conversionService.convert(consumers.get(0), UserTO.class)).thenReturn(userTOs.get(0));
+		when(conversionService.convert(consumers.get(1), UserTO.class)).thenReturn(userTOs.get(1));
+		when(userRepository.findAll()).thenReturn(consumers);
 
 
 		List<UserTO> retrievedListOfUsers = userService.list();
 
-		verify(conversionService, times(1)).convert(users.get(0), UserTO.class);
-		verify(conversionService, times(1)).convert(users.get(1), UserTO.class);
+		verify(conversionService, times(1)).convert(consumers.get(0), UserTO.class);
+		verify(conversionService, times(1)).convert(consumers.get(1), UserTO.class);
 		verify(userRepository, times(1)).findAll();
 		Assert.assertEquals(retrievedListOfUsers.size(), 2);
 
@@ -91,14 +92,14 @@ public class UserServiceTest {
 
 		String email = "example@email.com";
 
-		User user = new User();
-		user.setEmail(email);
+		Consumer consumer = new Consumer();
+		consumer.setEmail(email);
 
-		when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
+		when(userRepository.findByEmail(email)).thenReturn(Optional.of(consumer));
 
 		userService.findUserByEmail(email);
 
-		Assert.assertEquals(user.getEmail(), email);
+		Assert.assertEquals(consumer.getEmail(), email);
 
 	}
 	
@@ -118,11 +119,11 @@ public class UserServiceTest {
 	public void testCreateUser() {
 
 		UserTO userTO = prepareUserTo();
-		User user = prepareUser();
+		Consumer consumer = prepareUser();
 		
-		when(conversionService.convert(userTO, User.class)).thenReturn(user);
-		when(userRepository.save(user)).thenReturn(user);
-		when(conversionService.convert(user, UserTO.class)).thenReturn(userTO);
+		when(conversionService.convert(userTO, Consumer.class)).thenReturn(consumer);
+		when(userRepository.save(consumer)).thenReturn(consumer);
+		when(conversionService.convert(consumer, UserTO.class)).thenReturn(userTO);
 
 		userService.create(userTO);
 		
@@ -133,12 +134,12 @@ public class UserServiceTest {
 
 		UserTO userTO = prepareUserTo();
 		userTO.setUserId("234");
-		User user = prepareUser();
+		Consumer consumer = prepareUser();
 
-		when(userRepository.findByUserId(userTO.getUserId())).thenReturn(Optional.of(user));
-		when(conversionService.convert(userTO, User.class)).thenReturn(user);
-		when(userRepository.save(user)).thenReturn(user);
-		when(conversionService.convert(user, UserTO.class)).thenReturn(userTO);
+		when(userRepository.findByUserId(userTO.getUserId())).thenReturn(Optional.of(consumer));
+		when(conversionService.convert(userTO, Consumer.class)).thenReturn(consumer);
+		when(userRepository.save(consumer)).thenReturn(consumer);
+		when(conversionService.convert(consumer, UserTO.class)).thenReturn(userTO);
 
 		userService.updateUser(userTO);
 
@@ -165,24 +166,24 @@ public class UserServiceTest {
 	}
 
 
-	private User prepareUser() {
-		User user = new User();
-		user.setFirstName("first name");
-		user.setLastName("last name");
-		user.setEmail("example@email.com");
-		user.setPassword("myPass");
-		return user;
+	private Consumer prepareUser() {
+		Consumer consumer = new Consumer();
+		consumer.setFirstName("first name");
+		consumer.setLastName("last name");
+		consumer.setEmail("example@email.com");
+		consumer.setPassword("myPass");
+		return consumer;
 	}
 
-	private List<User> prepareUserList() {
+	private List<Consumer> prepareUserList() {
 
-		List<User> users = new ArrayList<User>() {
+		List<Consumer> consumers = new ArrayList<Consumer>() {
 			{
-				add(new User());
-				add(new User());
+				add(new Consumer());
+				add(new Consumer());
 			}
 		};
-		return users;
+		return consumers;
 	}
 
 	private List<UserTO> prepareUserTOList() {

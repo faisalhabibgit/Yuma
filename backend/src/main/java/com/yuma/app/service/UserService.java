@@ -10,8 +10,8 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Role;
-import com.yuma.app.document.User;
 import com.yuma.app.exception.ResourceNotFoundException;
 import com.yuma.app.payload.SignUpRequest;
 import com.yuma.app.repository.RoleRepository;
@@ -34,31 +34,30 @@ public class UserService {
 		this.passwordEncoder = passwordEncoder;
 	}
 
-	public User saveUser(SignUpRequest req) {
-		this.userServiceLogger.info("saving user {}", req.getEmail());
+	public Consumer saveUser(SignUpRequest req) {
+		this.userServiceLogger.info("saving consumer {}", req.getEmail());
 
-		User user = conversionService.convert(req, User.class);
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user.setActive(true);
+		Consumer consumer = conversionService.convert(req, Consumer.class);
+		consumer.setPassword(passwordEncoder.encode(consumer.getPassword()));
+		consumer.setActive(false);
 
 		Optional<Role> userRole = roleRepository.findByRole("ADMIN");
-		userRole.ifPresent(x -> user.setRoles(new HashSet<>(Collections.singletonList(x))));
-		return userRepository.save(user);
+		userRole.ifPresent(x -> consumer.setRoles(new HashSet<>(Collections.singletonList(x))));
+		return userRepository.save(consumer);
 	}
 
 	public List<UserTO> list() {
 		this.userServiceLogger.info("fetching users list");
 
-		List<User> userList = userRepository.findAll();
-		return convertUserListToUserTOList(userList);
-		
+		List<Consumer> consumerList = userRepository.findAll();
+		return convertUserListToUserTOList(consumerList);
 	}
 
 	public UserTO findUserByEmail(String email) {
-		userServiceLogger.info("fetching user by email: %s", email);
-		User user = userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
+		userServiceLogger.info("fetching consumer by email: %s", email);
+		Consumer consumer = userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Consumer", "email", email));
 		
-		return conversionService.convert(user, UserTO.class);
+		return conversionService.convert(consumer, UserTO.class);
 		
 	}
 	
@@ -69,21 +68,20 @@ public class UserService {
 	}
 
 	public UserTO create(UserTO userTO) {
-
 		userTO.setUserId(UUID.randomUUID().toString());
-		User userToCreate = conversionService.convert(userTO, User.class);
-		User user = userRepository.save(userToCreate);
-		return conversionService.convert(user, UserTO.class);
+		Consumer consumerToCreate = conversionService.convert(userTO, Consumer.class);
+		Consumer consumer = userRepository.save(consumerToCreate);
+		return conversionService.convert(consumer, UserTO.class);
 	}
 	
 	public UserTO updateUser(UserTO userTO){
-		this.userServiceLogger.info("fetching user from DB to update");
-		User user = userRepository.findByUserId(userTO.getUserId()).orElseThrow(() -> new ResourceNotFoundException("User", "userId", userTO.getUserId()));
+		this.userServiceLogger.info("fetching consumer from DB to update");
+		Consumer consumer = userRepository.findByUserId(userTO.getUserId()).orElseThrow(() -> new ResourceNotFoundException("Consumer", "userId", userTO.getUserId()));
 		
-		User userToUpdate = conversionService.convert(userTO, User.class);
-		user.updateFrom(userToUpdate);
-		User updatedUser = userRepository.save(user);
-		return conversionService.convert(updatedUser, UserTO.class);
+		Consumer consumerToUpdate = conversionService.convert(userTO, Consumer.class);
+		consumer.updateFrom(consumerToUpdate);
+		Consumer updatedConsumer = userRepository.save(consumer);
+		return conversionService.convert(updatedConsumer, UserTO.class);
 		
 	}
 	
@@ -93,16 +91,16 @@ public class UserService {
 	
 	public List<UserTO> activeUsers(){
 		userServiceLogger.info("fetching users list");
-		List<User> userList = userRepository.findByIsActiveIsTrue().orElseThrow(() -> new ResourceNotFoundException("User", "isActive", true));
+		List<Consumer> consumerList = userRepository.findByIsActiveIsTrue().orElseThrow(() -> new ResourceNotFoundException("Consumer", "isActive", true));
 		
-		return convertUserListToUserTOList(userList);
+		return convertUserListToUserTOList(consumerList);
 
 	}
 	
-	protected List<UserTO> convertUserListToUserTOList(List<User> userList){
+	protected List<UserTO> convertUserListToUserTOList(List<Consumer> consumerList){
 		List<UserTO> userTOS = new ArrayList<>();
 
-		for (User consumer : userList) {
+		for (Consumer consumer : consumerList) {
 			userTOS.add(conversionService.convert(consumer, UserTO.class));
 		}
 		return userTOS;

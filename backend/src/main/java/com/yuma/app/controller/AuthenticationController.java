@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.yuma.app.document.User;
+import com.yuma.app.document.Admin;
 import com.yuma.app.payload.ApiResponse;
 import com.yuma.app.payload.JwtAuthenticationResponse;
 import com.yuma.app.payload.LoginRequest;
 import com.yuma.app.payload.SignUpRequest;
 import com.yuma.app.security.JwtTokenProvider;
-import com.yuma.app.service.UserService;
+import com.yuma.app.service.AdminService;
 
 @Slf4j
 @RestController
@@ -40,7 +40,7 @@ public class AuthenticationController {
 	AuthenticationManager authenticationManager;
 	
 	@Autowired
-	UserService userService;
+	AdminService adminService;
 
 	@Autowired
 	JwtTokenProvider tokenProvider;
@@ -64,22 +64,22 @@ public class AuthenticationController {
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
 		logger.info("processing sign up request");
-		if(userService.existsByEmail(signUpRequest.getEmail())) {
+		if(adminService.existsByEmail(signUpRequest.getEmail())) {
 			return new ResponseEntity<>(new ApiResponse(false, "Username is already taken!"),
 				HttpStatus.BAD_REQUEST);
 		}
 
-		if(userService.existsByEmail(signUpRequest.getEmail())) {
+		if(adminService.existsByEmail(signUpRequest.getEmail())) {
 			return new ResponseEntity<>(new ApiResponse(false, "Email Address already in use!"),
 				HttpStatus.BAD_REQUEST);
 		}
 		
-		User result = userService.saveUser(signUpRequest);
+		Admin result = adminService.saveAdmin(signUpRequest);
 
 		URI location = ServletUriComponentsBuilder
 			.fromCurrentContextPath().path("/users/{username}")
 			.buildAndExpand(result.getEmail()).toUri();
 
-		return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
+		return ResponseEntity.created(location).body(new ApiResponse(true, "Admin registered successfully"));
 	}
 }

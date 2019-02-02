@@ -5,11 +5,11 @@ import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.yuma.app.document.User;
+import com.yuma.app.document.Consumer;
 
-public interface UserRepository extends MongoRepository<User, String> {
-	Optional<User> findByEmail(String email);
-	Optional<User> findByUserId(String userID);
+public interface UserRepository extends MongoRepository<Consumer, String> {
+	Optional<Consumer> findByEmail(String email);
+	Optional<Consumer> findByUserId(String userID);
 	Boolean existsByEmail(String email);
-	Optional<List<User>> findByIsActiveIsTrue();
+	Optional<List<Consumer>> findByIsActiveIsTrue();
 }

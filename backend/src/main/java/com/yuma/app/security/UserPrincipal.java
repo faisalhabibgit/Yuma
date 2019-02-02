@@ -13,8 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.yuma.app.document.Plan;
-import com.yuma.app.document.User;
+import com.yuma.app.document.Admin;
 
 @Setter
 @Getter
@@ -26,12 +25,8 @@ public class UserPrincipal implements UserDetails {
 
 	private String lastName;
 	
-	private Plan plan;
-
 	private boolean isActive;
 	
-	private String timestamp;
-
 	@JsonIgnore
 	private String email;
 
@@ -40,32 +35,28 @@ public class UserPrincipal implements UserDetails {
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserPrincipal(String userId, String firstName, String lastName, String email, Plan plan, boolean isActive, String timestamp, String password, Collection<? extends GrantedAuthority> authorities) {
+	public UserPrincipal(String userId, String firstName, String lastName, String email, boolean isActive, String password, Collection<? extends GrantedAuthority> authorities) {
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.plan = plan;
 		this.isActive = isActive;
-		this.timestamp = timestamp;
 		this.authorities = authorities;
 	}
 
-	public static UserPrincipal create(User user) {
-		List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
+	public static UserPrincipal create(Admin admin) {
+		List<GrantedAuthority> authorities = admin.getRoles().stream().map(role ->
 			new SimpleGrantedAuthority(role.getRole())
 		).collect(Collectors.toList());
 
 		return new UserPrincipal(
-			user.getUserId(),
-			user.getFirstName(),
-			user.getLastName(),
-			user.getEmail(),
-			user.getPlan(),
-			user.isActive(),
-			user.getTimestamp(),
-			user.getPassword(),
+			admin.getUserId(),
+			admin.getFirstName(),
+			admin.getLastName(),
+			admin.getEmail(),
+			admin.isActive(),
+			admin.getPassword(),
 			authorities
 		);
 	}

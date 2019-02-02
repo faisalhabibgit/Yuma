@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.yuma.app.catalog.CombinationReport;
 import com.yuma.app.catalog.MealCatalog;
+import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Meal;
-import com.yuma.app.document.User;
 import com.yuma.app.exception.ResourceNotFoundException;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.repository.UserRepository;
@@ -68,10 +68,10 @@ public class MealService {
 		List<Meal> mealList = mealRepository.
 			findByIsAvailableIsTrue()
 			.orElseThrow(() -> new ResourceNotFoundException("Meals", "isAvailable",true));
-		List<User> userList = userRepository.
+		List<Consumer> consumerList = userRepository.
 			findByIsActiveIsTrue()
-			.orElseThrow(() -> new ResourceNotFoundException("User", "isActive", true));
-		List<CombinationReport> possibleComboReports = mealCatalog.generateWeeklyCombination(mealList, userList);
+			.orElseThrow(() -> new ResourceNotFoundException("Consumer", "isActive", true));
+		List<CombinationReport> possibleComboReports = mealCatalog.generateWeeklyCombination(mealList, consumerList);
 		return possibleComboReports;
 	}
 	

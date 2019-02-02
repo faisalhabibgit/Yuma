@@ -1,6 +1,7 @@
 package com.yuma.app.security;
 
-import io.jsonwebtoken.lang.Assert;
+import static org.mockito.Mockito.when;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -9,17 +10,16 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.security.core.Authentication;
 import org.springframework.test.util.ReflectionTestUtils;
 
-
-import static org.mockito.Mockito.when;
+import io.jsonwebtoken.lang.Assert;
 
 @RunWith(MockitoJUnitRunner.class)
 public class JwtTokenProviderTest {
 	
 	@InjectMocks
-	JwtTokenProvider jwtTokenProvider;
+	private JwtTokenProvider jwtTokenProvider;
 	
 	@Mock
-	Authentication authentication;
+	private Authentication authentication;
 	
 	String userId = "1234";
 	
@@ -35,9 +35,8 @@ public class JwtTokenProviderTest {
 		Assert.notNull(token);
 	}
 	
-	UserPrincipal prepareUserPrincipal() {
-		UserPrincipal userPrincipal = new UserPrincipal(userId, "first name", "last name", null,
-			null, true, null, null, null);
+	private UserPrincipal prepareUserPrincipal() {
+		UserPrincipal userPrincipal = new UserPrincipal(userId, "first name", "last name", null, true, null, null);
 		return userPrincipal;
 	}
 

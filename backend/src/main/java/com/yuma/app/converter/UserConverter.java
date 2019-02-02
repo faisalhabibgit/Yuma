@@ -2,25 +2,25 @@ package com.yuma.app.converter;
 
 import org.springframework.core.convert.converter.Converter;
 
-import com.yuma.app.document.User;
+import com.yuma.app.document.Consumer;
 import com.yuma.app.to.UserTO;
 
-public class UserConverter implements Converter<UserTO, User> {
+public class UserConverter implements Converter<UserTO, Consumer> {
 
 	@Override
-	public User convert(UserTO userTO) {
-		User user = new User();
-		user.setFirstName(userTO.getFirstName());
-		user.setLastName(userTO.getLastName());
-		user.setPassword(userTO.getPassword());
-		user.setEmail(userTO.getEmail());
-		user.setPlan(userTO.getPlan());
-		user.setActive(userTO.isEnabled());
-		user.setTimestamp(userTO.getTimestamp());
-		user.setRoles(userTO.getRoles());
-		user.setUserId(userTO.getUserId());
-		user.setMealList(userTO.getMealList());
-		user.setDislikesList(userTO.getDislikesList());
-		return user;
+	public Consumer convert(UserTO userTO) {
+		Consumer consumer = new Consumer();
+		consumer.setFirstName(userTO.getFirstName());
+		consumer.setLastName(userTO.getLastName());
+		consumer.setPassword(userTO.getPassword());
+		consumer.setEmail(userTO.getEmail());
+		consumer.setPlan(userTO.getPlan());
+		consumer.setActive(userTO.isEnabled());
+		consumer.setTimestamp(userTO.getTimestamp());
+		consumer.setRoles(userTO.getRoles());
+		consumer.setUserId(userTO.getUserId());
+		consumer.setMealList(userTO.getMealList());
+		consumer.setDislikesList(userTO.getDislikesList());
+		return consumer;
 	}
 }

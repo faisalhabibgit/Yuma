@@ -15,9 +15,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
-import com.yuma.app.document.User;
 import com.yuma.app.repository.MealRepository;
 
 @Slf4j
@@ -38,18 +38,18 @@ public class MealCatalog {
 		this.possibleCombinations = new ArrayList<>();
 	}
 	
-	public List<CombinationReport> generateWeeklyCombination(List<Meal> availableMeals, List<User> activeUsers) {
+	public List<CombinationReport> generateWeeklyCombination(List<Meal> availableMeals, List<Consumer> activeConsumers) {
 		logger.info("instantiating Combination Report in generate Weekly Combination");
 
 		int i = 0;
 		CombinationReport combinationReport;
-		setMealScores(availableMeals, activeUsers);
-		combinationReport = new CombinationReport(0, countCombinationScore(availableMeals), activeUsers, availableMeals);
+		setMealScores(availableMeals, activeConsumers);
+		combinationReport = new CombinationReport(0, countCombinationScore(availableMeals), activeConsumers, availableMeals);
 		runMealCombinationAlgorithm(combinationReport);
 		combinationReport.getMealsList().addAll(addedMeals);
 
 		while (i < 2 && (combinationReport.getNumberOfBlanks() != 0)) {
-			combinationReport = new CombinationReport(0, countCombinationScore(availableMeals), activeUsers, availableMeals);
+			combinationReport = new CombinationReport(0, countCombinationScore(availableMeals), activeConsumers, availableMeals);
 			replaceLowestScore(combinationReport, i);
 			runMealCombinationAlgorithm(combinationReport);
 			combinationReport.getMealsList().addAll(addedMeals);
@@ -60,19 +60,19 @@ public class MealCatalog {
 
 	protected void runMealCombinationAlgorithm(CombinationReport combinationReport) {
 		logger.info("running meal combo Algorithm");
-		for (User user : combinationReport.getUserList()) {
-			generatePossibleMealsForUser(combinationReport, user, 0);
+		for (Consumer consumer : combinationReport.getConsumerList()) {
+			generatePossibleMealsForUser(combinationReport, consumer, 0);
 		}
 		possibleCombinations.add(combinationReport);
 	}
 
-	protected void setMealScores(List<Meal> mealList, List<User> userList) {
+	protected void setMealScores(List<Meal> mealList, List<Consumer> consumerList) {
 		logger.info("Setting meal scores");
 		
 		boolean scorable = true;
 		List<String> userDislikesList;
-		for (User user : userList) {
-			userDislikesList = user.getDislikesList();
+		for (Consumer consumer : consumerList) {
+			userDislikesList = consumer.getDislikesList();
 			for (Meal meal : mealList) {
 				for (Ingredients ingredient : meal.getIngredients()) {
 					if (userDislikesList.contains(ingredient.getName())) {
@@ -89,13 +89,13 @@ public class MealCatalog {
 		}
 	}
 
-	protected void generatePossibleMealsForUser(CombinationReport combinationReport, User user, int mealCounter) {
-		logger.info("inside generate possible meals for that user");
+	protected void generatePossibleMealsForUser(CombinationReport combinationReport, Consumer consumer, int mealCounter) {
+		logger.info("inside generate possible meals for that consumer");
 		int numOfBlanks;
 
 		for (Meal meal : combinationReport.getMealsList()) {
-			if (user.getMealList().size() < user.getPlan().getNumOfMeals()) {
-				if (checkIfMealWorks(meal, user)) {
+			if (consumer.getMealList().size() < consumer.getPlan().getNumOfMeals()) {
+				if (checkIfMealWorks(meal, consumer)) {
 					mealCounter++;
 				} 
 			} else {
@@ -103,32 +103,32 @@ public class MealCatalog {
 			}
 		}
 
-		if (user.getPlan().getNumOfMeals() == mealCounter) {
+		if (consumer.getPlan().getNumOfMeals() == mealCounter) {
 			return;
 		}
 		
-		if (user.getMealList().size() != user.getPlan().getNumOfMeals()) {
-			if (user.getPlan().getNumOfMeals() > combinationReport.getMealsList().size()) {
-				numOfBlanks = combinationReport.getMealsList().size() - user.getMealList().size();
+		if (consumer.getMealList().size() != consumer.getPlan().getNumOfMeals()) {
+			if (consumer.getPlan().getNumOfMeals() > combinationReport.getMealsList().size()) {
+				numOfBlanks = combinationReport.getMealsList().size() - consumer.getMealList().size();
 				if (numOfBlanks > 0) {
-					int timesToRun = user.getPlan().getNumOfMeals() - numOfBlanks - mealCounter;
-					generatePossibleMealsForUserWithBlanks(combinationReport, user, timesToRun);
+					int timesToRun = consumer.getPlan().getNumOfMeals() - numOfBlanks - mealCounter;
+					generatePossibleMealsForUserWithBlanks(combinationReport, consumer, timesToRun);
 				} else {
-					generatePossibleMealsForUser(combinationReport, user, mealCounter);
+					generatePossibleMealsForUser(combinationReport, consumer, mealCounter);
 				}
 			}
 		}
-		numOfBlanks = user.getPlan().getNumOfMeals() - user.getMealList().size();
+		numOfBlanks = consumer.getPlan().getNumOfMeals() - consumer.getMealList().size();
 		combinationReport.setNumberOfBlanks(combinationReport.getNumberOfBlanks() + numOfBlanks);
 	}
 	
-	protected void generatePossibleMealsForUserWithBlanks(CombinationReport combinationReport, User user, int timesToRun){
+	protected void generatePossibleMealsForUserWithBlanks(CombinationReport combinationReport, Consumer consumer, int timesToRun){
 		int timesRan = 0;
 		
 		for (Meal meal : combinationReport.getMealsList()) {
 			if (timesRan <= timesToRun) {
-				if (user.getMealList().size() < user.getPlan().getNumOfMeals()) {
-					checkIfMealWorks(meal, user);
+				if (consumer.getMealList().size() < consumer.getPlan().getNumOfMeals()) {
+					checkIfMealWorks(meal, consumer);
 				} else {
 					break;
 				}
@@ -162,10 +162,10 @@ public class MealCatalog {
 		return lowestIndex;
 	}
 
-	protected boolean checkIfMealWorks(Meal meal, User user) {
-		logger.info("checking if: " + meal.getName() + " works for " + user.getFirstName());
+	protected boolean checkIfMealWorks(Meal meal, Consumer consumer) {
+		logger.info("checking if: " + meal.getName() + " works for " + consumer.getFirstName());
 		
-		List<String> userDislikesList = user.getDislikesList();
+		List<String> userDislikesList = consumer.getDislikesList();
 		List<Ingredients> ingredientsToRemove = new ArrayList<>();
 		Meal newMeal = meal;
 
@@ -180,13 +180,13 @@ public class MealCatalog {
 		}
 
 		if (ingredientsToRemove.size() > 0) {
-			logger.info(meal.getName() + "works for " + user.getFirstName() + " but some ingredients have to change");
+			logger.info(meal.getName() + "works for " + consumer.getFirstName() + " but some ingredients have to change");
 		
 			newMeal = generateNewMealWithModifiedIngredients(meal, ingredientsToRemove);
 			addedMeals.add(newMeal);
 		}
 
-		user.getMealList().add(newMeal);
+		consumer.getMealList().add(newMeal);
 		return true;
 	}
 
