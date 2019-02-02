@@ -220,7 +220,7 @@ public class CombinationReportService {
 		return comboScore;
 	}
 	
-	protected void saveCombinationReport(int i){
+	public void saveCombinationReport(int i){
 		this.combinationReportRepository.save(this.possibleCombinations.get(i));
 	}
 }

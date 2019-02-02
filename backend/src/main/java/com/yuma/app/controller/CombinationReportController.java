@@ -28,14 +28,12 @@ public class CombinationReportController {
 
 	@GetMapping("/weeklycombo")
 	public List<CombinationReportTO> getWeeklyCombo() {
-
 		return this.combinationReportService.generateWeeklyCombination();
 	}
 	
 	@PostMapping("{index}")
 	public void chosenCombo(@PathVariable int index){
-		combinationReportService.
+		combinationReportService.saveCombinationReport(index);
 	}
-	
 	
 }
