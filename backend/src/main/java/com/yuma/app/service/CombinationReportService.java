@@ -1,23 +1,25 @@
 package com.yuma.app.service;
 
-import com.yuma.app.document.CombinationReport;
-import com.yuma.app.document.Ingredients;
-import com.yuma.app.document.Meal;
-import com.yuma.app.document.User;
-import com.yuma.app.repository.MealRepository;
-import com.yuma.app.repository.UserRepository;
-import com.yuma.app.to.CombinationReportTO;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
+import com.yuma.app.document.CombinationReport;
+import com.yuma.app.document.Ingredients;
+import com.yuma.app.document.Meal;
+import com.yuma.app.document.User;
+import com.yuma.app.repository.CombinationReportRepository;
+import com.yuma.app.repository.MealRepository;
+import com.yuma.app.repository.UserRepository;
+import com.yuma.app.to.CombinationReportTO;
 
 @Service
 public class CombinationReportService {
@@ -29,6 +31,9 @@ public class CombinationReportService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private CombinationReportRepository combinationReportRepository;
 	private List<CombinationReport> possibleCombinations;
 	private List<Meal> addedMeals;
 	private List<Meal> availableMeals;
@@ -213,5 +218,9 @@ public class CombinationReportService {
 		}
 
 		return comboScore;
+	}
+	
+	protected void saveCombinationReport(int i){
+		this.combinationReportRepository.save(this.possibleCombinations.get(i));
 	}
 }
