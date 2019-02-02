@@ -15,17 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yuma.app.service.UserService;
+import com.yuma.app.service.ConsumerService;
 import com.yuma.app.to.UserTO;
 
 @Slf4j
 @RestController
 @RequestMapping("api/rest")
 public class UserController {
-	final Logger logger = LoggerFactory.getLogger(UserController.class);
-	private UserService userService;
 
-	public UserController(UserService consumerService) {
+	final Logger logger = LoggerFactory.getLogger(UserController.class);
+	private ConsumerService userService;
+
+
+	public UserController(ConsumerService consumerService) {
 		this.userService = consumerService;
 	}
 

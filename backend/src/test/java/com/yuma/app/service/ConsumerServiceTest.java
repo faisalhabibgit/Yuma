@@ -41,7 +41,7 @@ public class ConsumerServiceTest {
 
 
 	@InjectMocks
-	private UserService userService;
+	private ConsumerService userService;
 	
 	private String adminRole = "ADMIN";
 

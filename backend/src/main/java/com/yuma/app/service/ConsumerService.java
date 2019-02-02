@@ -1,9 +1,7 @@
 package com.yuma.app.service;
 
 import java.util.*;
-
 import lombok.extern.slf4j.Slf4j;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.ConversionService;
@@ -20,14 +18,14 @@ import com.yuma.app.to.UserTO;
 
 @Slf4j
 @Service
-public class UserService {
-	private Logger userServiceLogger = LoggerFactory.getLogger(UserService.class);
+public class ConsumerService {
+	private Logger userServiceLogger = LoggerFactory.getLogger(ConsumerService.class);
 	private UserRepository userRepository;
 	private ConversionService conversionService;
 	private RoleRepository roleRepository;
 	private PasswordEncoder passwordEncoder;
 
-	public UserService(UserRepository userRepository, ConversionService conversionService, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+	public ConsumerService(UserRepository userRepository, ConversionService conversionService, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
 		this.userRepository = userRepository;
 		this.conversionService = conversionService;
 		this.roleRepository = roleRepository;
@@ -66,7 +64,7 @@ public class UserService {
 		
 		userRepository.delete(uuid);
 	}
-
+	
 	public UserTO create(UserTO userTO) {
 		userTO.setUserId(UUID.randomUUID().toString());
 		Consumer consumerToCreate = conversionService.convert(userTO, Consumer.class);
@@ -84,7 +82,6 @@ public class UserService {
 		return conversionService.convert(updatedConsumer, UserTO.class);
 		
 	}
-	
 	public boolean existsByEmail(String email){
 		return userRepository.existsByEmail(email);
 	}

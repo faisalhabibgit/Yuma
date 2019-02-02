@@ -21,7 +21,7 @@ import com.yuma.app.repository.RoleRepository;
 @Slf4j
 @Service
 public class AdminService {
-	private Logger userServiceLogger = LoggerFactory.getLogger(UserService.class);
+	private Logger userServiceLogger = LoggerFactory.getLogger(AdminService.class);
 	private AdminRepository adminRepository;
 	private ConversionService conversionService;
 	private RoleRepository roleRepository;

@@ -7,6 +7,7 @@ import {
 } from 'reactstrap';
 import AvailableMeals from "./AvailableMeals";
 import DisplayMeals from "./DisplayMeals";
+import DisplayUsers from "./DisplayUsers";
 
 class Dashboard extends Component {
 
@@ -61,28 +62,13 @@ class Dashboard extends Component {
         </CardDeck>
 
 
-        <CardDeck style={{padding:'12px', height:'250px'}}>
+        <CardDeck style={{padding:'12px', height:'450px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Header</h5>
+              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Users </h5>
             </CardHeader>
             <CardBody>
-            </CardBody>
-          </Card>
-
-          <Card>
-            <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Header</h5>
-            </CardHeader>
-            <CardBody>
-            </CardBody>
-          </Card>
-
-          <Card>
-            <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Header</h5>
-            </CardHeader>
-            <CardBody>
+              <DisplayUsers />
             </CardBody>
           </Card>
 
