@@ -31,7 +31,7 @@ public class CombinationReportController {
 		return this.combinationReportService.generateWeeklyCombination();
 	}
 	
-	@PostMapping("{index}")
+	@PostMapping("/weeklycombo/{index}")
 	public void chosenCombo(@PathVariable int index){
 		combinationReportService.saveCombinationReport(index);
 	}

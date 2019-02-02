@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.converter.ConverterRegistry;
 
+import com.yuma.app.converter.CombinationReportTOConverter;
 import com.yuma.app.converter.MealConverter;
 import com.yuma.app.converter.MealTOConverter;
 import com.yuma.app.converter.SignupRequestConverter;
@@ -24,6 +25,7 @@ public class ConverterConfiguration {
 		registry.addConverter(new UserConverter());
 		registry.addConverter(new UserTOConverter());
 		registry.addConverter(new SignupRequestConverter());
+		registry.addConverter(new CombinationReportTOConverter(conversionService));
 
 	}
 }
