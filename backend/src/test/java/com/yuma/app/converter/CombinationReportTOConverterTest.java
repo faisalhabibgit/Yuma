@@ -28,7 +28,7 @@ public class CombinationReportTOConverterTest {
 	ConversionService conversionService;
 
 	@Test
-	public void testMealToConverter() {
+	public void testCombinationReportTOConverter() {
 		
 		CombinationReport combinationReport = prepareCombinationReport();
 		

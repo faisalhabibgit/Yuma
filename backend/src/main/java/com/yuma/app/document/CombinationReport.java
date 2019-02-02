@@ -28,6 +28,7 @@ public class CombinationReport {
 	private Date createdOn;
 	private List<Consumer> userList = new ArrayList<>();
 	private List<Meal> mealsList = new ArrayList<>();
+	private Date date;
 
 	public CombinationReport(int numberOfBlanks, int combinationScore, List<Consumer> activeUsers, List<Meal> availableMeals) {
 		this.numberOfBlanks = numberOfBlanks;
