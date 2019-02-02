@@ -8,6 +8,7 @@ import {
 import AvailableMeals from "./AvailableMeals";
 import DisplayMeals from "./DisplayMeals";
 import DisplayUsers from "./DisplayUsers";
+import MealCombo from "./MealCombo";
 
 class Dashboard extends Component {
 
@@ -34,6 +35,7 @@ class Dashboard extends Component {
               <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Meal Combo</h5>
             </CardHeader>
             <CardBody>
+            <MealCombo/>  
             </CardBody>
           </Card>
 
