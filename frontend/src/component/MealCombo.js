@@ -5,7 +5,6 @@ import {
 } from 'reactstrap';
 import Modal from 'react-modal';
 
-
 class MealCombo extends Component {
 
   constructor() {
@@ -27,12 +26,10 @@ class MealCombo extends Component {
     this.setState({modalIsOpen: false});
   }
   
-
   render() {
-
     return(
- 
       <CardDeck style={{padding:'15px', maxHeight:'200px'}}>
+        
         <Card>
           <CardBody className="text-center">
             <h2> Meal Combo #1</h2>
