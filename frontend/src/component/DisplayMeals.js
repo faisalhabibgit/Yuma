@@ -21,6 +21,10 @@ class DisplayMeals extends Component {
       .then((obj) => {
         var matchedArr = [];
 
+        if (obj.length < this.state.displayLimit) {
+          this.setState({displayLimit: obj.length});
+        }
+
         for (let index = 0; index < this.state.displayLimit; index++) {
           const element = obj[index];
           matchedArr.push(element);
