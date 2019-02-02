@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Meal;
-import com.yuma.app.document.User;
 
 public class Helper {
 
@@ -14,7 +14,7 @@ public class Helper {
 			.collect(Collectors.toList());
 	}
 
-	public static List<User> toUserList(final Iterable<User> iterable) {
+	public static List<Consumer> toUserList(final Iterable<Consumer> iterable) {
 		return StreamSupport.stream(iterable.spliterator(), false)
 			.collect(Collectors.toList());
 	}

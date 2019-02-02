@@ -4,7 +4,7 @@ package com.yuma.app.converter;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.yuma.app.document.User;
+import com.yuma.app.document.Admin;
 import com.yuma.app.payload.SignUpRequest;
 
 public class SignupRequestConverterTest {
@@ -12,12 +12,12 @@ public class SignupRequestConverterTest {
 	public void testSignUpRequestToUserConverter() {
 		SignUpRequest signUpRequest = prepareSignUpRequest();
 		SignupRequestConverter signupRequestConverter = new SignupRequestConverter();
-		User user = signupRequestConverter.convert(signUpRequest);
+		Admin admin = signupRequestConverter.convert(signUpRequest);
 
-		Assert.assertEquals(user.getFirstName(), signUpRequest.getFirstName());
-		Assert.assertEquals(user.getLastName(), signUpRequest.getLastName());
-		Assert.assertEquals(user.getEmail(), signUpRequest.getEmail());
-		Assert.assertEquals(user.getPassword(), signUpRequest.getPassword());
+		Assert.assertEquals(admin.getFirstName(), signUpRequest.getFirstName());
+		Assert.assertEquals(admin.getLastName(), signUpRequest.getLastName());
+		Assert.assertEquals(admin.getEmail(), signUpRequest.getEmail());
+		Assert.assertEquals(admin.getPassword(), signUpRequest.getPassword());
 	}
 
 	private SignUpRequest prepareSignUpRequest() {

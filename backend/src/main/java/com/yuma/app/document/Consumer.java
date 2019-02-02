@@ -20,9 +20,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
-
-
+public class Consumer {
+	
 	@Id
 	private String userId;
 	private String password;
@@ -38,16 +37,17 @@ public class User {
 	private List<String> dislikesList;
 	private List<String> likes;
 
-	public void updateFrom(User userToUpdate) {
-		this.setFirstName(userToUpdate.getFirstName());
-		this.setLastName(userToUpdate.getLastName());
-		this.setEmail(userToUpdate.getEmail());
-		this.setPlan(userToUpdate.getPlan());
+	public void updateFrom(Consumer consumerToUpdate) {
+		this.setFirstName(consumerToUpdate.getFirstName());
+		this.setLastName(consumerToUpdate.getLastName());
+		this.setEmail(consumerToUpdate.getEmail());
+		this.setPlan(consumerToUpdate.getPlan());
+		this.setActive(consumerToUpdate.isActive());
 	}
 
 	@Override
 	public String toString() {
-		return "User{" +
+		return "Consumer{" +
 			"userId=" + userId +
 			", password='" + password + '\'' +
 			", firstName='" + firstName + '\'' +

@@ -35,13 +35,13 @@ class DisplayMeals extends Component {
         
         <Container>
         
-          <div style={{ maxWidth:'800px', maxHeight:'275px', overflow:'scroll'}}>
-          <Table striped bordered condensed>
-            <thead>
-            <th className="text-center">Name</th>
-            <th className="text-center">Description</th>
+          <div style={{ maxWidth:'900px', maxHeight:'300px', overflow:'scroll'}}>
+          <Table bordered condensed>
+            <thead style={{background: '#599BE9',color:'white'}}>
+            <th className="text-center" >Name</th>
+            <th className="text-center" >Description</th>
             </thead>
-            <tbody >
+            <tbody style={{background:'#d3d3d3'}}>
             <td>
               {
                 this.state.apiObject.map(x => <tr>{x.name.toString()}</tr>)

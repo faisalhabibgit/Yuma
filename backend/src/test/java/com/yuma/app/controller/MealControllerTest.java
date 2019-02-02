@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
-import com.yuma.app.service.MealServiceImp;
+import com.yuma.app.service.MealService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +28,7 @@ public class MealControllerTest {
 	@MockBean
 	private MealRepository mealRepository;
 	@MockBean
-	private MealServiceImp mealService;
+	private MealService mealService;
 	@Autowired
 	private MealController mealResource;
 
