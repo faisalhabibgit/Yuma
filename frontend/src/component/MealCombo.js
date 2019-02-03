@@ -5,6 +5,8 @@ import {
 } from 'reactstrap';
 import Modal from 'react-modal';
 
+import ComboOne from './mealcombo/ComboOne';
+
 class MealCombo extends Component {
 
   constructor() {
@@ -33,7 +35,7 @@ class MealCombo extends Component {
 
   handleModalChange1() {
     this.openModal();
-    this.setState({ ModalContent : <h1>Combo 1</h1>})
+    this.setState({ ModalContent : <ComboOne />})
   }
 
   handleModalChange2() {
