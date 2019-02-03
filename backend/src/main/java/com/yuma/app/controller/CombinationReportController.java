@@ -1,10 +1,10 @@
 package com.yuma.app.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,5 +46,10 @@ public class CombinationReportController {
 	public void downloadCSV(HttpServletResponse response) throws IOException {
 		List<Consumer> consumerList = this.combinationReportService.getMostRecentlyAdded().getUserList();
 		WriteCsvToResponse.writeConsumers(response.getWriter(), consumerList);
+	}
+	
+	@GetMapping("/search/{date}")
+	public CombinationReportTO getCombinationReportByDate(@PathVariable Date date){
+		return this.combinationReportService.getCombinationReportByDate(date);
 	}
 }

@@ -239,4 +239,12 @@ public class CombinationReportService {
 		}
 		this.possibleCombinations.clear();
 	}
+	
+	public CombinationReportTO getCombinationReportByDate(Date date){
+		CombinationReport combinationReport = this.combinationReportRepository.findCombinationReportByCreatedOnIsLike(date).orElseThrow(() ->
+			new ResourceNotFoundException("CombinationReport", "Date", date)
+		);
+		
+		return conversionService.convert(combinationReport, CombinationReportTO.class);
+	}
 }
