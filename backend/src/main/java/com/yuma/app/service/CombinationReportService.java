@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -240,9 +241,11 @@ public class CombinationReportService {
 		this.possibleCombinations.clear();
 	}
 	
-	public CombinationReportTO getCombinationReportByDate(Date date){
-		CombinationReport combinationReport = this.combinationReportRepository.findCombinationReportByCreatedOnIsLike(date).orElseThrow(() ->
-			new ResourceNotFoundException("CombinationReport", "Date", date)
+	public CombinationReportTO getCombinationReportByDate(DateTime startDate){
+		DateTime endDate = startDate.plusWeeks(1);
+		
+		CombinationReport combinationReport = this.combinationReportRepository.findCombinationReportByCreatedOnBetween(startDate.toDate(), endDate.toDate()).orElseThrow(() ->
+			new ResourceNotFoundException("CombinationReport", "Date", endDate)
 		);
 		
 		return conversionService.convert(combinationReport, CombinationReportTO.class);

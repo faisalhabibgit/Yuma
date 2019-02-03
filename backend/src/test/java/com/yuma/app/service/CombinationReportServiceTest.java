@@ -4,12 +4,12 @@ import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -184,13 +184,11 @@ public class CombinationReportServiceTest {
 	public void getReportCombinationByDateTest(){
 		CombinationReport combinationReport = CombinationReport.builder().userList(prepareUserList()).combinationScore(30).mealsList(prepareMealList()).id(UUID.randomUUID().toString()).build();
 		Optional<CombinationReport> co = Optional.of(combinationReport);
+		DateTime start = new DateTime();
+		DateTime end = start.plusWeeks(1);
 		
-		Date date = new Date();
-		
-		when(combinationReportRepository.findCombinationReportByCreatedOnIsLike(date)).thenReturn(co);
-		
-		Optional<CombinationReport> combinationReport1 = combinationReportRepository.findCombinationReportByCreatedOnIsLike(date);
-		
+		when(combinationReportRepository.findCombinationReportByCreatedOnBetween(start.toDate(),end.toDate())).thenReturn(co);
+		Optional<CombinationReport> combinationReport1 = combinationReportRepository.findCombinationReportByCreatedOnBetween(start.toDate(), end.toDate());
 		Assert.assertEquals(combinationReport1.get().getCombinationScore(),30);
 	}
 	
