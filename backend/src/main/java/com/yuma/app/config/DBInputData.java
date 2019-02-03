@@ -36,7 +36,8 @@
 ////		JSONParser parser = new JSONParser();
 ////
 ////		try {
-////			Object obj = parser.parse(new FileReader("../../resources/preferences_parsed.json"));
+////			BufferedReader reader = new BufferedReader(new FileReader("backend/src/main/resources/preferences_parsed.json"));
+//			Object obj = parser.parse(reader);
 ////
 ////			JSONObject jsonObject = (JSONObject) obj;
 ////			JSONObject users = (JSONObject) jsonObject.get("users");

@@ -25,7 +25,6 @@ public class AdminConverterTest {
 		userTO.setUserId("id");
 		userTO.setFirstName("first name");
 		userTO.setLastName("last name");
-		userTO.setPassword("password");
 		userTO.setEnabled(true);
 		userTO.setEmail("test@email.com");
 		return userTO;
