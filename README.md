@@ -55,7 +55,7 @@ You can also run the application using Maven.
 $ cd backend
 $  ../mvnw spring-boot:run
 ```
-This launches the application on port 9000.
+This launches the application on port 2020.
 
 ## Running the frontend for development mode
 
