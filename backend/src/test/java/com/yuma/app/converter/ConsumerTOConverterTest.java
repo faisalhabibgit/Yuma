@@ -27,7 +27,6 @@ public class ConsumerTOConverterTest {
 		consumer.setActive(true);
 		consumer.setFirstName("first name");
 		consumer.setLastName("last name");
-		consumer.setPassword("password");
 		return consumer;
 	}
 }
