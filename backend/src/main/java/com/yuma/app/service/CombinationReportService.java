@@ -56,6 +56,9 @@ public class CombinationReportService {
 
 	public List<CombinationReportTO> generateWeeklyCombination() {
 		logger.info("instantiating Combination Report in generate Weekly Combination");
+		if (!possibleCombinations.isEmpty()){
+			possibleCombinations.clear();
+		}
 		List<Meal> availableMeals = mealRepository.findByIsAvailableIsTrue();
 		List<Consumer> activeUsers = userRepository.findByIsActiveIsTrue();
 		List<Meal> highlyRankedMeals;
