@@ -13,11 +13,9 @@ public class UserTOConverter implements Converter<Consumer, UserTO> {
 		userTO.setFirstName(consumer.getFirstName());
 		userTO.setLastName(consumer.getLastName());
 		userTO.setEmail(consumer.getEmail());
-		userTO.setPassword(consumer.getPassword());
 		userTO.setPlan(consumer.getPlan());
 		userTO.setEnabled(consumer.isActive());
 		userTO.setTimestamp(consumer.getTimestamp());
-		userTO.setRoles(consumer.getRoles());
 		userTO.setUserId(consumer.getUserId());
 		userTO.setMealList(consumer.getMealList());
 		userTO.setDislikesList(consumer.getDislikesList());

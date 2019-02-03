@@ -27,9 +27,9 @@ public class Meal {
 	private String name;
 	private String description;
 	private boolean isAvailable;
-	private HashSet<String> flags;
+	private HashSet<String> flags = new HashSet<>();
 	private int mealScore;
-	protected List<Ingredients> ingredients;
+	protected List<Ingredients> ingredients = new ArrayList<>();
 
 	
 	public Meal(Meal deepCopy){
