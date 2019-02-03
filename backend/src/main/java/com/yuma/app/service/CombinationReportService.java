@@ -17,6 +17,7 @@ import com.yuma.app.document.CombinationReport;
 import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
+import com.yuma.app.exception.ResourceNotFoundException;
 import com.yuma.app.repository.CombinationReportRepository;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.repository.UserRepository;
@@ -43,6 +44,13 @@ public class CombinationReportService {
 		this.conversionService = conversionService;
 		this.addedMeals = new ArrayList<>();
 		this.possibleCombinations = new ArrayList<>();
+	}
+	
+	public CombinationReport getMostRecentlyAdded(){
+		CombinationReport combinationReport = combinationReportRepository.findTopByOrderByCreatedOnDesc().orElseThrow(() ->
+			new ResourceNotFoundException("Combination report", "CreatedOn", null)
+		);
+		return combinationReport;
 	}
 
 	public List<CombinationReportTO> generateWeeklyCombination() {

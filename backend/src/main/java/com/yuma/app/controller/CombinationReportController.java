@@ -1,6 +1,9 @@
 package com.yuma.app.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yuma.app.document.Consumer;
 import com.yuma.app.service.CombinationReportService;
 import com.yuma.app.to.CombinationReportTO;
+import com.yuma.app.util.WriteCsvToResponse;
 
 @Slf4j
 @RestController
@@ -36,4 +41,9 @@ public class CombinationReportController {
 		combinationReportService.saveCombinationReport(index);
 	}
 	
+	@RequestMapping(value = "/download/consumers.csv", produces = "text/csv")
+	public void downloadCSV(HttpServletResponse response) throws IOException {
+		List<Consumer> consumerList = this.combinationReportService.getMostRecentlyAdded().getUserList();
+		WriteCsvToResponse.writeConsumers(response.getWriter(), consumerList);
+	}
 }

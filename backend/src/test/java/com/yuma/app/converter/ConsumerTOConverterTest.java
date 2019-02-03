@@ -17,7 +17,6 @@ public class ConsumerTOConverterTest {
 		Assert.assertEquals(userTo.getUserId(), consumer.getUserId());
 		Assert.assertEquals(userTo.getFirstName(), consumer.getFirstName());
 		Assert.assertEquals(userTo.getLastName(), consumer.getLastName());
-		Assert.assertEquals(userTo.getPassword(), consumer.getPassword());
 		Assert.assertEquals(userTo.isEnabled(), consumer.isActive());
 	}
 
