@@ -9,6 +9,5 @@ import com.yuma.app.document.CombinationReport;
 
 public interface CombinationReportRepository extends MongoRepository<CombinationReport, String> {
 	Optional<CombinationReport> findTopByOrderByCreatedOnDesc();
-	Optional<CombinationReport> findCombinationReportByCreatedOnIsLike(Date date);
 	Optional<CombinationReport> findCombinationReportByCreatedOnBetween(Date start, Date end);
 }
