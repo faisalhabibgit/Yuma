@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import com.yuma.app.document.CombinationReport;
 import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
+import com.yuma.app.exception.ResourceNotFoundException;
 import com.yuma.app.repository.CombinationReportRepository;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.repository.UserRepository;
@@ -44,9 +46,19 @@ public class CombinationReportService {
 		this.addedMeals = new ArrayList<>();
 		this.possibleCombinations = new ArrayList<>();
 	}
+  
+	public CombinationReport getMostRecentlyAdded(){
+		CombinationReport combinationReport = combinationReportRepository.findTopByOrderByCreatedOnDesc().orElseThrow(() ->
+			new ResourceNotFoundException("Combination report", "CreatedOn", null)
+		);
+		return combinationReport;
+	}
 
 	public List<CombinationReportTO> generateWeeklyCombination() {
 		logger.info("instantiating Combination Report in generate Weekly Combination");
+		if (!possibleCombinations.isEmpty()){
+			possibleCombinations.clear();
+		}
 		List<Meal> availableMeals = mealRepository.findByIsAvailableIsTrue();
 		List<Consumer> activeUsers = userRepository.findByIsActiveIsTrue();
 		List<Meal> highlyRankedMeals;
@@ -230,5 +242,15 @@ public class CombinationReportService {
 			return;
 		}
 		this.possibleCombinations.clear();
+	}
+	
+	public CombinationReportTO getCombinationReportByDate(DateTime startDate){
+		DateTime endDate = startDate.plusWeeks(1);
+		
+		CombinationReport combinationReport = this.combinationReportRepository.findCombinationReportByCreatedOnBetween(startDate.toDate(), endDate.toDate()).orElseThrow(() ->
+			new ResourceNotFoundException("CombinationReport", "Date", endDate)
+		);
+		
+		return conversionService.convert(combinationReport, CombinationReportTO.class);
 	}
 }

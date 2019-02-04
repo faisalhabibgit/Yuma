@@ -29,6 +29,7 @@ public class CombinationReportTOConverter implements Converter<CombinationReport
 		
 		combinationReportTO.setCombinationScore(combinationReport.getCombinationScore());
 		combinationReportTO.setNumberOfBlanks(combinationReport.getNumberOfBlanks());
+		combinationReportTO.setCreatedOn(combinationReport.getCreatedOn());
 		combinationReportTO.setMealTOS(combinationReport.getMealsList().stream().map(meal -> conversionService.convert(meal, MealTO.class)).collect(Collectors.toList()));
 		combinationReportTO.setUserTOS(combinationReport.getUserList().stream().map(user -> conversionService.convert(user, UserTO.class)).collect(Collectors.toList()));
 		return combinationReportTO;
