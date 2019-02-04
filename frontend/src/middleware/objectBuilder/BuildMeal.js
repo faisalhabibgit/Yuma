@@ -11,7 +11,6 @@ class BuildMeal {
 
   getMealPromiseObj(apiPath) {
     var mealList = [];
-    var ingredientsList = [];
     var api;
     const apiToken = new ApiToken();
 

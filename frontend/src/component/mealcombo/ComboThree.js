@@ -28,7 +28,7 @@ class ComboThree extends Component {
     }
 
     getDisplay(){
-        if (this.state.apiObject == undefined || this.state.apiObject.length == 0) {
+        if (this.state.apiObject === undefined || this.state.apiObject.length === 0) {
             console.log(this.state.apiObject);
             return <Loading />
         } else {
