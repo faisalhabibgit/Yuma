@@ -54,7 +54,7 @@ class Login extends Component {
   
   postLogin(){
     const apiToken = new ApiToken();
-    apiToken.getToken('http://localhost:2020/api/auth/signin',
+    apiToken.getToken('api/auth/signin',
       {
         email: this.state.email,
         password: this.state.password

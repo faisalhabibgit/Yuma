@@ -21,7 +21,7 @@ class Retriever {
                 const userBuilderAll = new BuildUser();
                 this.entityPromise = userBuilderAll.getUserPromiseObj(apiPath);
                 break;
-            case 'api/meals/weeklycombo':
+            case 'api/combinationreport/weeklycombo':
                 const buildMealCombo = new BuildMealCombo();
                 this.entityPromise = buildMealCombo.getMealComboPromiseObj(apiPath);
                 break;
