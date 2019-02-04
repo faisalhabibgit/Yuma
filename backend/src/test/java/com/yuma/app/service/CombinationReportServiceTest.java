@@ -6,7 +6,10 @@ import static org.mockito.MockitoAnnotations.initMocks;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
+import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +23,7 @@ import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
 import com.yuma.app.document.Plan;
+import com.yuma.app.repository.CombinationReportRepository;
 import com.yuma.app.repository.MealRepository;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -28,7 +32,7 @@ public class CombinationReportServiceTest {
 	private CombinationReportService combinationReportService;
 	
 	@Mock
-	ConversionService conversionService;
+	private ConversionService conversionService;
 	
 	@Mock
 	private MealRepository mealRepository;
@@ -37,7 +41,10 @@ public class CombinationReportServiceTest {
 	private List<Meal> addedMeals;
 	
 	@Mock
-	List<CombinationReport> possibleCombinations;
+	private List<CombinationReport> possibleCombinations;
+	
+	@Mock
+	private CombinationReportRepository combinationReportRepository;
 	
 	private CombinationReport combinationReport;
 
@@ -171,6 +178,18 @@ public class CombinationReportServiceTest {
 		combinationReportService.generatePossibleMealsForUser(combinationReport, consumer, 0);
 		
 		Assert.assertEquals(consumer.getMealList().size(), 4);
+	}
+	
+	@Test
+	public void getReportCombinationByDateTest(){
+		CombinationReport combinationReport = CombinationReport.builder().userList(prepareUserList()).combinationScore(30).mealsList(prepareMealList()).id(UUID.randomUUID().toString()).build();
+		Optional<CombinationReport> co = Optional.of(combinationReport);
+		DateTime start = new DateTime();
+		DateTime end = start.plusWeeks(1);
+		
+		when(combinationReportRepository.findCombinationReportByCreatedOnBetween(start.toDate(),end.toDate())).thenReturn(co);
+		Optional<CombinationReport> combinationReport1 = combinationReportRepository.findCombinationReportByCreatedOnBetween(start.toDate(), end.toDate());
+		Assert.assertEquals(combinationReport1.get().getCombinationScore(),30);
 	}
 	
 	private List<Meal> prepareMealList() {

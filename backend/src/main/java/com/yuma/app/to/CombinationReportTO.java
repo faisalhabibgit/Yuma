@@ -1,12 +1,14 @@
 package com.yuma.app.to;
 
+import java.util.Date;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 
-import java.util.List;
+import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
@@ -18,6 +20,7 @@ public class CombinationReportTO {
 	private String id;
 	private int numberOfBlanks;
 	private int combinationScore;
+	private Date createdOn;
 	private List<UserTO> userTOS;
 	private List<MealTO> mealTOS;
 
