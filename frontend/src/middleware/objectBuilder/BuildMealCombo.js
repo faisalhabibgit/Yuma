@@ -1,8 +1,7 @@
 import ApiToken from '../ApiToken';
 import MealCombo from '../objects/MealCombo';
-import Meal from '../objects/Meal';
-import Ingredients from '../objects/Ingredients';
-import User from '../objects/User';
+import BuildMeal from '../objectBuilder/BuildMeal';
+import BuildUser from '../objectBuilder/BuildUser';
 
 
 class BuildMealCombo {
@@ -37,36 +36,30 @@ class BuildMealCombo {
             .then((myJson) => {
                 this.availableCombo = myJson.length;
                 for (let i = 0; i < this.availableCombo; i++) {
+                    var buildMeal = new BuildMeal();
                     var obj = myJson[i];
                     var mealcombo = new MealCombo();
                     var userList = [];
 
                     mealcombo.setNumberOfBlanks(obj['numberOfBlanks']);
                     mealcombo.setCombinationScore(obj['combinationScore']);
-                    console.log(myJson);
-                    var consumerList = obj['userTOS'];
-                    for (let j = 0; j < consumerList.length; j++) {
-                        var user = new User();
-                        var consumerInfo = consumerList[j];
 
-                        user.setUserId(consumerInfo['userId']);
-                        user.setFirstName(consumerInfo['firstName']);
-                        user.setLastName(consumerInfo['lastName']);
-                        user.setEmail(consumerInfo['email']);
-                        user.setPlan(consumerInfo['plan']);
-                        user.setIsActive(consumerInfo['enabled']);
-                        user.setTimestamp(consumerInfo['timestamp']);
-                        user.setMealList(consumerInfo['mealList']); //TODO: change from JSON obj to Entity obj
-                        user.setDislikesList(consumerInfo['dislikesList']);
-                        
-                        userList.push(user);
+                    var consumerList = obj['userTOS'];
+                    var buildUser = new BuildUser();
+                    for (let j = 0; j < consumerList.length; j++) {
+                        var consumerInfo = consumerList[j];
+                        userList.push(buildUser.JSONobjToUser(consumerInfo));
                     }
+
                     mealcombo.setConsumerList(userList);
 
-                    mealcombo.setMealsList(obj['mealTOS']); //TODO: change from JSON obj to Entity obj
+                    var mealListCombo = []
+                    for (let index = 0; index < obj['mealTOS'].length; index++) {
+                        mealListCombo.push(buildMeal.JSONobjToMeal(obj['mealTOS'][index]));
+                    }
+                    mealcombo.setMealsList(mealListCombo);
 
                     mealComboList.push(mealcombo);
-
                 }
                 return mealComboList;
             });
