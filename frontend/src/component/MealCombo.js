@@ -6,6 +6,8 @@ import {
 import Modal from 'react-modal';
 
 import ComboOne from './mealcombo/ComboOne';
+import ComboTwo from './mealcombo/ComboTwo';
+import ComboThree from './mealcombo/ComboThree';
 
 class MealCombo extends Component {
 
@@ -40,12 +42,12 @@ class MealCombo extends Component {
 
   handleModalChange2() {
     this.openModal();
-    this.setState({ ModalContent : <h1>Combo 2</h1>})
+    this.setState({ ModalContent : <ComboTwo />})
   }
 
   handleModalChange3() {
     this.openModal();
-    this.setState({ ModalContent : <h1>Combo 3</h1>})
+    this.setState({ ModalContent : <ComboThree />})
   }
 
   render() {
