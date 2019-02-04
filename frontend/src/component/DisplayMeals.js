@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Container, Table
+  Container, Table
 } from 'reactstrap';
 import Retriever from '../middleware/Retriever';
 
@@ -10,8 +10,7 @@ class DisplayMeals extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      apiObject: [],
-      displayLimit: 10,
+      apiObject: []
     }
   }
 
@@ -20,12 +19,7 @@ class DisplayMeals extends Component {
     retriever.getEntityPromise()
       .then((obj) => {
         var matchedArr = [];
-
-        if (obj.length < this.state.displayLimit) {
-          this.setState({displayLimit: obj.length});
-        }
-
-        for (let index = 0; index < this.state.displayLimit; index++) {
+        for (let index = 0; index < obj.length; index++) {
           const element = obj[index];
           matchedArr.push(element);
         }
@@ -33,36 +27,31 @@ class DisplayMeals extends Component {
       })
   }
 
-    render() {
+  render() {
+    return(
       
-      return(
-        
-        <Container>
-        
-          <div style={{ maxWidth:'900px', maxHeight:'300px', overflow:'scroll'}}>
+      <Container>
+        <h5 className="text-center"> Number of All Meals:{this.state.apiObject.length} </h5>
+        <div style={{ maxWidth:'900px', maxHeight:'300px', overflow:'scroll'}}>
           <Table bordered condensed>
             <thead style={{background: '#599BE9',color:'white'}}>
             <th className="text-center" >Name</th>
             <th className="text-center" >Description</th>
             </thead>
             <tbody style={{background:'#d3d3d3'}}>
-            <td>
-              {
-                this.state.apiObject.map(x => <tr>{x.name.toString()}</tr>)
-              }
-            </td>
-            <td>
-              {
-                this.state.apiObject.map(x => <tr>{x.description.toString()}</tr>)
-              }
-            </td>
+            {
+              this.state.apiObject.map(x =>
+                <tr>
+                  <td>{x.name.toString()}</td>
+                  <td>{x.description.toString()}</td>
+                </tr>
+              ) }
             </tbody>
           </Table>
         </div>
       </Container>
     );
-
-    }
+  }
 }
 
 export default DisplayMeals;
