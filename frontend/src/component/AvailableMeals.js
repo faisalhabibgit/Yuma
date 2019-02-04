@@ -12,7 +12,7 @@ class AvailableMeals extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Meals: {}
+      apiObject: []
     }
   }
 
@@ -20,56 +20,34 @@ class AvailableMeals extends Component {
     const retriever = new Retriever('api/meals/availablemeals');
     retriever.getEntityPromise()
       .then((obj) => {
-        this.setState({ Meals: obj });
+        var matchedArr = [];
+        for (let index = 0; index < obj.length; index++) {
+          const element = obj[index];
+          matchedArr.push(element);
+        }
+        this.setState({ apiObject: matchedArr });
       })
   }
-
-  Description() {
-    var mealDescription = [];
-    for (var i = 0; i < this.state.Meals.length; i++) {
-      mealDescription.push(this.state.Meals[i].description.toString());
-    }
-    return mealDescription
-  }
-
-  Name() {
-    var mealNames = [];
-    for (var i = 0; i < this.state.Meals.length; i++) {
-      mealNames.push(this.state.Meals[i].name.toString());
-    }
-    return mealNames
-  }
-
+  
   render () {
-    var AvailableMealsDescription = this.Description();
-    var AvailableMealsName = this.Name();
 
     return(
       <Container>
-
-        <h4> Number of Available Meals: {AvailableMealsName.length} </h4>
-
-        <div style={{ maxWidth:'800px', maxHeight:'275px', overflow:'scroll'}}>
+        <h5 className="text-center"> Number of Available Meals:{this.state.apiObject.length} </h5>
+        <div style={{ maxWidth:'900px', maxHeight:'300px', overflow:'scroll'}}>
           <Table bordered condensed>
             <thead style={{background: '#599BE9',color:'white'}}>
             <th className="text-center" >Name</th>
-            <th className="text-center">Description</th>
+            <th className="text-center" >Description</th>
             </thead>
-            <tbody style={{background:'#d3d3d3'}} >
-            <td>
-              {AvailableMealsName.map((item,index) =>
-                <tr key={index}>
-                  {item}
+            <tbody style={{background:'#d3d3d3'}}>
+            {
+              this.state.apiObject.map(x =>
+                <tr>
+                  <td>{x.name.toString()}</td>
+                  <td>{x.description.toString()}</td>
                 </tr>
-              )}
-            </td>
-            <td>
-              {AvailableMealsDescription.map((item,index) =>
-                <tr key={index} >
-                  {item}
-                </tr>
-              )}
-            </td>
+              ) }
             </tbody>
           </Table>
         </div>
