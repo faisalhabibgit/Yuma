@@ -1,14 +1,14 @@
 class Plan {
 
   constructor() {
-    this.numOfMeal = null;
+    this.numOfMeals = null;
     this.extraVeggies = null;
     this.extraProtein = null;
     this.details = null;
   
   }
 
-    setNumOfMeal(numOfMeal){ this.numOfMeal = numOfMeal }
+    setNumOfMeal(numOfMeals){ this.numOfMeals = numOfMeals }
     setExtraVeggies(extraVeggies){ this.extraVeggies = extraVeggies }
     setExtraProtein(extraProtein){ this.extraProtein = extraProtein }
     setDetails(details){ this.details = details}
@@ -16,7 +16,7 @@ class Plan {
 
 
   toString() {
-    return (this.numOfMeal + ', ' + this.extraVeggies + ', ' + this.extraProtein + ', ' + this.details);
+    return (this.numOfMeals + ', ' + this.extraVeggies + ', ' + this.extraProtein + ', ' + this.details);
   }
 }
 
