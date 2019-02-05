@@ -26,11 +26,15 @@ class DisplayCombo extends Component {
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td> <h6> Name</h6></td>
-                <td> <h6> Description</h6></td>
-              </tr>
+              {
+                this.state.apiObject.mealsList.map(x =>
+                  <tr>
+                    <td>{x.name}</td>
+                    <td>{x.description}</td>
+                  </tr>
+                ) }
               </tbody>
+              
             </Table> 
             
             <h1>Users</h1>
@@ -49,8 +53,7 @@ class DisplayCombo extends Component {
                 <h6> Last Name: { x.lastName}</h6>
                 <h6> Email: { x.email}</h6>
                 </div>
-
-
+                  
                   <div className="col" style={{padding: '20px'}}>
                   <h5 style={{color:'#599BE9'}}>User Details </h5>
                   <h6> Number of Meals: { x.plan.numOfMeal}</h6>
@@ -61,24 +64,21 @@ class DisplayCombo extends Component {
                   </h6>
                 </div>
                 </div>
-                
-                  <div>
+                 
+                <div>
                   <h5 style={{color:'#599BE9'}}>Meals </h5>
-                    <h6> Name: name , Description: chicken and broccolie topped with a touch of love</h6>
-                    <h6> Name: name , Description: chicken and broccolie topped with a touch of love</h6>
-                    <h6> Name: name , Description: chicken and broccolie topped with a touch of love</h6>
-                    <h6> Name: name , Description: chicken and broccolie topped with a touch of love</h6>
-                    <h6> Name: name ,  Description: chicken and broccolie topped with a touch of love</h6>
 
+                    {  x.mealList.map(meal =>
+                    <h6> Name: {meal.name} , Description: {meal.description}</h6>
+                    )}
                   </div>
               </CardBody>
             </Card>
              </div>
-            ) }
+            )}
                
           </Container>
         );
-
     }
 }
 
