@@ -56,10 +56,10 @@ class DisplayCombo extends Component {
                   
                   <div className="col" style={{padding: '20px'}}>
                   <h5 style={{color:'#599BE9'}}>User Details </h5>
-                  <h6> Number of Meals: { x.plan.numOfMeal}</h6>
-                  <h6> Extra Veggies: { x.plan.extraVeggies}</h6>
-                  <h6 > Extra Protein: { x.plan.extraProtein}</h6>
-                  <h6> Details: {x.plan.details}  </h6>
+                  <h6> Number of Meals: { x.plan.numOfMeals}</h6>
+                  <h6> Extra Veggies: { x.plan.extraVeggies.toString()}</h6>
+                  <h6 > Extra Protein: { x.plan.extraProtein.toString()}</h6>
+                  <h6> Details: {x.plan.details.toString()}  </h6>
                   <h6> Dislikes: {x.dislikesList.join(",")}
                   </h6>
                 </div>
