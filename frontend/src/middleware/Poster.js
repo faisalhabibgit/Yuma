@@ -2,7 +2,7 @@ import ApiToken from './ApiToken';
 
 class Poster {
 
-    constructor(apiPath) {
+    constructor() {
         this.apiToken = new ApiToken();
     }
 

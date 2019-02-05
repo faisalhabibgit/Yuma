@@ -11,6 +11,8 @@ import ComboOne from './mealcombo/ComboOne';
 import ComboTwo from './mealcombo/ComboTwo';
 import ComboThree from './mealcombo/ComboThree';
 
+import Retriever from '../middleware/Retriever';
+
 class MealCombo extends Component {
 
   constructor() {
@@ -19,7 +21,8 @@ class MealCombo extends Component {
     this.state = {
       modalIsOpen: false,
       ModalContent: '',
-      downloadCSV: ''
+      downloadCSV: '',
+      hiddenElement: null
     };
 
     this.openModal = this.openModal.bind(this);
@@ -28,6 +31,7 @@ class MealCombo extends Component {
     this.handleModalChange2 = this.handleModalChange2.bind(this);
     this.handleModalChange3 = this.handleModalChange3.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDownloadCSV = this.handleDownloadCSV.bind(this);
 
     this.poster = new Poster();
   }
@@ -57,13 +61,24 @@ class MealCombo extends Component {
 
   handleSubmit(e) {
     this.poster.selectMealCombo(e.target.id).then((empty) => {
-      this.setState({ downloadCSV: <Button style={{ background: '#599BE9' }} onClick={this.handleDownload} type="submit">Download CSV</Button> })
+      const retriever = new Retriever('api/combinationreport/download/consumers.csv');
+      retriever.getEntityPromise().then((csv) => {
+
+        this.setState({ hiddenElement: document.createElement('a') });
+        this.state.hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+        this.state.hiddenElement.target = '_blank';
+        this.state.hiddenElement.download = 'report.csv';
+        
+        this.setState({ downloadCSV: <Button style={{ background: '#599BE9' }} type="submit" onClick={this.handleDownloadCSV} >Download CSV</Button> })
+      })
     })
   }
 
-  handleDownload() {
-    console.log('...Downloading');
+  handleDownloadCSV() {
+    this.state.hiddenElement.click();
   }
+
+
 
   render() {
     return (
@@ -81,7 +96,6 @@ class MealCombo extends Component {
               </div>
             </CardBody>
           </Card>
-          {this.state.downloadCSV}
           <Card>
             <CardBody className="text-center">
               <h2> Meal Combo #2</h2>
@@ -105,9 +119,9 @@ class MealCombo extends Component {
               </div>
             </CardBody>
           </Card>
-        
+
         </CardDeck>
-        
+
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
@@ -116,6 +130,7 @@ class MealCombo extends Component {
           <button onClick={this.closeModal}>close</button>
           <div>{this.state.ModalContent}</div>
         </Modal>
+        <div>{this.state.downloadCSV}</div>
       </div>
     );
   }
