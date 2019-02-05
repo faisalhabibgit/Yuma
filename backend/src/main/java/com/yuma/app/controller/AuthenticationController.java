@@ -75,7 +75,7 @@ public class AuthenticationController {
 		}
 		
 		Admin result = adminService.saveAdmin(signUpRequest);
-
+		
 		URI location = ServletUriComponentsBuilder
 			.fromCurrentContextPath().path("/users/{username}")
 			.buildAndExpand(result.getEmail()).toUri();

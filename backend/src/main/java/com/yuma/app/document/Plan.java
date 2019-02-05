@@ -18,5 +18,5 @@ public class Plan {
 	private int numOfMeals;
 	private boolean extraVeggies;
 	private boolean extraProtein;
-	private HashSet<String> details;
+	private HashSet<String> details = new HashSet<>();
 }

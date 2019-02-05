@@ -12,12 +12,10 @@ public class UserConverter implements Converter<UserTO, Consumer> {
 		Consumer consumer = new Consumer();
 		consumer.setFirstName(userTO.getFirstName());
 		consumer.setLastName(userTO.getLastName());
-		consumer.setPassword(userTO.getPassword());
 		consumer.setEmail(userTO.getEmail());
 		consumer.setPlan(userTO.getPlan());
 		consumer.setActive(userTO.isEnabled());
 		consumer.setTimestamp(userTO.getTimestamp());
-		consumer.setRoles(userTO.getRoles());
 		consumer.setUserId(userTO.getUserId());
 		consumer.setMealList(userTO.getMealList());
 		consumer.setDislikesList(userTO.getDislikesList());

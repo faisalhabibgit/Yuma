@@ -88,10 +88,8 @@ public class ConsumerService {
 	
 	public List<UserTO> activeUsers(){
 		userServiceLogger.info("fetching users list");
-		List<Consumer> consumerList = userRepository.findByIsActiveIsTrue().orElseThrow(() -> new ResourceNotFoundException("Consumer", "isActive", true));
-		
+		List<Consumer> consumerList = userRepository.findByIsActiveIsTrue();
 		return convertUserListToUserTOList(consumerList);
-
 	}
 	
 	protected List<UserTO> convertUserListToUserTOList(List<Consumer> consumerList){

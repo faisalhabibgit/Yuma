@@ -4,17 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
-import com.yuma.app.catalog.CombinationReport;
-import com.yuma.app.catalog.MealCatalog;
-import com.yuma.app.document.Consumer;
+
 import com.yuma.app.document.Meal;
 import com.yuma.app.exception.ResourceNotFoundException;
 import com.yuma.app.repository.MealRepository;
-import com.yuma.app.repository.UserRepository;
 import com.yuma.app.to.MealTO;
 
 @Service
@@ -22,23 +20,19 @@ public class MealService {
 
 	private Logger mealServiceLogger = LoggerFactory.getLogger(MealService.class);
 	private MealRepository mealRepository;
-	private UserRepository userRepository;
 	private ConversionService conversionService;
-	private MealCatalog mealCatalog;
 
-	public MealService(MealRepository mealRepository, UserRepository userRepository, ConversionService conversionService) {
+	public MealService(MealRepository mealRepository, ConversionService conversionService) {
 		this.mealRepository = mealRepository;
-		this.userRepository = userRepository;
 		this.conversionService = conversionService;
-		this.mealCatalog = new MealCatalog(mealRepository);
 	}
-	
+
 	public List<MealTO> list() {
 		mealServiceLogger.info("fetching list of all meals in %s", MealService.class);
 		List<MealTO> mealTos = convertMealToMealTO(mealRepository.findAll());
 		return mealTos;
 	}
-	
+
 	public MealTO update(MealTO mealTo) {
 		mealServiceLogger.info("updating meal with description %s, in %s", mealTo.getDescription(), MealService.class);
 		Meal meal = mealRepository.findByMealId(mealTo.getMealId()).orElseThrow(() -> new ResourceNotFoundException("Meal", "mealID", mealTo.getName()));
@@ -47,7 +41,7 @@ public class MealService {
 		Meal newMealCreated = mealRepository.save(meal);
 		return conversionService.convert(newMealCreated, MealTO.class);
 	}
-	
+
 	public MealTO create(MealTO mealTo) {
 		this.mealServiceLogger.info("creating Meal in %s", MealService.class);
 		mealTo.setMealId(UUID.randomUUID());
@@ -55,23 +49,11 @@ public class MealService {
 		Meal meal = mealRepository.save(mealToCreate);
 		return conversionService.convert(meal, MealTO.class);
 	}
-
-	public List<CombinationReport> generateWeeklyCombos() {
-		this.mealServiceLogger.info("generating optimal weekly combo in %s", MealService.class);
-		List<Meal> mealList = mealRepository.
-			findByIsAvailableIsTrue()
-			.orElseThrow(() -> new ResourceNotFoundException("Meals", "isAvailable",true));
-		List<Consumer> consumerList = userRepository.
-			findByIsActiveIsTrue()
-			.orElseThrow(() -> new ResourceNotFoundException("Consumer", "isActive", true));
-		List<CombinationReport> possibleComboReports = mealCatalog.generateWeeklyCombination(mealList, consumerList);
-		return possibleComboReports;
-	}
 	
 	public List<MealTO> availableMeals(){
 		mealServiceLogger.info("retrieving available meals in %s", MealService.class);
 		
-		List<Meal> availableMeals = mealRepository.findByIsAvailableIsTrue().orElseThrow(() -> new ResourceNotFoundException("Meal", "isAvailable", true));
+		List<Meal> availableMeals = mealRepository.findByIsAvailableIsTrue();
 		List<MealTO> mealTOS = convertMealToMealTO(availableMeals);
 		return mealTOS;
 	}

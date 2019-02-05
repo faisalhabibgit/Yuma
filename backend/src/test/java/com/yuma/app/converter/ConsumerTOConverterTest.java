@@ -17,7 +17,6 @@ public class ConsumerTOConverterTest {
 		Assert.assertEquals(userTo.getUserId(), consumer.getUserId());
 		Assert.assertEquals(userTo.getFirstName(), consumer.getFirstName());
 		Assert.assertEquals(userTo.getLastName(), consumer.getLastName());
-		Assert.assertEquals(userTo.getPassword(), consumer.getPassword());
 		Assert.assertEquals(userTo.isEnabled(), consumer.isActive());
 	}
 
@@ -28,7 +27,6 @@ public class ConsumerTOConverterTest {
 		consumer.setActive(true);
 		consumer.setFirstName("first name");
 		consumer.setLastName("last name");
-		consumer.setPassword("password");
 		return consumer;
 	}
 }
