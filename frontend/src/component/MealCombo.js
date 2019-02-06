@@ -70,7 +70,7 @@ class MealCombo extends Component {
         link.download = 'report.csv';
 
         this.setState({ hiddenElement : link});
-        this.setState({ downloadCSV: <Button style={{ background: '#599BE9' }} type="submit" onClick={this.handleDownloadCSV} >Download CSV</Button> })
+        this.setState({ downloadCSV: <Button style={{ background: '#599BE9', margin:'15px' }} type="submit" onClick={this.handleDownloadCSV} >Download CSV</Button> })
       })
     })
   }
