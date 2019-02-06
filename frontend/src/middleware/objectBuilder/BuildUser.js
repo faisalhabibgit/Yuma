@@ -1,5 +1,7 @@
 import ApiToken from '../ApiToken';
 import User from '../objects/User';
+import Plan from '../objects/Plan';
+import BuildMeal from '../objectBuilder/BuildMeal';
 
 
 class BuildUser {
@@ -31,24 +33,42 @@ class BuildUser {
             })
             .then((myJson) => {
                 for (var i = 0; i < myJson.length; i++) {
-
-                    var obj = myJson[i];
-                    var user = new User();
-                    user.setUserId(obj['userId']);
-                    user.setFirstName(obj['firstName']);
-                    user.setLastName(obj['lastName']);
-                    user.setEmail(obj['email']);
-                    user.setPlan(obj['plan']);
-                    user.setIsActive(obj['enabled']);
-                    user.setTimestamp(obj['timestamp']);
-                    user.setMealList(obj['mealList']); //TODO: change from JSON obj to Entity obj
-                    user.setDislikesList(obj['dislikesList']);
-
-                    userList.push(user);
-
+                    userList.push(this.JSONobjToUser(myJson[i]));
                 }
                 return userList;
             });
+    }
+
+    JSONobjToUser(obj){
+
+        var buildMeal = new BuildMeal();
+
+        var user = new User();
+        user.setUserId(obj['userId']);
+        user.setFirstName(obj['firstName']);
+        user.setLastName(obj['lastName']);
+        user.setEmail(obj['email']);
+        user.setPlan(this.JSONobjToPlan(obj['plan']));
+        user.setIsActive(obj['enabled']);
+        user.setTimestamp(obj['timestamp']);
+
+        var mealList = [];
+        for (let index = 0; index < obj['mealList'].length; index++) {
+            mealList.push(buildMeal.JSONobjToMeal(obj['mealList'][index]));
+        }
+        user.setMealList(mealList);
+        user.setDislikesList(obj['dislikesList']);
+
+        return user;
+    }
+
+    JSONobjToPlan(obj){
+        var plan = new Plan();
+        plan.setNumOfMeal(obj.numOfMeals);
+        plan.setExtraVeggies(obj.extraVeggies);
+        plan.setExtraProtein(obj.extraProtein);
+        plan.setDetails(obj.details);
+        return plan;
     }
 
 

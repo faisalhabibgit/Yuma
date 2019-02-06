@@ -11,7 +11,6 @@ class BuildMeal {
 
   getMealPromiseObj(apiPath) {
     var mealList = [];
-    var ingredientsList = [];
     var api;
     const apiToken = new ApiToken();
 
@@ -53,29 +52,8 @@ class BuildMeal {
       .then((myJson) => {
         for (var i = 0; i < myJson.length; i++) {
           var obj = myJson[i];
-
-          for (var j in obj.ingredients) {
-            var ingredientObj = obj.ingredients[j];
-
-            var ingredients = new Ingredients();
-            ingredients.setName(ingredientObj.name);
-            ingredients.setWeight(ingredientObj.weight);
-            ingredients.setCalories(ingredientObj.calories);
-            ingredients.setPrice(ingredientObj.price);
-
-            ingredientsList.push(ingredients);
-          }
-
-          var meal = new Meal();
-          meal.setName(obj.name);
-          meal.setDescription(obj.description);
-          meal.setIsAvailable(obj.available);
-          meal.setFlags(obj.flags);
-          meal.setIngredients(ingredientsList);
-
-
-          mealList.push(meal);
-          ingredientsList = [];
+          mealList.push(this.JSONobjToMeal(obj));
+          
         }
         return mealList;
       });
@@ -104,6 +82,32 @@ class BuildMeal {
       })
     })
 
+  }
+
+  // given a JSON meal object, return a Javascript Meal object.
+  JSONobjToMeal(obj) {
+    var ingredientsList = [];
+
+    for (var j in obj.ingredients) {
+      var ingredientObj = obj.ingredients[j];
+
+      var ingredients = new Ingredients();
+      ingredients.setName(ingredientObj.name);
+      ingredients.setWeight(ingredientObj.weight);
+      ingredients.setCalories(ingredientObj.calories);
+      ingredients.setPrice(ingredientObj.price);
+
+      ingredientsList.push(ingredients);
+    }
+
+    var meal = new Meal();
+    meal.setName(obj.name);
+    meal.setDescription(obj.description);
+    meal.setIsAvailable(obj.available);
+    meal.setFlags(obj.flags);
+    meal.setIngredients(ingredientsList);
+  
+    return meal;
   }
 
 }

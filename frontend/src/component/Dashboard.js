@@ -29,7 +29,7 @@ class Dashboard extends Component {
     return (
       <div style={{background: '#ADB7BF'}}>
 
-        <CardDeck style={{padding:'12px', height:'300px'}}>
+        <CardDeck style={{padding:'12px', height:'380px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
               <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Meal Combo</h5>
