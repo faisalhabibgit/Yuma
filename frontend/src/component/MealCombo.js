@@ -64,11 +64,12 @@ class MealCombo extends Component {
       const retriever = new Retriever('api/combinationreport/download/consumers.csv');
       retriever.getEntityPromise().then((csv) => {
 
-        this.setState({ hiddenElement: document.createElement('a') });
-        this.state.hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-        this.state.hiddenElement.target = '_blank';
-        this.state.hiddenElement.download = 'report.csv';
-        
+        var link = document.createElement('a');
+        link.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+        link.target = '_blank';
+        link.download = 'report.csv';
+
+        this.setState({ hiddenElement : link});
         this.setState({ downloadCSV: <Button style={{ background: '#599BE9' }} type="submit" onClick={this.handleDownloadCSV} >Download CSV</Button> })
       })
     })

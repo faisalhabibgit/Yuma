@@ -29,6 +29,7 @@ class Retriever {
             case 'api/combinationreport/download/consumers.csv':
                 const buildDownload = new BuildDownload();
                 this.entityPromise = buildDownload.getCSVDownloadPromise(apiPath);
+                break;
             default:
             // code block
         }
