@@ -90,7 +90,22 @@ class NewMeal extends Component {
       ingredients: [...prevState.ingredients, { name: "", weight: "", calories: "", price: "" }],
     }));
   };
+  
+  calculate = (e) =>{
+    e.preventDefault();
+    this.setState(() => ({
+      ingredients: [{calories: this.calculateCalories() }],
+    }))
+    
+  };
 
+  //TODO
+  // Take name of ingredient and return calories from edamam api call
+  calculateCalories (){
+    var countTrial = "400";
+  return countTrial;
+  };
+  
   removeIngredient(e, index) {
     e.preventDefault();
     this.state.ingredients.splice(index, 1);
@@ -229,6 +244,7 @@ class NewMeal extends Component {
                           onChange={this.handleChange}
                           className="calories"
                         />
+                        <button style={{ marginLeft: 40 }} onClick={this.calculate}>Calculate</button>
                         <br />
                         <label htmlFor={priceId}>Price</label>
                         <input
