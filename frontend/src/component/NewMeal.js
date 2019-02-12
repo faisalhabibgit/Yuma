@@ -34,7 +34,7 @@ class NewMeal extends Component {
       dairy: 'false',
       gluten: 'false',
       shellfish: 'false',
-      soy: 'false',
+      soy: 'false'
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
