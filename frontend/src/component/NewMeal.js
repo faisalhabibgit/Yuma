@@ -13,6 +13,7 @@ import BuildMeal from '../middleware/objectBuilder/BuildMeal';
 const REDIRECTHOME = '/';
 
 class NewMeal extends Component {
+  
 
   constructor(props) {
     super(props);
@@ -33,13 +34,14 @@ class NewMeal extends Component {
       dairy: 'false',
       gluten: 'false',
       shellfish: 'false',
-      soy: 'false'
+      soy: 'false',
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.postMeal = this.postMeal.bind(this);
     this.setFlags = this.setFlags.bind(this);
+    
   }
 
   handleSubmit(event) {
@@ -72,7 +74,7 @@ class NewMeal extends Component {
 
       let ingredients = [...this.state.ingredients];
       ingredients[event.target.dataset.id][event.target.className] = event.target.value;
-      this.setState({ ingredients }, () => console.log(this.state.ingredients));
+      this.setState({ ingredients: ingredients }, () => console.log(this.state.ingredients));
 
     } else {
 
@@ -102,8 +104,24 @@ class NewMeal extends Component {
   //TODO
   // Take name of ingredient and return calories from edamam api call
   calculateCalories (){
-    var countTrial = "400";
-  return countTrial;
+    var caloriesInt = null;
+    var nameIngr = "1 chicken";
+    var ingr = this.state.ingredients[0]['name'];
+
+    var api = "https://api.edamam.com/api/nutrition-data?app_id=71abc6c1&app_key=455917addf9580d94f113a626b5ac632&ingr="+ ingr;
+   console.log(this.state.ingredients[0]['name'])
+    
+    fetch(api)
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
+            this.setState(() => ({
+                  ingredients: [{calories: json['calories' ]}],
+               }));
+      console.log("Calculated Number of calories in this ingredient is "+json['calories']);
+
+      })
   };
   
   removeIngredient(e, index) {
