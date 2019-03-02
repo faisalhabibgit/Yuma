@@ -107,9 +107,9 @@ class NewMeal extends Component {
   // Take name of ingredient and return calories from edamam api call
   calculateCalories (e){
     var ingr = this.state.ingredients[0]['name'];
-    var weights = this.state.ingredients[0]['weight'];
+    var unit = this.state.ingredients[0]['weight'];
 
-    var api = "https://api.edamam.com/api/nutrition-data?app_id=71abc6c1&app_key=455917addf9580d94f113a626b5ac632&ingr="+weights+" "+ ingr;
+    var api = "https://api.edamam.com/api/nutrition-data?app_id=71abc6c1&app_key=455917addf9580d94f113a626b5ac632&ingr="+unit+" "+ ingr;
    console.log(this.state.ingredients[0]['name'])
     
     fetch(api)
