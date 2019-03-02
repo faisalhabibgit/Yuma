@@ -106,8 +106,6 @@ class NewMeal extends Component {
   //TODO
   // Take name of ingredient and return calories from edamam api call
   calculateCalories (e){
-    var caloriesInt = null;
-    var nameIngr = "1 chicken";
     var ingr = this.state.ingredients[0]['name'];
     var weights = this.state.ingredients[0]['weight'];
 
