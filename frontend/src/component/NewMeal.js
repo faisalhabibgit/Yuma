@@ -13,6 +13,7 @@ import BuildMeal from '../middleware/objectBuilder/BuildMeal';
 const REDIRECTHOME = '/';
 
 class NewMeal extends Component {
+  
 
   constructor(props) {
     super(props);
@@ -40,6 +41,9 @@ class NewMeal extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.postMeal = this.postMeal.bind(this);
     this.setFlags = this.setFlags.bind(this);
+    this.calculate = this.calculate.bind(this);
+    this.calculateCalories = this.calculateCalories.bind(this);
+
   }
 
   handleSubmit(event) {
@@ -72,7 +76,7 @@ class NewMeal extends Component {
 
       let ingredients = [...this.state.ingredients];
       ingredients[event.target.dataset.id][event.target.className] = event.target.value;
-      this.setState({ ingredients }, () => console.log(this.state.ingredients));
+      this.setState({ ingredients: ingredients }, () => console.log(this.state.ingredients));
 
     } else {
 
@@ -93,18 +97,54 @@ class NewMeal extends Component {
   
   calculate = (e) =>{
     e.preventDefault();
-    this.setState(() => ({
-      ingredients: [{calories: this.calculateCalories() }],
+    this.setState((prevState) => ({
+      ingredients: [...prevState.ingredients, {calories: this.calculateCalories(e) }],
     }))
     
   };
-
+  
   //TODO
   // Take name of ingredient and return calories from edamam api call
-  calculateCalories (){
-    var countTrial = "400";
-  return countTrial;
+  calculateCalories (e){
+    var ingr = this.state.ingredients[0]['name'];
+    var unit = this.state.ingredients[0]['weight'];
+
+    var api = "https://api.edamam.com/api/nutrition-data?app_id=71abc6c1&app_key=455917addf9580d94f113a626b5ac632&ingr="+unit+" "+ ingr;
+   console.log(this.state.ingredients[0]['name'])
+    
+    fetch(api)
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
+      console.log("Calculated Number of calories in this ingredient is "+json['calories']);
+      console.log(json);
+      var totalweight = json['totalWeight'];
+      console.log(totalweight);
+      
+        this.setState(() => ({                                                           
+            ingredients: [{calories: json['calories' ], weight: json['totalWeight']}], 
+         }));
+
+        //bug fix attempt
+        // let ingredients = [...this.state.ingredients];
+        // var i = 0;
+        // if(ingredients[i]['calories'] != null){
+        //   i++;
+        // }
+        //   ingredients[i]['calories'] = json['calories'];
+        //
+        //   this.setState({ ingredients: this.state.ingredients });
+
+
+      })
   };
+  
+  //TODO: 
+  //calculate Calories from input weight and not ingredient name
+  caloriesFromWeight(){
+    
+  }
   
   removeIngredient(e, index) {
     e.preventDefault();
@@ -241,7 +281,7 @@ class NewMeal extends Component {
                           data-id={idx}
                           id={caloriesId}
                           value={this.state.ingredients[idx].calories}
-                          onChange={this.handleChange}
+                          onChange={this.handleChange }
                           className="calories"
                         />
                         <button style={{ marginLeft: 40 }} onClick={this.calculate}>Calculate</button>
