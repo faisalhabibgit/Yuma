@@ -89,15 +89,15 @@ class NewMeal extends Component {
     }
   }
 
-  addIngredient = (e) => {
-    e.preventDefault();
+  // addIngredient = (e) => {
+  addIngredient(event){
     this.setState((prevState) => ({
       ingredients: [...prevState.ingredients, { name: "", weight: "", calories: "", price: "" }],
     }));
   };
 
-  calculate = (event) =>{
-    event.preventDefault();
+  // calculate = (e) =>{
+  calculate(event){
     var index = this.idx
     this.setState((prevState) => ({
       ingredients: [...prevState.ingredients, {calories: this.calculateCalories(event, index) }],
@@ -108,12 +108,12 @@ class NewMeal extends Component {
   //TODO
   // Take name of ingredient and return calories from edamam api call
   calculateCalories (event, index){
-    var ingr = this.state.ingredients[index]['name'];
-    var weight = this.state.ingredients[index]['weight'];
+    var ingr = this.state.ingredients[0]['name'];
+    var weight = this.state.ingredients[0]['weight'];
 
     var api = "https://api.edamam.com/api/nutrition-data?app_id=71abc6c1&app_key=455917addf9580d94f113a626b5ac632&ingr=1"+ ingr;
     console.log(api)
-   console.log(this.state.ingredients[index]['name'])
+   console.log(this.state.ingredients[0]['name'])
 
     fetch(api)
       .then((response) => {
@@ -126,7 +126,7 @@ class NewMeal extends Component {
       console.log(totalweight);
 
         this.setState(() => ({
-            // ingredients: [{calories: json['calories' ], weight: json['totalWeight']}],
+            // ingredients: [{calories: json['calories'], weight: json['totalWeight']}],
             ingredients: [{calories: this.caloriesFromWeight(weight, json['calories'], json['totalWeight'])}],
          }));
 
