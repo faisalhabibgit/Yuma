@@ -9,7 +9,15 @@ beforeAll(() => {
     wrapper = shallow(<Router><Navigation /></Router>);
 });
 
-test('Has link to Logout page', () => {
-    const linkString = '<a class="nav-link" href="/Logout">Logout</a>';
-    expect(wrapper.html()).toContain(linkString);    
+test('Has link to Login', () => {
+    const Loginlink = wrapper.find("[data-test='navigation-login']");
+    expect(Loginlink).toBeDefined;
 });
+
+test('Has link to Logout', () => {
+    const Logoutlink = wrapper.find("[data-test='navigation-logout']");
+    expect(Logoutlink).toBeDefined;
+})
+
+
+
