@@ -13,12 +13,3 @@ beforeAll(() => {
 test('Renders correctly in debug', () =>{
     expect(wrapper).toMatchSnapshot();
 });
-
-test('Expect correct value for token with no authentication', () => {
-    const props = wrapper.props();
-
-    expect(props).not.toBe(null);
-    expect(wrapper.state('ApiToken')).to.equal(new ApiToken())
-
-    //expect(true).toEqual(true);
-});
