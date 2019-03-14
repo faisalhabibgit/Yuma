@@ -4,8 +4,8 @@ import Test from '../component/Test';
 import sinon from 'sinon';
 
 //CODE WILL BE UNCOMMENTED ONCE TEST.JS IS REFACTORED TO SearchMeal.js
-// this is because line 13 causes the js test runner to fail, as 'Test.prototype' is invalid but
-// necessary to prototype the Test.js file
+// this is because line 13 causes the js test runner to fail, as 'file_name.prototype' must
+// represent Test.js, but this is not allowed
 
 
 test('Search meal page renders', () => {

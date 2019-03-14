@@ -254,7 +254,7 @@ class NewMeal extends Component {
                   this.state.ingredients.map((val, idx) => {
                     let ingredientId = `name-${idx}`, weightId = `weight-${idx}`, caloriesId = `calories-${idx}`, priceId = `price-${idx}`;
                     return (
-                      <div key={idx}>
+                      <div data-test="initial-ingredient" key={idx}>
                         <br />
                         <label htmlFor={ingredientId}>{`Ingredient #${idx + 1}`}</label>
                         <input

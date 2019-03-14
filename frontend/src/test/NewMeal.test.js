@@ -55,4 +55,7 @@ test('New meal page renders a single ingredient form upon INITIAL rendering', ()
 
     expect(wrapper.length).toBe(1);
 
+    const initialIngredient = wrapper.find("[data-test='initial-ingredient']");
+    expect(initialIngredient.length).toBe(1);
+
 });
