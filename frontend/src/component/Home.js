@@ -35,7 +35,7 @@ class Home extends Component {
                             <CardBody data-test="meal-card">
                                 <CardTitle>Meals</CardTitle>
                                 <CardText>Check the meal inventory</CardText>
-                                <Link to="/Test"><Button>Search Now</Button></Link>
+                                <Link to="/Test"><Button data-test="meal-button">Search Now</Button></Link>
                             </CardBody>
                         </Card>
                     </Col>
@@ -45,7 +45,7 @@ class Home extends Component {
                             <CardBody data-test="add-meal-card">
                                 <CardTitle>Add Meals</CardTitle>
                                 <CardText>Add a new recipe</CardText>
-                                <Link to="/NewMeal"><Button>Add Now</Button></Link>
+                                <Link to="/NewMeal"><Button data-test='add-meal-button'>Add Now</Button></Link>
                             </CardBody>
                         </Card>
                     </Col>
@@ -55,7 +55,7 @@ class Home extends Component {
                             <CardBody data-test="meal-history-card">
                                 <CardTitle>Meal History</CardTitle>
                                 <CardText>Find the dates</CardText>
-                                <Link to="/MealHistory"><Button>Find Now</Button></Link>
+                                <Link to="/MealHistory"><Button data-test='history-button'>Find Now</Button></Link>
                             </CardBody>
                         </Card>
                     </Col>
@@ -65,7 +65,7 @@ class Home extends Component {
                             <CardBody data-test="stats-card">
                                 <CardTitle>Dashboard</CardTitle>
                                 <CardText>Check the stats</CardText>
-                                <Link to="/Dashboard"><Button>View Now</Button></Link>
+                                <Link to="/Dashboard"><Button data-test='stats-button'>View Now</Button></Link>
                             </CardBody>
                         </Card>
                     </Col>
@@ -75,7 +75,7 @@ class Home extends Component {
                             <CardBody data-test="settings-card">
                                 <CardTitle>Settings</CardTitle>
                                 <CardText>Edit and Configure</CardText>
-                                <Link to="/NewMeal"><Button>Config</Button></Link>
+                                <Link to="/NewMeal"><Button data-test='settings-button'>Config</Button></Link>
                             </CardBody>
                         </Card>
                     </Col>
