@@ -44,11 +44,11 @@ class NewMeal extends Component {
     this.calculate = this.calculate.bind(this);
     this.calculateCalories = this.calculateCalories.bind(this);
     this.caloriesFromWeight = this.caloriesFromWeight.bind(this);
+    this.addIngredient = this.addIngredient.bind(this);
 
   }
 
   handleSubmit(event) {
-
     event.preventDefault();
 
     if (this.state.name.length < 1) {
@@ -97,23 +97,27 @@ class NewMeal extends Component {
   };
 
   // calculate = (e) =>{
-  calculate(event){
-    var index = this.idx
+  calculate(index){
+    var idx = index
     this.setState((prevState) => ({
-      ingredients: [...prevState.ingredients, {calories: this.calculateCalories(event, index) }],
+      ingredients: [...prevState.ingredients, {calories: this.calculateCalories(idx) }],
     }))
+    console.log("calulate(index), index = " + index )
 
   };
 
   //TODO
   // Take name of ingredient and return calories from edamam api call
-  calculateCalories (event, index){
-    var ingr = this.state.ingredients[0]['name'];
-    var weight = this.state.ingredients[0]['weight'];
+  calculateCalories(idx){
+    var index = idx;
+    console.log("this" + this)
+    console.log("calulateCalories(index), index = " + index )
+    var ingr = this.state.ingredients[index]['name'];
+    var weight = this.state.ingredients[index]['weight'];
 
-    var api = "https://api.edamam.com/api/nutrition-data?app_id=71abc6c1&app_key=455917addf9580d94f113a626b5ac632&ingr=1"+ ingr;
+    var api = "https://api.edamam.com/api/nutrition-data?app_id=6fd2547b&app_key=61888ddf81b29e52ad9aaf1a8d5b4400&ingr=1"+ ingr;
     console.log(api)
-   console.log(this.state.ingredients[0]['name'])
+   console.log(this.state.ingredients[index]['name'])
 
     fetch(api)
       .then((response) => {
@@ -165,6 +169,7 @@ class NewMeal extends Component {
 
     for (let i = 0; i < this.state.ingredients.length; i++) {
       var anIngredient = new Ingredients();
+      console.log("ingedient: " + i);
 
       anIngredient.setName(this.state.ingredients[i]['name']);
       anIngredient.setWeight(this.state.ingredients[i]['weight']);
@@ -289,7 +294,7 @@ class NewMeal extends Component {
                           onChange={this.handleChange }
                           className="calories"
                         />
-                        <button style={{ marginLeft: 40 }} onClick={this.calculate.bind(this, idx)}>Calculate</button>
+                        <button style={{ marginLeft: 40 }} onClick={() => this.calculate(idx)}>Calculate</button>
                         <br />
                         <label htmlFor={priceId}>Price</label>
                         <input
