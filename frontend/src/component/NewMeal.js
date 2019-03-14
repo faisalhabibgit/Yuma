@@ -18,13 +18,7 @@ class NewMeal extends Component {
   constructor(props) {
     super(props);
 
-    const apiToken = new ApiToken();
-    if (!apiToken.isAuthenticated()) {
-      console.log('User Not Logged');
-      this.props.history.push(`/Login`)
-    } else {
-      console.log('User Login Success');
-    }
+    this.checkAuthenticated();
 
     this.state = {
       name: '',
@@ -44,6 +38,17 @@ class NewMeal extends Component {
     this.calculate = this.calculate.bind(this);
     this.calculateCalories = this.calculateCalories.bind(this);
 
+  }
+
+  checkAuthenticated(){
+
+    const apiToken = new ApiToken();
+    if (!apiToken.isAuthenticated()) {
+      console.log('User Not Logged');
+      this.props.history.push(`/Login`)
+    } else {
+      console.log('User Login Success');
+    }
   }
 
   handleSubmit(event) {
@@ -222,6 +227,7 @@ class NewMeal extends Component {
                 <Input
                   type="text"
                   name="name"
+                  data-test="enter-meal-name"
                   id="name"
                   placeholder="Chicken Parmesan"
                   onChange={this.handleChange}
@@ -233,6 +239,7 @@ class NewMeal extends Component {
                 <Input
                   type="text"
                   name="description"
+                  data-test="enter-meal-description"
                   id="description"
                   placeholder="Chicken basted in tomato sauce."
                   onChange={this.handleChange}
@@ -241,7 +248,7 @@ class NewMeal extends Component {
                 <br />
 
                 <Label>Ingredients</Label>
-                <button style={{ marginLeft: 40 }} onClick={this.addIngredient}>Add new ingredient</button>
+                <button style={{ marginLeft: 40 }} onClick={this.addIngredient} data-test="add-ingredient-button">Add new ingredient</button>
                 <br /><br />
                 {
                   this.state.ingredients.map((val, idx) => {
