@@ -14,8 +14,11 @@ class Test extends Component {
   constructor(props) {
     super(props);
 
+<<<<<<< HEAD
     this.checkAuthenticated();
 
+=======
+>>>>>>> 298213fd19dfe56b8a6e2054bcd5c2d4c876a324
     this.state = {
       value: '',
       limit: 10,
@@ -23,13 +26,19 @@ class Test extends Component {
       displayData: [],
     }
 
+
+    this.checkAuthenticated();
+
     this.handleQueryChange = this.handleQueryChange.bind(this);
     this.handleNumber = this.handleNumber.bind(this);
 
   }
 
   checkAuthenticated(){
+<<<<<<< HEAD
 
+=======
+>>>>>>> 298213fd19dfe56b8a6e2054bcd5c2d4c876a324
     const apiToken = new ApiToken();
     if(!apiToken.isAuthenticated()){
       console.log('User Not Logged');
@@ -37,7 +46,10 @@ class Test extends Component {
     }else{
       console.log('User Login Success');
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 298213fd19dfe56b8a6e2054bcd5c2d4c876a324
   }
 
   componentDidMount() {
@@ -85,6 +97,7 @@ class Test extends Component {
               <Label>Search Meals: </Label>
               <Input
                 type="text"
+                data-test="search-input"
                 value={this.state.value}
                 onChange={this.handleQueryChange}
               />
