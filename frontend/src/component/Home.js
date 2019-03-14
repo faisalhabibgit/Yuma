@@ -11,6 +11,11 @@ class Home extends Component {
     constructor(props) {
         super(props);
 
+        this.checkAuthenticated();
+    }
+
+
+    checkAuthenticated(){
         const apiToken = new ApiToken();
         if(!apiToken.isAuthenticated()){
           console.log('User Not Logged');
@@ -18,7 +23,6 @@ class Home extends Component {
         }else{
           console.log('User Login Success');
         }
-
     }
 
     render() {
