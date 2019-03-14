@@ -32,7 +32,7 @@ class Home extends Component {
                     <Col>
                         <Card>
                             <CardImg top width="100%" src="https://resources.stuff.co.nz/content/dam/images/1/f/a/z/4/j/image.related.StuffLandscapeSixteenByNine.320x180.1fawv3.png/1478554384578.jpg" alt="Card image cap" />
-                            <CardBody>
+                            <CardBody data-test="meal-card">
                                 <CardTitle>Meals</CardTitle>
                                 <CardText>Check the meal inventory</CardText>
                                 <Link to="/Test"><Button>Search Now</Button></Link>
@@ -42,7 +42,7 @@ class Home extends Component {
                     <Col>
                         <Card>
                             <CardImg top width="100%" src="https://www.ingredientsnetwork.com/47/product/99/15/56/p991556th_S.jpg" alt="Card image cap" />
-                            <CardBody>
+                            <CardBody data-test="add-meal-card">
                                 <CardTitle>Add Meals</CardTitle>
                                 <CardText>Add a new recipe</CardText>
                                 <Link to="/NewMeal"><Button>Add Now</Button></Link>
@@ -52,7 +52,7 @@ class Home extends Component {
                      <Col>
                         <Card>
                             <CardImg top width="100%" src="https://davidhoganwriter.files.wordpress.com/2018/02/greek-food.jpg?w=520&h=350&crop=1" alt="Card image cap" />
-                            <CardBody>
+                            <CardBody data-test="meal-history-card">
                                 <CardTitle>Meal History</CardTitle>
                                 <CardText>Find the dates</CardText>
                                 <Link to="/MealHistory"><Button>Find Now</Button></Link>
@@ -62,7 +62,7 @@ class Home extends Component {
                     <Col>
                         <Card>
                             <CardImg top width="100%" src="https://i.imgur.com/QF3pQEZ.jpg" alt="Card image cap" />
-                            <CardBody>
+                            <CardBody data-test="stats-card">
                                 <CardTitle>Dashboard</CardTitle>
                                 <CardText>Check the stats</CardText>
                                 <Link to="/Dashboard"><Button>View Now</Button></Link>
@@ -72,7 +72,7 @@ class Home extends Component {
                     <Col>
                         <Card>
                             <CardImg top width="100%" src="https://i.imgur.com/RNMo8zj.png" alt="Card image cap" />
-                            <CardBody>
+                            <CardBody data-test="settings-card">
                                 <CardTitle>Settings</CardTitle>
                                 <CardText>Edit and Configure</CardText>
                                 <Link to="/NewMeal"><Button>Config</Button></Link>
