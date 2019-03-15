@@ -306,7 +306,7 @@ class NewMeal extends Component {
                         />
                         <br />
                         <br />
-                        <button onClick={(e) => { this.removeIngredient(e, idx) }}> Remove </button>
+                        <button data-test="delete-ingredient-button" onClick={(e) => { this.removeIngredient(e, idx) }}> Remove </button>
                       </div>
                     )
                   })
