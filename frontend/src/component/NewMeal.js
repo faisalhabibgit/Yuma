@@ -116,7 +116,7 @@ class NewMeal extends Component {
     var weight = this.state.ingredients[index]['weight'];
     var ingredientTempList = this.state.ingredients
     var calculatedIngredient = this.state.ingredients[index]
-debugger
+
     var api = "https://api.edamam.com/api/nutrition-data?app_id=6fd2547b&app_key=61888ddf81b29e52ad9aaf1a8d5b4400&ingr="+ ingr +"%20" + weight;
 
     fetch(api)
