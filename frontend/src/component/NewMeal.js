@@ -89,27 +89,14 @@ class NewMeal extends Component {
     }
   }
 
-  // addIngredient = (e) => {
-  addIngredient(e){
+addIngredient(e){
     e.preventDefault();
     this.setState((prevState) => ({
       ingredients: [...prevState.ingredients, { name: "", weight: "", calories: "", price: "" }],
     }));
   };
 
-  // calculate = (e) =>{
-  // calculate(index){
-  //   var idx = index
-  //   this.setState((prevState) => ({
-  //     ingredients: [...prevState.ingredients, {calories: this.calculateCalories(idx) }],
-  //   }))
-  //   console.log("calulate(index), index = " + index )
-  //
-  // };
-
-  //TODO
-  // Take name of ingredient and return calories from edamam api call
-  calculateCalories(e, idx){
+calculateCalories(e, idx){
     e.preventDefault();
     var index = idx;
     console.log("this" + this)
@@ -126,40 +113,18 @@ class NewMeal extends Component {
         return response.json();
       })
       .then((json) => {
-        if (json['totalWeight'] == 0 && json['calories'] == 0){
+        if (json['totalWeight'] == "0" && json['calories'] == "0"){
            alert('Please verify the ingredient name and/or the input weight.')}
         else{
-          var totalweight = json['totalWeight'];
-          calculatedIngredient['calories'] = json['calories'];
-          ingredientTempList[idx] = calculatedIngredient;
-          this.setState(() => ({
-            ingredients: ingredientTempList,
-            // ingredients: [...prevState.ingredients, {calories: json['calories'], weight: json['totalWeight']}],
-              // ingredients[idx]: [{calories: this.caloriesFromWeight(weight, json['calories'], json['totalWeight'])}],
+            calculatedIngredient['calories'] = json['calories'];
+            ingredientTempList[idx] = calculatedIngredient;
+            this.setState(() => ({
+                ingredients: ingredientTempList,
             }));
-
-        //bug fix attempt
-        // let ingredients = [...this.state.ingredients];
-        // var i = 0;
-        // if(ingredients[i]['calories'] != null){
-        //   i++;
-        // }
-        //   ingredients[i]['calories'] = json['calories'];
-        //
-        //   this.setState({ ingredients: this.state.ingredients });
-
-        }
-      })
+      }})
   };
 
-  //TODO:
-  //calculate Calories from input weight and not ingredient name
-  // caloriesFromWeight(weight, caloriesPerItem, itemWeight){
-  //   var calories = (weight*caloriesPerItem)/itemWeight;
-  //   return calories;
-  // };
-
-  removeIngredient(e, index) {
+ removeIngredient(e, index) {
     e.preventDefault();
     this.state.ingredients.splice(index, 1);
     this.setState({ ingredients: this.state.ingredients });
@@ -245,6 +210,7 @@ class NewMeal extends Component {
 
                 <Label>Meal Description</Label>
                 <Input
+                  class="form-control"
                   type="text"
                   name="description"
                   id="description"
@@ -318,7 +284,6 @@ class NewMeal extends Component {
                     )
                   })
                 }
-
                 <br />
 
                 <Label style={{ fontWeight: "bold" }}> Possible Food Allergies </Label>
