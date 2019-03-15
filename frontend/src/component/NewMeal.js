@@ -118,29 +118,23 @@ class NewMeal extends Component {
     var calculatedIngredient = this.state.ingredients[index]
 debugger
     var api = "https://api.edamam.com/api/nutrition-data?app_id=6fd2547b&app_key=61888ddf81b29e52ad9aaf1a8d5b4400&ingr="+ ingr +"%20" + weight;
-    console.log(api)
-   console.log(this.state.ingredients[index]['name'])
-   console.log("comparing this")
-   console.log(calculatedIngredient['name'])
-   console.log(ingredientTempList[idx]['name'])
-
 
     fetch(api)
       .then((response) => {
         return response.json();
       })
       .then((json) => {
-      console.log("Calculated Number of calories in this ingredient is "+json['calories']);
-      console.log(json);
-      var totalweight = json['totalWeight'];
-      console.log(totalweight);
-      calculatedIngredient['calories'] = json['calories']
-      ingredientTempList[idx] = calculatedIngredient
-        this.setState(() => ({
-          ingredients: ingredientTempList,
-          // ingredients: [...prevState.ingredients, {calories: json['calories'], weight: json['totalWeight']}],
-            // ingredients[idx]: [{calories: this.caloriesFromWeight(weight, json['calories'], json['totalWeight'])}],
-         }));
+        if (json['totalWeight'] == 0 && json['calories'] == 0){
+           alert('Please verify the ingredient name and/or the input weight.')}
+        else{
+          var totalweight = json['totalWeight'];
+          calculatedIngredient['calories'] = json['calories'];
+          ingredientTempList[idx] = calculatedIngredient;
+          this.setState(() => ({
+            ingredients: ingredientTempList,
+            // ingredients: [...prevState.ingredients, {calories: json['calories'], weight: json['totalWeight']}],
+              // ingredients[idx]: [{calories: this.caloriesFromWeight(weight, json['calories'], json['totalWeight'])}],
+            }));
 
         //bug fix attempt
         // let ingredients = [...this.state.ingredients];
@@ -152,7 +146,7 @@ debugger
         //
         //   this.setState({ ingredients: this.state.ingredients });
 
-
+        }
       })
   };
 
