@@ -28,26 +28,29 @@ class DisplayMeals extends Component {
   }
 
   render() {
-    console.log(this.state.apiObject)
-    return(
-      
+    return (
+
       <Container>
         <h5 className="text-center"> Number of All Meals:{this.state.apiObject.length} </h5>
-        <div style={{ maxWidth:'900px', maxHeight:'300px', overflow:'scroll'}}>
+        <div style={{ maxWidth: '900px', maxHeight: '300px', overflow: 'scroll' }}>
           <Table bordered condensed>
-            <thead style={{background: '#599BE9',color:'white'}}>
-            <th className="text-center" >Name</th>
-            <th className="text-center" >Description</th>
+            <thead style={{ background: '#599BE9', color: 'white' }}>
+              <th className="text-center" >Name</th>
+              <th className="text-center" >Description</th>
             </thead>
-            <tbody style={{background:'#d3d3d3'}}>
-            {
-              this.state.apiObject.map(x =>
-                <tr>
-                  <td>{x.name.toString()}</td>
-                  <td>{x.description.toString()}</td>
-                  {/* <td>{x.mealId.toString()}</td> */}
-                </tr>
-              ) }
+            <tbody style={{ background: '#d3d3d3' }}>
+              {
+                this.state.apiObject.map(x =>
+                  <tr>
+                    <td>{x.name.toString()}</td>
+                    <td>{x.description.toString()}</td>
+                    {/* <td></td> */}
+                    <td>
+                      {/* TODO: find some way to implement the boolean value of whether a meal is available */}
+                      <input type="checkbox" name="{x.mealId.toString()}" checked='checked' />
+                    </td>
+                  </tr>
+                )}
             </tbody>
           </Table>
         </div>
