@@ -9,6 +9,7 @@ class Meal {
       this.ingredients = null;
     }
 
+    setMealId(mealId){this.mealId = mealId}
     setName(name){this.name = name}
     setDescription(description){this.description = description}
     setIsAvailable(value){this.isAvailable = value}

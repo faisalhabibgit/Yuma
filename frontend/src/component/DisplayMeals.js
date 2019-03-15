@@ -28,6 +28,7 @@ class DisplayMeals extends Component {
   }
 
   render() {
+    console.log(this.state.apiObject)
     return(
       
       <Container>
@@ -44,6 +45,7 @@ class DisplayMeals extends Component {
                 <tr>
                   <td>{x.name.toString()}</td>
                   <td>{x.description.toString()}</td>
+                  {/* <td>{x.mealId.toString()}</td> */}
                 </tr>
               ) }
             </tbody>
