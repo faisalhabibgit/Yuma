@@ -88,21 +88,15 @@ test(' New meal page renders remove button for each ingredient, and removes the 
     const ingredients = wrapper.find("[data-test='initial-ingredient']");
     expect(ingredients.length).toBe(2);
 
+    //Assert there are 2 delete ingredient buttons
     const deleteIngredientButton = wrapper.find("[data-test='delete-ingredient-button']");
-    //console.log(deleteIngredientButton.at(0));
+    expect(deleteIngredientButton.length).toBe(2);
 
-    //delete the first form
-    const event2 = {preventDefault: () => {}};
-    const event3 = {idx: {index: 0}};
-    deleteIngredientButton.at(0).simulate('click', event2, event3);
-    wrapper.update();
-
-    //assert first is gone
-    expect(ingredients.length).toBe(1);
-    console.log(ingredients.debug());
-    expect(deleteIngredientButton.at(0).key()).toBeNull();
-
+    //Assert that the state is updated once the remove button is pressed
+    wrapper.instance().removeIngredient(event,0);
+    expect(wrapper.state().ingredients.length).toBe(1);
     
-
-
+    //Assert the ui now has only 1 ingredient form
+    const ingredientsAfter = wrapper.find("[data-test='initial-ingredient']");
+    expect(ingredientsAfter.length).toBe(1);
 });
