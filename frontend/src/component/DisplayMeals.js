@@ -26,6 +26,8 @@ class DisplayMeals extends Component {
         }
         this.setState({ apiObject: matchedArr });
 
+        // This stores the availability of the meals as
+        // mealId => value inside checkboxToggle
         var checkToggleArr = {};
         for (let index = 0; index < this.state.apiObject.length; index++) {
           const element = this.state.apiObject[index].mealId.toString();
