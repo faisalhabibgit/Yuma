@@ -10,7 +10,8 @@ class DisplayMeals extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      apiObject: []
+      apiObject: [],
+      checkboxToggle: {}
     }
   }
 
@@ -24,7 +25,22 @@ class DisplayMeals extends Component {
           matchedArr.push(element);
         }
         this.setState({ apiObject: matchedArr });
+
+        var checkToggleArr = {};
+        for (let index = 0; index < this.state.apiObject.length; index++) {
+          const element = this.state.apiObject[index].mealId.toString();
+          const value = this.state.apiObject[index].isAvailable
+          checkToggleArr[element] = value;
+        }
+        this.setState({ checkboxToggle: checkToggleArr });
       })
+  }
+
+  handleClick(event) {
+    const toggleId = event.target.name
+    this.state.checkboxToggle[toggleId] = ! this.state.checkboxToggle[toggleId]
+    this.forceUpdate()
+    console.log(this.state.checkboxToggle)
   }
 
   render() {
@@ -44,10 +60,15 @@ class DisplayMeals extends Component {
                   <tr>
                     <td>{x.name.toString()}</td>
                     <td>{x.description.toString()}</td>
-                    {/* <td></td> */}
                     <td>
-                      {/* TODO: find some way to implement the boolean value of whether a meal is available */}
-                      <input type="checkbox" name="{x.mealId.toString()}" checked='checked' />
+                      {
+                        <input
+                          type="checkbox"
+                          name={x.mealId.toString()}
+                          checked={this.state.checkboxToggle[x.mealId.toString()]}
+                          onClick={this.handleClick.bind(this)}
+                        />
+                      }
                     </td>
                   </tr>
                 )}
