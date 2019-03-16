@@ -59,6 +59,12 @@ public class ConsumerService {
 		
 	}
 	
+	public List<UserTO> findUsersByCompany(String company){
+		userServiceLogger.info("fetching consumers from company: %s",company);
+		List<Consumer> consumerList = userRepository.findByCompany(company);
+		return convertUserListToUserTOList(consumerList);	
+	}
+	
 	public void deleteUserByUserID(String uuid){
 		this.userServiceLogger.info("deleting user by uuid: {}", uuid);
 		

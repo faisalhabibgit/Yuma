@@ -47,6 +47,13 @@ public class UserController {
 		logger.info("retrieving active users list from DB");
 		return this.userService.activeUsers();
 	}
+	
+	@GetMapping("/{company}")
+	public List<UserTO> getUsersByCompany(@PathVariable String company){
+		this.logger.info("retrieving list of users by company");
+		return this.userService.findUsersByCompany(company);
+	}
+	
 
 	@RequestMapping(method = RequestMethod.POST)
 	public UserTO createUser(@RequestBody UserTO userTO){
