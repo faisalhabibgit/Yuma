@@ -14,13 +14,7 @@ class Test extends Component {
   constructor(props) {
     super(props);
 
-    const apiToken = new ApiToken();
-    if(!apiToken.isAuthenticated()){
-      console.log('User Not Logged');
-      this.props.history.push(`/Login`)
-    }else{
-      console.log('User Login Success');
-    }
+    this.checkAuthenticated();
 
     this.state = {
       value: '',
@@ -32,6 +26,16 @@ class Test extends Component {
     this.handleQueryChange = this.handleQueryChange.bind(this);
     this.handleNumber = this.handleNumber.bind(this);
 
+  }
+
+  checkAuthenticated(){
+    const apiToken = new ApiToken();
+    if(!apiToken.isAuthenticated()){
+      console.log('User Not Logged');
+      this.props.history.push(`/Login`)
+    }else{
+      console.log('User Login Success');
+    }
   }
 
   componentDidMount() {
@@ -79,6 +83,7 @@ class Test extends Component {
               <Label>Search Meals: </Label>
               <Input
                 type="text"
+                data-test="search-input"
                 value={this.state.value}
                 onChange={this.handleQueryChange}
               />
