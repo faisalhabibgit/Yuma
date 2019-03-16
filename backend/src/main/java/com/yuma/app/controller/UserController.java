@@ -48,7 +48,7 @@ public class UserController {
 		return this.userService.activeUsers();
 	}
 	
-	@GetMapping("/{company}")
+	@GetMapping("/company/{company}")
 	public List<UserTO> getUsersByCompany(@PathVariable String company){
 		this.logger.info("retrieving list of users by company");
 		return this.userService.findUsersByCompany(company);

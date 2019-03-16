@@ -61,7 +61,7 @@ public class ConsumerService {
 	
 	public List<UserTO> findUsersByCompany(String company){
 		userServiceLogger.info("fetching consumers from company: %s",company);
-		List<Consumer> consumerList = userRepository.findByCompany(company);
+		List<Consumer> consumerList = userRepository.findByCompanyIgnoreCase(company);
 		return convertUserListToUserTOList(consumerList);	
 	}
 	
