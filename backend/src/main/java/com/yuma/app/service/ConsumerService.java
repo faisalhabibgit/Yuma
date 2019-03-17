@@ -92,6 +92,8 @@ public class ConsumerService {
 		return userRepository.existsByEmail(email);
 	}
 	
+	public boolean existsByCompany(String company){ return userRepository.existsByCompany(company);}
+	
 	public List<UserTO> activeUsers(){
 		userServiceLogger.info("fetching users list");
 		List<Consumer> consumerList = userRepository.findByIsActiveIsTrue();

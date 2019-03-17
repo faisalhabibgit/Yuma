@@ -6,8 +6,10 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import com.yuma.app.service.ConsumerService;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -66,6 +68,16 @@ public class UserControllerTest {
 		//call our API
 		userController.getUsersByCompany("Google");
 		verify(userService).findUsersByCompany("Google");
+		
+	}
+	
+	@Test
+	public void testGetCompanyDoesntExist(){
+
+		List<UserTO> emptyList;
+		when(userService.existsByCompany("AGreatcompany")).thenReturn((Boolean.FALSE));
+		emptyList = userController.getUsersByCompany("AGreatcompany");
+		Assert.assertTrue(emptyList.size() == 0);
 		
 	}
 
