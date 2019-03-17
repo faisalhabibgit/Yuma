@@ -8,7 +8,7 @@ class Poster {
 
     //Make a post request and expect nothing in return
     selectMealCombo(data) {
-        const API = 'api/combinationreport/weeklycombo/'+data.toString();
+        const API = 'api/combinationreport/weeklycombo/'+data.toString()-1;
         return fetch(API, {
             method: 'POST',
             headers: {
