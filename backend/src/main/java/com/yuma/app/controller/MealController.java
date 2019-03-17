@@ -73,4 +73,11 @@ public class MealController {
 
 		this.mealService.deleteMeal(mealId);
 	}
+	
+	@PutMapping("/availability/{uuid}")
+	public void updateMealAvailability(@PathVariable UUID mealId){
+		logger.info("updating availability of {}", mealId);
+		
+		this.mealService.updateAvailability(mealId);
+	}
 }
