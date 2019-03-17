@@ -76,6 +76,11 @@ public class UserControllerTest {
 
 		List<UserTO> emptyList;
 		when(userService.existsByCompany("AGreatcompany")).thenReturn((Boolean.FALSE));
+		
+		//to mock mongo, return an empty list
+		if(userService.existsByCompany("AGreatcompany"))
+			when(userController.getUsersByCompany("AGreatcompany")).thenReturn(new ArrayList<UserTO>());
+		
 		emptyList = userController.getUsersByCompany("AGreatcompany");
 		Assert.assertTrue(emptyList.size() == 0);
 		
