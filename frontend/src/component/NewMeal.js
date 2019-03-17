@@ -113,7 +113,7 @@ calculateCalories(e, idx){
         return response.json();
       })
       .then((json) => {
-        if (json['totalWeight'] == "0" && json['calories'] == "0"){
+        if (json['totalWeight'] === "0" && json['calories'] === "0"){
            alert('Please verify the ingredient name and/or the input weight.')}
         else{
             calculatedIngredient['calories'] = json['calories'];
