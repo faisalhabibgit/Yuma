@@ -35,10 +35,10 @@ class Navigation extends Component {
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <NavLink tag={Link} to="/Login">Login</NavLink>
+                            <NavLink data-test="navigation-login" tag={Link} to="/Login">Login</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink tag={Link} to="/Logout">Logout</NavLink>
+                            <NavLink data-test="navigation-logout" tag={Link} to="/Logout">Logout</NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>

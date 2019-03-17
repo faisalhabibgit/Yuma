@@ -93,7 +93,7 @@ class MealCombo extends Component {
                 <Button variant="secondary" onClick={this.handleModalChange1}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-                <Button style={{ background: '#599BE9' }} onClick={this.handleSubmit} id='1' type="submit">Select</Button>
+                <Button data-test="combo-one-button-select" style={{ background: '#599BE9' }} onClick={this.handleSubmit} id='1' type="submit">Select</Button>
               </div>
             </CardBody>
           </Card>
@@ -104,7 +104,7 @@ class MealCombo extends Component {
                 <Button variant="secondary" onClick={this.handleModalChange2}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-                <Button style={{ background: '#599BE9' }} onClick={this.handleSubmit} id='2' type="submit">Select</Button>
+                <Button data-test="combo-two-button-select" style={{ background: '#599BE9' }} onClick={this.handleSubmit} id='2' type="submit">Select</Button>
               </div>
             </CardBody>
           </Card>
@@ -116,7 +116,7 @@ class MealCombo extends Component {
                 <Button variant="secondary" onClick={this.handleModalChange3}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-                <Button style={{ background: '#599BE9' }} onClick={this.handleSubmit} id='3' type="submit">Select</Button>
+                <Button data-test="combo-three-button-select" style={{ background: '#599BE9' }} onClick={this.handleSubmit} id='3' type="submit">Select</Button>
               </div>
             </CardBody>
           </Card>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Login from '../component/Login';
+import sinon from 'sinon';
 
 let wrapper;
 
@@ -31,4 +32,30 @@ test('Assert form records inputs', () => {
     const passInput = wrapper.find('#password');
     passInput.value = credentials.pass;
     expect(passInput.value).toEqual(credentials.pass);
+});
+
+test('Assert onChange called when form receives username input', () =>{
+
+    const spy = sinon.spy(Login.prototype, "handleChange");
+    const event = {target: {name: "email", value: "test@gmail.com"}};
+    const wrapperLogin = shallow(<Login handleChange={spy}/>);
+
+    wrapperLogin.find('#email').simulate('change', event);
+
+    expect(spy.calledOnce).toEqual(true);
+
+    sinon.restore(); //restore handleChange
+});
+
+test('Assert onChange called when form receives password input', () =>{
+
+    const spy = sinon.spy(Login.prototype, "handleChange");
+    const event = {target: {name: "password", value: "password2"}};
+    const wrapperLogout = shallow(<Login handleChange={spy}/>);
+
+    wrapperLogout.find('#password').simulate('change', event);
+
+    expect(spy.calledOnce).toEqual(true);
+
+    sinon.restore(); //restore handleChange
 });
