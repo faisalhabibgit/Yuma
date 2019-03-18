@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import {
+  ListGroup, ListGroupItem,
+  Container, Col, Form, FormGroup, Label, Input
+} from 'reactstrap';
 
 
 class UserByCompanyName extends Component {
@@ -20,13 +24,20 @@ class UserByCompanyName extends Component {
 
   render() {
     return (
-      <div className="to-do-main-list">
-        <input
-          onChange = { (e)=>this.handleQueryChange(e.target.value)}
-          value={this.state.userInput}
-          type="text"
-        />
-      </div>
+      <Container>
+        <Col sm="12" md={{ size: 6, offset: 3 }}>
+          <Form className="form">
+            <FormGroup>
+              <input
+                onChange = { (e)=>this.handleQueryChange(e.target.value)}
+                value={this.state.userInput}
+                type="text"
+              />
+            </FormGroup>
+          </Form>
+        </Col>
+      </Container>
+
     );
   }
 
