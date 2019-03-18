@@ -4,10 +4,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -158,4 +160,14 @@ public class MealServiceTest {
 		Assert.assertEquals(mealTO.isAvailable(), false);
 	}
 	
+	@Test
+	public void givenAvailableMeal_updateMealAvailabilityToFalse(){
+		meal1.setAvailable(true);
+		Mockito.when(mealRepository.findByMealId(meal1.getMealId())).thenReturn(Optional.of(meal1));
+		mealService.updateAvailability(meal1.getMealId());
+
+		ArgumentCaptor<Meal> captor = ArgumentCaptor.forClass(Meal.class);
+		Mockito.verify(mealRepository).save(captor.capture());
+		Assert.assertEquals(false, captor.getValue().isAvailable());
+	}
 }

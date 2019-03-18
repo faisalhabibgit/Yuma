@@ -18,13 +18,7 @@ class NewMeal extends Component {
   constructor(props) {
     super(props);
 
-    const apiToken = new ApiToken();
-    if (!apiToken.isAuthenticated()) {
-      console.log('User Not Logged');
-      this.props.history.push(`/Login`)
-    } else {
-      console.log('User Login Success');
-    }
+    this.checkAuthenticated();
 
     this.state = {
       name: '',
@@ -46,6 +40,17 @@ class NewMeal extends Component {
     // this.caloriesFromWeight = this.caloriesFromWeight.bind(this);
     this.addIngredient = this.addIngredient.bind(this);
 
+  }
+
+  checkAuthenticated(){
+
+    const apiToken = new ApiToken();
+    if (!apiToken.isAuthenticated()) {
+      console.log('User Not Logged');
+      this.props.history.push(`/Login`)
+    } else {
+      console.log('User Login Success');
+    }
   }
 
   handleSubmit(event) {
@@ -201,6 +206,7 @@ calculateCalories(e, idx){
                 <Input
                   type="text"
                   name="name"
+                  data-test="enter-meal-name"
                   id="name"
                   placeholder="Chicken Parmesan"
                   onChange={this.handleChange}
@@ -213,6 +219,7 @@ calculateCalories(e, idx){
                   class="form-control"
                   type="text"
                   name="description"
+                  data-test="enter-meal-description"
                   id="description"
                   placeholder="Chicken basted in tomato sauce."
                   onChange={this.handleChange}
@@ -221,13 +228,13 @@ calculateCalories(e, idx){
                 <br />
 
                 <Label>Ingredients</Label>
-                <button style={{ marginLeft: 40 }} onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</button>
+                <button style={{ marginLeft: 40 }} data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</button>
                 <br /><br />
                 {
                   this.state.ingredients.map((val, idx) => {
                     let ingredientId = `name-${idx}`, weightId = `weight-${idx}`, caloriesId = `calories-${idx}`, priceId = `price-${idx}`;
                     return (
-                      <div key={idx}>
+                      <div data-test="initial-ingredient" key={idx}>
                         <br />
                         <label htmlFor={ingredientId}>{`Ingredient #${idx + 1}`}</label>
                         <input
@@ -279,7 +286,7 @@ calculateCalories(e, idx){
                         />
                         <br />
                         <br />
-                        <button onClick={(e) => { this.removeIngredient(e, idx) }}> Remove </button>
+                        <button data-test="delete-ingredient-button" onClick={(e) => { this.removeIngredient(e, idx) }}> Remove </button>
                       </div>
                     )
                   })

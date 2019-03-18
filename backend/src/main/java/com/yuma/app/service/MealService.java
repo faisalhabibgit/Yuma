@@ -86,4 +86,20 @@ public class MealService {
 		}
 		return mealTos;
 	}
+
+	public void updateAvailability(UUID mealId) {
+		Meal meal = mealRepository.findByMealId(mealId).map(Meal::new).orElseThrow(() -> new ResourceNotFoundException("Meal", "mealId", mealId));
+		switchAvailability(meal);
+	}
+	
+	protected void switchAvailability(Meal meal){
+		if (meal.isAvailable()) {
+			meal.setAvailable(false);
+			mealRepository.save(meal);
+		}
+		else{
+			meal.setAvailable(true);
+			mealRepository.save(meal);
+		}
+	}
 }

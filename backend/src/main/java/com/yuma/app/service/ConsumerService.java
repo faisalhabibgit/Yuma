@@ -59,6 +59,12 @@ public class ConsumerService {
 		
 	}
 	
+	public List<UserTO> findUsersByCompany(String company){
+		userServiceLogger.info("fetching consumers from company: %s",company);
+		List<Consumer> consumerList = userRepository.findByCompanyIgnoreCase(company);
+		return convertUserListToUserTOList(consumerList);	
+	}
+	
 	public void deleteUserByUserID(String uuid){
 		this.userServiceLogger.info("deleting user by uuid: {}", uuid);
 		
@@ -85,6 +91,8 @@ public class ConsumerService {
 	public boolean existsByEmail(String email){
 		return userRepository.existsByEmail(email);
 	}
+	
+	public boolean existsByCompany(String company){ return userRepository.existsByCompany(company);}
 	
 	public List<UserTO> activeUsers(){
 		userServiceLogger.info("fetching users list");

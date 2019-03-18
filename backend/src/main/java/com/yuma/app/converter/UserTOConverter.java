@@ -16,6 +16,7 @@ public class UserTOConverter implements Converter<Consumer, UserTO> {
 		userTO.setPlan(consumer.getPlan());
 		userTO.setEnabled(consumer.isActive());
 		userTO.setTimestamp(consumer.getTimestamp());
+		userTO.setCompany(consumer.getCompany());
 		userTO.setUserId(consumer.getUserId());
 		userTO.setMealList(consumer.getMealList());
 		userTO.setDislikesList(consumer.getDislikesList());
