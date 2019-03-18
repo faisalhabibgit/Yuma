@@ -42,7 +42,7 @@ class UserByCompanyName extends Component {
         <Col sm={{ size: 6, order: 2, offset: 1 }}>
           <ListGroup>
             {
-              this.state.searchList
+              this.state.searchList.map(x => <ListGroupItem>{x}</ListGroupItem>)
             }
           </ListGroup>
         </Col>
