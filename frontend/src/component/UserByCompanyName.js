@@ -12,8 +12,11 @@ class UserByCompanyName extends Component {
 
     this.state = {
       userInput: "",
-      list: []
+      searchList: ["mock list",
+                  "some stuff"]
     }
+
+    this.handleQueryChange = this.handleQueryChange.bind(this);
   }
 
   handleQueryChange(input){
@@ -35,6 +38,13 @@ class UserByCompanyName extends Component {
               />
             </FormGroup>
           </Form>
+        </Col>
+        <Col sm={{ size: 6, order: 2, offset: 1 }}>
+          <ListGroup>
+            {
+              this.state.searchList
+            }
+          </ListGroup>
         </Col>
       </Container>
 
