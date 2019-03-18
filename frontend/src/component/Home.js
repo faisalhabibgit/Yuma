@@ -71,6 +71,16 @@ class Home extends Component {
                     </Col>
                     <Col>
                         <Card>
+                            <CardImg top width="100%" src="https://i.imgur.com/XplLIk9.png" alt="Card image cap" />
+                            <CardBody data-test="settings-card">
+                                <CardTitle>Users by Company</CardTitle>
+                                <CardText>Search and View</CardText>
+                                <Link to="/UserByCompanyName"><Button data-test='settings-button'>View Now</Button></Link>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                    <Col>
+                        <Card>
                             <CardImg top width="100%" src="https://i.imgur.com/RNMo8zj.png" alt="Card image cap" />
                             <CardBody data-test="settings-card">
                                 <CardTitle>Settings</CardTitle>
