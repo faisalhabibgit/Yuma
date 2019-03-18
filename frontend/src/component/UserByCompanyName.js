@@ -14,6 +14,8 @@ class UserByCompanyName extends Component {
 
     this.state = {
       userInput: "",
+      // apiObject: [{company:"google", email: "email", firstname: "some first name", lastname: "some last name"}
+      //             ],
       apiObject: null,
       searchList: [],
     }
@@ -35,6 +37,7 @@ class UserByCompanyName extends Component {
   handleQueryChange(input){
     this.setState({
       userInput: input
+    })
     }, this.companyFetch(input));
     if( (this.state.apiObject === null) || (this.searchList = ["no result"])) {
       this.setState({
@@ -57,11 +60,11 @@ class UserByCompanyName extends Component {
   search() {
     var matchedArr = [];
     for (var i = 0; i < this.state.apiObject.length; i++) {
-      if (this.state.apiObject[i].company.toString().includes(this.state.value)
+      if (this.state.apiObject[i].company.toString().includes(this.state.userInput)
       ) {
-        matchedArr.push("email: "  + this.state.apiObject[i].email.toString() +
-                        "First Name: " + this.state.apiObject[i].firstname.toString() +
-                        "Last Name: " + this.state.apiObject[i].lastname.toString());
+        matchedArr.push(" email: "  + this.state.apiObject[i].email.toString() +
+                        "  First Name: " + this.state.apiObject[i].firstname.toString() +
+                        "  Last Name: " + this.state.apiObject[i].lastname.toString());
       }
     }
     this.setState({ searchList: matchedArr });
