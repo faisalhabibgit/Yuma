@@ -15,6 +15,11 @@ class Dashboard extends Component {
 
   constructor(props) {
     super(props);
+  
+    this.checkAuthenticated();
+  }
+
+  checkAuthenticated(){
 
     const apiToken = new ApiToken();
     if (!apiToken.isAuthenticated()) {
@@ -23,13 +28,14 @@ class Dashboard extends Component {
     } else {
       console.log('Check Authentification Dashboard: PASS');
     }
+
   }
 
   render() {
     return (
       <div style={{background: '#ADB7BF'}}>
 
-        <CardDeck style={{padding:'12px', height:'380px'}}>
+        <CardDeck data-test="meal-combo-card" style={{padding:'12px', height:'380px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
               <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Meal Combo</h5>
@@ -42,7 +48,7 @@ class Dashboard extends Component {
         </CardDeck>
 
 
-        <CardDeck style={{padding:'12px', height:'450px'}}>
+        <CardDeck data-test="available-meal-card" style={{padding:'12px', height:'450px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
               <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Available Meals</h5>
@@ -53,7 +59,7 @@ class Dashboard extends Component {
           </Card>
 
           <Card>
-            <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
+            <CardHeader data-test="all-meals-card" className="text-center" style={{background: '#B9C5D5'}}>
               <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> All Meals</h5>
             </CardHeader>
             <CardBody>
@@ -64,7 +70,7 @@ class Dashboard extends Component {
         </CardDeck>
 
 
-        <CardDeck style={{padding:'12px', height:'450px'}}>
+        <CardDeck data-test="users-card" style={{padding:'12px', height:'450px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
               <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Users </h5>
