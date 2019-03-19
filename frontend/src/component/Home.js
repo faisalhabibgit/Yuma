@@ -47,7 +47,7 @@ class Home extends Component {
 
                 <Card  style={{border:'none', height:'120px'}}>
                   <CardBody data-test="stats-card">
-                    <Link to="/Dashboard"> <img src={dashboard}   height='120px' alt="dashboard"/> </Link>
+                    <Link to="/Dashboard"> <img data-test='stats-button' src={dashboard}   height='120px' alt="dashboard"/> </Link>
                     <CardTitle>
                       <h3 style={{color: '#599BE9'}}>Dashboard</h3>
                     </CardTitle>
@@ -57,7 +57,7 @@ class Home extends Component {
 
                 <Card  style={{border:'none', height:'200px'}}>
                   <CardBody data-test="meal-card">
-                    <Link to="/Test"> <img src={search}  height='120px' alt="search"/> </Link>
+                    <Link to="/Test"> <img data-test='meal-button' src={search}  height='120px' alt="search"/> </Link>
                     <CardTitle>
                       <h3 style={{color: '#599BE9'}}>Meals</h3>
                     </CardTitle>
@@ -67,7 +67,7 @@ class Home extends Component {
                 
                 <Card  style={{border:'none', height:'200px'}}>
                   <CardBody data-test="add-meal-card">
-                    <Link to="/NewMeal"> <img src={add}  height='120px' alt="add"/> </Link>
+                    <Link to="/NewMeal"> <img data-test='add-meal-button' src={add}  height='120px' alt="add"/> </Link>
                     <CardTitle>
                       <h3 style={{color: '#599BE9'}}>Add Meal</h3>
                     </CardTitle>
@@ -77,7 +77,7 @@ class Home extends Component {
 
                 <Card  style={{border:'none', height:'200px'}}>
                   <CardBody data-test="meal-history-card">
-                    <Link to="/MealHistory"> <img src={history}  height='120px' alt="history"/> </Link>
+                    <Link to="/MealHistory"> <img  data-test='history-button' src={history}  height='120px' alt="history"/> </Link>
                     <CardTitle>
                       <h3 style={{color: '#599BE9'}}>Meal History</h3>
                     </CardTitle>
