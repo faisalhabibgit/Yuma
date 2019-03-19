@@ -34,7 +34,7 @@ class Home extends Component {
           <div>
 
             <div className="text-center">
-              <img src={yuma}  width='100%' height='450px' alt="Card image cap"/>
+              <img src={yuma}  width='100%' height='450px' alt="yuma"/>
             </div>
             
             <div className="text-center" style={{padding:'35px'}}>
@@ -47,7 +47,7 @@ class Home extends Component {
 
                 <Card  style={{border:'none', height:'120px'}}>
                   <CardBody data-test="stats-card">
-                    <Link to="/Dashboard"> <img src={dashboard}   height='120px' alt="Card image cap"/> </Link>
+                    <Link to="/Dashboard"> <img src={dashboard}   height='120px' alt="dashboard"/> </Link>
                     <CardTitle>
                       <h3 style={{color: '#599BE9'}}>Dashboard</h3>
                     </CardTitle>
@@ -57,7 +57,7 @@ class Home extends Component {
 
                 <Card  style={{border:'none', height:'200px'}}>
                   <CardBody data-test="meal-card">
-                    <Link to="/Test"> <img src={search}  height='120px' alt="Card image cap"/> </Link>
+                    <Link to="/Test"> <img src={search}  height='120px' alt="search"/> </Link>
                     <CardTitle>
                       <h3 style={{color: '#599BE9'}}>Meals</h3>
                     </CardTitle>
@@ -67,7 +67,7 @@ class Home extends Component {
                 
                 <Card  style={{border:'none', height:'200px'}}>
                   <CardBody data-test="add-meal-card">
-                    <Link to="/NewMeal"> <img src={add}  height='120px' alt="Card image cap"/> </Link>
+                    <Link to="/NewMeal"> <img src={add}  height='120px' alt="add"/> </Link>
                     <CardTitle>
                       <h3 style={{color: '#599BE9'}}>Add Meal</h3>
                     </CardTitle>
@@ -77,7 +77,7 @@ class Home extends Component {
 
                 <Card  style={{border:'none', height:'200px'}}>
                   <CardBody data-test="meal-history-card">
-                    <Link to="/MealHistory"> <img src={history}  height='120px' alt="Card image cap"/> </Link>
+                    <Link to="/MealHistory"> <img src={history}  height='120px' alt="history"/> </Link>
                     <CardTitle>
                       <h3 style={{color: '#599BE9'}}>Meal History</h3>
                     </CardTitle>
