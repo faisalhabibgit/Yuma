@@ -36,14 +36,14 @@ class Home extends Component {
             <div className="text-center">
               <img src={yuma}  width='100%' height='450px' alt="yuma"/>
             </div>
-            
-            <div className="text-center" style={{padding:'35px'}}>
+
+            <div className="text-center" style={{padding:'25px'}}>
               <h1 style={{color: '#599BE9'}}>Manage</h1>
-              <h1>__________</h1>
+              <h1>_________________________</h1>
             </div>
 
             <div className="text-center" >
-              <CardDeck  style={{padding:'25px', height:'250px'}}>
+              <CardDeck  style={{padding:'20px', height:'250px'}}>
 
                 <Card  style={{border:'none', height:'120px'}}>
                   <CardBody data-test="stats-card">
@@ -69,7 +69,7 @@ class Home extends Component {
                   <CardBody data-test="add-meal-card">
                     <Link to="/NewMeal"> <img data-test='add-meal-button' src={add}  height='120px' alt="add"/> </Link>
                     <CardTitle>
-                      <h3 style={{color: '#599BE9'}}>Add Meal</h3>
+                      <h3 style={{color: '#599BE9'}}>Add Meals</h3>
                     </CardTitle>
                     <CardText>Add a New Recipe  </CardText>
                   </CardBody>
