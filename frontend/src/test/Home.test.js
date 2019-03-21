@@ -78,19 +78,4 @@ test('Home page renders "stats" card', () => {
 
 });
 
-test('Home page renders "stats" card', () => {
 
-    const stubber = sinon.stub(Home.prototype, 'checkAuthenticated').returns(true);
-    const wrapper = shallow(<Home checkAuthenticated={stubber}/>);
-
-    const mealCard = wrapper.find("[data-test='settings-card']");
-    expect(mealCard).toBeDefined();
-
-    //check if button renders
-    const settingsButton = wrapper.find("[data-test='settings-button']");
-    expect(settingsButton.length).toBe(1);
-
-    sinon.restore();
-
-
-});

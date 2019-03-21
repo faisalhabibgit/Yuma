@@ -39,6 +39,7 @@ class Test extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     const retriever = new Retriever('api/meals/all');
     retriever.getEntityPromise()
       .then((obj) => {

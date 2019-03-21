@@ -41,6 +41,10 @@ class NewMeal extends Component {
     this.addIngredient = this.addIngredient.bind(this);
 
   }
+  
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
 
   checkAuthenticated(){
 

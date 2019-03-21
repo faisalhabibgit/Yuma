@@ -44,7 +44,7 @@ public class MealService {
 
 	public MealTO create(MealTO mealTo) {
 		this.mealServiceLogger.info("creating Meal in %s", MealService.class);
-		mealTo.setMealId(UUID.randomUUID());
+		mealTo.setMealId(UUID.randomUUID().toString());
 		Meal mealToCreate = conversionService.convert(mealTo, Meal.class);
 		Meal meal = mealRepository.save(mealToCreate);
 		return conversionService.convert(meal, MealTO.class);
@@ -58,7 +58,7 @@ public class MealService {
 		return mealTOS;
 	}
 
-	public void deleteMeal(UUID mealId) {
+	public void deleteMeal(String mealId) {
 		mealServiceLogger.info("deleting meal in %s", MealService.class);
 
 		mealRepository.delete(mealRepository.findOne(mealId));
@@ -87,7 +87,7 @@ public class MealService {
 		return mealTos;
 	}
 
-	public void updateAvailability(UUID mealId) {
+	public void updateAvailability(String mealId) {
 		Meal meal = mealRepository.findByMealId(mealId).map(Meal::new).orElseThrow(() -> new ResourceNotFoundException("Meal", "mealId", mealId));
 		switchAvailability(meal);
 	}
