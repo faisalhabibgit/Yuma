@@ -98,9 +98,9 @@ public class MealServiceTest {
 		ingredientsList5.add(milk);
 		ingredientsList5.add(chicken);
 
-		meal1 = new Meal(UUID.randomUUID(), "chick broc", "chicken and broccolie topped with a touch of love", true, new HashSet<>(),40,ingredientsList1);
-		meal2 = new Meal(UUID.randomUUID(), "beef and rice", "beef and rice topped with a touch of love", true, new HashSet<>(), 40,ingredientsList2);
-		meal3 = new Meal(UUID.randomUUID(), "fish and rice", "fish and rice topped with a touch of love", true, new HashSet<>(),40, ingredientsList3);
+		meal1 = new Meal(UUID.randomUUID().toString(), "chick broc", "chicken and broccolie topped with a touch of love", true, new HashSet<>(),40,ingredientsList1);
+		meal2 = new Meal(UUID.randomUUID().toString(), "beef and rice", "beef and rice topped with a touch of love", true, new HashSet<>(), 40,ingredientsList2);
+		meal3 = new Meal(UUID.randomUUID().toString(), "fish and rice", "fish and rice topped with a touch of love", true, new HashSet<>(),40, ingredientsList3);
 		mealTO = new MealTO(meal1.getMealId(), "chicken and veg", "chicken and veg",false,new HashSet<>(),40, new ArrayList<>());
 		mealTO2 = new MealTO(meal2.getMealId(), "chick broc", "chicken and broccolie topped with a touch of love",true,new HashSet<>(),40, new ArrayList<>());
 
@@ -138,7 +138,7 @@ public class MealServiceTest {
 	
 	@Test 
 	public void MealServiceUpdateTest(){
-		UUID uuid = mealTO.getMealId();
+		String uuid = mealTO.getMealId();
 		Optional<Meal> meal = Optional.of(meal1);
 
 		Mockito.when(mealRepository.findByMealId(uuid)).thenReturn(meal);

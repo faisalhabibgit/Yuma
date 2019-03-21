@@ -2,7 +2,6 @@ package com.yuma.app.to;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.UUID;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +16,7 @@ import com.yuma.app.document.Ingredients;
 @AllArgsConstructor
 public class MealTO {
 
-	private UUID mealId;
+	private String mealId;
 	private String name;
 	private String description;
 	private boolean isAvailable;

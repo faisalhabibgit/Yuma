@@ -218,7 +218,7 @@ public class CombinationReportService {
 
 		Meal newMeal = new Meal(meal);
 		newMeal.getIngredients().removeAll(ingredientsToRemove);
-		newMeal.setMealId(UUID.randomUUID());
+		newMeal.setMealId(UUID.randomUUID().toString());
 		return newMeal;
 	}
 
