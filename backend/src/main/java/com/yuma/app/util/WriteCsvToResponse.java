@@ -53,7 +53,9 @@ public class WriteCsvToResponse {
 		for (Ingredients ingredient : ingredients){
 			stringBuilder.append(ingredient.getName()).append(", ");
 		}
-		stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(","));
+		if (ingredients.size()>1) {
+			stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(","));
+		}
 		
 		return "\""+stringBuilder.toString()+"\"";
 	}
