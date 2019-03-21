@@ -3,6 +3,7 @@ import {
   Container, Table
 } from 'reactstrap';
 import Retriever from '../middleware/Retriever';
+import Poster from '../middleware/Poster';
 
 
 class DisplayMeals extends Component {
@@ -39,10 +40,16 @@ class DisplayMeals extends Component {
   }
 
   handleClick(event) {
+    //This saves the mealID inside a var: toggleID
     const toggleId = event.target.name
-    this.state.checkboxToggle[toggleId] = ! this.state.checkboxToggle[toggleId]
-    this.forceUpdate()
-    console.log(this.state.checkboxToggle)
+
+    const poster = new Poster();
+    poster.toggleMeal(toggleId)
+      .then((empty) => {
+        this.state.checkboxToggle[toggleId] = ! this.state.checkboxToggle[toggleId]
+        this.forceUpdate()
+    });
+    //console.log(this.state.checkboxToggle)
   }
 
   render() {

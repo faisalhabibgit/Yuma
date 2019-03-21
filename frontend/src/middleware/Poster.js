@@ -18,6 +18,20 @@ class Poster {
             }
         });
     }
+
+    //Toggle the a meal's availability
+    toggleMeal(mealId) {
+        const API = 'api/meals/availability/'+mealId;
+        return fetch(API, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.apiToken.getCookie('yuma-token')
+            }
+        });
+    }
+
 }
 
 export default Poster;
