@@ -26,8 +26,8 @@ public class mealApiTest {
 	protected List<Ingredients> ingredients = new ArrayList<>();
 	@Inject
 	WebApplicationContext context;
-	private UUID mealId1 = UUID.randomUUID();
-	private UUID mealId2 = UUID.randomUUID();
+	private String mealId1 = UUID.randomUUID().toString();
+	private String mealId2 = UUID.randomUUID().toString();
 
 	private String name1 = "butter chicken lasagna";
 	private String description1 = "creamy and buttery";
