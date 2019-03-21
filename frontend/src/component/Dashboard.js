@@ -19,6 +19,10 @@ class Dashboard extends Component {
     this.checkAuthenticated();
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   checkAuthenticated(){
 
     const apiToken = new ApiToken();
