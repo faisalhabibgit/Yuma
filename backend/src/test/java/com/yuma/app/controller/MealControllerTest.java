@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
-import com.yuma.app.service.MealService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.yuma.app.repository.MealRepository;
+import com.yuma.app.service.MealService;
 import com.yuma.app.to.MealTO;
 
 @RunWith(SpringRunner.class)
@@ -39,10 +39,10 @@ public class MealControllerTest {
 
 	@Before
 	public void setUp(){
-		mealTO1 = new MealTO(UUID.randomUUID(), "chicken", "chicken", false, new HashSet<>(), 30, new ArrayList<>());
+		mealTO1 = new MealTO(UUID.randomUUID().toString(), "chicken", "chicken", false, new HashSet<>(), 30, new ArrayList<>());
 		mealTO1updated = new MealTO(mealTO1.getMealId(), "chicken", "chicken", true, new HashSet<>(), 24, new ArrayList<>());
 		mealTO1Created = new MealTO(mealTO1.getMealId(), "chicken", "chicken", false, new HashSet<>(), 5, new ArrayList<>());
-		mealTO2 = new MealTO(UUID.randomUUID(), "mutton", "mutton", true, new HashSet<>(), 67, new ArrayList<>());
+		mealTO2 = new MealTO(UUID.randomUUID().toString(), "mutton", "mutton", true, new HashSet<>(), 67, new ArrayList<>());
 		initMocks(this);
 	}
 
