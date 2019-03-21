@@ -39,6 +39,10 @@ class NewMeal extends Component {
     this.calculateCalories = this.calculateCalories.bind(this);
 
   }
+  
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
 
   checkAuthenticated(){
 

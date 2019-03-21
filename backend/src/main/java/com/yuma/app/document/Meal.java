@@ -3,7 +3,6 @@ package com.yuma.app.document;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.UUID;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +22,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Meal {
 
 	@Id
-	private UUID mealId;
+	private String mealId;
 	private String name;
 	private String description;
 	private boolean isAvailable;
