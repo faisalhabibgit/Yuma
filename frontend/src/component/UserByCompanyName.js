@@ -37,7 +37,6 @@ class UserByCompanyName extends Component {
   handleQueryChange(input){
     this.setState({
       userInput: input
-    })
     }, this.companyFetch(input));
     if( (this.state.apiObject === null) || (this.searchList = ["no result"])) {
       this.setState({
@@ -60,8 +59,12 @@ class UserByCompanyName extends Component {
   search() {
     var matchedArr = [];
     for (var i = 0; i < this.state.apiObject.length; i++) {
+      console.log("this.state.apiObject[i].company: " + this.state.apiObject[i].company);
+      console.log("this.state.userInput: " + this.state.userInput);
+
       if (this.state.apiObject[i].company.toString().includes(this.state.userInput)
       ) {
+
         matchedArr.push(" email: "  + this.state.apiObject[i].email.toString() +
                         "  First Name: " + this.state.apiObject[i].firstname.toString() +
                         "  Last Name: " + this.state.apiObject[i].lastname.toString());

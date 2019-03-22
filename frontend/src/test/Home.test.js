@@ -4,11 +4,11 @@ import Home from '../component/Home';
 import sinon from 'sinon';
 
 test('Home page renders', () => {
-    
+
     //stub the authentication token
     const stubber = sinon.stub(Home.prototype, 'checkAuthenticated').returns(true);
     const wrapper = shallow(<Home checkAuthenticated={stubber}/>);
-    
+
     expect(wrapper.length).toBe(1);
     sinon.restore();
 });
@@ -36,11 +36,28 @@ test('Home page renders "add meals card"', () => {
 
     const mealCard = wrapper.find("[data-test='add-meal-card']");
     expect(mealCard).toBeDefined();
-    
+
     //check if button renders
     const addMealButton = wrapper.find("[data-test='add-meal-button']");
     expect(addMealButton.length).toBe(1);
-    
+
+    sinon.restore();
+
+});
+
+
+test('Home page renders "view-clients-card"', () => {
+
+    const stubber = sinon.stub(Home.prototype, 'checkAuthenticated').returns(true);
+    const wrapper = shallow(<Home checkAuthenticated={stubber}/>);
+
+    const clientCard = wrapper.find("[data-test='view-clients-card']");
+    expect(clientCard).toBeDefined();
+
+    //check if button renders
+    const viewCompanyButton = wrapper.find("[data-test='view-clientsl-button']");
+    expect(viewCompanyButton.length).toBe(1);
+
     sinon.restore();
 
 });
@@ -52,11 +69,11 @@ test('Home page renders "Meal history" card', () => {
 
     const mealCard = wrapper.find("[data-test='meal-history-card']");
     expect(mealCard).toBeDefined();
-    
+
     //check if button renders
     const historyButton = wrapper.find("[data-test='history-button']");
     expect(historyButton.length).toBe(1);
-    
+
     sinon.restore();
 
 });
@@ -68,14 +85,12 @@ test('Home page renders "stats" card', () => {
 
     const mealCard = wrapper.find("[data-test='stats-card']");
     expect(mealCard).toBeDefined();
-    
+
     //check if button renders
     const statsButton = wrapper.find("[data-test='stats-button']");
     expect(statsButton.length).toBe(1);
-    
+
     sinon.restore();
 
 
 });
-
-

@@ -5,6 +5,7 @@ import history from './images/history.png';
 import dashboard from './images/dashboard.png';
 import search from './images/search.png';
 import add from './images/add.png';
+import companyUsers from './images/companyUsers.png';
 import {
     CardDeck,
     Card,  CardText, CardBody,
@@ -75,8 +76,15 @@ class Home extends Component {
                   </CardBody>
                 </Card>
 
-                //todo add UserByCompanyName
-                // link is :  /UserByCompanyName
+                <Card  style={{border:'none', height:'200px'}}>
+                  <CardBody data-test="view-clients-card">
+                    <Link to="/UserByCompanyName"> <img data-test='view-clients-button' src={companyUsers}  height='120px' alt="view"/> </Link>
+                    <CardTitle>
+                      <h3 style={{color: '#599BE9'}}>Client List</h3>
+                    </CardTitle>
+                    <CardText>View Users By Company</CardText>
+                  </CardBody>
+                </Card>
 
                 <Card  style={{border:'none', height:'200px'}}>
                   <CardBody data-test="meal-history-card">
