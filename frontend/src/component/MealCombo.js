@@ -60,7 +60,7 @@ class MealCombo extends Component {
   }
 
   handleSubmit(e) {
-    this.poster.selectMealCombo(e.target.id).then((empty) => {
+    this.poster.selectMealCombo(e.target.id).then(() => {
       const retriever = new Retriever('api/combinationreport/download/consumers.csv');
       retriever.getEntityPromise().then((csv) => {
 
