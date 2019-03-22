@@ -86,15 +86,9 @@ class Test extends Component {
     this.setState({ displayData: matchedArr });
   }
   
-
   render() {
-    
-
     return (
       <div className="text-center" style={ sectionStyle }  >
-
-
-
         <Container>
           <Col sm="12" md={{ size: 6, offset: 3 }}>
             <Form className="form">
@@ -146,23 +140,18 @@ class Test extends Component {
                           <h6 style={{color: '#599BE9'}}>Weight</h6> {ing.weight.toString()}
                           <h6 style={{color: '#599BE9'}}>Calories</h6>{ing.calories.toString()}
                           <h6 style={{color: '#599BE9'}}>Price</h6> {ing.price.toString()} 
-                      </ListGroupItem>)
-                        
+                      
+                        </ListGroupItem>)
                         }
                         </ListGroup>
                       </div>
-                      
-
                     </Collapse>
-
                   </ListGroupItem>)
                 }
               </ListGroup>
             </Col>
           </div>
-
         </Container>
-
       </div>
     );
   }
