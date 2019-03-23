@@ -46,6 +46,8 @@ class DisplayMeals extends Component {
     const poster = new Poster();
     poster.toggleMeal(toggleId)
       .then((empty) => {
+
+        // eslint-disable-next-line
         this.state.checkboxToggle[toggleId] = ! this.state.checkboxToggle[toggleId]
         this.forceUpdate()
     });
