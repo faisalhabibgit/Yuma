@@ -49,7 +49,7 @@ public class CombinationReportService {
   
 	public CombinationReport getMostRecentlyAdded(){
 		CombinationReport combinationReport = combinationReportRepository.findTopByOrderByCreatedOnDesc().orElseThrow(() ->
-			new ResourceNotFoundException("Combination report", "CreatedOn", null)
+			new ResourceNotFoundException("Combination report", "most recently added", null)
 		);
 		return combinationReport;
 	}
@@ -236,6 +236,7 @@ public class CombinationReportService {
 		combinationReport.setCreatedOn(new Date());
 		try {
 			this.combinationReportRepository.save(combinationReport);
+			this.userRepository.save(combinationReport.getUserList());
 		}
 		catch (IndexOutOfBoundsException e){
 			logger.info("index out of bound");
