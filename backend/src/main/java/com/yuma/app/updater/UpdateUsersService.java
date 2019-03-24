@@ -1,5 +1,7 @@
 package com.yuma.app.updater;
 
+import static org.springframework.util.CollectionUtils.isEmpty;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ import okhttp3.Response;
 
 public class UpdateUsersService {
 
+	private static HashMap<String, YumaPreferencePOJO> usersCovered = new HashMap<>();
+
 	private static final String endpoint = "http://itsyuma.com/preferences";
 
 
@@ -23,7 +27,6 @@ public class UpdateUsersService {
 	}
 
 	public static void fetchYumaUsers(){
-		HashMap<String, YumaPreferencePOJO> usersCovered = new HashMap<>();
 		OkHttpClient client = new OkHttpClient();
 		JSONParser jsonParser = new JSONParser();
 
@@ -43,47 +46,34 @@ public class UpdateUsersService {
 
 				JSONObject jsonObject = (JSONObject) obj;
 				JSONArray jsonArray = (JSONArray) jsonObject.get("data");
-
-				for (Object key : jsonArray){
-					System.out.println(key);
-					System.out.println();
-					for (int i=0; i < jsonArray.size(); i++){
-						JSONObject preferenceObject = (JSONObject) jsonArray.get(i);
-						String userId = preferenceObject.get("user._id").toString();
-						if (usersCovered.containsKey(userId)){
-							YumaPreferencePOJO yumaPreferencePOJO = usersCovered.get(userId);
-							String preferenceKeyType = preferenceObject.get("key").toString();
-							String value = preferenceObject.get("value").toString();
-							switch (preferenceKeyType) {
-								case "general":
-									yumaPreferencePOJO.getGeneralPreference().add(value);
-									break;
-								case "diet":
-									yumaPreferencePOJO.getDiet().add(value);
-									break;
-								case "allergy":
-									yumaPreferencePOJO.getAllergies().add(value);
-									break;
-								case "addition":
-									yumaPreferencePOJO.getAdditions().add(value);
-									break;
-								case "other":
-									yumaPreferencePOJO.getOther().add(value);
-							}
-						}
-						else {
+				
+				for (Object jsonArrayIndex: jsonArray){
+					JSONObject preferenceJsonObject = (JSONObject) jsonArrayIndex;
+					JSONObject userJsonObject = (JSONObject) preferenceJsonObject.get("user");
+					JSONObject groupJsonObject = (JSONObject) userJsonObject.get("group");
+					String userId = userJsonObject.get("_id").toString();
+					if (usersCovered.containsKey(userId)){
+						YumaPreferencePOJO yumaPreferencePOJO = usersCovered.get(userId);
+						String preferenceKeyType = preferenceJsonObject.get("key").toString();
+						String value = preferenceJsonObject.get("value").toString();
+						switch (preferenceKeyType) {
+							case "general":
+								yumaPreferencePOJO.getGeneralPreference().add(value);
+								break;case "diet": yumaPreferencePOJO.getDiet().add(value);
+								break;case "allergy": yumaPreferencePOJO.getAllergies().add(value);
+								break;case "addition": yumaPreferencePOJO.getAdditions().add(value);
+								break;case "other": yumaPreferencePOJO.getOther().add(value);
+								break;case "plan": yumaPreferencePOJO.setNumberOfMealsPerWeek(Integer.parseInt(value)); } } else {
+						if (!isEmpty(groupJsonObject)) {
 							YumaGroupPOJO yumaGroupPOJO = YumaGroupPOJO.builder()
-								.id(preferenceObject.get("user.group._id").toString())
-								.alias(preferenceObject.get("user.group.alias").toString())
+								.alias(groupJsonObject.get("alias").toString())
 								.build();
-
 							YumaUserPOJO yumaUserPOJO = YumaUserPOJO.builder()
-								.id(preferenceObject.get("user._id").toString())
-								.firstName((String) preferenceObject.get("user.firstName"))
-								.lastName((String) preferenceObject.get("user.lastName"))
+								.id(userId)
+								.firstName(userJsonObject.get("firstName").toString())
+								.lastName(userJsonObject.get("lastName").toString())
 								.yumaGroupPOJO(yumaGroupPOJO)
 								.build();
-							
 							YumaPreferencePOJO yumaPreferencePOJO = YumaPreferencePOJO.builder()
 								.additions(new ArrayList<>())
 								.allergies(new ArrayList<>())
@@ -92,23 +82,16 @@ public class UpdateUsersService {
 								.other(new ArrayList<>())
 								.user(yumaUserPOJO)
 								.build();
-							usersCovered.put(userId,yumaPreferencePOJO);
-						}
-					}
+							usersCovered.put(userId,yumaPreferencePOJO); } } }int num=0;
+				for (YumaPreferencePOJO yumaPreferencePOJO: usersCovered.values()){
+					System.out.print(yumaPreferencePOJO.getNumberOfMealsPerWeek()+",");
+					System.out.print(yumaPreferencePOJO.getUser().getFirstName() +",");
+					System.out.print(yumaPreferencePOJO.getUser().getLastName() +",");
+					System.out.println();
+					num++;
 				}
-//				JSONArray preferencesList = new JSONArray();
-//				String[] objects = preferencesList.toJSONString().split("object");
-//				for(String s: objects){
-//					System.out.println(s);
-//					System.out.println();
-//				}
-				
+				System.out.println(num);
 			}
-//			System.out.println("Output from Server .... \n");
-//			while ((output = br.readLine()) != null) {
-//				System.out.println(" ");
-//				System.out.println(output);
-//			}
 		}catch (Exception e){
 			e.printStackTrace();
 		}
