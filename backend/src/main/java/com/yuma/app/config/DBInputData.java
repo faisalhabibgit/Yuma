@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.yuma.app.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 
 import org.json.simple.JSONArray;
@@ -35,7 +36,7 @@ public class DBInputData {
 		JSONParser parser = new JSONParser();
 
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/preferences_parsed.json"));
+			BufferedReader reader = new BufferedReader(new FileReader("backend/src/main/resources/preferences_parsed.json"));
 			Object obj = parser.parse(reader);
 
 			JSONObject jsonObject = (JSONObject) obj;
@@ -116,14 +117,15 @@ public class DBInputData {
 				roleRepository.save(newUserRole);
 			}
 		};
+	}
 		
-//	@Bean
-//	CommandLineRunner populateProductionUsers(UserRepository userRepository) {
-//		List<Consumer> consumers = parseJsonFileAndCreateAUserList();
-//		return args -> {
-//			for (Consumer consumer : consumers) {
-//				userRepository.save(consumer);
-//			}
-//		};
+	@Bean
+	CommandLineRunner populateProductionUsers(UserRepository userRepository) {
+		List<Consumer> consumers = parseJsonFileAndCreateAUserList();
+		return args -> {
+			for (Consumer consumer : consumers) {
+				userRepository.save(consumer);
+			}
+		};
 	}
 }
