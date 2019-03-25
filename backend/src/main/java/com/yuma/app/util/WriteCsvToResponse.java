@@ -29,7 +29,7 @@ public class WriteCsvToResponse {
 			for (Consumer consumer : consumers) {
 				StringBuilder fullName = new StringBuilder();
 				fullName.append(consumer.getFirstName().toUpperCase()).append(" ").append(consumer.getLastName());
-				String companyName = consumer.getCompany();
+				String companyName = consumer.getCompany().getAlias();
 				for (Meal meal : consumer.getMealList()) {
 					String[] data = {
 						companyName,

@@ -3,6 +3,7 @@ package com.yuma.app.to;
 import java.util.List;
 import java.util.Set;
 
+import com.yuma.app.document.Company;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +27,7 @@ public class UserTO {
 	private Plan plan;
 	private boolean enabled;
 	private String timestamp;
-	private String company;
+	private Company company;
 	private Set<Role> roles;
 	private List<Meal> mealList;
 	private List<String> dislikesList;
