@@ -31,4 +31,5 @@ public class UserTO {
 	private Set<Role> roles;
 	private List<Meal> mealList;
 	private List<String> dislikesList;
+
 }

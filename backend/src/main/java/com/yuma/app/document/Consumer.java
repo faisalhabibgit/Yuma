@@ -31,7 +31,7 @@ public class Consumer {
 	private Plan plan;
 	private boolean isActive;
 	private String timestamp;
-	private String company;
+	private Company company;
 	private String yumaServerId;
 	
 	@DBRef
