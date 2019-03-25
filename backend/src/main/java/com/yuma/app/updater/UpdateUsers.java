@@ -8,23 +8,35 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class UpdateUsersService {
+@Slf4j
+public class UpdateUsers {
 
-	private static HashMap<String, YumaPreferencePOJO> usersCovered = new HashMap<>();
+	private Logger updateUsersLogger = LoggerFactory.getLogger(UpdateUsers.class);
 	private static final String endpoint = "http://itsyuma.com/preferences";
+	private HashMap<String, YumaPreferencePOJO> fetchedUsersMap;
 
-	public void fetchYumaUsers(){
+	public UpdateUsers() {
+		this.fetchedUsersMap = new HashMap<>();
+	}
+
+	public HashMap<String, YumaPreferencePOJO> fetchYumaUsers(){
+		updateUsersLogger.info("fetching users from Yuma servers");
 		BufferedReader responseBufferedReader = makeCall();
 		JSONArray jsonArray = getJsonArray(responseBufferedReader);
-		parseThroughPreferences(jsonArray);
+
+		return parseThroughPreferences(jsonArray);
 	}
 
 	private JSONArray getJsonArray(BufferedReader responseBufferedReader) {
@@ -45,10 +57,14 @@ public class UpdateUsersService {
 		OkHttpClient client = new OkHttpClient();
 		try {
 			Response response = client.newCall(setupRequest()).execute();
+			updateUsersLogger.info("fetched users from Yuma servers Successfully");
+
 			return new BufferedReader(new InputStreamReader(response.body().byteStream()));
 		}
 		catch (IOException e){
+			updateUsersLogger.error("error while fetching users from Yuma servers");
 			e.printStackTrace();
+
 			return null;
 		}
 	}
@@ -61,20 +77,21 @@ public class UpdateUsersService {
 			.build();
 	}
 
-	protected void parseThroughPreferences(JSONArray preferencesArray){
+	private HashMap<String, YumaPreferencePOJO> parseThroughPreferences(JSONArray preferencesArray){
 		for (Object jsonObject : preferencesArray){
 			JSONObject preferenceJsonObject = (JSONObject) jsonObject;
 			JSONObject userJsonObject = (JSONObject) preferenceJsonObject.get("user");
 			String userId = userJsonObject.get("_id").toString();
-			
-			if (usersCovered.containsKey(userId)){
-				YumaPreferencePOJO yumaPreferencePOJO = usersCovered.get(userId);
-				addPreferenceToExistingPreferencePOJO(yumaPreferencePOJO, preferenceJsonObject);
+
+			if (fetchedUsersMap.containsKey(userId)){
+				updatePreferencePOJO(fetchedUsersMap.get(userId), preferenceJsonObject);
 			}
 			else if(checkIfUserHasGroup(userJsonObject)) {
-				saveToHashMap(serializeObjects(userJsonObject));
+				saveToHashMap(fetchedUsersMap, serializeObjects(userJsonObject));
 			}
 		}
+
+		return fetchedUsersMap;
 	}
 
 	private boolean checkIfUserHasGroup(JSONObject userJsonObject) {
@@ -85,7 +102,7 @@ public class UpdateUsersService {
 		return (JSONObject) userJsonObject.get("group");
 	}
 
-	private void addPreferenceToExistingPreferencePOJO(YumaPreferencePOJO yumaPreferencePOJO, JSONObject preferenceJsonObject) {
+	private void updatePreferencePOJO(YumaPreferencePOJO yumaPreferencePOJO, JSONObject preferenceJsonObject) {
 		String preferenceKeyType = preferenceJsonObject.get("key").toString();
 		String value = preferenceJsonObject.get("value").toString();
 		switch (preferenceKeyType) {
@@ -123,7 +140,7 @@ public class UpdateUsersService {
 			.alias(groupJsonObject.get("alias").toString())
 			.build();
 	}
-	
+
 	private YumaUserPOJO serializeYumaUserGroupPOJO(JSONObject userJsonObject) {
 		return YumaUserPOJO.builder()
 			.id(userJsonObject.get("_id").toString())
@@ -143,8 +160,8 @@ public class UpdateUsersService {
 			.build();
 	}
 
-	private void saveToHashMap(YumaPreferencePOJO yumaPreferencePOJO) {
+	private void saveToHashMap(HashMap<String, YumaPreferencePOJO> fetchedUsersMap, YumaPreferencePOJO yumaPreferencePOJO) {
 		YumaUserPOJO yumaUserPOJO = yumaPreferencePOJO.getUser();
-		usersCovered.put(yumaUserPOJO.getId(), yumaPreferencePOJO);
+		fetchedUsersMap.put(yumaUserPOJO.getId(), yumaPreferencePOJO);
 	}
 }
