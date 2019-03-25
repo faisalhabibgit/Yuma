@@ -1,11 +1,16 @@
 package com.yuma.app.document;
 
+import java.util.HashSet;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.yuma.app.document.enums.Allergens;
+import com.yuma.app.document.enums.HealthLabels;
 
 @Document
 @Getter
@@ -19,6 +24,8 @@ public class Ingredients {
 	private double calories;
 	private double price;
 	private boolean optional;
+	private HashSet<HealthLabels> healthLabels;
+	private HashSet<Allergens> allergens;
 
 	@Override
 	public String toString() {

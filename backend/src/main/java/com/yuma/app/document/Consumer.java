@@ -21,7 +21,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Builder
 public class Consumer {
-	
+
 	@Id
 	private String userId;
 	private String password;
@@ -31,7 +31,7 @@ public class Consumer {
 	private Plan plan;
 	private boolean isActive;
 	private String timestamp;
-	private Company company;
+	private String company;
 	private String yumaServerId;
 	
 	@DBRef
