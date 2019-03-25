@@ -14,10 +14,10 @@ public class YumaPreferencePOJO {
 	private String id;
 	private int numberOfMealsPerWeek;
 	private YumaUserPOJO user;
-	private List<String> generalPreference;
+	private String diet;
+	private List<String> proteinTypes;
 	private List<String> allergies;
-	private List<String> additions;
-	private List<String> diet;
+	private List<String> specialRequests;
 	private List<String> other;
 	private DateTime lastUpdate;
 }

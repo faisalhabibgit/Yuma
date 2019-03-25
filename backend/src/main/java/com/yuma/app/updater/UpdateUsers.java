@@ -107,22 +107,22 @@ public class UpdateUsers {
 		String value = preferenceJsonObject.get("value").toString();
 		switch (preferenceKeyType) {
 			case "general":
-				yumaPreferencePOJO.getGeneralPreference().add(value);
+				yumaPreferencePOJO.getProteinTypes().add(value);
 				break;
 			case "diet":
-				yumaPreferencePOJO.getDiet().add(value);
+				yumaPreferencePOJO.setDiet(value);
 				break;
 			case "allergy":
 				yumaPreferencePOJO.getAllergies().add(value);
 				break;
 			case "addition":
-				yumaPreferencePOJO.getAdditions().add(value);
-				break;
-			case "other":
-				yumaPreferencePOJO.getOther().add(value);
+				yumaPreferencePOJO.getSpecialRequests().add(value);
 				break;
 			case "plan":
 				yumaPreferencePOJO.setNumberOfMealsPerWeek(Integer.parseInt(value));
+				break;
+			case "other":
+				yumaPreferencePOJO.getOther().add(value);
 		}
 	}
 
@@ -152,10 +152,9 @@ public class UpdateUsers {
 	private YumaPreferencePOJO serializeYumaPreferencePOJO(YumaUserPOJO yumaUserPOJO) {
 		return YumaPreferencePOJO.builder()
 			.user(yumaUserPOJO)
-			.additions(new ArrayList<>())
+			.proteinTypes(new ArrayList<>())
 			.allergies(new ArrayList<>())
-			.diet(new ArrayList<>())
-			.generalPreference(new ArrayList<>())
+			.specialRequests(new ArrayList<>())
 			.other(new ArrayList<>())
 			.build();
 	}

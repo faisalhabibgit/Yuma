@@ -20,7 +20,7 @@ public class UserConverter implements Converter<ConsumerTO, Consumer> {
 		consumer.setYumaServerId(consumerTO.getYumaServerId());
 		consumer.setUserId(consumerTO.getUserId());
 		consumer.setMealList(consumerTO.getMealList());
-		consumer.setDislikesList(consumerTO.getDislikesList());
+		consumer.setAllergies(consumerTO.getAllergies());
 		return consumer;
 	}
 }
