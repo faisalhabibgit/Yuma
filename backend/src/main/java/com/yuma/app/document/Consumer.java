@@ -31,8 +31,9 @@ public class Consumer {
 	private Plan plan;
 	private boolean isActive;
 	private String timestamp;
-	private String yumaServerId;
 	private String company;
+	private String yumaServerId;
+	
 	@DBRef
 	private Set<Role> roles;
 	private List<Meal> mealList = new ArrayList<>();
