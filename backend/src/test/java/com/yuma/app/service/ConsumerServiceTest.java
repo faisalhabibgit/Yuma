@@ -25,7 +25,7 @@ import com.yuma.app.document.Role;
 import com.yuma.app.payload.SignUpRequest;
 import com.yuma.app.repository.RoleRepository;
 import com.yuma.app.repository.UserRepository;
-import com.yuma.app.to.UserTO;
+import com.yuma.app.to.ConsumerTO;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ConsumerServiceTest {
@@ -72,17 +72,17 @@ public class ConsumerServiceTest {
 	public void WhenListCalledThenShouldReturnListOfUsers() {
 
 		List<Consumer> consumers = prepareUserList();
-		List<UserTO> userTOs = prepareUserTOList();
+		List<ConsumerTO> consumerTOS = prepareUserTOList();
 
-		when(conversionService.convert(consumers.get(0), UserTO.class)).thenReturn(userTOs.get(0));
-		when(conversionService.convert(consumers.get(1), UserTO.class)).thenReturn(userTOs.get(1));
+		when(conversionService.convert(consumers.get(0), ConsumerTO.class)).thenReturn(consumerTOS.get(0));
+		when(conversionService.convert(consumers.get(1), ConsumerTO.class)).thenReturn(consumerTOS.get(1));
 		when(userRepository.findAll()).thenReturn(consumers);
 
 
-		List<UserTO> retrievedListOfUsers = userService.list();
+		List<ConsumerTO> retrievedListOfUsers = userService.list();
 
-		verify(conversionService, times(1)).convert(consumers.get(0), UserTO.class);
-		verify(conversionService, times(1)).convert(consumers.get(1), UserTO.class);
+		verify(conversionService, times(1)).convert(consumers.get(0), ConsumerTO.class);
+		verify(conversionService, times(1)).convert(consumers.get(1), ConsumerTO.class);
 		verify(userRepository, times(1)).findAll();
 		Assert.assertEquals(retrievedListOfUsers.size(), 2);
 
@@ -141,30 +141,30 @@ public class ConsumerServiceTest {
 	@Test
 	public void testCreateUser() {
 
-		UserTO userTO = prepareUserTo();
+		ConsumerTO consumerTO = prepareUserTo();
 		Consumer consumer = prepareUser();
 		
-		when(conversionService.convert(userTO, Consumer.class)).thenReturn(consumer);
+		when(conversionService.convert(consumerTO, Consumer.class)).thenReturn(consumer);
 		when(userRepository.save(consumer)).thenReturn(consumer);
-		when(conversionService.convert(consumer, UserTO.class)).thenReturn(userTO);
+		when(conversionService.convert(consumer, ConsumerTO.class)).thenReturn(consumerTO);
 
-		userService.create(userTO);
+		userService.create(consumerTO);
 		
 	}
 
 	@Test
 	public void testUserUpdate() {
 
-		UserTO userTO = prepareUserTo();
-		userTO.setUserId("234");
+		ConsumerTO consumerTO = prepareUserTo();
+		consumerTO.setUserId("234");
 		Consumer consumer = prepareUser();
 
-		when(userRepository.findByUserId(userTO.getUserId())).thenReturn(Optional.of(consumer));
-		when(conversionService.convert(userTO, Consumer.class)).thenReturn(consumer);
+		when(userRepository.findByUserId(consumerTO.getUserId())).thenReturn(Optional.of(consumer));
+		when(conversionService.convert(consumerTO, Consumer.class)).thenReturn(consumer);
 		when(userRepository.save(consumer)).thenReturn(consumer);
-		when(conversionService.convert(consumer, UserTO.class)).thenReturn(userTO);
+		when(conversionService.convert(consumer, ConsumerTO.class)).thenReturn(consumerTO);
 
-		userService.updateUser(userTO);
+		userService.updateUser(consumerTO);
 
 	}
 	
@@ -209,20 +209,20 @@ public class ConsumerServiceTest {
 		return consumers;
 	}
 
-	private List<UserTO> prepareUserTOList() {
+	private List<ConsumerTO> prepareUserTOList() {
 
-		List<UserTO> userTOs = new ArrayList<UserTO>() {
+		List<ConsumerTO> consumerTOS = new ArrayList<ConsumerTO>() {
 			{
-				add(new UserTO());
-				add(new UserTO());
+				add(new ConsumerTO());
+				add(new ConsumerTO());
 			}
 		};
-		return userTOs;
+		return consumerTOS;
 	}
 	
-	private UserTO prepareUserTo(){
+	private ConsumerTO prepareUserTo(){
 		
-		UserTO userTO = new UserTO();
-		return userTO;
+		ConsumerTO consumerTO = new ConsumerTO();
+		return consumerTO;
 	}
 }

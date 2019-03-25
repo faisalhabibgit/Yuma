@@ -21,7 +21,7 @@ public class CombinationReportTO {
 	private int numberOfBlanks;
 	private int combinationScore;
 	private Date createdOn;
-	private List<UserTO> userTOS;
+	private List<ConsumerTO> consumerTOS;
 	private List<MealTO> mealTOS;
 
 	@Override
@@ -29,7 +29,7 @@ public class CombinationReportTO {
 		return "CombinationReport{" +
 			"numberOfBlanks=" + numberOfBlanks +
 			", combinationScore=" + combinationScore +
-			", userList=" + userTOS +
+			", userList=" + consumerTOS +
 			", mealsList=" + mealTOS +
 			'}';
 	}

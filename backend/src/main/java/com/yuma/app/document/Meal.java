@@ -13,6 +13,9 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.yuma.app.document.enums.HealthLabels;
+import com.yuma.app.document.enums.ProteinType;
+
 @Document
 @Getter
 @Setter
@@ -26,9 +29,10 @@ public class Meal {
 	private String name;
 	private String description;
 	private boolean isAvailable;
-	private HashSet<String> flags = new HashSet<>();
 	private int mealScore;
-	protected List<Ingredients> ingredients = new ArrayList<>();
+	private List<Ingredients> ingredients = new ArrayList<>();
+	private HashSet<HealthLabels> healthLabels;
+	private HashSet<ProteinType> proteinTypes;
 
 	
 	public Meal(Meal deepCopy){
@@ -36,9 +40,11 @@ public class Meal {
 		this.setName(deepCopy.getName());
 		this.setDescription(deepCopy.getDescription());
 		this.setAvailable(deepCopy.isAvailable);
-		this.setFlags(deepCopy.getFlags());
 		this.setIngredients(new ArrayList<>(deepCopy.getIngredients()));
+		this.setHealthLabels(new HashSet<>(deepCopy.getHealthLabels()));
+		this.setProteinTypes(new HashSet<>(deepCopy.getProteinTypes()));
 	}
+
 	@Override
 	public String toString() {
 		return "Meal{" +
@@ -46,7 +52,6 @@ public class Meal {
 			", mealId=" + mealId +
 			", description='" + description + '\'' +
 			", isAvailable=" + isAvailable +
-			", flags=" + flags +
 			", mealScore=" + mealScore +
 			'}';
 	}
@@ -56,7 +61,8 @@ public class Meal {
 		this.setDescription(mealToUpdate.getDescription());
 		this.setAvailable(mealToUpdate.isAvailable());
 		this.setIngredients(mealToUpdate.getIngredients());
-		this.setFlags(mealToUpdate.getFlags());
 		this.setMealScore(mealToUpdate.getMealScore());
+		this.setHealthLabels(mealToUpdate.getHealthLabels());
+		this.setProteinTypes(mealToUpdate.getProteinTypes());
 	}
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yuma.app.service.ConsumerService;
-import com.yuma.app.to.UserTO;
+import com.yuma.app.to.ConsumerTO;
 
 @Slf4j
 @RestController
@@ -30,7 +30,7 @@ public class UserController {
 	}
 
 	@GetMapping("/all")
-	public List<UserTO> getAll() {
+	public List<ConsumerTO> getAll() {
 		log.info("retrieving user list from DB");
 		return this.userService.list();
 	}
@@ -41,26 +41,26 @@ public class UserController {
 		this.userService.deleteUserByUserID(uuid);
 	}
 	@GetMapping("/active")
-	public List<UserTO> getActiveUsers() {
+	public List<ConsumerTO> getActiveUsers() {
 		log.info("retrieving active users list from DB");
 		return this.userService.activeUsers();
 	}
 	
 	@GetMapping("/company/{company}")
-	public List<UserTO> getUsersByCompany(@PathVariable String company){
+	public List<ConsumerTO> getUsersByCompany(@PathVariable String company){
 		log.info("retrieving list of users by company");
 		return this.userService.findUsersByCompany(company);
 	}
 	
 
 	@RequestMapping(method = RequestMethod.POST)
-	public UserTO createUser(@RequestBody UserTO userTO){
+	public ConsumerTO createUser(@RequestBody ConsumerTO userTO){
 		log.info("creating user from DB in controller");
 		return this.userService.create(userTO);
 	}
 	
 	@PutMapping("/update")
-	public UserTO updateUser(@RequestBody UserTO userTO){
+	public ConsumerTO updateUser(@RequestBody ConsumerTO userTO){
 		log.info("updating user from DB in controller");
 		return this.userService.updateUser(userTO);
 	}

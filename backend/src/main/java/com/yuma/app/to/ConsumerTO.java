@@ -16,7 +16,7 @@ import com.yuma.app.document.Role;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserTO {
+public class ConsumerTO {
 
 	private String userId;
 	private String firstName;
