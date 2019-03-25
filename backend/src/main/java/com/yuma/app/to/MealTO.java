@@ -1,7 +1,7 @@
 package com.yuma.app.to;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +24,7 @@ public class MealTO {
 	private boolean isAvailable;
 	private int mealScore;
 	private List<Ingredients> ingredients;
-	private HashSet<HealthLabels> healthLabels;
-	private HashSet<ProteinType> proteinTypes;
+	private Set<HealthLabels> healthLabels;
+	private Set<ProteinType> proteinTypes;
 
 }
