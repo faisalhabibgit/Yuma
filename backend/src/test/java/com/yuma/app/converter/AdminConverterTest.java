@@ -4,29 +4,29 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.yuma.app.document.Consumer;
-import com.yuma.app.to.UserTO;
+import com.yuma.app.to.ConsumerTO;
 
 public class AdminConverterTest {
 	@Test
 	public void testUserConverter() {
-		UserTO userTo = prepareUserTO();
+		ConsumerTO consumerTo = prepareUserTO();
 		UserConverter userConverter = new UserConverter();
-		Consumer consumer = userConverter.convert(userTo);
+		Consumer consumer = userConverter.convert(consumerTo);
 
-		Assert.assertEquals(consumer.getUserId(), userTo.getUserId());
-		Assert.assertEquals(consumer.getFirstName(), userTo.getFirstName());
-		Assert.assertEquals(consumer.getLastName(), userTo.getLastName());
-		Assert.assertEquals(consumer.isActive(), userTo.isEnabled());
-		Assert.assertEquals(consumer.getPassword(), userTo.getPassword());
+		Assert.assertEquals(consumer.getUserId(), consumerTo.getUserId());
+		Assert.assertEquals(consumer.getFirstName(), consumerTo.getFirstName());
+		Assert.assertEquals(consumer.getLastName(), consumerTo.getLastName());
+		Assert.assertEquals(consumer.isActive(), consumerTo.isEnabled());
+		Assert.assertEquals(consumer.getPassword(), consumerTo.getPassword());
 	}
 
-	private UserTO prepareUserTO() {
-		UserTO userTO = new UserTO();
-		userTO.setUserId("id");
-		userTO.setFirstName("first name");
-		userTO.setLastName("last name");
-		userTO.setEnabled(true);
-		userTO.setEmail("test@email.com");
-		return userTO;
+	private ConsumerTO prepareUserTO() {
+		ConsumerTO consumerTO = new ConsumerTO();
+		consumerTO.setUserId("id");
+		consumerTO.setFirstName("first name");
+		consumerTO.setLastName("last name");
+		consumerTO.setEnabled(true);
+		consumerTO.setEmail("test@email.com");
+		return consumerTO;
 	}
 }

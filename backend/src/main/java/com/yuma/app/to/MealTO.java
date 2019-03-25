@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import com.yuma.app.document.Ingredients;
+import com.yuma.app.document.enums.HealthLabels;
+import com.yuma.app.document.enums.ProteinType;
 
 @Getter
 @Setter
@@ -20,21 +22,9 @@ public class MealTO {
 	private String name;
 	private String description;
 	private boolean isAvailable;
-	private HashSet<String> flags;
 	private int mealScore;
-	protected List<Ingredients> ingredients;
+	private List<Ingredients> ingredients;
+	private HashSet<HealthLabels> healthLabels;
+	private HashSet<ProteinType> proteinTypes;
 
-
-	@Override
-	public String toString() {
-		return "Meal{" +
-			"mealId=" + mealId +
-			"name=" + name +
-			", description='" + description + '\'' +
-			", isAvailable=" + isAvailable +
-			", ingredients=" + ingredients +
-			", flags=" + flags +
-			", mealScore=" + mealScore +
-			'}';
-	}
 }
