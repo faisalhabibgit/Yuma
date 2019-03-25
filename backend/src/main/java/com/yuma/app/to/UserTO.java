@@ -26,8 +26,8 @@ public class UserTO {
 	private Plan plan;
 	private boolean enabled;
 	private String timestamp;
-	private String yumaServerId;
 	private String company;
+	private String yumaServerId;
 	private Set<Role> roles;
 	private List<Meal> mealList;
 	private List<String> dislikesList;
