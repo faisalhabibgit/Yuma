@@ -1,6 +1,7 @@
 package com.yuma.app.document;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -13,6 +14,8 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.yuma.app.document.enums.Allergens;
 
 @Document
 @Getter
@@ -37,8 +40,8 @@ public class Consumer {
 	@DBRef
 	private Set<Role> roles;
 	private List<Meal> mealList = new ArrayList<>();
-	private List<String> dislikesList;
-	private List<String> likes;
+	private Set<Allergens> allergies = new HashSet<>();
+	private List<String> consumerComments = new ArrayList<>();
 
 	public void updateFrom(Consumer consumerToUpdate) {
 		this.setFirstName(consumerToUpdate.getFirstName());

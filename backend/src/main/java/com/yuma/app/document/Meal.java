@@ -3,6 +3,7 @@ package com.yuma.app.document;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,8 +32,8 @@ public class Meal {
 	private boolean isAvailable;
 	private int mealScore;
 	private List<Ingredients> ingredients = new ArrayList<>();
-	private HashSet<HealthLabels> healthLabels;
-	private HashSet<ProteinType> proteinTypes;
+	private Set<HealthLabels> healthLabels;
+	private Set<ProteinType> proteinTypes;
 
 	
 	public Meal(Meal deepCopy){
