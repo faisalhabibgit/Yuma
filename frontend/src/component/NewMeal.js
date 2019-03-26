@@ -3,7 +3,8 @@ import {
   Col, Form,
   FormGroup, Label, Input,
   Button,
-  Container,
+  Container,Card, CardHeader,  CardBody,
+  CardDeck
 } from 'reactstrap';
 import ApiToken from '../middleware/ApiToken';
 import Ingredients from '../middleware/objects/Ingredients';
@@ -197,6 +198,8 @@ calculateCalories(e, idx){
 
   render() {
     return (
+      <div style={{background: '#ADB7BF'}}>
+
       <Container>
         <Col sm="12" md={{ size: 6, offset: 3 }}>
           <h2>Enter a New Meal</h2>
@@ -206,7 +209,12 @@ calculateCalories(e, idx){
           <Form className="form" onSubmit={this.handleSubmit}>
             <Col >
               <FormGroup>
-                <Label>Name</Label>
+              <CardDeck data-test="meal-combo-card" style={{padding:'12px', height:'380px'}}>
+                <Card>
+                 <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
+                    <Label>Name</Label>
+                </CardHeader>
+                <CardBody>
                 <Input
                   type="text"
                   name="name"
@@ -215,10 +223,17 @@ calculateCalories(e, idx){
                   placeholder="Chicken Parmesan"
                   onChange={this.handleChange}
                 />
+                </CardBody>
+                </Card>
+              </CardDeck>
 
                 <br />
-
-                <Label>Meal Description</Label>
+                <CardDeck data-test="meal-combo-card" style={{padding:'12px', height:'380px'}}>
+                 <Card>
+                  <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
+                  <Label>Meal Description</Label>
+                  </CardHeader>
+                  <CardBody>
                 <Input
                   class="form-control"
                   type="text"
@@ -228,11 +243,16 @@ calculateCalories(e, idx){
                   placeholder="Chicken basted in tomato sauce."
                   onChange={this.handleChange}
                 />
-
+                  </CardBody>
+                </Card>
+              </CardDeck>
                 <br />
-
+               
+                <CardDeck data-test="meal-combo-card" style={{padding:'12px', height:'380px'}}>
                 <Label>Ingredients</Label>
-                <button style={{ marginLeft: 40 }} data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</button>
+                <div>
+                <Button variant="secondary"  data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</Button>
+                </div>
                 <br /><br />
                 {
                   this.state.ingredients.map((val, idx) => {
@@ -295,6 +315,7 @@ calculateCalories(e, idx){
                     )
                   })
                 }
+                </CardDeck>
                 <br />
 
                 <Label style={{ fontWeight: "bold" }}> Possible Food Allergies </Label>
@@ -337,6 +358,8 @@ calculateCalories(e, idx){
         </Col>
 
       </Container>
+
+      </div>
     );
   }
 }
