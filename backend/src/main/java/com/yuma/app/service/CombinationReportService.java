@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,7 @@ import com.yuma.app.document.CombinationReport;
 import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
+import com.yuma.app.document.enums.Allergens;
 import com.yuma.app.exception.ResourceNotFoundException;
 import com.yuma.app.repository.CombinationReportRepository;
 import com.yuma.app.repository.MealRepository;
@@ -94,12 +96,12 @@ public class CombinationReportService {
 		logger.info("Setting meal scores");
 
 		boolean scorable = true;
-		List<String> userDislikesList;
+		Set<Allergens> userDislikesList;
 		for (Consumer user : userList) {
-			userDislikesList = user.getDislikesList();
+			userDislikesList = user.getAllergies();
 			for (Meal meal : mealList) {
 				for (Ingredients ingredient : meal.getIngredients()) {
-					if (userDislikesList.contains(ingredient.getName())) {
+					if (userDislikesList.contains(ingredient.getAllergens().iterator().next())) {
 						if (!ingredient.isOptional()) {
 							scorable = false;
 							break;
@@ -188,12 +190,12 @@ public class CombinationReportService {
 	protected boolean checkIfMealWorks(Meal meal, Consumer user) {
 		logger.info("checking if: " + meal.getName() + " works for " + user.getFirstName());
 
-		List<String> userDislikesList = user.getDislikesList();
+		Set<Allergens> userDislikesList = user.getAllergies();
 		List<Ingredients> ingredientsToRemove = new ArrayList<>();
 		Meal newMeal = meal;
 
 		for (Ingredients ingredient : newMeal.getIngredients()) {
-			if (userDislikesList.contains(ingredient.getName())) {
+			if (userDislikesList.contains(ingredient.getAllergens().iterator().next())) {
 				if (!ingredient.isOptional()) {
 					return false;
 				} else {
