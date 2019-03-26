@@ -202,20 +202,21 @@ calculateCalories(e, idx){
 
       <Container>
         <Col sm="12" md={{ size: 6, offset: 3 }}>
+        <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
           <h2>Enter a New Meal</h2>
-
+        </CardHeader>
           <br />
 
           <Form className="form" onSubmit={this.handleSubmit}>
             <Col >
               <FormGroup>
-              <CardDeck data-test="meal-combo-card" style={{padding:'12px', height:'380px'}}>
-                <Card>
-                 <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-                    <Label>Name</Label>
-                </CardHeader>
-                <CardBody>
-                <Input
+          <CardDeck data-test="name" style={{padding:'12px', height:'450px'}}>
+          <Card>
+            <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
+              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Name</h5>
+            </CardHeader>
+            <CardBody>
+            <Input
                   type="text"
                   name="name"
                   data-test="enter-meal-name"
@@ -223,18 +224,15 @@ calculateCalories(e, idx){
                   placeholder="Chicken Parmesan"
                   onChange={this.handleChange}
                 />
-                </CardBody>
-                </Card>
-              </CardDeck>
+            </CardBody>
+          </Card>
 
-                <br />
-                <CardDeck data-test="meal-combo-card" style={{padding:'12px', height:'380px'}}>
-                 <Card>
-                  <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-                  <Label>Meal Description</Label>
-                  </CardHeader>
-                  <CardBody>
-                <Input
+          <Card>
+            <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
+              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Meal Description</h5>
+            </CardHeader>
+            <CardBody>
+            <Input
                   class="form-control"
                   type="text"
                   name="description"
@@ -243,13 +241,16 @@ calculateCalories(e, idx){
                   placeholder="Chicken basted in tomato sauce."
                   onChange={this.handleChange}
                 />
-                  </CardBody>
-                </Card>
-              </CardDeck>
+            </CardBody>
+          </Card>
+
+        </CardDeck>
+
+                       
                 <br />
                
-                <CardDeck data-test="meal-combo-card" style={{padding:'12px', height:'380px'}}>
                 <Label>Ingredients</Label>
+                <br />
                 <div>
                 <Button variant="secondary"  data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</Button>
                 </div>
@@ -295,7 +296,9 @@ calculateCalories(e, idx){
                           onChange={this.handleChange }
                           className="calories"
                         />
-                        <button style={{ marginLeft: 40 }} onClick={(e) => this.calculateCalories(e, idx)}>Calculate</button>
+                        <div>
+                         <Button variant="secondary"  onClick={(e) => this.calculateCalories(e, idx)}>Calculate</Button>
+                       </div>
                         <br />
                         <label htmlFor={priceId}>Price</label>
                         <input
@@ -310,12 +313,14 @@ calculateCalories(e, idx){
                         />
                         <br />
                         <br />
-                        <button data-test="delete-ingredient-button" onClick={(e) => { this.removeIngredient(e, idx) }}> Remove </button>
+                        <div>
+                         <Button variant="secondary"  data-test="delete-ingredient-button" onClick={(e) => { this.removeIngredient(e, idx) }}> Remove </Button>
+                       </div>
                       </div>
                     )
                   })
                 }
-                </CardDeck>
+                
                 <br />
 
                 <Label style={{ fontWeight: "bold" }}> Possible Food Allergies </Label>
