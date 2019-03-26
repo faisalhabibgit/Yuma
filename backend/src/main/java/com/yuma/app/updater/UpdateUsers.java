@@ -15,12 +15,14 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 @Slf4j
+@Service
 public class UpdateUsers {
 
 	private Logger updateUsersLogger = LoggerFactory.getLogger(UpdateUsers.class);

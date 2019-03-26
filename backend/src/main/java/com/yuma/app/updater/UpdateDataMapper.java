@@ -20,10 +20,17 @@ import static com.yuma.app.document.enums.SpecialRequest.LARGE_PORTION;
 import static com.yuma.app.document.enums.SpecialRequest.LOW_CARBS;
 import static org.reflections.util.Utils.isEmpty;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Plan;
@@ -32,34 +39,46 @@ import com.yuma.app.document.enums.Diet;
 import com.yuma.app.document.enums.ProteinType;
 import com.yuma.app.document.enums.SpecialRequest;
 
+@Slf4j
+@Service
 public class UpdateDataMapper {
 
-	HashMap<String, YumaPreferencePOJO> yumaPreferencePOJOHashMap;
-	HashMap<String, Consumer> updatedConsumersHashMap;
+	private Logger updateDataMapper = LoggerFactory.getLogger(UpdateDataMapper.class);
+	private List<Consumer> updatedConsumersList;
 
-	public UpdateDataMapper(HashMap<String, YumaPreferencePOJO> yumaPreferencePOJOHashMap) {
-		this.yumaPreferencePOJOHashMap = yumaPreferencePOJOHashMap;
+	public UpdateDataMapper() {
+		this.updatedConsumersList = new ArrayList<>();
 	}
 
-	public void dataMapper(){
+	public List<Consumer> dataMapper(HashMap<String, YumaPreferencePOJO> yumaPreferencePOJOHashMap){
+		updateDataMapper.info("mapping users from Yuma Server to local Objects");
 		for(String  yumaPOJOUserId: yumaPreferencePOJOHashMap.keySet()) {
 			YumaPreferencePOJO yumaPreferencePOJO = yumaPreferencePOJOHashMap.get(yumaPOJOUserId);
-			Plan updatedConsumer = mapYumaPreferenceToPlan(yumaPreferencePOJO);
 			Consumer consumer = mapYumaPreferenceToConsumer(yumaPreferencePOJO);
+			consumer.setPlan(mapYumaPreferenceToPlan(yumaPreferencePOJO));
+			consumer.setCompany(mapYumaGroupToCompany(yumaPreferencePOJO.getUser()));
+			updatedConsumersList.add(consumer);
 		}
-		
+
+		updateDataMapper.info("Finished mapping users from Yuma Server to local Objects");
+		return updatedConsumersList;
+	}
+
+	private String mapYumaGroupToCompany(YumaUserPOJO user) {
+		YumaGroupPOJO yumaGroupPOJO = user.getYumaGroupPOJO();
+
+		return yumaGroupPOJO.alias;
 	}
 
 	private Consumer mapYumaPreferenceToConsumer(YumaPreferencePOJO yumaPreferencePOJO) {
 		YumaUserPOJO yumaUserPOJO = yumaPreferencePOJO.getUser();
-		YumaGroupPOJO yumaGroupPOJO = yumaUserPOJO.getYumaGroupPOJO();
 
 		return Consumer.builder()
 			.allergies(mapAllergyTypesIfExists(yumaPreferencePOJO.getAllergies()))
 			.consumerComments(yumaPreferencePOJO.getOther())
 			.firstName(yumaUserPOJO.getFirstName())
 			.lastName(yumaUserPOJO.getLastName())
-			.company(yumaGroupPOJO.alias)
+			.yumaServerId(yumaUserPOJO.getId())
 			.build();
 	}
 
