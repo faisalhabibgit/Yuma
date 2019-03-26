@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yuma.app.service.AdminService;
 import com.yuma.app.service.ConsumerService;
 import com.yuma.app.to.ConsumerTO;
 
@@ -25,10 +26,12 @@ public class UserController {
 
 	final Logger logger = LoggerFactory.getLogger(UserController.class);
 	private ConsumerService userService;
+	private AdminService adminService;
 
 
-	public UserController(ConsumerService consumerService) {
+	public UserController(ConsumerService consumerService, AdminService adminService) {
 		this.userService = consumerService;
+		this.adminService = adminService;
 	}
 
 	@GetMapping("/all")
@@ -49,21 +52,27 @@ public class UserController {
 	}
 	
 	@GetMapping("/company/{company}")
-	public List<ConsumerTO> getUsersByCompany(@PathVariable String company){
+	public List<ConsumerTO> getUsersByCompany(@PathVariable String company) {
 		this.logger.info("retrieving list of users by company");
 		return this.userService.findUsersByCompany(company);
 	}
 	
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ConsumerTO createUser(@RequestBody ConsumerTO consumerTO){
+	public ConsumerTO createUser(@RequestBody ConsumerTO consumerTO) {
 		this.logger.info("creating user from DB in controller");
 		return this.userService.create(consumerTO);
 	}
 	
 	@PutMapping("/update")
-	public ConsumerTO updateUser(@RequestBody ConsumerTO consumerTO){
+	public ConsumerTO updateUser(@RequestBody ConsumerTO consumerTO) {
 		this.logger.info("updating user from DB in controller");
 		return this.userService.updateUser(consumerTO);
+	}
+	
+	@GetMapping("/update/users")
+	public void updateUsersFromYumaServer() {
+		this.logger.info("updating users from Yuma DB in controller");
+		this.adminService.updateUsersFromYumaServer();
 	}
 }
