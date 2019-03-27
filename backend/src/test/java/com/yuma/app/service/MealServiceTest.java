@@ -1,6 +1,5 @@
 package com.yuma.app.service;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -26,13 +25,13 @@ import com.yuma.app.to.MealTO;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MealServiceTest {
-	
+
 	@MockBean
 	private MealRepository mealRepository;
-	
+
 	@Mock
 	private ConversionService conversionService;
-	
+
 	@Autowired
 	private MealService mealService;
 
@@ -51,24 +50,144 @@ public class MealServiceTest {
 		ArrayList<Ingredients> ingredientsList4 = new ArrayList<>();
 		ArrayList<Ingredients> ingredientsList5 = new ArrayList<>();
 		//bogus ingredients
-		Ingredients chickpeas = new Ingredients("chickpeas", 123.343, 0.002, 59.00, false);
-		Ingredients cheese = new Ingredients("cheese", 3.343, 0.02, 58.00, false);
-		Ingredients chicken = new Ingredients("chicken", 13.343, 0.2, 57.00, false);
-		Ingredients brocolie = new Ingredients("brocolie", 1.343, 0.000234, 5.00, false);
-		Ingredients beef = new Ingredients("beef", 1.343, 0.000234, 5.00, false);
-		Ingredients rice = new Ingredients("rice", 1.343, 0.000234, 5.00, false);
-		Ingredients tomato = new Ingredients("tomato", 1.343, 0.000234, 5.00, false);
-		Ingredients raisin = new Ingredients("raisin", 1.343, 0.000234, 5.00, false);
-		Ingredients banana = new Ingredients("banana", 1.343, 0.000234, 5.00, false);
-		Ingredients fish = new Ingredients("fish", 1.343, 0.000234, 5.00, false);
-		Ingredients potato = new Ingredients("potato", 1.343, 0.000234, 5.00, false);
-		Ingredients nuts = new Ingredients("nuts", 1.343, 0.000234, 5.00, false);
-		Ingredients lamb = new Ingredients("lamb", 1.343, 0.000234, 5.00, false);
-		Ingredients nutsOptional = new Ingredients("nuts", 1.343, 0.000234, 5.00, true);
-		Ingredients onionOptional = new Ingredients("onion", 1.343, 0.000234, 5.00, true);
-		Ingredients chickpeasOptional = new Ingredients("chickpeas", 1.343, 0.000234, 5.00, true);
-		Ingredients pork = new Ingredients("pork", 1.343, 0.000234, 5.00, true);
-		Ingredients milk = new Ingredients("milk", 1.343, 0.000234, 5.00, false);
+		Ingredients chickpeas = Ingredients.builder()
+			.name("chickpeas")
+			.weight(123.343)
+			.calories(0.002)
+			.price(59.00)
+			.optional(false)
+			.build(); 
+		
+		Ingredients cheese = Ingredients.builder()
+			.name("cheese")
+			.weight(123.343)
+			.calories(0.002)
+			.price(59.00)
+			.optional(false)
+			.build();
+		
+		Ingredients chicken = Ingredients.builder()
+			.name("chicken")
+			.weight(13.343)
+			.calories(0.002)
+			.price(57.00)
+			.optional(false)
+			.build();
+		
+		Ingredients brocolie = Ingredients.builder()
+			.name("brocolie")
+			.weight(1.343)
+			.calories(0.002)
+			.price(5.00)
+			.optional(false)
+			.build();
+		
+		
+		Ingredients beef =  Ingredients.builder()
+			.name("beef")
+			.weight(1.343)
+			.calories(0.002)
+			.price(5.00)
+			.optional(false)
+			.build();
+			
+			
+		Ingredients rice =  Ingredients.builder()
+			.name("rice")
+			.weight(1.343)
+			.calories(0.002)
+			.price(5.00)
+			.optional(false)
+			.build();
+		
+		Ingredients tomato =  Ingredients.builder()
+			.name("tomato")
+			.weight(1.343)
+			.calories(0.002)
+			.price(5.00)
+			.optional(false)
+			.build(); 
+			
+		Ingredients raisin =  Ingredients.builder()
+			.name("raisin")
+			.weight(1.343)
+			.calories(0.002)
+			.price(5.00)
+			.optional(false)
+			.build();
+		Ingredients banana = Ingredients.builder()
+			.name("banana")
+			.weight(1.343)
+			.calories(0.002)
+			.price(5.00)
+			.optional(false)
+			.build();
+		Ingredients fish =  Ingredients.builder()
+			.name("fish")
+			.weight(1.343)
+			.calories(0.002)
+			.price(5.00)
+			.optional(false)
+			.build();
+		Ingredients potato =  Ingredients.builder()
+			.name("potato")
+			.weight(1.343)
+			.calories(0.002)
+			.price(5.00)
+			.optional(false)
+			.build();
+		Ingredients nuts =  Ingredients.builder()
+			.name("nuts")
+			.weight(1.343)
+			.calories(0.002)
+			.price(5.00)
+			.optional(false)
+			.build();
+		
+		Ingredients lamb =  Ingredients.builder()
+			.name("lamb")
+			.weight(1.343)
+			.calories(0.002)
+			.price(5.00)
+			.optional(false)
+			.build();
+		Ingredients nutsOptional =  Ingredients.builder()
+			.name("nuts")
+			.weight(1.343)
+			.calories(0.002)
+			.price(5.00)
+			.optional(true)
+			.build();
+		
+		Ingredients onionOptional =  Ingredients.builder()
+			.name("onion")
+			.weight(1.343)
+			.calories(0.002)
+			.price(5.00)
+			.optional(true)
+			.build();
+		Ingredients chickpeasOptional =  Ingredients.builder()
+			.name("chickpeas")
+			.weight(1.343)
+			.calories(0.002)
+			.price(5.00)
+			.optional(true)
+			.build();
+		Ingredients pork =  Ingredients.builder()
+			.name("pork")
+			.weight(1.343)
+			.calories(0.002)
+			.price(5.00)
+			.optional(true)
+			.build();
+		Ingredients milk = Ingredients.builder()
+			.name("milk")
+			.weight(1.343)
+			.calories(0.002)
+			.price(5.00)
+			.optional(true)
+			.build();
+		
 
 
 		ingredientsList1.add(chickpeas);
@@ -98,16 +217,52 @@ public class MealServiceTest {
 		ingredientsList5.add(milk);
 		ingredientsList5.add(chicken);
 
-		meal1 = new Meal(UUID.randomUUID().toString(), "chick broc", "chicken and broccolie topped with a touch of love", true, new HashSet<>(),40,ingredientsList1);
-		meal2 = new Meal(UUID.randomUUID().toString(), "beef and rice", "beef and rice topped with a touch of love", true, new HashSet<>(), 40,ingredientsList2);
-		meal3 = new Meal(UUID.randomUUID().toString(), "fish and rice", "fish and rice topped with a touch of love", true, new HashSet<>(),40, ingredientsList3);
-		mealTO = new MealTO(meal1.getMealId(), "chicken and veg", "chicken and veg",false,new HashSet<>(),40, new ArrayList<>());
-		mealTO2 = new MealTO(meal2.getMealId(), "chick broc", "chicken and broccolie topped with a touch of love",true,new HashSet<>(),40, new ArrayList<>());
-
+		meal1 = Meal.builder()
+			.mealId(UUID.randomUUID().toString())
+			.name("chick broc")
+			.description("chicken and broccolie topped with a touch of love")
+			.isAvailable(true)
+			.ingredients(ingredientsList1)
+			.mealScore(40)
+			.build();
+		
+		meal2 = Meal.builder()
+			.mealId(UUID.randomUUID().toString())
+			.name("beef and rice")
+			.description("beef and rice topped with a touch of love")
+			.isAvailable(true)
+			.ingredients(ingredientsList2)
+			.mealScore(40)
+			.build(); 
+			
+		meal3 =  Meal.builder()
+			.mealId(UUID.randomUUID().toString())
+			.name("fish and rice")
+			.description("fish and rice topped with a touch of love")
+			.isAvailable(true)
+			.ingredients(ingredientsList3)
+			.mealScore(40)
+			.build(); 
+		
+		mealTO =  MealTO.builder()
+			.mealId(UUID.randomUUID().toString())
+			.name("chicken and veg")
+			.description("chicken and veg")
+			.isAvailable(true)
+			.mealScore(40)
+			.build();
+		
+		mealTO2 = MealTO.builder()
+			.mealId(meal1.getMealId())
+			.name("chick broc")
+			.description(" chicken and broccolie topped with a touch of love")
+			.isAvailable(true)
+			.mealScore(40)
+			.build();
 
 		MockitoAnnotations.initMocks(this);
 	}
-	
+
 	@Test
 	public void MealServiceListTest() {
 		List<Meal> actualMeals = new ArrayList<>();
@@ -115,27 +270,27 @@ public class MealServiceTest {
 		actualMeals.add(meal1);
 		actualMeals.add(meal2);
 		actualMeals.add(meal3);
-		
+
 		Mockito.when(mealRepository.findAll()).thenReturn(actualMeals);
-		
+
 		expectedMeals = mealService.list();
 		Assert.assertEquals(expectedMeals.size(), actualMeals.size());
 	}
-	
+
 	@Test
 	public void MealServiceListByPredicateTest(){
 
 		String desc = "chicken";
 		MealTO expectedMeals;
 		Optional<Meal> optionalMeal = Optional.ofNullable(new Meal());
-		
+
 		Mockito.when(mealRepository.findByDescription(desc)).thenReturn(optionalMeal);
 		Mockito.when(mealRepository.findByDescription(desc)).thenReturn(optionalMeal);
-		
+
 		expectedMeals = mealService.findByDescription(desc);
 		Assert.assertNotNull(expectedMeals);
 	}
-	
+
 	@Test 
 	public void MealServiceUpdateTest(){
 		String uuid = mealTO.getMealId();
@@ -159,7 +314,7 @@ public class MealServiceTest {
 		Assert.assertEquals(mealTO.getDescription(), "chicken and veg");
 		Assert.assertEquals(mealTO.isAvailable(), false);
 	}
-	
+
 	@Test
 	public void givenAvailableMeal_updateMealAvailabilityToFalse(){
 		meal1.setAvailable(true);

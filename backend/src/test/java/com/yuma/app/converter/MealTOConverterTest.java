@@ -31,7 +31,12 @@ public class MealTOConverterTest {
 		meal.setAvailable(false);
 		meal.setIngredients(new ArrayList<Ingredients>() {
 			{
-				add(new Ingredients("Tomatoes", 20, 21, 32, false));
+				add(Ingredients.builder()
+					.name("Tomatoes")
+					.weight(20)
+					.calories(21)
+					.price(32)
+					.build());
 			}
 		});
 		meal.setMealScore(30);
