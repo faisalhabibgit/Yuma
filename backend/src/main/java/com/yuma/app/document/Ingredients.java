@@ -3,6 +3,7 @@ package com.yuma.app.document;
 import java.util.HashSet;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import com.yuma.app.document.enums.HealthLabels;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Ingredients {
 
 	private String name;

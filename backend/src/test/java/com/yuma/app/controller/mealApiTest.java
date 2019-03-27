@@ -41,8 +41,25 @@ public class mealApiTest {
 
 	@Before
 	public void setup() {
-		mealTO1 = new MealTO(mealId1, name1, description1, isAvailable, flags, score1, ingredients);
-		mealTO2 = new MealTO(mealId2, name2, description2, isAvailable, flags, score2, ingredients);
+		mealTO1 = MealTO.builder()
+			.mealId(mealId1)
+			.name(name1)
+			.description(description1)
+			.isAvailable(isAvailable)
+			.flags(flags)
+			.mealScore(score1)
+			.ingredients(ingredients)
+			.build();
+		
+		mealTO2 = MealTO.builder()
+			.mealId(mealId2)
+			.name(name2)
+			.description(description2)
+			.isAvailable(isAvailable)
+			.flags(flags)
+			.mealScore(score2)
+			.ingredients(ingredients)
+			.build();
 
 		RestAssuredMockMvc.mockMvc(MockMvcBuilders.webAppContextSetup(context).build());
 

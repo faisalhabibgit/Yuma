@@ -32,4 +32,5 @@ public class ConsumerTO {
 	private Set<Role> roles;
 	private List<Meal> mealList;
 	private Set<Allergens> allergies;
+	private List<String> dislikesList;
 }
