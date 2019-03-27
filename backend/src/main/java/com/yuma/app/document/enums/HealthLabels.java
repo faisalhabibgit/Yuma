@@ -5,7 +5,6 @@ public enum HealthLabels {
 	VEGETARIAN,
 	DAIRY_FREE,
 	GLUTEN_FREE,
-	WHEAT_FREE,
 	EGG_FREE,
 	PEANUT_FREE,
 	TREE_NUT_FREE,

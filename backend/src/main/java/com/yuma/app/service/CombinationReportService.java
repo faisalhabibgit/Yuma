@@ -1,5 +1,6 @@
 package com.yuma.app.service;
 
+
 import com.yuma.app.document.CombinationReport;
 import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Meal;

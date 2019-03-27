@@ -31,10 +31,10 @@ public class Meal {
 	private String description;
 	private boolean isAvailable;
 	private int mealScore;
+	private HashSet<String> flags = new HashSet<>();
 	private List<Ingredients> ingredients = new ArrayList<>();
-	private Set<HealthLabels> healthLabels;
-	private Set<ProteinType> proteinTypes;
-
+	private Set<HealthLabels> healthLabels = new HashSet<>();
+	private Set<ProteinType> proteinTypes = new HashSet<>();
 	
 	public Meal(Meal deepCopy){
 		this.setMealId(deepCopy.mealId);
@@ -44,17 +44,6 @@ public class Meal {
 		this.setIngredients(new ArrayList<>(deepCopy.getIngredients()));
 		this.setHealthLabels(new HashSet<>(deepCopy.getHealthLabels()));
 		this.setProteinTypes(new HashSet<>(deepCopy.getProteinTypes()));
-	}
-
-	@Override
-	public String toString() {
-		return "Meal{" +
-			"ingredients=" + ingredients +
-			", mealId=" + mealId +
-			", description='" + description + '\'' +
-			", isAvailable=" + isAvailable +
-			", mealScore=" + mealScore +
-			'}';
 	}
 
 	public void updateFrom(Meal mealToUpdate) {

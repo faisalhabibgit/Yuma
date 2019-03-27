@@ -62,6 +62,7 @@ public class CombinationReportServiceTest {
 
 	private List<CombinationReport> possibleCombinations;
 
+
 	Optional<CombinationReport> optionalCombinationReport;
 
 	Optional<CombinationReport> optionalCombinationReportEmpty;
@@ -119,5 +120,4 @@ public class CombinationReportServiceTest {
 		verify(mealRepository, times(1)).findByIsAvailableIsTrue();
 		verify(userRepository, times(1)).findByIsActiveIsTrue();
 	}
-
 }

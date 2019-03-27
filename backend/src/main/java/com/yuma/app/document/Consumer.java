@@ -42,6 +42,8 @@ public class Consumer {
 	private List<Meal> mealList = new ArrayList<>();
 	private Set<Allergens> allergies = new HashSet<>();
 	private List<String> consumerComments = new ArrayList<>();
+	private List<String> dislikesList;
+
 
 	public void updateFrom(Consumer consumerToUpdate) {
 		this.setFirstName(consumerToUpdate.getFirstName());
