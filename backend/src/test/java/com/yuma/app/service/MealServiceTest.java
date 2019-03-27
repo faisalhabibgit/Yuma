@@ -282,7 +282,7 @@ public class MealServiceTest {
 
 		String desc = "chicken";
 		MealTO expectedMeals;
-		Optional<Meal> optionalMeal = Optional.ofNullable(new Meal());
+		Optional<Meal> optionalMeal = Optional.of(new Meal());
 
 		Mockito.when(mealRepository.findByDescription(desc)).thenReturn(optionalMeal);
 		Mockito.when(mealRepository.findByDescription(desc)).thenReturn(optionalMeal);
