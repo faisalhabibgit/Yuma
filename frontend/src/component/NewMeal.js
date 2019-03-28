@@ -198,9 +198,10 @@ calculateCalories(e, idx){
 
   render() {
     return (
-      <div style={{background: '#ADB7BF'}}>
+      <div style={{background: '#ADB7BF'}} >
 
       <Container>
+     
         <Col sm="12" md={{ size: 6, offset: 3 }}>
         <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
           <h2>Enter a New Meal</h2>
@@ -210,10 +211,10 @@ calculateCalories(e, idx){
           <Form className="form" onSubmit={this.handleSubmit}>
             <Col >
               <FormGroup>
-          <CardDeck data-test="name" style={{padding:'12px', height:'450px'}}>
+          <CardDeck data-test="name" style={{padding:'12px', height:'200px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Name</h5>
+              <h5 style={{color: 'black'}}> Name</h5>
             </CardHeader>
             <CardBody>
             <Input
@@ -229,7 +230,7 @@ calculateCalories(e, idx){
 
           <Card>
             <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Meal Description</h5>
+              <h5 style={{color: 'black'}}> Meal Description</h5>
             </CardHeader>
             <CardBody>
             <Input
@@ -246,19 +247,22 @@ calculateCalories(e, idx){
 
         </CardDeck>
 
-                       
-                <br />
-               
-                <Label>Ingredients</Label>
+                     
+       
+         
                 <br />
                 <div>
-                <Button variant="secondary"  data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</Button>
+                <Button variant="secondary" size="lg" block data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</Button>
                 </div>
                 <br /><br />
+                               
+                <Card style= {{background:'#D0DCE5'}} style={{ borderRadius: 10}} style={{borderColor:'#274F6C'}}>
+                <CardBody className="text-center">
                 {
                   this.state.ingredients.map((val, idx) => {
                     let ingredientId = `name-${idx}`, weightId = `weight-${idx}`, caloriesId = `calories-${idx}`, priceId = `price-${idx}`;
                     return (
+                     
                       <div data-test="initial-ingredient" key={idx}>
                         <br />
                         <label htmlFor={ingredientId}>{`Ingredient #${idx + 1}`}</label>
@@ -317,13 +321,25 @@ calculateCalories(e, idx){
                          <Button variant="secondary"  data-test="delete-ingredient-button" onClick={(e) => { this.removeIngredient(e, idx) }}> Remove </Button>
                        </div>
                       </div>
+                      
                     )
                   })
                 }
                 
+                </CardBody>
+                </Card> 
+                                   
+                
                 <br />
+                
+                <Card style= {{background:'#D0DCE5'}} style={{ borderRadius: 10}} style={{borderColor:'#274F6C'}}>
 
-                <Label style={{ fontWeight: "bold" }}> Possible Food Allergies </Label>
+                      <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
+         <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Possible Food Allergies</h5>
+        </CardHeader>
+                      <CardBody className="text-center">
+
+               
 
                 <FormGroup row>
                   <Col sm={{ size: 10 }}>
@@ -355,10 +371,16 @@ calculateCalories(e, idx){
                     </FormGroup>
                   </Col>
                 </FormGroup>
+                </CardBody>
+                </Card>
 
               </FormGroup>
+              
+              <div class="text-center" >
+              <Button  type="submit" value="Submit" size="lg" block>Submit</Button>
+              </div>
             </Col>
-            <Button type="submit" value="Submit">Submit</Button>
+            
           </Form>
         </Col>
 
