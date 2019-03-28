@@ -57,7 +57,7 @@ class Home extends Component {
 
                 <Card  style={{border:'none', height:'200px'}}>
                   <CardBody data-test="meal-card">
-                    <Link to="/Test"> <img data-test='meal-button' src={search}  height='120px' alt="search"/> </Link>
+                    <Link to="/SearchMeal"> <img data-test='meal-button' src={search}  height='120px' alt="search"/> </Link>
                     <CardTitle>
                       <h3 style={{color: '#599BE9'}}>Meals</h3>
                     </CardTitle>
