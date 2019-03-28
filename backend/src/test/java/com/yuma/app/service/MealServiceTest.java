@@ -1,5 +1,6 @@
 package com.yuma.app.service;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -224,6 +225,8 @@ public class MealServiceTest {
 			.isAvailable(true)
 			.ingredients(ingredientsList1)
 			.mealScore(40)
+			.healthLabels(new HashSet<>())
+			.proteinTypes(new HashSet<>())
 			.build();
 		
 		meal2 = Meal.builder()
@@ -312,7 +315,7 @@ public class MealServiceTest {
 		Mockito.when(conversionService.convert(meal1, MealTO.class)).thenReturn(mealTO);
 		mealService.create(mealTO);
 		Assert.assertEquals(mealTO.getDescription(), "chicken and veg");
-		Assert.assertEquals(mealTO.isAvailable(), false);
+		Assert.assertEquals(mealTO.isAvailable(), true);
 	}
 
 	@Test
