@@ -329,37 +329,34 @@ calculateCalories(e, idx){
                   <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
                     <h5 style={{color: 'black'}}> Possible Food Allergies</h5>
                   </CardHeader>
-                <CardBody className="text-center"> 
-                <FormGroup row>
-                  <Col sm={{ size: 10 }}>
-                    <FormGroup check>
-                      <Label>
-                        <Input  style = {{alignItems:'right'}} type="checkbox" id="nuts" onChange={this.handleChange} />
+                <CardBody className="text-left" style={{padding:'50px'}}>              
+                     <Label>
+                      <Input type="checkbox" id="nuts" onChange={this.handleChange} />
                         Tree Nuts
-                        </Label>
+                      </Label>
                       <br />
                       <Label>
                         <Input type="checkbox" id="dairy" onChange={this.handleChange} />
                         Dairy
-                        </Label>
+                      </Label>
                       <br />
                       <Label>
                         <Input type="checkbox" id="gluten" onChange={this.handleChange} />
                         Gluten
-                        </Label>
+                      </Label>
                       <br />
                       <Label>
                         <Input type="checkbox" id="shellfish" onChange={this.handleChange} />
                         Shellfish
-                        </Label>
+                      </Label>
                       <br />
                       <Label>
                         <Input type="checkbox" id="soy" onChange={this.handleChange} />
                         Soy
-                        </Label>
-                    </FormGroup>
-                  </Col>
-                </FormGroup>
+                      </Label>
+                    
+                 
+                
                 </CardBody>
                 </Card>
             </FormGroup>
