@@ -199,64 +199,59 @@ calculateCalories(e, idx){
   render() {
     return (
       <div style={{background: '#ADB7BF'}} >
-
       <Container>
      
         <Col sm="12" md={{ size: 6, offset: 3 }}>
-        <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-          <h2>Enter a New Meal</h2>
-        </CardHeader>
+          <CardHeader  className="text-center" style={{background: '#B9C5D5', borderRadius: 10}}>
+            <h2>Enter a New Meal</h2>
+          </CardHeader>
           <br />
 
           <Form className="form" onSubmit={this.handleSubmit}>
             <Col >
               <FormGroup>
-          <CardDeck data-test="name" style={{padding:'12px', height:'200px'}}>
-          <Card>
-            <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black'}}> Name</h5>
-            </CardHeader>
-            <CardBody>
-            <Input
-                  type="text"
-                  name="name"
-                  data-test="enter-meal-name"
-                  id="name"
-                  placeholder="Chicken Parmesan"
-                  onChange={this.handleChange}
-                />
-            </CardBody>
-          </Card>
+              <CardDeck data-test="name" style={{padding:'12px', height:'200px', borderRadius: 10}}>
+                <Card>
+                  <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
+                    <h5 style={{color: 'black'}}> Name</h5>
+                  </CardHeader>
+                <CardBody>
+                  <Input
+                        type="text"
+                        name="name"
+                        data-test="enter-meal-name"
+                        id="name"
+                        placeholder="Chicken Parmesan"
+                        onChange={this.handleChange}
+                      />
+                </CardBody>
+                </Card>
 
-          <Card>
-            <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black'}}> Meal Description</h5>
-            </CardHeader>
-            <CardBody>
-            <Input
-                  class="form-control"
-                  type="text"
-                  name="description"
-                  data-test="enter-meal-description"
-                  id="description"
-                  placeholder="Chicken basted in tomato sauce."
-                  onChange={this.handleChange}
-                />
-            </CardBody>
-          </Card>
-
-        </CardDeck>
-
-                     
-       
-         
+                <Card>
+                  <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
+                    <h5 style={{color: 'black'}}> Meal Description</h5>
+                  </CardHeader>
+                <CardBody>
+                  <Input
+                        class="form-control"
+                        type="text"
+                        name="description"
+                        data-test="enter-meal-description"
+                        id="description"
+                        placeholder="Chicken basted in tomato sauce."
+                        onChange={this.handleChange}
+                      />
+                </CardBody>
+                </Card>
+              </CardDeck>
                 <br />
+
                 <div>
-                <Button variant="secondary" size="lg" block data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</Button>
+                  <Button variant="secondary" size="lg" block data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</Button>
                 </div>
                 <br /><br />
                                
-                <Card style= {{background:'#D0DCE5'}} style={{ borderRadius: 10}} style={{borderColor:'#274F6C'}}>
+                <Card style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
                 <CardBody className="text-center">
                 {
                   this.state.ingredients.map((val, idx) => {
@@ -324,28 +319,22 @@ calculateCalories(e, idx){
                       
                     )
                   })
-                }
-                
+                }                
                 </CardBody>
-                </Card> 
-                                   
-                
+                </Card>
                 <br />
                 
-                <Card style= {{background:'#D0DCE5'}} style={{ borderRadius: 10}} style={{borderColor:'#274F6C'}}>
-
-                      <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
-         <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Possible Food Allergies</h5>
-        </CardHeader>
-                      <CardBody className="text-center">
-
-               
-
+                
+                <Card style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
+                  <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
+                    <h5 style={{color: 'black'}}> Possible Food Allergies</h5>
+                  </CardHeader>
+                <CardBody className="text-center"> 
                 <FormGroup row>
                   <Col sm={{ size: 10 }}>
                     <FormGroup check>
                       <Label>
-                        <Input type="checkbox" id="nuts" onChange={this.handleChange} />
+                        <Input  style = {{alignItems:'right'}} type="checkbox" id="nuts" onChange={this.handleChange} />
                         Tree Nuts
                         </Label>
                       <br />
@@ -373,19 +362,16 @@ calculateCalories(e, idx){
                 </FormGroup>
                 </CardBody>
                 </Card>
-
-              </FormGroup>
+            </FormGroup>
+            <br />
               
               <div class="text-center" >
               <Button  type="submit" value="Submit" size="lg" block>Submit</Button>
               </div>
-            </Col>
-            
+            </Col>            
           </Form>
         </Col>
-
       </Container>
-
       </div>
     );
   }
