@@ -1,35 +1,46 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Test from '../component/Test';
+import SearchMeal from '../component/SearchMeal';
 import sinon from 'sinon';
 
-//CODE WILL BE UNCOMMENTED ONCE TEST.JS IS REFACTORED TO SearchMeal.js
-// this is because line 13 causes the js test runner to fail, as 'file_name.prototype' must
-// represent Test.js, but this is not allowed
+let wrapper;
 
+beforeAll(() => {
+    
+    //stub the authentication token
+    const stubber = sinon.stub(SearchMeal.prototype, 'checkAuthenticated').returns(true);
+
+    //stub the componentDidMount method, as it causes a react error
+    const cmDidMount = sinon.stub(SearchMeal.prototype, 'componentDidMount').returns(true);
+    wrapper = shallow(<SearchMeal checkAuthenticated={stubber} componentDidMount={cmDidMount}/>);
+});
+
+afterAll(() => {
+
+    sinon.restore();
+
+});
 
 test('Search meal page renders', () => {
     
-    // //stub the authentication token
-    // const stubber = sinon.stub(Test.prototype, 'checkAuthenticated').returns(true);
-    // const wrapper = shallow(<Test checkAuthenticated={stubber}/>);
-    
-    // expect(wrapper.length).toBe(1);
-    // sinon.restore();
+    expect(wrapper.length).toBe(1);
 });
 
-// test('Search meal renders search box', () => {
+test('Search meal renders search box', () => {
+    
+    expect(wrapper.length).toBe(1);
+    
+    //check if box renders
+    const searchBox = wrapper.find("[data-test='search-input']");
+    expect(searchBox.length).toBe(1);
+    
+});
 
-//     //stub the authentication token
-//     const stubber = sinon.stub(Test.prototype, 'checkAuthenticated').returns(true);
-//     const wrapper = shallow(<Test checkAuthenticated={stubber}/>);
-    
-//     expect(wrapper.length).toBe(1);
-    
-//     //check if box renders
-//     const searchBox = wrapper.find("[data-test='search-meal']");
-//     expect(searchBox.length).toBe(1);
-    
-//     sinon.restore();
+test('Search meal page renders result limit select box', () =>{
 
-// });
+    expect(wrapper.length).toBe(1);
+
+    const selectBox = wrapper.find("[data-test='search-select']");
+    expect(selectBox.length).toBe(1);
+
+});
