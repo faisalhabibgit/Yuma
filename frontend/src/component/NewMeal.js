@@ -201,7 +201,7 @@ calculateCalories(e, idx){
       <div style={{background: '#ADB7BF'}} >
       <Container>
      
-        <Col sm="12" md={{ size: 6, offset: 3 }}>
+        <Col sm="12" md={{ size: 12}}>
           <CardHeader  className="text-center" style={{background: '#B9C5D5', borderRadius: 10}}>
             <h2>Enter a New Meal</h2>
           </CardHeader>
@@ -286,7 +286,7 @@ calculateCalories(e, idx){
                         <br />
                         <label htmlFor={caloriesId}>Calories</label>
                         <input
-                          style={{ marginLeft: 65 }}
+                          style={{ marginLeft: 61 }}
                           type="text"
                           name={caloriesId}
                           data-id={idx}
@@ -301,7 +301,7 @@ calculateCalories(e, idx){
                         <br />
                         <label htmlFor={priceId}>Price</label>
                         <input
-                          style={{ marginLeft: 86 }}
+                          style={{ marginLeft: 83 }}
                           type="text"
                           name={priceId}
                           data-id={idx}
