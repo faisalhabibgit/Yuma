@@ -31,6 +31,7 @@ public class Consumer {
 	private Plan plan;
 	private boolean isActive;
 	private String timestamp;
+	private String yumaServerId;
 	private Company company;
 	@DBRef
 	private Set<Role> roles;
@@ -44,20 +45,5 @@ public class Consumer {
 		this.setEmail(consumerToUpdate.getEmail());
 		this.setPlan(consumerToUpdate.getPlan());
 		this.setActive(consumerToUpdate.isActive());
-	}
-
-	@Override
-	public String toString() {
-		return "Consumer{" +
-			"userId=" + userId +
-			", password='" + password + '\'' +
-			", firstName='" + firstName + '\'' +
-			", lastName='" + lastName + '\'' +
-			", email='" + email + '\'' +
-			", plan=" + plan +
-			", isActive=" + isActive +
-			", timestamp='" + timestamp + '\'' +
-			", roles=" + roles +
-			'}';
 	}
 }
