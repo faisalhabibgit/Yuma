@@ -22,6 +22,7 @@ public class UserConverter implements Converter<ConsumerTO, Consumer> {
 		consumer.setMealList(consumerTO.getMealList());
 		consumer.setAllergies(consumerTO.getAllergies());
 		consumer.setDislikesList(consumerTO.getDislikesList());
+		consumer.setLikes(consumerTO.getLikes());
 		return consumer;
 	}
 }
