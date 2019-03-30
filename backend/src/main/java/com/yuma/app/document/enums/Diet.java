@@ -1,5 +1,5 @@
 package com.yuma.app.document.enums;
 
 public enum Diet {
-	HALAL, KOSHER
+	HALAL, KOSHER, NONE
 }
