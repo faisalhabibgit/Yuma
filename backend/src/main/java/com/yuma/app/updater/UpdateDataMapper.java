@@ -18,6 +18,7 @@ import static com.yuma.app.document.enums.ProteinType.VEGAN;
 import static com.yuma.app.document.enums.ProteinType.VEGETARIAN;
 import static com.yuma.app.document.enums.SpecialRequest.LARGE_PORTION;
 import static com.yuma.app.document.enums.SpecialRequest.LOW_CARBS;
+import static com.yuma.app.document.enums.SpecialRequest.NONE;
 import static org.reflections.util.Utils.isEmpty;
 
 import java.util.ArrayList;
@@ -104,6 +105,8 @@ public class UpdateDataMapper {
 						break;
 					case "TREE-NUTS":
 						userAllergies.add(TREE_NUTS);
+						break;
+					default:
 				}
 			}
 		}
@@ -131,6 +134,9 @@ public class UpdateDataMapper {
 						break;
 					case "LARGE-PORTION":
 						specialRequests.add(LARGE_PORTION);
+						break;
+					default:
+						specialRequests.add(NONE);
 				}
 			}
 		}
@@ -168,6 +174,8 @@ public class UpdateDataMapper {
 						break;
 					case "VEGETARIAN":
 						proteinTypesHashSet.add(VEGETARIAN);
+						break;
+					default:
 				}
 			}
 		}
@@ -176,17 +184,15 @@ public class UpdateDataMapper {
 	}
 
 	private Diet mapDietTypesIfExists(String dietPojo) {
-		Diet diet = null;
 		if (!isEmpty(dietPojo)) {
 			switch (dietPojo.toUpperCase()) {
 				case "HALAL":
-					diet = HALAL;
-					break;
+					return HALAL;
 				case "KOSHER":
-					diet = KOSHER;
+					return KOSHER;
 			}
 		}
 
-		return diet;
+		return Diet.NONE;
 	}
 }
