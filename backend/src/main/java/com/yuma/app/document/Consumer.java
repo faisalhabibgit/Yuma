@@ -42,7 +42,7 @@ public class Consumer {
 	private Set<Allergens> allergies = new HashSet<>();
 	private List<String> consumerComments = new ArrayList<>();
 	private List<String> dislikesList;
-
+	private List<String> likes;
 
 	public void updateFrom(Consumer consumerToUpdate) {
 		this.setFirstName(consumerToUpdate.getFirstName());
