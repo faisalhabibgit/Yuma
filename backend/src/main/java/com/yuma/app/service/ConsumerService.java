@@ -17,6 +17,7 @@ import com.yuma.app.to.ConsumerTO;
 @Slf4j
 @Service
 public class ConsumerService {
+
 	private UserRepository userRepository;
 	private ConversionService conversionService;
 	private RoleRepository roleRepository;
@@ -50,6 +51,7 @@ public class ConsumerService {
 
 	public ConsumerTO findUserByEmail(String email) {
 		log.info("fetching consumer by email: %s", email);
+
 		Consumer consumer = userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Consumer", "email", email));
 		
 		return conversionService.convert(consumer, ConsumerTO.class);
@@ -58,13 +60,14 @@ public class ConsumerService {
 	
 	public List<ConsumerTO> findUsersByCompany(String company){
 		log.info("fetching consumers from company: %s",company);
+
 		List<Consumer> consumerList = userRepository.findByCompanyIgnoreCase(company);
 		return convertUserListToUserTOList(consumerList);	
 	}
 	
 	public void deleteUserByUserID(String uuid){
 		log.info("deleting user by uuid: {}", uuid);
-		
+
 		userRepository.delete(uuid);
 	}
 	
@@ -85,7 +88,8 @@ public class ConsumerService {
 		return conversionService.convert(updatedConsumer, ConsumerTO.class);
 		
 	}
-	public boolean existsByEmail(String email){
+	
+	protected boolean existsByEmail(String email){
 		return userRepository.existsByEmail(email);
 	}
 	
@@ -93,16 +97,18 @@ public class ConsumerService {
 	
 	public List<ConsumerTO> activeUsers(){
 		log.info("fetching users list");
+
 		List<Consumer> consumerList = userRepository.findByIsActiveIsTrue();
 		return convertUserListToUserTOList(consumerList);
 	}
-	
-	protected List<ConsumerTO> convertUserListToUserTOList(List<Consumer> consumerList){
+
+	private List<ConsumerTO> convertUserListToUserTOList(List<Consumer> consumerList){
 		List<ConsumerTO> consumerTOS = new ArrayList<>();
 
 		for (Consumer consumer : consumerList) {
 			consumerTOS.add(conversionService.convert(consumer, ConsumerTO.class));
 		}
+
 		return consumerTOS;
 	}
 }

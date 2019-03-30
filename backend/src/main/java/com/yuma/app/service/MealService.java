@@ -90,8 +90,8 @@ public class MealService {
 		Meal meal = mealRepository.findByMealId(mealId).map(Meal::new).orElseThrow(() -> new ResourceNotFoundException("Meal", "mealId", mealId));
 		switchAvailability(meal);
 	}
-	
-	protected void switchAvailability(Meal meal){
+
+	private void switchAvailability(Meal meal){
 		if (meal.isAvailable()) {
 			meal.setAvailable(false);
 			mealRepository.save(meal);
