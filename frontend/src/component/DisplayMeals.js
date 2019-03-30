@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './stylesheet/toggle.css'
 import {
   Container, Table
 } from 'reactstrap';
@@ -48,15 +49,14 @@ class DisplayMeals extends Component {
       .then((empty) => {
 
         // eslint-disable-next-line
-        this.state.checkboxToggle[toggleId] = ! this.state.checkboxToggle[toggleId]
+        this.state.checkboxToggle[toggleId] = !this.state.checkboxToggle[toggleId]
         this.forceUpdate()
-    });
+      });
     //console.log(this.state.checkboxToggle)
   }
 
   render() {
     return (
-
       <Container>
         <h5 className="text-center"> Number of All Meals:{this.state.apiObject.length} </h5>
         <div style={{ maxWidth: '900px', maxHeight: '300px', overflow: 'scroll' }}>
@@ -73,12 +73,15 @@ class DisplayMeals extends Component {
                     <td>{x.description.toString()}</td>
                     <td>
                       {
-                        <input
-                          type="checkbox"
-                          name={x.mealId.toString()}
-                          checked={this.state.checkboxToggle[x.mealId.toString()]}
-                          onClick={this.handleClick.bind(this)}
-                        />
+                        <label className="switch">
+                          <input
+                            type="checkbox"
+                            name={x.mealId.toString()}
+                            checked={this.state.checkboxToggle[x.mealId.toString()]}
+                            onClick={this.handleClick.bind(this)}
+                          />
+                          <span className="slider round"></span>
+                        </label>
                       }
                     </td>
                   </tr>
