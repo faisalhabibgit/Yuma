@@ -68,7 +68,8 @@ public class DBInputData {
 
 					String numOfMeals = (String) jsonobject.get("plan");
 					if (numOfMeals != null) {
-						user.getPlan().setNumOfMeals(Integer.parseInt(numOfMeals));
+						user.getPlan()
+							.setNumOfMeals(Integer.parseInt(numOfMeals));
 					}
 
 					String dislike = (String) jsonobject.get("allergy");
