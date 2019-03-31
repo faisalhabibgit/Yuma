@@ -42,7 +42,7 @@ class Dashboard extends Component {
         <CardDeck data-test="meal-combo-card" style={{padding:'12px', height:'380px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Meal Combo</h5>
+              <h5 style={{color: 'black'}}> Meal Combo</h5>
             </CardHeader>
             <CardBody>
             <MealCombo/>  
@@ -55,7 +55,7 @@ class Dashboard extends Component {
         <CardDeck data-test="available-meal-card" style={{padding:'12px', height:'450px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Available Meals</h5>
+              <h5 style={{color: 'black'}}> Available Meals</h5>
             </CardHeader>
             <CardBody>
               <AvailableMeals />
@@ -64,7 +64,7 @@ class Dashboard extends Component {
 
           <Card>
             <CardHeader data-test="all-meals-card" className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> All Meals</h5>
+              <h5 style={{color: 'black'}}> All Meals</h5>
             </CardHeader>
             <CardBody>
               <DisplayMeals />
@@ -77,7 +77,7 @@ class Dashboard extends Component {
         <CardDeck data-test="users-card" style={{padding:'12px', height:'450px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Users </h5>
+              <h5 style={{color: 'black'}}> Users </h5>
             </CardHeader>
             <CardBody>
               <DisplayUsers />
@@ -86,27 +86,7 @@ class Dashboard extends Component {
 
         </CardDeck>
 
-
-        <CardDeck style={{padding:'12px', height:'275px'}}>
-          <Card>
-            <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Header</h5>
-            </CardHeader>
-            <CardBody>
-            </CardBody>
-          </Card>
-
-
-          <Card>
-            <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}>Header</h5>
-            </CardHeader>
-            <CardBody>
-            </CardBody>
-          </Card>
-
-        </CardDeck>
-
+        
       </div>
     );
 
