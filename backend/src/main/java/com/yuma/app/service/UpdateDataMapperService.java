@@ -88,7 +88,10 @@ public class UpdateDataMapperService {
 			.consumerComments(yumaPreferencePOJO.getOther())
 			.firstName(yumaUserPOJO.getFirstName())
 			.lastName(yumaUserPOJO.getLastName())
-			.yumaServerId(yumaUserPOJO.getId())
+			.userId(yumaUserPOJO.getId())
+			.email("")
+			.dislikesList(new ArrayList<>())
+			.likes(new ArrayList<>())
 			.isActive(true)
 			.build();
 	}

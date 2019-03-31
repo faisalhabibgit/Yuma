@@ -21,7 +21,6 @@ import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Plan;
 import com.yuma.app.document.Role;
 import com.yuma.app.repository.RoleRepository;
-import com.yuma.app.repository.UserRepository;
 
 
 @Slf4j
@@ -120,13 +119,13 @@ public class DBInputData {
 		};
 	}
 
-	@Bean
-	CommandLineRunner populateProductionUsers(UserRepository userRepository) {
-		List<Consumer> consumers = parseJsonFileAndCreateAUserList();
-		return args -> {
-			for (Consumer consumer : consumers) {
-				userRepository.save(consumer);
-			}
-		};
-	}
+//	@Bean
+//	CommandLineRunner populateProductionUsers(UserRepository userRepository) {
+//		List<Consumer> consumers = parseJsonFileAndCreateAUserList();
+//		return args -> {
+//			for (Consumer consumer : consumers) {
+//				userRepository.save(consumer);
+//			}
+//		};
+//	}
 }
