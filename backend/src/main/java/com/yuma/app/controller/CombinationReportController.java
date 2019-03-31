@@ -26,7 +26,7 @@ import com.yuma.app.util.WriteCsvToResponse;
 @RestController
 @RequestMapping("api/combinationreport")
 public class CombinationReportController {
-	
+
 	CombinationReportService combinationReportService;
 	CombinationReportHelper combinationReportHelper;
 	WeeklyCombinationHelper weeklyCombinationHelper;
@@ -43,7 +43,7 @@ public class CombinationReportController {
 		log.info("generating weekly meal combo");
 		return this.combinationReportService.generateWeeklyCombination();
 	}
-	
+
 	@PostMapping("/weeklycombo/{index}")
 	public void chosenCombo(@PathVariable int index){
 		

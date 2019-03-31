@@ -50,6 +50,7 @@ public class CombinationReportService {
   
 	public CombinationReport getMostRecentlyAdded() {
 		log.info("Retrieving most recently added combination report.");
+
 		CombinationReport combinationReport = combinationReportRepository.findTopByOrderByCreatedOnDesc().orElseThrow(() ->
 			new ResourceNotFoundException("Combination report", "most recently added", null)
 		);
@@ -72,6 +73,7 @@ public class CombinationReportService {
 		while (i < MAX && (combinationReport.getNumberOfBlanks() != 0)) {
 			weeklyCombinationHelper.reRunMealCombinationAlgorithm(weeklyCombination, i, addedMeals);
 		}
+
 		return possibleCombinations.stream().map(combinationReport1 ->
 			conversionService.convert(combinationReport1, CombinationReportTO.class)).collect(Collectors.toList());
 	}
