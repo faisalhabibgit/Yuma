@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yuma.app.service.AdminService;
 import com.yuma.app.service.ConsumerService;
 import com.yuma.app.to.ConsumerTO;
 
@@ -24,11 +23,9 @@ import com.yuma.app.to.ConsumerTO;
 public class UserController {
 	
 	private ConsumerService userService;
-	private AdminService adminService;
 	
-	public UserController(ConsumerService consumerService, AdminService adminService) {
+	public UserController(ConsumerService consumerService) {
 		this.userService = consumerService;
-		this.adminService = adminService;
 	}
 
 	@GetMapping("/all")
@@ -65,11 +62,5 @@ public class UserController {
 	public ConsumerTO updateUser(@RequestBody ConsumerTO consumerTO){
 		log.info("updating user from DB in controller");
 		return this.userService.updateUser(consumerTO);
-	}
-	
-	@GetMapping("/update/users")
-	public void updateUsersFromYumaServer() {
-		log.info("updating users from Yuma DB in controller");
-		this.adminService.updateUsersFromYumaServer();
 	}
 }
