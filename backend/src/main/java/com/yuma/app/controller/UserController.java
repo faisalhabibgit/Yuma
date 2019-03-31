@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yuma.app.service.AdminService;
 import com.yuma.app.service.ConsumerService;
 import com.yuma.app.to.ConsumerTO;
 
@@ -26,12 +25,10 @@ public class UserController {
 
 	final Logger logger = LoggerFactory.getLogger(UserController.class);
 	private ConsumerService userService;
-	private AdminService adminService;
 
 
-	public UserController(ConsumerService consumerService, AdminService adminService) {
+	public UserController(ConsumerService consumerService) {
 		this.userService = consumerService;
-		this.adminService = adminService;
 	}
 
 	@GetMapping("/all")
