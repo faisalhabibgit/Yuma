@@ -1,4 +1,4 @@
-package com.yuma.app.updater;
+package com.yuma.app.service;
 
 import static com.yuma.app.document.enums.Allergens.DAIRY;
 import static com.yuma.app.document.enums.Allergens.GLUTEN;
@@ -29,8 +29,7 @@ import java.util.Set;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yuma.app.document.Consumer;
@@ -39,20 +38,30 @@ import com.yuma.app.document.enums.Allergens;
 import com.yuma.app.document.enums.Diet;
 import com.yuma.app.document.enums.ProteinType;
 import com.yuma.app.document.enums.SpecialRequest;
+import com.yuma.app.repository.UserRepository;
+import com.yuma.app.updater.UpdateUsers;
+import com.yuma.app.updater.YumaGroupPOJO;
+import com.yuma.app.updater.YumaPreferencePOJO;
+import com.yuma.app.updater.YumaUserPOJO;
 
 @Slf4j
 @Service
-public class UpdateDataMapper {
+public class UpdateDataMapperService {
 
-	private Logger updateDataMapper = LoggerFactory.getLogger(UpdateDataMapper.class);
-	private List<Consumer> updatedConsumersList;
+	private UpdateUsers updateUsers;
+	private UserRepository userRepository;
 
-	public UpdateDataMapper() {
-		this.updatedConsumersList = new ArrayList<>();
+	@Autowired
+	public UpdateDataMapperService(UpdateUsers updateUsers, UserRepository userRepository) {
+		this.updateUsers = updateUsers;
+		this.userRepository = userRepository;
 	}
 
-	public List<Consumer> dataMapper(HashMap<String, YumaPreferencePOJO> yumaPreferencePOJOHashMap){
-		updateDataMapper.info("mapping users from Yuma Server to local Objects");
+	public void mapAndSaveUsers(){
+		List<Consumer> updatedConsumersList = new ArrayList<>();
+		HashMap<String, YumaPreferencePOJO> yumaPreferencePOJOHashMap = updateUsers.fetchYumaUsers();
+
+		log.info("mapping users from Yuma Server to local Objects");
 		for(String  yumaPOJOUserId: yumaPreferencePOJOHashMap.keySet()) {
 			YumaPreferencePOJO yumaPreferencePOJO = yumaPreferencePOJOHashMap.get(yumaPOJOUserId);
 			Consumer consumer = mapYumaPreferenceToConsumer(yumaPreferencePOJO);
@@ -61,14 +70,14 @@ public class UpdateDataMapper {
 			updatedConsumersList.add(consumer);
 		}
 
-		updateDataMapper.info("Finished mapping users from Yuma Server to local Objects");
-		return updatedConsumersList;
+		log.info("saving updated users");
+		userRepository.save(updatedConsumersList);
 	}
 
 	private String mapYumaGroupToCompany(YumaUserPOJO user) {
 		YumaGroupPOJO yumaGroupPOJO = user.getYumaGroupPOJO();
 
-		return yumaGroupPOJO.alias;
+		return yumaGroupPOJO.getAlias();
 	}
 
 	private Consumer mapYumaPreferenceToConsumer(YumaPreferencePOJO yumaPreferencePOJO) {
@@ -80,6 +89,7 @@ public class UpdateDataMapper {
 			.firstName(yumaUserPOJO.getFirstName())
 			.lastName(yumaUserPOJO.getLastName())
 			.yumaServerId(yumaUserPOJO.getId())
+			.isActive(true)
 			.build();
 	}
 
