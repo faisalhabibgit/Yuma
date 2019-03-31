@@ -28,7 +28,6 @@ public class ConsumerTO {
 	private boolean enabled;
 	private String timestamp;
 	private String company;
-	private String yumaServerId;
 	private Set<Role> roles;
 	private List<Meal> mealList;
 	private Set<Allergens> allergies;

@@ -17,7 +17,6 @@ public class UserConverter implements Converter<ConsumerTO, Consumer> {
 		consumer.setActive(consumerTO.isEnabled());
 		consumer.setTimestamp(consumerTO.getTimestamp());
 		consumer.setCompany(consumerTO.getCompany());
-		consumer.setYumaServerId(consumerTO.getYumaServerId());
 		consumer.setUserId(consumerTO.getUserId());
 		consumer.setMealList(consumerTO.getMealList());
 		consumer.setAllergies(consumerTO.getAllergies());
