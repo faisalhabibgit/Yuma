@@ -35,7 +35,6 @@ public class Consumer {
 	private boolean isActive;
 	private String timestamp;
 	private String company;
-	private String yumaServerId;
 	@DBRef
 	private Set<Role> roles;
 	private List<Meal> mealList = new ArrayList<>();
