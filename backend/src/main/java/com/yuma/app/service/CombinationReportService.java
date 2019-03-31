@@ -28,13 +28,13 @@ import com.yuma.app.to.CombinationReportTO;
 public class CombinationReportService {
 
 	private Logger logger = LoggerFactory.getLogger(CombinationReportService.class);
-	
+
 	@Autowired
 	private MealRepository mealRepository;
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private CombinationReportRepository combinationReportRepository;
 	private List<CombinationReport> possibleCombinations;
@@ -46,7 +46,7 @@ public class CombinationReportService {
 		this.addedMeals = new ArrayList<>();
 		this.possibleCombinations = new ArrayList<>();
 	}
-  
+
 	public CombinationReport getMostRecentlyAdded(){
 		CombinationReport combinationReport = combinationReportRepository.findTopByOrderByCreatedOnDesc().orElseThrow(() ->
 			new ResourceNotFoundException("Combination report", "most recently added", null)
@@ -77,7 +77,7 @@ public class CombinationReportService {
 			combinationReport.getMealsList().addAll(addedMeals);
 			i++;
 		}
-		
+
 		return possibleCombinations.stream().map(combinationReport1 ->
 			conversionService.convert(combinationReport1, CombinationReportTO.class)).collect(Collectors.toList());
 	}
@@ -163,7 +163,7 @@ public class CombinationReportService {
 
 	protected void replaceLowestScore(CombinationReport combinationReport, int index, List<Meal> highlyRankedMeals) {
 		logger.info("replacing lowest scored meal with a higher one");
-		
+
 		int lowestRankedIndex = getLowestRankedMeal(combinationReport.getMealsList());
 		Meal lowestRankedMeal = combinationReport.getMealsList().get(lowestRankedIndex);
 
@@ -230,7 +230,7 @@ public class CombinationReportService {
 
 		return comboScore;
 	}
-	
+
 	public void saveCombinationReport(int i){
 		CombinationReport combinationReport = this.possibleCombinations.get(i);
 		combinationReport.setCreatedOn(new Date());
@@ -244,14 +244,14 @@ public class CombinationReportService {
 		}
 		this.possibleCombinations.clear();
 	}
-	
+
 	public CombinationReportTO getCombinationReportByDate(DateTime startDate){
 		DateTime endDate = startDate.plusWeeks(1);
-		
+
 		CombinationReport combinationReport = this.combinationReportRepository.findCombinationReportByCreatedOnBetween(startDate.toDate(), endDate.toDate()).orElseThrow(() ->
 			new ResourceNotFoundException("CombinationReport", "Date", endDate)
 		);
-		
+
 		return conversionService.convert(combinationReport, CombinationReportTO.class);
 	}
 }

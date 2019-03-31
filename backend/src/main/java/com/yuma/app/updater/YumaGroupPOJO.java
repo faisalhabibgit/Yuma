@@ -7,6 +7,6 @@ import lombok.Data;
 @Data
 public class YumaGroupPOJO {
 
-	String id;
-	String alias;
+	private String id;
+	private String alias;
 }

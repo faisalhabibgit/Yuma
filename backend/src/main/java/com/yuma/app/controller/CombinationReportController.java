@@ -24,9 +24,9 @@ import com.yuma.app.util.WriteCsvToResponse;
 @RestController
 @RequestMapping("api/combinationreport")
 public class CombinationReportController {
-	
+
 	CombinationReportService combinationReportService;
-	
+
 	@Autowired
 	public CombinationReportController(CombinationReportService combinationReportService) {
 		this.combinationReportService = combinationReportService;
@@ -36,7 +36,7 @@ public class CombinationReportController {
 	public List<CombinationReportTO> getWeeklyCombo() {
 		return this.combinationReportService.generateWeeklyCombination();
 	}
-	
+
 	@PostMapping("/weeklycombo/{index}")
 	public void chosenCombo(@PathVariable int index){
 		combinationReportService.saveCombinationReport(index);

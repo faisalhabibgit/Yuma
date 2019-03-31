@@ -2,7 +2,6 @@ package com.yuma.app.service;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 
 import lombok.extern.slf4j.Slf4j;
@@ -14,13 +13,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.yuma.app.document.Admin;
-import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Role;
 import com.yuma.app.payload.SignUpRequest;
 import com.yuma.app.repository.AdminRepository;
 import com.yuma.app.repository.RoleRepository;
 import com.yuma.app.repository.UserRepository;
-import com.yuma.app.updater.UpdateDataMapper;
 import com.yuma.app.updater.UpdateUsers;
 
 @Slf4j
@@ -33,9 +30,9 @@ public class AdminService {
 	private PasswordEncoder passwordEncoder;
 	private UserRepository userRepository;
 	private UpdateUsers updateUsers;
-	private UpdateDataMapper updateDataMapper;
+	private UpdateDataMapperService updateDataMapper;
 
-	public AdminService(AdminRepository adminRepository, ConversionService conversionService, RoleRepository roleRepository, PasswordEncoder passwordEncoder, UpdateUsers updateUsers, UpdateDataMapper updateDataMapper, UserRepository userRepository) {
+	public AdminService(AdminRepository adminRepository, ConversionService conversionService, RoleRepository roleRepository, PasswordEncoder passwordEncoder, UpdateUsers updateUsers, UpdateDataMapperService updateDataMapper, UserRepository userRepository) {
 		this.adminRepository = adminRepository;
 		this.conversionService = conversionService;
 		this.roleRepository = roleRepository;
@@ -63,7 +60,5 @@ public class AdminService {
 
 	public void updateUsersFromYumaServer(){
 		userServiceLogger.info("Updating Users in Database");
-		List<Consumer> updatedUsersList = updateDataMapper.dataMapper(updateUsers.fetchYumaUsers());
-		userRepository.save(updatedUsersList);
 	}
 }

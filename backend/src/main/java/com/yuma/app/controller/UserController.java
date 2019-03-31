@@ -69,10 +69,4 @@ public class UserController {
 		this.logger.info("updating user from DB in controller");
 		return this.userService.updateUser(consumerTO);
 	}
-	
-	@GetMapping("/update/users")
-	public void updateUsersFromYumaServer() {
-		this.logger.info("updating users from Yuma DB in controller");
-		this.adminService.updateUsersFromYumaServer();
-	}
 }
