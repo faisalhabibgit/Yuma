@@ -3,7 +3,7 @@ import ApiToken from "../middleware/ApiToken";
 
 import {
   Card, CardHeader,  CardBody,
-  CardDeck
+  CardDeck, Button
 } from 'reactstrap';
 import AvailableMeals from "./AvailableMeals";
 import DisplayMeals from "./DisplayMeals";
@@ -22,6 +22,8 @@ class Dashboard extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
+
+  
 
   checkAuthenticated(){
 
@@ -42,7 +44,7 @@ class Dashboard extends Component {
         <CardDeck data-test="meal-combo-card" style={{padding:'12px', height:'380px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black'}}> Meal Combo</h5>
+              <h2 style={{color: 'black'}}> Meal Combination Reports</h2>
             </CardHeader>
             <CardBody>
             <MealCombo/>  
@@ -77,7 +79,9 @@ class Dashboard extends Component {
         <CardDeck data-test="users-card" style={{padding:'12px', height:'450px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black'}}> Users </h5>
+              <div>
+                <Button variant="secondary"  onClick={this.handleModalChange3}>Update User</Button>
+              </div>
             </CardHeader>
             <CardBody>
               <DisplayUsers />

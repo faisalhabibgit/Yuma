@@ -88,7 +88,7 @@ class MealCombo extends Component {
 
           <Card>
             <CardBody className="text-center">
-              <h2> Meal Combo #1</h2>
+              <h4> Meal Combo #1</h4>
               <div>
                 <Button variant="secondary" onClick={this.handleModalChange1}>View Full Combination Report</Button>
               </div>
@@ -99,7 +99,7 @@ class MealCombo extends Component {
           </Card>
           <Card>
             <CardBody className="text-center">
-              <h2> Meal Combo #2</h2>
+              <h4> Meal Combo #2</h4>
               <div>
                 <Button variant="secondary" onClick={this.handleModalChange2}>View Full Combination Report</Button>
               </div>
@@ -111,7 +111,7 @@ class MealCombo extends Component {
 
           <Card>
             <CardBody className="text-center">
-              <h2> Meal Combo #3</h2>
+              <h4> Meal Combo #3</h4>
               <div>
                 <Button variant="secondary" onClick={this.handleModalChange3}>View Full Combination Report</Button>
               </div>
