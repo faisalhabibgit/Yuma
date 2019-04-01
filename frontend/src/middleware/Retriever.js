@@ -1,5 +1,7 @@
 import BuildMeal from './objectBuilder/BuildMeal';
 import BuildUser from './objectBuilder/BuildUser';
+import BuildMealCombo from './objectBuilder/BuildMealCombo';
+import BuildDownload from './objectBuilder/BuildDownload';
 
 class Retriever {
 
@@ -19,6 +21,14 @@ class Retriever {
             case 'api/rest/all':
                 const userBuilderAll = new BuildUser();
                 this.entityPromise = userBuilderAll.getUserPromiseObj(apiPath);
+                break;
+            case 'api/combinationreport/weeklycombo':
+                const buildMealCombo = new BuildMealCombo();
+                this.entityPromise = buildMealCombo.getMealComboPromiseObj(apiPath);
+                break;
+            case 'api/combinationreport/download/consumers.csv':
+                const buildDownload = new BuildDownload();
+                this.entityPromise = buildDownload.getCSVDownloadPromise(apiPath);
                 break;
             default:
             // code block

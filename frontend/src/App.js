@@ -8,11 +8,12 @@ import Navigation from './component/Navigation';
 import Footer from './component/Footer';
 import Home from './component/Home';
 import Error from './component/Error';
-import Test from './component/Test';
+import SearchMeal from './component/SearchMeal';
 import NewMeal from './component/NewMeal';
 import MealHistory from './component/MealHistory';
 import TestApiView from './component/TestApiView';
 import Dashboard from './component/Dashboard';
+
 
 class App extends Component {
 
@@ -27,7 +28,7 @@ class App extends Component {
           <Route path="/Login" component={Login} />
           <Route path="/Registration" component={Registration} />
           <Route path="/NewMeal" component={NewMeal} />
-          <Route path="/Test" component={Test} />
+          <Route path="/SearchMeal" component={SearchMeal} />
           <Route path="/MealHistory" component={MealHistory}/> 
           <Route path="/TestApiView" component={TestApiView} />
           <Route path="/Logout" component={Logout} />

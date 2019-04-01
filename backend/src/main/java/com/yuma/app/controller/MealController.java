@@ -1,7 +1,6 @@
 package com.yuma.app.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -68,9 +67,16 @@ public class MealController {
 	}
 
 	@DeleteMapping("/{mealId}")
-	public void deleteMeal(@PathVariable UUID mealId) {
+	public void deleteMeal(@PathVariable String mealId) {
 		logger.info("deleting meal with mealId {}", mealId);
 
 		this.mealService.deleteMeal(mealId);
+	}
+	
+	@PutMapping("/availability/{mealId}")
+	public void updateMealAvailability(@PathVariable String mealId){
+		logger.info("updating availability of {}", mealId);
+		
+		this.mealService.updateAvailability(mealId);
 	}
 }
