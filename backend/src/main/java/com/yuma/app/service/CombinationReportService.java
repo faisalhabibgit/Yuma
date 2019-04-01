@@ -7,9 +7,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
@@ -24,10 +23,9 @@ import com.yuma.app.repository.MealRepository;
 import com.yuma.app.repository.UserRepository;
 import com.yuma.app.to.CombinationReportTO;
 
+@Slf4j
 @Service
 public class CombinationReportService {
-
-	private Logger logger = LoggerFactory.getLogger(CombinationReportService.class);
 	
 	@Autowired
 	private MealRepository mealRepository;
@@ -48,6 +46,7 @@ public class CombinationReportService {
 	}
   
 	public CombinationReport getMostRecentlyAdded(){
+		log.info("Retrieving most recently added combination report.");
 		CombinationReport combinationReport = combinationReportRepository.findTopByOrderByCreatedOnDesc().orElseThrow(() ->
 			new ResourceNotFoundException("Combination report", "most recently added", null)
 		);
@@ -55,7 +54,7 @@ public class CombinationReportService {
 	}
 
 	public List<CombinationReportTO> generateWeeklyCombination() {
-		logger.info("instantiating Combination Report in generate Weekly Combination");
+		log.info("instantiating Combination Report in generate Weekly Combination");
 		if (!possibleCombinations.isEmpty()){
 			possibleCombinations.clear();
 		}
@@ -83,7 +82,7 @@ public class CombinationReportService {
 	}
 
 	protected void runMealCombinationAlgorithm(CombinationReport combinationReport) {
-		logger.info("running meal combo Algorithm");
+		log.info("running meal combo Algorithm");
 		for (Consumer user : combinationReport.getUserList()) {
 			generatePossibleMealsForUser(combinationReport, user, 0);
 		}
@@ -91,7 +90,7 @@ public class CombinationReportService {
 	}
 
 	protected void setMealScores(List<Meal> mealList, List<Consumer> userList) {
-		logger.info("Setting meal scores");
+		log.info("Setting meal scores");
 
 		boolean scorable = true;
 		List<String> userDislikesList;
@@ -114,7 +113,7 @@ public class CombinationReportService {
 	}
 
 	protected void generatePossibleMealsForUser(CombinationReport combinationReport, Consumer user, int mealCounter) {
-		logger.info("inside generate possible meals for that user");
+		log.info("inside generate possible meals for that user");
 		int numOfBlanks;
 
 		for (Meal meal : combinationReport.getMealsList()) {
@@ -162,7 +161,7 @@ public class CombinationReportService {
 	}
 
 	protected void replaceLowestScore(CombinationReport combinationReport, int index, List<Meal> highlyRankedMeals) {
-		logger.info("replacing lowest scored meal with a higher one");
+		log.info("replacing lowest scored meal with a higher one");
 		
 		int lowestRankedIndex = getLowestRankedMeal(combinationReport.getMealsList());
 		Meal lowestRankedMeal = combinationReport.getMealsList().get(lowestRankedIndex);
@@ -186,7 +185,7 @@ public class CombinationReportService {
 	}
 
 	protected boolean checkIfMealWorks(Meal meal, Consumer user) {
-		logger.info("checking if: " + meal.getName() + " works for " + user.getFirstName());
+		log.info("checking if: " + meal.getName() + " works for " + user.getFirstName());
 
 		List<String> userDislikesList = user.getDislikesList();
 		List<Ingredients> ingredientsToRemove = new ArrayList<>();
@@ -203,7 +202,7 @@ public class CombinationReportService {
 		}
 
 		if (ingredientsToRemove.size() > 0) {
-			logger.info(meal.getName() + "works for " + user.getFirstName() + " but some ingredients have to change");
+			log.info(meal.getName() + "works for " + user.getFirstName() + " but some ingredients have to change");
 
 			newMeal = generateNewMealWithModifiedIngredients(meal, ingredientsToRemove);
 			addedMeals.add(newMeal);
@@ -214,7 +213,7 @@ public class CombinationReportService {
 	}
 
 	protected Meal generateNewMealWithModifiedIngredients(Meal meal, List<Ingredients> ingredientsToRemove) {
-		logger.info("generating modified meal");
+		log.info("generating modified meal");
 
 		Meal newMeal = new Meal(meal);
 		newMeal.getIngredients().removeAll(ingredientsToRemove);
@@ -239,7 +238,7 @@ public class CombinationReportService {
 			this.userRepository.save(combinationReport.getUserList());
 		}
 		catch (IndexOutOfBoundsException e){
-			logger.info("index out of bound");
+			log.info("index out of bound");
 			return;
 		}
 		this.possibleCombinations.clear();
