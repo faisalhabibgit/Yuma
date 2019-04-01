@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.yuma.app.util.CombinationReportHelper;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,13 +41,15 @@ public class CombinationReportService {
 	private List<CombinationReport> possibleCombinations;
 	private List<Meal> addedMeals;
 	private ConversionService conversionService;
+	protected CombinationReportHelper combinationReportHelper;
 
 	public CombinationReportService(ConversionService conversionService) {
 		this.conversionService = conversionService;
 		this.addedMeals = new ArrayList<>();
 		this.possibleCombinations = new ArrayList<>();
+		this.combinationReportHelper = new CombinationReportHelper();
 	}
-  
+
 	public CombinationReport getMostRecentlyAdded(){
 		CombinationReport combinationReport = combinationReportRepository.findTopByOrderByCreatedOnDesc().orElseThrow(() ->
 			new ResourceNotFoundException("Combination report", "CreatedOn", null)
@@ -64,16 +67,16 @@ public class CombinationReportService {
 		List<Meal> highlyRankedMeals;
 		int i = 0;
 		CombinationReport combinationReport;
-		setMealScores(availableMeals, activeUsers);
-		combinationReport = new CombinationReport(0, countCombinationScore(availableMeals), activeUsers, availableMeals);
-		runMealCombinationAlgorithm(combinationReport);
+		combinationReportHelper.setMealScores(availableMeals, activeUsers);
+		combinationReport = new CombinationReport(0, combinationReportHelper.countCombinationScore(availableMeals), activeUsers, availableMeals);
+		combinationReportHelper.runMealCombinationAlgorithm(combinationReport, possibleCombinations, addedMeals);
 		combinationReport.getMealsList().addAll(addedMeals);
 		highlyRankedMeals = mealRepository.findTop3ByOrderByMealScoreDesc();
 
 		while (i < 2 && (combinationReport.getNumberOfBlanks() != 0)) {
-			combinationReport = new CombinationReport(0, countCombinationScore(availableMeals), activeUsers, availableMeals);
-			replaceLowestScore(combinationReport, i, highlyRankedMeals);
-			runMealCombinationAlgorithm(combinationReport);
+			combinationReport = new CombinationReport(0, combinationReportHelper.countCombinationScore(availableMeals), activeUsers, availableMeals);
+			combinationReportHelper.replaceLowestScore(combinationReport, i, highlyRankedMeals);
+			combinationReportHelper.runMealCombinationAlgorithm(combinationReport, possibleCombinations, addedMeals);
 			combinationReport.getMealsList().addAll(addedMeals);
 			i++;
 		}
@@ -82,155 +85,7 @@ public class CombinationReportService {
 			conversionService.convert(combinationReport1, CombinationReportTO.class)).collect(Collectors.toList());
 	}
 
-	protected void runMealCombinationAlgorithm(CombinationReport combinationReport) {
-		logger.info("running meal combo Algorithm");
-		for (Consumer user : combinationReport.getUserList()) {
-			generatePossibleMealsForUser(combinationReport, user, 0);
-		}
-		possibleCombinations.add(combinationReport);
-	}
 
-	protected void setMealScores(List<Meal> mealList, List<Consumer> userList) {
-		logger.info("Setting meal scores");
-
-		boolean scorable = true;
-		List<String> userDislikesList;
-		for (Consumer user : userList) {
-			userDislikesList = user.getDislikesList();
-			for (Meal meal : mealList) {
-				for (Ingredients ingredient : meal.getIngredients()) {
-					if (userDislikesList.contains(ingredient.getName())) {
-						if (!ingredient.isOptional()) {
-							scorable = false;
-							break;
-						}
-					}
-				}
-				if (scorable) {
-					meal.setMealScore((meal.getMealScore() + 1));
-				}
-			}
-		}
-	}
-
-	protected void generatePossibleMealsForUser(CombinationReport combinationReport, Consumer user, int mealCounter) {
-		logger.info("inside generate possible meals for that user");
-		int numOfBlanks;
-
-		for (Meal meal : combinationReport.getMealsList()) {
-			if (user.getMealList().size() < user.getPlan().getNumOfMeals()) {
-				if (checkIfMealWorks(meal, user)) {
-					mealCounter++;
-				}
-			} else {
-				break;
-			}
-		}
-
-		if (user.getPlan().getNumOfMeals() == mealCounter) {
-			return;
-		}
-
-		if (user.getMealList().size() != user.getPlan().getNumOfMeals()) {
-			if (user.getPlan().getNumOfMeals() > combinationReport.getMealsList().size()) {
-				numOfBlanks = combinationReport.getMealsList().size() - user.getMealList().size();
-				if (numOfBlanks > 0) {
-					int timesToRun = user.getPlan().getNumOfMeals() - numOfBlanks - mealCounter;
-					generatePossibleMealsForUserWithBlanks(combinationReport, user, timesToRun);
-				} else {
-					generatePossibleMealsForUser(combinationReport, user, mealCounter);
-				}
-			}
-		}
-		numOfBlanks = user.getPlan().getNumOfMeals() - user.getMealList().size();
-		combinationReport.setNumberOfBlanks(combinationReport.getNumberOfBlanks() + numOfBlanks);
-	}
-
-	protected void generatePossibleMealsForUserWithBlanks(CombinationReport combinationReport, Consumer user, int timesToRun){
-		int timesRan = 0;
-
-		for (Meal meal : combinationReport.getMealsList()) {
-			if (timesRan <= timesToRun) {
-				if (user.getMealList().size() < user.getPlan().getNumOfMeals()) {
-					checkIfMealWorks(meal, user);
-				} else {
-					break;
-				}
-				timesRan++;
-			}
-		}
-	}
-
-	protected void replaceLowestScore(CombinationReport combinationReport, int index, List<Meal> highlyRankedMeals) {
-		logger.info("replacing lowest scored meal with a higher one");
-		
-		int lowestRankedIndex = getLowestRankedMeal(combinationReport.getMealsList());
-		Meal lowestRankedMeal = combinationReport.getMealsList().get(lowestRankedIndex);
-
-		if (lowestRankedMeal.getMealScore() <= highlyRankedMeals.get(index).getMealScore()) {
-			combinationReport.getMealsList().add(lowestRankedIndex, highlyRankedMeals.get(index));
-			combinationReport.updateCombinationScore(lowestRankedMeal.getMealScore(), highlyRankedMeals.get(index).getMealScore());
-		}
-	}
-
-	protected int getLowestRankedMeal(List<Meal> mealList) {
-		int lowestIndex;
-		List<Integer> integers = new ArrayList<>();
-		for (Meal meal : mealList) {
-			integers.add(meal.getMealScore());
-		}
-
-		lowestIndex = integers.indexOf(Collections.min(integers));
-
-		return lowestIndex;
-	}
-
-	protected boolean checkIfMealWorks(Meal meal, Consumer user) {
-		logger.info("checking if: " + meal.getName() + " works for " + user.getFirstName());
-
-		List<String> userDislikesList = user.getDislikesList();
-		List<Ingredients> ingredientsToRemove = new ArrayList<>();
-		Meal newMeal = meal;
-
-		for (Ingredients ingredient : newMeal.getIngredients()) {
-			if (userDislikesList.contains(ingredient.getName())) {
-				if (!ingredient.isOptional()) {
-					return false;
-				} else {
-					ingredientsToRemove.add(ingredient);
-				}
-			}
-		}
-
-		if (ingredientsToRemove.size() > 0) {
-			logger.info(meal.getName() + "works for " + user.getFirstName() + " but some ingredients have to change");
-
-			newMeal = generateNewMealWithModifiedIngredients(meal, ingredientsToRemove);
-			addedMeals.add(newMeal);
-		}
-
-		user.getMealList().add(newMeal);
-		return true;
-	}
-
-	protected Meal generateNewMealWithModifiedIngredients(Meal meal, List<Ingredients> ingredientsToRemove) {
-		logger.info("generating modified meal");
-
-		Meal newMeal = new Meal(meal);
-		newMeal.getIngredients().removeAll(ingredientsToRemove);
-		newMeal.setMealId(UUID.randomUUID());
-		return newMeal;
-	}
-
-	protected int countCombinationScore(List<Meal> meals) {
-		int comboScore = 0;
-		for (Meal meal : meals) {
-			comboScore += meal.getMealScore();
-		}
-
-		return comboScore;
-	}
-	
 	public void saveCombinationReport(int i){
 		CombinationReport combinationReport = this.possibleCombinations.get(i);
 		combinationReport.setCreatedOn(new Date());
@@ -243,7 +98,7 @@ public class CombinationReportService {
 		}
 		this.possibleCombinations.clear();
 	}
-	
+
 	public CombinationReportTO getCombinationReportByDate(DateTime startDate){
 		DateTime endDate = startDate.plusWeeks(1);
 		
