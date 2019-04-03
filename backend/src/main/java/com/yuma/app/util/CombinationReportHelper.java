@@ -1,9 +1,6 @@
 package com.yuma.app.util;
 
-import com.yuma.app.document.CombinationReport;
-import com.yuma.app.document.Consumer;
-import com.yuma.app.document.Ingredients;
-import com.yuma.app.document.Meal;
+import com.yuma.app.document.*;
 import com.yuma.app.service.CombinationReportService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,12 +14,12 @@ public class CombinationReportHelper {
 
 	private Logger logger = LoggerFactory.getLogger(CombinationReportService.class);
 
-	public void runMealCombinationAlgorithm(CombinationReport combinationReport, List<CombinationReport> possibleCombinations, List<Meal> addedMeals) {
+	public void runMealCombinationAlgorithm(WeeklyCombination weeklyCombination, List<Meal> addedMeals) {
 		logger.info("running meal combo Algorithm");
-		for (Consumer user : combinationReport.getUserList()) {
-			generatePossibleMealsForUser(combinationReport, user, 0, addedMeals);
+		for (Consumer user : weeklyCombination.getCombinationReport().getUserList()) {
+			generatePossibleMealsForUser(weeklyCombination.getCombinationReport(), user, 0, addedMeals);
 		}
-		possibleCombinations.add(combinationReport);
+		weeklyCombination.getPossibleCombinations().add(weeklyCombination.getCombinationReport());
 	}
 
 	public void setMealScores(List<Meal> mealList, List<Consumer> userList) {

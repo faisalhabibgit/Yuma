@@ -1,34 +1,33 @@
 package com.yuma.app.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.yuma.app.document.WeeklyCombination;
 import com.yuma.app.util.CombinationReportHelper;
+import com.yuma.app.util.WeeklyCombinationHelper;
 import org.joda.time.DateTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
 import com.yuma.app.document.CombinationReport;
 import com.yuma.app.document.Consumer;
-import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
 import com.yuma.app.exception.ResourceNotFoundException;
 import com.yuma.app.repository.CombinationReportRepository;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.repository.UserRepository;
 import com.yuma.app.to.CombinationReportTO;
+import lombok.extern.slf4j.Slf4j;
 
+
+@Slf4j
 @Service
 public class CombinationReportService {
 
-	private Logger logger = LoggerFactory.getLogger(CombinationReportService.class);
 	
 	@Autowired
 	private MealRepository mealRepository;
@@ -41,7 +40,9 @@ public class CombinationReportService {
 	private List<CombinationReport> possibleCombinations;
 	private List<Meal> addedMeals;
 	private ConversionService conversionService;
-	protected CombinationReportHelper combinationReportHelper;
+	
+	private CombinationReportHelper combinationReportHelper;
+	private WeeklyCombinationHelper weeklyCombinationHelper;
 
 	public CombinationReportService(ConversionService conversionService) {
 		this.conversionService = conversionService;
@@ -58,27 +59,20 @@ public class CombinationReportService {
 	}
 
 	public List<CombinationReportTO> generateWeeklyCombination() {
-		logger.info("instantiating Combination Report in generate Weekly Combination");
+		log.info("instantiating Combination Report in generate Weekly Combination");
 		if (!possibleCombinations.isEmpty()){
 			possibleCombinations.clear();
 		}
 		List<Meal> availableMeals = mealRepository.findByIsAvailableIsTrue();
 		List<Consumer> activeUsers = userRepository.findByIsActiveIsTrue();
-		List<Meal> highlyRankedMeals;
+
 		int i = 0;
-		CombinationReport combinationReport;
-		combinationReportHelper.setMealScores(availableMeals, activeUsers);
-		combinationReport = new CombinationReport(0, combinationReportHelper.countCombinationScore(availableMeals), activeUsers, availableMeals);
-		combinationReportHelper.runMealCombinationAlgorithm(combinationReport, possibleCombinations, addedMeals);
-		combinationReport.getMealsList().addAll(addedMeals);
-		highlyRankedMeals = mealRepository.findTop3ByOrderByMealScoreDesc();
+		CombinationReport combinationReport = new CombinationReport();
+		WeeklyCombination weeklyCombination = new WeeklyCombination(combinationReport, possibleCombinations, availableMeals, activeUsers);
+		weeklyCombinationHelper.runFirstMealCombinationAlgorithm(weeklyCombination, addedMeals);
 
 		while (i < 2 && (combinationReport.getNumberOfBlanks() != 0)) {
-			combinationReport = new CombinationReport(0, combinationReportHelper.countCombinationScore(availableMeals), activeUsers, availableMeals);
-			combinationReportHelper.replaceLowestScore(combinationReport, i, highlyRankedMeals);
-			combinationReportHelper.runMealCombinationAlgorithm(combinationReport, possibleCombinations, addedMeals);
-			combinationReport.getMealsList().addAll(addedMeals);
-			i++;
+			weeklyCombinationHelper.reRunMealCombinationAlgorithm(weeklyCombination, i, addedMeals);
 		}
 		
 		return possibleCombinations.stream().map(combinationReport1 ->
@@ -93,7 +87,7 @@ public class CombinationReportService {
 			this.combinationReportRepository.save(combinationReport);
 		}
 		catch (IndexOutOfBoundsException e){
-			logger.info("index out of bound");
+			log.info("index out of bound");
 			return;
 		}
 		this.possibleCombinations.clear();
