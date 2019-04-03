@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import com.yuma.app.document.Plan;
 import com.yuma.app.document.enums.ProteinType;
 import com.yuma.app.repository.UserRepository;
 
+@Slf4j
 @Service
 public class ProteinTypeScoringService {
 
@@ -27,6 +30,7 @@ public class ProteinTypeScoringService {
 
 	public EnumMap<ProteinType, Double> calculateProteinTypeScore() {
 		if (proteinTypePercentageMap.size() == 0) {
+			log.info("generating new score percentages");
 			EnumMap<ProteinType, Integer> proteinTypeCountMap = calculateProteinTypeCount();
 			calculatePercentages(proteinTypeCountMap);
 		}
@@ -39,6 +43,7 @@ public class ProteinTypeScoringService {
 	}
 
 	private EnumMap<ProteinType, Integer> calculateProteinTypeCount() {
+		log.info("calculating counts");
 		EnumMap<ProteinType, Integer> proteinTypeCountMap = new EnumMap<>(ProteinType.class);
 
 		List<Set<ProteinType>> listOfSetsOfUserProteinTypes = getListOfSetsOfUserProteinTypes();
