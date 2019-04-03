@@ -101,6 +101,7 @@ class BuildMeal {
     }
 
     var meal = new Meal();
+    meal.setMealId(obj.mealId);
     meal.setName(obj.name);
     meal.setDescription(obj.description);
     meal.setIsAvailable(obj.available);
