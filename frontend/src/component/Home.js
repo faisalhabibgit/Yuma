@@ -1,86 +1,95 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import yuma from '../component/images/yuma.png';
+import history from './images/history.png';
+import dashboard from './images/dashboard.png';
+import search from './images/search.png';
+import add from './images/add.png';
 import {
-    Container, Row, Col,
-    Card, CardImg, CardText, CardBody,
-    CardTitle, Button
+    CardDeck,
+    Card,  CardText, CardBody,
+    CardTitle
 } from 'reactstrap';
 import ApiToken from '../middleware/ApiToken';
 
 class Home extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.checkAuthenticated();
+    this.checkAuthenticated();
+  }
+
+
+  checkAuthenticated(){
+    const apiToken = new ApiToken();
+    if(!apiToken.isAuthenticated()){
+      console.log('User Not Logged');
+      this.props.history.push(`/Login`)
+    }else{
+      console.log('User Login Success');
     }
-
-
-    checkAuthenticated(){
-        const apiToken = new ApiToken();
-        if(!apiToken.isAuthenticated()){
-          console.log('User Not Logged');
-          this.props.history.push(`/Login`)
-        }else{
-          console.log('User Login Success');
-        }
-    }
-
+  }
     render() {
         return (
-            <Container>
-                <Row>
-                    <Col>
-                        <Card>
-                            <CardImg top width="100%" src="https://resources.stuff.co.nz/content/dam/images/1/f/a/z/4/j/image.related.StuffLandscapeSixteenByNine.320x180.1fawv3.png/1478554384578.jpg" alt="Card image cap" />
-                            <CardBody data-test="meal-card">
-                                <CardTitle>Meals</CardTitle>
-                                <CardText>Check the meal inventory</CardText>
-                                <Link to="/Test"><Button data-test="meal-button">Search Now</Button></Link>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col>
-                        <Card>
-                            <CardImg top width="100%" src="https://www.ingredientsnetwork.com/47/product/99/15/56/p991556th_S.jpg" alt="Card image cap" />
-                            <CardBody data-test="add-meal-card">
-                                <CardTitle>Add Meals</CardTitle>
-                                <CardText>Add a new recipe</CardText>
-                                <Link to="/NewMeal"><Button data-test='add-meal-button'>Add Now</Button></Link>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                     <Col>
-                        <Card>
-                            <CardImg top width="100%" src="https://davidhoganwriter.files.wordpress.com/2018/02/greek-food.jpg?w=520&h=350&crop=1" alt="Card image cap" />
-                            <CardBody data-test="meal-history-card">
-                                <CardTitle>Meal History</CardTitle>
-                                <CardText>Find the dates</CardText>
-                                <Link to="/MealHistory"><Button data-test='history-button'>Find Now</Button></Link>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col>
-                        <Card>
-                            <CardImg top width="100%" src="https://i.imgur.com/QF3pQEZ.jpg" alt="Card image cap" />
-                            <CardBody data-test="stats-card">
-                                <CardTitle>Dashboard</CardTitle>
-                                <CardText>Check the stats</CardText>
-                                <Link to="/Dashboard"><Button data-test='stats-button'>View Now</Button></Link>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col>
-                        <Card>
-                            <CardImg top width="100%" src="https://i.imgur.com/RNMo8zj.png" alt="Card image cap" />
-                            <CardBody data-test="settings-card">
-                                <CardTitle>Settings</CardTitle>
-                                <CardText>Edit and Configure</CardText>
-                                <Link to="/NewMeal"><Button data-test='settings-button'>Config</Button></Link>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-            </Container>
+          <div>
+
+            <div className="text-center">
+              <img src={yuma}  width='100%' height='450px' alt="yuma"/>
+            </div>
+
+            <div className="text-center" style={{padding:'25px'}}>
+              <h1 style={{color: '#599BE9'}}>Manage</h1>
+              <h1>_________________________</h1>
+            </div>
+
+            <div className="text-center" >
+              <CardDeck  style={{padding:'20px', height:'250px'}}>
+
+                <Card  style={{border:'none', height:'120px'}}>
+                  <CardBody data-test="stats-card">
+                    <Link to="/Dashboard"> <img data-test='stats-button' src={dashboard}   height='120px' alt="dashboard"/> </Link>
+                    <CardTitle>
+                      <h3 style={{color: '#599BE9'}}>Dashboard</h3>
+                    </CardTitle>
+                    <CardText>Meal Combination Reports & Stats</CardText>
+                  </CardBody>
+                </Card>
+
+                <Card  style={{border:'none', height:'200px'}}>
+                  <CardBody data-test="meal-card">
+                    <Link to="/SearchMeal"> <img data-test='meal-button' src={search}  height='120px' alt="search"/> </Link>
+                    <CardTitle>
+                      <h3 style={{color: '#599BE9'}}>Meals</h3>
+                    </CardTitle>
+                    <CardText>Search the Meal Inventory</CardText>
+                  </CardBody>
+                </Card>
+                
+                <Card  style={{border:'none', height:'200px'}}>
+                  <CardBody data-test="add-meal-card">
+                    <Link to="/NewMeal"> <img data-test='add-meal-button' src={add}  height='120px' alt="add"/> </Link>
+                    <CardTitle>
+                      <h3 style={{color: '#599BE9'}}>Add Meals</h3>
+                    </CardTitle>
+                    <CardText>Add a New Recipe  </CardText>
+                  </CardBody>
+                </Card>
+
+                <Card  style={{border:'none', height:'200px'}}>
+                  <CardBody data-test="meal-history-card">
+                    <Link to="/MealHistory"> <img  data-test='history-button' src={history}  height='120px' alt="history"/> </Link>
+                    <CardTitle>
+                      <h3 style={{color: '#599BE9'}}>Meal History</h3>
+                    </CardTitle>
+                    <CardText>View Past Meal Combinations </CardText>
+                  </CardBody>
+                </Card>
+
+              </CardDeck>
+
+            </div>
+
+          </div>
         );
 
     }

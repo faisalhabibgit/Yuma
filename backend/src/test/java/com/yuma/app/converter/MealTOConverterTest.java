@@ -26,7 +26,7 @@ public class MealTOConverterTest {
 
 	private Meal prepareMeal() {
 		Meal meal = new Meal();
-		meal.setMealId(UUID.randomUUID());
+		meal.setMealId(UUID.randomUUID().toString());
 		meal.setDescription("this is a meal description");
 		meal.setAvailable(false);
 		meal.setIngredients(new ArrayList<Ingredients>() {

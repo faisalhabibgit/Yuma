@@ -25,6 +25,11 @@ class MealHistory extends Component{
 
     this.handleChange = this.handleChange.bind(this);
   }
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+  
   handleChange(date)
   {
     this.setState({
