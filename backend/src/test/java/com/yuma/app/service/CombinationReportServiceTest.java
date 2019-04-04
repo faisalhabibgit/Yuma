@@ -39,33 +39,33 @@ public class CombinationReportServiceTest {
 
 	@Mock
 	private ConversionService conversionService;
-	
+
 	@Mock
 	private WeeklyCombinationHelper weeklyCombinationHelper;
 
 	@Mock
 	private MealRepository mealRepository;
-	
+
 	@Mock
 	private UserRepository userRepository;
-	
+
 	@Mock
 	private CombinationReportRepository combinationReportRepository;
-	
+
 	@Mock
 	private List<Meal> mealList;
-	
+
 	@Mock
 	private List<Consumer> userList;
 
 	private CombinationReport combinationReport;
-	
+
 	private List<CombinationReport> possibleCombinations;
 
 	Optional<CombinationReport> optionalCombinationReport;
 
 	Optional<CombinationReport> optionalCombinationReportEmpty;
-	
+
 	@Before
 	public void setup() {
 
@@ -75,14 +75,14 @@ public class CombinationReportServiceTest {
 		possibleCombinations = new ArrayList<>();
 		combinationReport = HelperCombo.prepareAndReturnCombinationReport();
 		possibleCombinations.add(combinationReport);
-		combinationReportService = new CombinationReportService(conversionService, possibleCombinations);
+		combinationReportService = new CombinationReportService(conversionService);
 		optionalCombinationReport = Optional.of(combinationReport);
 		optionalCombinationReportEmpty = Optional.empty();
 
 		MockitoAnnotations.initMocks(this);
 
 	}
-	
+
 	@Test
 	public void getCombinationReportByDateTest(){
 		when(combinationReportRepository.findCombinationReportByCreatedOnBetween(any(Date.class), any(Date.class))).thenReturn(optionalCombinationReport);
@@ -95,7 +95,7 @@ public class CombinationReportServiceTest {
 		when(combinationReportRepository.findCombinationReportByCreatedOnBetween(any(Date.class), any(Date.class))).thenReturn(optionalCombinationReportEmpty);
 		combinationReportService.getCombinationReportByDate(new DateTime());
 	}
-	
+
 	@Test
 	public void getMostRecentlyAddedTest(){
 		when(combinationReportRepository.findTopByOrderByCreatedOnDesc()).thenReturn(optionalCombinationReport);
@@ -108,16 +108,16 @@ public class CombinationReportServiceTest {
 		when(combinationReportRepository.findTopByOrderByCreatedOnDesc()).thenReturn(optionalCombinationReportEmpty);
 		combinationReportService.getMostRecentlyAdded();
 	}
-	
+
 	@Test
 	public void generateWeeklyCombinationTest(){
 		when(mealRepository.findByIsAvailableIsTrue()).thenReturn(mealList);
 		when(userRepository.findByIsActiveIsTrue()).thenReturn(userList);
-		
+
 		combinationReportService.generateWeeklyCombination();
-		
+
 		verify(mealRepository, times(1)).findByIsAvailableIsTrue();
 		verify(userRepository, times(1)).findByIsActiveIsTrue();
 	}
-	
+
 }

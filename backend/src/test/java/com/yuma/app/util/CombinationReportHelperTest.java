@@ -25,14 +25,12 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CombinationReportHelperTest {
-
-	private CombinationReportService combinationReportService;
-
-	@Mock
-	private ConversionService conversionService;
-
+	
 	@InjectMocks
 	private CombinationReportHelper combinationReportHelper;
+	
+	@Mock
+	private ConversionService conversionService;
 
 	@Mock
 	private MealRepository mealRepository;
@@ -44,8 +42,9 @@ public class CombinationReportHelperTest {
 	private CombinationReportRepository combinationReportRepository;
 
 	private CombinationReport combinationReport;
-
-
+	
+	private CombinationReportService combinationReportService;
+	
 	@Before
 	public void setup() {
 		combinationReportService = new CombinationReportService(conversionService);

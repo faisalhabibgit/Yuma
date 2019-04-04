@@ -120,9 +120,12 @@ public class HelperCombo {
 		meals.get(0).setMealScore(1);
 		meals.get(1).setMealScore(2);
 		meals.get(2).setMealScore(3);
+		
+		List<Consumer> users = prepareUserList();
 
 		CombinationReport combinationReport = new CombinationReport();
 		combinationReport.setMealsList(meals);
+		combinationReport.setUserList(users);
 
 		return combinationReport;
 	}

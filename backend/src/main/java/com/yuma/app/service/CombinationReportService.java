@@ -51,12 +51,12 @@ public class CombinationReportService {
 		this.combinationReportHelper = new CombinationReportHelper();
 	}
 
-	public CombinationReportService(ConversionService conversionService, List<CombinationReport> possibleCombinations) {
-		this.conversionService = conversionService;
-		this.addedMeals = new ArrayList<>();
-		this.possibleCombinations = possibleCombinations;
-		this.combinationReportHelper = new CombinationReportHelper();
-	}
+//	public CombinationReportService(ConversionService conversionService, List<CombinationReport> possibleCombinations) {
+//		this.conversionService = conversionService;
+//		this.addedMeals = new ArrayList<>();
+//		this.possibleCombinations = possibleCombinations;
+//		this.combinationReportHelper = new CombinationReportHelper();
+//	}
 
 	public CombinationReport getMostRecentlyAdded(){
 		CombinationReport combinationReport = combinationReportRepository.findTopByOrderByCreatedOnDesc().orElseThrow(() ->
