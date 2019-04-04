@@ -1,88 +1,123 @@
-//package com.yuma.app.service;
-//
-//import static org.mockito.Matchers.any;
-//import static org.mockito.Mockito.times;
-//import static org.mockito.Mockito.verify;
-//import static org.mockito.Mockito.when;
-//import static org.mockito.MockitoAnnotations.initMocks;
-//
-//import java.util.ArrayList;
-//import java.util.HashSet;
-//import java.util.List;
-//import java.util.Optional;
-//import java.util.UUID;
-//
-//import com.yuma.app.HelperCombo;
-//import com.yuma.app.util.CombinationReportHelper;
-//import com.yuma.app.util.WeeklyCombinationHelper;
-//import org.joda.time.DateTime;
-//import org.junit.Assert;
-//import org.junit.Before;
-//import org.junit.Test;
-//import org.junit.runner.RunWith;
-//import org.mockito.InjectMocks;
-//import org.mockito.Mock;
-//import org.mockito.MockitoAnnotations;
-//import org.mockito.runners.MockitoJUnitRunner;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.core.convert.ConversionService;
-//
-//import com.yuma.app.document.CombinationReport;
-//import com.yuma.app.document.Consumer;
-//import com.yuma.app.document.Ingredients;
-//import com.yuma.app.document.Meal;
-//import com.yuma.app.document.Plan;
-//import com.yuma.app.repository.CombinationReportRepository;
-//import com.yuma.app.repository.MealRepository;
-//import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-//
-//@RunWith(SpringJUnit4ClassRunner.class)
-//public class CombinationReportServiceTest {
-//
-//	@InjectMocks
-//	private CombinationReportService combinationReportService;
-//
-//	@Mock
-//	private CombinationReportHelper combinationReportHelper;
-//
-//	@Mock
-//	private ConversionService conversionService;
-//
-//
-//	@Mock
-//	private WeeklyCombinationHelper weeklyCombinationHelper;
-//
-//	@Mock
-//	private MealRepository mealRepository;
-//
-//	@Mock
-//	private List<Meal> addedMeals;
-//
-//	private List<CombinationReport> possibleCombinations;
-//
-//	@Mock
-//	private CombinationReportRepository combinationReportRepository;
-//
-//	private CombinationReport combinationReport;
-//
-//	@Mock
-//	private List<Meal> mealList;
-//	@Before
-//	public void setup() {
-//
-////		combinationReportService = new CombinationReportService(conversionService);
-//		mealList = HelperCombo.prepareMealList();
-//		combinationReportHelper = new CombinationReportHelper();
-//		possibleCombinations = new ArrayList<>();
-//		combinationReport = new CombinationReport(0, 0, new ArrayList<>(), mealList);
-//		possibleCombinations.add(combinationReport);
-//		MockitoAnnotations.initMocks(this);
-//	}
-//
-//	@Test
-//	public void saveCombinationReportTest(){
-//		combinationReportService.saveCombinationReport(1);
-//		verify(combinationReportRepository, times(1)).save(any(CombinationReport.class));
-//
-//	}
-//}
+package com.yuma.app.service;
+
+import com.yuma.app.HelperCombo;
+import com.yuma.app.document.CombinationReport;
+import com.yuma.app.document.Consumer;
+import com.yuma.app.document.Meal;
+import com.yuma.app.exception.ResourceNotFoundException;
+import com.yuma.app.repository.CombinationReportRepository;
+import com.yuma.app.repository.MealRepository;
+import com.yuma.app.repository.UserRepository;
+import com.yuma.app.util.CombinationReportHelper;
+import com.yuma.app.util.WeeklyCombinationHelper;
+import org.joda.time.DateTime;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+public class CombinationReportServiceTest {
+
+	@InjectMocks
+	private CombinationReportService combinationReportService;
+
+	@Mock
+	private CombinationReportHelper combinationReportHelper;
+
+	@Mock
+	private ConversionService conversionService;
+	
+	@Mock
+	private WeeklyCombinationHelper weeklyCombinationHelper;
+
+	@Mock
+	private MealRepository mealRepository;
+	
+	@Mock
+	private UserRepository userRepository;
+	
+	@Mock
+	private CombinationReportRepository combinationReportRepository;
+	
+	@Mock
+	private List<Meal> mealList;
+	
+	@Mock
+	private List<Consumer> userList;
+
+	private CombinationReport combinationReport;
+	
+	private List<CombinationReport> possibleCombinations;
+
+	Optional<CombinationReport> optionalCombinationReport;
+
+	Optional<CombinationReport> optionalCombinationReportEmpty;
+	
+	@Before
+	public void setup() {
+
+		mealList = HelperCombo.prepareMealList();
+		userList = HelperCombo.prepareUserList();
+		combinationReportHelper = new CombinationReportHelper();
+		possibleCombinations = new ArrayList<>();
+		combinationReport = HelperCombo.prepareAndReturnCombinationReport();
+		possibleCombinations.add(combinationReport);
+		combinationReportService = new CombinationReportService(conversionService, possibleCombinations);
+		optionalCombinationReport = Optional.of(combinationReport);
+		optionalCombinationReportEmpty = Optional.empty();
+
+		MockitoAnnotations.initMocks(this);
+
+	}
+	
+	@Test
+	public void getCombinationReportByDateTest(){
+		when(combinationReportRepository.findCombinationReportByCreatedOnBetween(any(Date.class), any(Date.class))).thenReturn(optionalCombinationReport);
+		combinationReportService.getCombinationReportByDate(new DateTime());
+		verify(combinationReportRepository, times(1)).findCombinationReportByCreatedOnBetween(any(Date.class), any(Date.class));
+	}
+
+	@Test(expected = ResourceNotFoundException.class)
+	public void getCombinationReportByDateNotFoundTest(){
+		when(combinationReportRepository.findCombinationReportByCreatedOnBetween(any(Date.class), any(Date.class))).thenReturn(optionalCombinationReportEmpty);
+		combinationReportService.getCombinationReportByDate(new DateTime());
+	}
+	
+	@Test
+	public void getMostRecentlyAddedTest(){
+		when(combinationReportRepository.findTopByOrderByCreatedOnDesc()).thenReturn(optionalCombinationReport);
+		combinationReportService.getMostRecentlyAdded();
+		verify(combinationReportRepository, times(1)).findTopByOrderByCreatedOnDesc();
+	}
+
+	@Test(expected = ResourceNotFoundException.class)
+	public void getMostRecentlyAddedNotFoundTest(){
+		when(combinationReportRepository.findTopByOrderByCreatedOnDesc()).thenReturn(optionalCombinationReportEmpty);
+		combinationReportService.getMostRecentlyAdded();
+	}
+	
+	@Test
+	public void generateWeeklyCombinationTest(){
+		when(mealRepository.findByIsAvailableIsTrue()).thenReturn(mealList);
+		when(userRepository.findByIsActiveIsTrue()).thenReturn(userList);
+		
+		combinationReportService.generateWeeklyCombination();
+		
+		verify(mealRepository, times(1)).findByIsAvailableIsTrue();
+		verify(userRepository, times(1)).findByIsActiveIsTrue();
+	}
+	
+}
