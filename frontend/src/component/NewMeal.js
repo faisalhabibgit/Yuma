@@ -3,8 +3,7 @@ import {
   Col, Form,
   FormGroup, Label, Input,
   Button,
-  Container,Card, CardHeader,  CardBody,
-  CardDeck
+  Container,
 } from 'reactstrap';
 import ApiToken from '../middleware/ApiToken';
 import Ingredients from '../middleware/objects/Ingredients';
@@ -29,11 +28,15 @@ class NewMeal extends Component {
       dairy: 'false',
       gluten: 'false',
       shellfish: 'false',
-      soy: 'false'
+      soy: 'false',
+      pastSelect: null,
+      currentSelect: null,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleOnSelect = this.handleOnSelect.bind(this);
+
     this.postMeal = this.postMeal.bind(this);
     this.setFlags = this.setFlags.bind(this);
     // this.calculate = this.calculate.bind(this);
@@ -42,9 +45,26 @@ class NewMeal extends Component {
     this.addIngredient = this.addIngredient.bind(this);
 
   }
-  
+
   componentDidMount() {
     window.scrollTo(0, 0);
+  }
+
+  handleOnSelect(event, index){
+    event.preventDefault
+    this.setState(currentSelected: event.target);
+    if(this.state.pastSelect !== this.state.currentSelect) {
+      if(this.state.pastSelect.className === "weight"){
+        this.setState(pastSelect: this.state.currentSelect)
+        calculateCalories(event, index);
+      }
+      else {
+        this.setState(pastSelect: this.state.currentSelect)
+      }
+    }
+    else{
+      this.setState(pastSelect: this.state.currentSelect)
+    }
   }
 
   checkAuthenticated(){
@@ -198,66 +218,48 @@ calculateCalories(e, idx){
 
   render() {
     return (
-      <div style={{background: '#ADB7BF'}} >
       <Container>
-     
-        <Col sm="12" md={{ size: 12}}>
-          <CardHeader  className="text-center" style={{background: '#B9C5D5', borderRadius: 10}}>
-            <h2>Enter a New Meal</h2>
-          </CardHeader>
+        <Col sm="12" md={{ size: 6, offset: 3 }}>
+          <h2>Enter a New Meal</h2>
+
           <br />
 
           <Form className="form" onSubmit={this.handleSubmit}>
             <Col >
               <FormGroup>
-              <CardDeck data-test="name" style={{padding:'12px', height:'200px', borderRadius: 10}}>
-                <Card>
-                  <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-                    <h5 style={{color: 'black'}}> Name</h5>
-                  </CardHeader>
-                <CardBody>
-                  <Input
-                        type="text"
-                        name="name"
-                        data-test="enter-meal-name"
-                        id="name"
-                        placeholder="Chicken Parmesan"
-                        onChange={this.handleChange}
-                      />
-                </CardBody>
-                </Card>
+                <Label>Name</Label>
+                <Input
+                  type="text"
+                  name="name"
+                  data-test="enter-meal-name"
+                  id="name"
+                  placeholder="Chicken Parmesan"
+                  onChange={this.handleChange}
+                />
 
-                <Card>
-                  <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
-                    <h5 style={{color: 'black'}}> Meal Description</h5>
-                  </CardHeader>
-                <CardBody>
-                  <Input
-                        class="form-control"
-                        type="text"
-                        name="description"
-                        data-test="enter-meal-description"
-                        id="description"
-                        placeholder="Chicken basted in tomato sauce."
-                        onChange={this.handleChange}
-                      />
-                </CardBody>
-                </Card>
-              </CardDeck>
                 <br />
 
-                <div>
-                  <Button variant="secondary" size="lg" block data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</Button>
-                </div>
+                <Label>Meal Description</Label>
+                <Input
+                  class="form-control"
+                  type="text"
+                  name="description"
+                  data-test="enter-meal-description"
+                  id="description"
+                  placeholder="Chicken basted in tomato sauce."
+                  onChange={this.handleChange}
+                  onSelect={(e) ={this.handleOnSelect(e)}}
+                />
+
+                <br />
+
+                <Label>Ingredients</Label>
+                <button style={{ marginLeft: 40 }} data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</button>
                 <br /><br />
-                               
-                <Card style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
-                <CardBody className="text-center">
                 {
                   this.state.ingredients.map((val, idx) => {
                     let ingredientId = `name-${idx}`, weightId = `weight-${idx}`, caloriesId = `calories-${idx}`, priceId = `price-${idx}`;
                     return (
-                     
                       <div data-test="initial-ingredient" key={idx}>
                         <br />
                         <label htmlFor={ingredientId}>{`Ingredient #${idx + 1}`}</label>
@@ -286,7 +288,7 @@ calculateCalories(e, idx){
                         <br />
                         <label htmlFor={caloriesId}>Calories</label>
                         <input
-                          style={{ marginLeft: 61 }}
+                          style={{ marginLeft: 65 }}
                           type="text"
                           name={caloriesId}
                           data-id={idx}
@@ -295,13 +297,11 @@ calculateCalories(e, idx){
                           onChange={this.handleChange }
                           className="calories"
                         />
-                        <div>
-                         <Button variant="secondary"  onClick={(e) => this.calculateCalories(e, idx)}>Calculate</Button>
-                       </div>
+                        <button style={{ marginLeft: 40 }} onClick={(e) => this.calculateCalories(e, idx)}>Calculate</button>
                         <br />
                         <label htmlFor={priceId}>Price</label>
                         <input
-                          style={{ marginLeft: 83 }}
+                          style={{ marginLeft: 86 }}
                           type="text"
                           name={priceId}
                           data-id={idx}
@@ -312,64 +312,53 @@ calculateCalories(e, idx){
                         />
                         <br />
                         <br />
-                        <div>
-                         <Button variant="secondary"  data-test="delete-ingredient-button" onClick={(e) => { this.removeIngredient(e, idx) }}> Remove </Button>
-                       </div>
+                        <button data-test="delete-ingredient-button" onClick={(e) => { this.removeIngredient(e, idx) }}> Remove </button>
                       </div>
-                      
                     )
                   })
-                }                
-                </CardBody>
-                </Card>
+                }
                 <br />
-                
-                
-                <Card style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
-                  <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
-                    <h5 style={{color: 'black'}}> Possible Food Allergies</h5>
-                  </CardHeader>
-                <CardBody className="text-left" style={{padding:'50px'}}>              
-                     <Label>
-                      <Input type="checkbox" id="nuts" onChange={this.handleChange} />
+
+                <Label style={{ fontWeight: "bold" }}> Possible Food Allergies </Label>
+
+                <FormGroup row>
+                  <Col sm={{ size: 10 }}>
+                    <FormGroup check>
+                      <Label>
+                        <Input type="checkbox" id="nuts" onChange={this.handleChange} />
                         Tree Nuts
-                      </Label>
+                        </Label>
                       <br />
                       <Label>
                         <Input type="checkbox" id="dairy" onChange={this.handleChange} />
                         Dairy
-                      </Label>
+                        </Label>
                       <br />
                       <Label>
                         <Input type="checkbox" id="gluten" onChange={this.handleChange} />
                         Gluten
-                      </Label>
+                        </Label>
                       <br />
                       <Label>
                         <Input type="checkbox" id="shellfish" onChange={this.handleChange} />
                         Shellfish
-                      </Label>
+                        </Label>
                       <br />
                       <Label>
                         <Input type="checkbox" id="soy" onChange={this.handleChange} />
                         Soy
-                      </Label>
-                    
-                 
-                
-                </CardBody>
-                </Card>
-            </FormGroup>
-            <br />
-              
-              <div class="text-center" >
-              <Button  type="submit" value="Submit" size="lg" block>Submit</Button>
-              </div>
-            </Col>            
+                        </Label>
+                    </FormGroup>
+                  </Col>
+                </FormGroup>
+
+              </FormGroup>
+            </Col>
+            <Button type="submit" value="Submit">Submit</Button>
           </Form>
         </Col>
+
       </Container>
-      </div>
     );
   }
 }
