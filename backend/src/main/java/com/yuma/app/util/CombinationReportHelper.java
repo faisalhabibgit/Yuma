@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class CombinationReportHelper {
-
+	
 	private Logger logger = LoggerFactory.getLogger(CombinationReportService.class);
 
 	public void runMealCombinationAlgorithm(WeeklyCombination weeklyCombination, List<Meal> addedMeals) {
@@ -45,7 +45,7 @@ public class CombinationReportHelper {
 		}
 	}
 
-	public void generatePossibleMealsForUser(CombinationReport combinationReport, Consumer user, int mealCounter,List<Meal> addedMeals) {
+	public void generatePossibleMealsForUser(CombinationReport combinationReport, Consumer user, int mealCounter, List<Meal> addedMeals) {
 		logger.info("inside generate possible meals for that user");
 		int numOfBlanks;
 
@@ -78,7 +78,7 @@ public class CombinationReportHelper {
 		combinationReport.setNumberOfBlanks(combinationReport.getNumberOfBlanks() + numOfBlanks);
 	}
 
-	public void generatePossibleMealsForUserWithBlanks(CombinationReport combinationReport, Consumer user, int timesToRun, List<Meal> addedMeals){
+	public void generatePossibleMealsForUserWithBlanks(CombinationReport combinationReport, Consumer user, int timesToRun, List<Meal> addedMeals) {
 		int timesRan = 0;
 
 		for (Meal meal : combinationReport.getMealsList()) {
