@@ -46,7 +46,6 @@ test('Search meal page renders result limit select box', () =>{
 
 });
 
-
 test('Search meal page renders meal list', () =>{
 
   expect(wrapper.length).toBe(1);
