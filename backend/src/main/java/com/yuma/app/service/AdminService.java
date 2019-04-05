@@ -6,8 +6,6 @@ import java.util.Optional;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,7 +19,6 @@ import com.yuma.app.repository.RoleRepository;
 @Slf4j
 @Service
 public class AdminService {
-	private Logger userServiceLogger = LoggerFactory.getLogger(AdminService.class);
 	private AdminRepository adminRepository;
 	private ConversionService conversionService;
 	private RoleRepository roleRepository;
@@ -35,7 +32,7 @@ public class AdminService {
 	}
 
 	public Admin saveAdmin(SignUpRequest req) {
-		this.userServiceLogger.info("saving admin {}", req.getEmail());
+		log.info("saving admin {}", req.getEmail());
 
 		Admin admin = conversionService.convert(req, Admin.class);
 		admin.setPassword(passwordEncoder.encode(admin.getPassword()));
