@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class CombinationReportService {
+
 	@Autowired
 	private MealRepository mealRepository;
 	@Autowired
@@ -44,7 +45,9 @@ public class CombinationReportService {
 		this.addedMeals = new ArrayList<>();
 		this.possibleCombinations = new ArrayList<>();
 	}
+  
 	public CombinationReport getMostRecentlyAdded() {
+		log.info("Retrieving most recently added combination report.");
 		CombinationReport combinationReport = combinationReportRepository.findTopByOrderByCreatedOnDesc().orElseThrow(() ->
 			new ResourceNotFoundException("Combination report", "most recently added", null)
 		);
@@ -78,6 +81,7 @@ public class CombinationReportService {
 			this.combinationReportRepository.save(combinationReport);
 			this.userRepository.save(combinationReport.getUserList());
 		} catch (IndexOutOfBoundsException e) {
+
 			log.info("index out of bound");
 			return;
 		}
