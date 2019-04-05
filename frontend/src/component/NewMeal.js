@@ -265,6 +265,7 @@ calculateCalories(e, idx){
                           value={this.state.ingredients[idx].name}
                           onChange={this.handleChange}
                           className="name"
+                          data-test='ingredient-name'
                         />
                         <br />
                         <label htmlFor={weightId}>Weight</label>
@@ -277,6 +278,7 @@ calculateCalories(e, idx){
                           value={this.state.ingredients[idx].weight}
                           onChange={this.handleChange}
                           className="weight"
+                          data-test='ingredient-weight'
                         />
                         <br />
                         <label htmlFor={caloriesId}>Calories</label>
@@ -289,6 +291,7 @@ calculateCalories(e, idx){
                           value={this.state.ingredients[idx].calories}
                           onChange={this.handleChange }
                           className="calories"
+                          data-test='ingredient-calories'
                         />
                         <div>
                          <Button variant="secondary"  onClick={(e) => this.calculateCalories(e, idx)}>Calculate</Button>
@@ -304,6 +307,7 @@ calculateCalories(e, idx){
                           value={this.state.ingredients[idx].price}
                           onChange={this.handleChange}
                           className="price"
+                          data-test='ingredient-price'
                         />
                         <br />
                         <br />

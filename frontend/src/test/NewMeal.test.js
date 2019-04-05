@@ -94,6 +94,24 @@ test('New meal page renders "add new ingredient" button and adds an ingredient w
 
 });
 
+test('New meal page renders ingredient form inputs', () => {
+
+  expect(wrapper.length).toBe(1);
+
+  const ingredientNameInput = wrapper.find("[data-test='ingredient-name']");
+  expect(ingredientNameInput.length).toBe(1);
+
+  const ingredientWeightInput = wrapper.find("[data-test='ingredient-weight']");
+  expect(ingredientWeightInput.length).toBe(1);
+
+  const ingredientCaloriesInput = wrapper.find("[data-test='ingredient-calories']");
+  expect( ingredientCaloriesInput.length).toBe(1);
+
+  const ingredientPriceInput = wrapper.find("[data-test='ingredient-price']");
+  expect(ingredientPriceInput.length).toBe(1);
+
+});
+
 test('New meal page renders a single ingredient form upon INITIAL rendering', () => {
 
     expect(wrapper.length).toBe(1);
