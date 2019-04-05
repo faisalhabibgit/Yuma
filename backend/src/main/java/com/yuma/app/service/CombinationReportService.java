@@ -35,6 +35,7 @@ public class CombinationReportService {
 	private List<Meal> addedMeals;
 	private ConversionService conversionService;
 	private WeeklyCombinationHelper weeklyCombinationHelper;
+	
 	public static final int MAX = 2;
 
 

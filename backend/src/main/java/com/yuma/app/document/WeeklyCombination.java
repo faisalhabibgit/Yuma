@@ -17,6 +17,4 @@ public class WeeklyCombination {
 	List<CombinationReport> possibleCombinations;
 	List<Meal> availableMeals;
 	List<Consumer> activeUsers;
-	
-	
 }
