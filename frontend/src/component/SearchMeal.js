@@ -114,9 +114,9 @@ class SearchMeal extends Component {
           </Col>
           <div  style = {{height:'400px',overflow:'auto'}}>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <ListGroup >
+              <ListGroup data-test='meal-list' >
                 {
-                  this.state.displayData.map(x => <ListGroupItem >
+                  this.state.displayData.map(x => <ListGroupItem data-test='meal-item' >
                     <div>
                       <h5 style={{color: '#599BE9'}}>{x.name.toString()} </h5>
                     </div>
@@ -124,7 +124,7 @@ class SearchMeal extends Component {
                       <Button onClick={this.toggle.bind(this,x)} style={{ background: '#599BE9' }}>+</Button>
                     </div>
                     <Collapse  isOpen={this.state.collapse===x}>
-                      <div>
+                      <div data-test='meal-description'>
                         <h5 style={{color: '#599BE9'}}>Description</h5> {x.description.toString()}
                       </div>
                       <div>
