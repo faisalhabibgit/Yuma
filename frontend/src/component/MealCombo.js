@@ -23,7 +23,9 @@ class MealCombo extends Component {
       ModalContent: '',
       downloadCSV: '',
       hiddenElement: null,
-      background: '#599BE9'
+      //active: false
+      background: '#599BE9',
+     
     };
 
     this.openModal = this.openModal.bind(this);
@@ -33,9 +35,13 @@ class MealCombo extends Component {
     this.handleModalChange3 = this.handleModalChange3.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDownloadCSV = this.handleDownloadCSV.bind(this);
+    //this.toggle = this.toggle.bind(this);
+    //this.myColor = this.myColor.bind(this);
 
     this.poster = new Poster();
   }
+
+ 
 
   // toggle(position){
   //   if (this.state.active === position) {
@@ -45,12 +51,12 @@ class MealCombo extends Component {
   //   }
   // }
   
-  myColor(position){
-    if (this.state.active === position) {
-      return "red";
-    }
-    return "";
-  }
+  // myColor(position){
+  //   if (this.state.active === position) {
+  //     return "red";
+  //   }
+  //   return "";
+  // }
 
 
   openModal() {
@@ -76,15 +82,21 @@ class MealCombo extends Component {
     this.setState({ ModalContent: <ComboThree /> })
   }
 
-  handleSubmit(e) {    
-    this.setState({background: "red"});
+  handleSubmit(e) { 
+      
+    
     this.poster.selectMealCombo(e.target.id).then(() => {
+
       const retriever = new Retriever('api/combinationreport/download/consumers.csv');      
       retriever.getEntityPromise().then((csv) => {
+
         var link = document.createElement('a');
         link.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
         link.target = '_blank';
         link.download = 'report.csv';
+
+        this.setState({background: "red"});
+        //this.setState({ active: true }) 
         this.setState({ hiddenElement : link});
         this.setState({ downloadCSV: <Button style={{ background: '#599BE9', margin:'15px' }} type="submit" onClick={this.handleDownloadCSV} >Download CSV</Button> })
       })
@@ -109,7 +121,7 @@ class MealCombo extends Component {
                 <Button variant="secondary" onClick={this.handleModalChange1}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-                <Button data-test="combo-one-button-select" style={{background: this.myColor(1)}} onClick={this.handleSubmit(1)} id='1' type="submit">Select</Button>
+                <Button data-test="combo-one-button-select" style={{background:this.state.background}} onClick={this.handleSubmit} id='1' type="submit">Select</Button>
               </div>
             </CardBody>
           </Card>
@@ -120,7 +132,7 @@ class MealCombo extends Component {
                 <Button variant="secondary" onClick={this.handleModalChange2}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-                <Button data-test="combo-two-button-select" style={{background: this.myColor(2)}} onClick={this.handleSubmit(2)} id='2' type="submit">Select</Button>
+                <Button data-test="combo-two-button-select" style={{background:this.state.background}} onClick={this.handleSubmit} id='2' type="submit">Select</Button>
               </div>
             </CardBody>
           </Card>
@@ -132,7 +144,7 @@ class MealCombo extends Component {
                 <Button variant="secondary" onClick={this.handleModalChange3}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-                <Button data-test="combo-three-button-select" style={{background: this.myColor(3)}} onClick={this.handleSubmit(3)} id='3' type="submit">Select</Button>
+                <Button data-test="combo-three-button-select" style={{background:this.state.background}} onClick={this.handleSubmit} id='3' type="submit">Select</Button>
               </div>
             </CardBody>
           </Card>
