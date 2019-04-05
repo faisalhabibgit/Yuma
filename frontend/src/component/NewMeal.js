@@ -211,7 +211,7 @@ calculateCalories(e, idx){
             <Col >
               <FormGroup>
               <CardDeck data-test="name" style={{padding:'12px', height:'200px', borderRadius: 10}}>
-                <Card>
+                <Card  data-test="name-card">
                   <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
                     <h5 style={{color: 'black'}}> Name</h5>
                   </CardHeader>
@@ -227,7 +227,7 @@ calculateCalories(e, idx){
                 </CardBody>
                 </Card>
 
-                <Card>
+                <Card  data-test="meal-description-card">
                   <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
                     <h5 style={{color: 'black'}}> Meal Description</h5>
                   </CardHeader>
@@ -246,7 +246,7 @@ calculateCalories(e, idx){
               </CardDeck>
                 <br /><br />
 
-                <Card style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
+                <Card  data-test="ingredient-card" style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
                 <CardBody className="text-center">
                 {
                   this.state.ingredients.map((val, idx) => {
@@ -265,6 +265,7 @@ calculateCalories(e, idx){
                           value={this.state.ingredients[idx].name}
                           onChange={this.handleChange}
                           className="name"
+                          data-test='ingredient-name'
                         />
                         <br />
                         <label htmlFor={weightId}>Weight</label>
@@ -277,6 +278,7 @@ calculateCalories(e, idx){
                           value={this.state.ingredients[idx].weight}
                           onChange={this.handleChange}
                           className="weight"
+                          data-test='ingredient-weight'
                         />
                         <br />
                         <label htmlFor={caloriesId}>Calories</label>
@@ -289,6 +291,7 @@ calculateCalories(e, idx){
                           value={this.state.ingredients[idx].calories}
                           onChange={this.handleChange }
                           className="calories"
+                          data-test='ingredient-calories'
                         />
                         <div>
                          <Button variant="secondary"  onClick={(e) => this.calculateCalories(e, idx)}>Calculate</Button>
@@ -304,6 +307,7 @@ calculateCalories(e, idx){
                           value={this.state.ingredients[idx].price}
                           onChange={this.handleChange}
                           className="price"
+                          data-test='ingredient-price'
                         />
                         <br />
                         <br />
@@ -324,7 +328,7 @@ calculateCalories(e, idx){
                 <br />
 
 
-                <Card style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
+                <Card  data-test="possible-allergies-card" style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
                   <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
                     <h5 style={{color: 'black'}}> Possible Food Allergies</h5>
                   </CardHeader>
