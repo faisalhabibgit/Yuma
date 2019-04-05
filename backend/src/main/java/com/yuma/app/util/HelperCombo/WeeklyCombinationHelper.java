@@ -1,5 +1,6 @@
-package com.yuma.app.util;
+package com.yuma.app.util.HelperCombo;
 
+import com.yuma.app.util.HelperCombo.CombinationReportHelper;
 import com.yuma.app.document.CombinationReport;
 import com.yuma.app.document.Meal;
 import com.yuma.app.document.WeeklyCombination;
