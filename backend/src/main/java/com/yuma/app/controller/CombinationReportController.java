@@ -8,12 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
 
 import com.yuma.app.document.Consumer;
 import com.yuma.app.service.CombinationReportService;
@@ -56,5 +54,15 @@ public class CombinationReportController {
 	public CombinationReportTO getCombinationReportByDate(@PathVariable DateTime date){
 		log.info("Retrieving combination report from "+ date);
 		return this.combinationReportService.getCombinationReportByDate(date);
+	}
+
+	@GetMapping("/search")
+	public List<CombinationReportTO> getCombinationReportByDate(@RequestParam(name = "startdate")
+																															@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+																																LocalDate startDate, @RequestParam(name = "enddate")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+		LocalDate endDate){
+		log.info("Retrieving combination report from "+ startDate + " to " + endDate);
+		return this.combinationReportService.listCombinationReportByDate(startDate, endDate);
 	}
 }
