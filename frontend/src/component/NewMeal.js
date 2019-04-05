@@ -211,7 +211,7 @@ calculateCalories(e, idx){
             <Col >
               <FormGroup>
               <CardDeck data-test="name" style={{padding:'12px', height:'200px', borderRadius: 10}}>
-                <Card>
+                <Card  data-test="name-card">
                   <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
                     <h5 style={{color: 'black'}}> Name</h5>
                   </CardHeader>
@@ -227,7 +227,7 @@ calculateCalories(e, idx){
                 </CardBody>
                 </Card>
 
-                <Card>
+                <Card  data-test="meal-description-card">
                   <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
                     <h5 style={{color: 'black'}}> Meal Description</h5>
                   </CardHeader>
@@ -246,7 +246,7 @@ calculateCalories(e, idx){
               </CardDeck>
                 <br /><br />
 
-                <Card style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
+                <Card  data-test="ingredient-card" style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
                 <CardBody className="text-center">
                 {
                   this.state.ingredients.map((val, idx) => {
@@ -324,7 +324,7 @@ calculateCalories(e, idx){
                 <br />
 
 
-                <Card style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
+                <Card  data-test="possible-allergies-card" style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
                   <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
                     <h5 style={{color: 'black'}}> Possible Food Allergies</h5>
                   </CardHeader>

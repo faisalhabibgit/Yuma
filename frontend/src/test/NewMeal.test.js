@@ -3,12 +3,16 @@ import { shallow } from 'enzyme';
 import NewMeal, { addIngredient } from '../component/NewMeal';
 import sinon from 'sinon';
 
+
 let wrapper;
 
 beforeEach(() => {
     
     const stubber = sinon.stub(NewMeal.prototype, 'checkAuthenticated').returns(true);
-    wrapper = shallow(<NewMeal checkAuthenticated={stubber}/>);
+
+  //stub the componentDidMount method, as it causes a react error
+  const cmDidMount = sinon.stub(NewMeal.prototype, 'componentDidMount').returns(true);
+  wrapper = shallow(<NewMeal checkAuthenticated={stubber} componentDidMount={cmDidMount}/>);
 
   });
 
@@ -39,6 +43,34 @@ test('New meal page renders "meal description" input', () => {
 
     const descriptionInput = wrapper.find("[data-test='enter-meal-description']");
     expect(descriptionInput.length).toBe(1);
+
+});
+
+test('Renders Name Card', () => {
+
+  const nameCard = wrapper.find("[data-test='name-card']");
+  expect(nameCard.length).toBe(1);
+
+});
+
+test('Renders Description Card', () => {
+
+  const descriptionCard = wrapper.find("[data-test='meal-description-card']");
+  expect(descriptionCard.length).toBe(1);
+
+});
+
+test('Renders Ingredient Card', () => {
+
+  const ingredientCard = wrapper.find("[data-test='ingredient-card']");
+  expect(ingredientCard.length).toBe(1);
+
+});
+
+test('Renders Possible Allergies Card', () => {
+
+  const allergiesCard = wrapper.find("[data-test='possible-allergies-card']");
+  expect(allergiesCard.length).toBe(1);
 
 });
 
@@ -100,3 +132,5 @@ test(' New meal page renders remove button for each ingredient, and removes the 
     const ingredientsAfter = wrapper.find("[data-test='initial-ingredient']");
     expect(ingredientsAfter.length).toBe(1);
 });
+
+
