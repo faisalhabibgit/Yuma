@@ -1,6 +1,8 @@
 package com.yuma.app.controller;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,6 +61,18 @@ public class CombinationReportControllerTest {
 		
 		combinationReportController.chosenCombo(index);
 		verify(combinationReportService).saveCombinationReport(index);
+	}
+	
+	@Test
+	public void testCombinationReportListingInDateRange() {
+		
+		LocalDate startDate = new LocalDate();
+		LocalDate endDate = new LocalDate();
+		
+		when(combinationReportService.listCombinationReportByDate(startDate, endDate)).thenReturn(new ArrayList<>());
+		combinationReportController.getCombinationReportByDate(startDate,  endDate);
+		
+		verify(combinationReportService).listCombinationReportByDate(startDate, endDate);
 	}
 
 	private List<Consumer> prepareList() {

@@ -8,9 +8,11 @@ import com.yuma.app.exception.ResourceNotFoundException;
 import com.yuma.app.repository.CombinationReportRepository;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.repository.UserRepository;
+import com.yuma.app.to.CombinationReportTO;
 import com.yuma.app.util.HelperCombo.CombinationReportHelper;
 import com.yuma.app.util.HelperCombo.WeeklyCombinationHelper;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -118,6 +120,25 @@ public class CombinationReportServiceTest {
 
 		verify(mealRepository, times(1)).findByIsAvailableIsTrue();
 		verify(userRepository, times(1)).findByIsActiveIsTrue();
+	}
+
+	@Test
+	public void testListCombinationReportInDateRange() {
+
+		LocalDate startDate = new LocalDate();
+		LocalDate endDate = new LocalDate();
+		
+		List<CombinationReport> combinationReports = new ArrayList<CombinationReport>() {
+			{
+				add(new CombinationReport());
+			}
+		};
+		
+		when(combinationReportRepository.findAllByCreatedOnBetween(startDate.toDate(), endDate.toDate())).thenReturn(combinationReports);
+
+		combinationReportService.listCombinationReportByDate(startDate, endDate);
+
+		verify(conversionService).convert(combinationReports.get(0), CombinationReportTO.class);
 	}
 
 }
