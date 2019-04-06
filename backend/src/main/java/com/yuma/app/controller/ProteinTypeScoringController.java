@@ -31,4 +31,11 @@ public class ProteinTypeScoringController {
 
 		proteinTypeScoringService.modifyProteinTypeScoring(updatedPercentages);
 	}
+	
+	@DeleteMapping
+	public void resetProteinPercentage(){
+		log.info("reset score percentage");
+		
+		proteinTypeScoringService.resetProteinTypeScoring();
+	}
 }
