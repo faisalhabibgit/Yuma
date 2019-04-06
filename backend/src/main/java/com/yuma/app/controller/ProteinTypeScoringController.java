@@ -3,9 +3,7 @@ package com.yuma.app.controller;
 import com.yuma.app.document.enums.ProteinType;
 import com.yuma.app.service.ProteinTypeScoringService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.EnumMap;
 
@@ -25,5 +23,12 @@ public class ProteinTypeScoringController {
 		log.info("fetching score percentage");
 
 		return proteinTypeScoringService.calculateProteinTypeScore();
+	}
+
+	@PutMapping("/modify")
+	public void setProteinPercentage(@RequestBody EnumMap<ProteinType, Double> updatedPercentages) {
+		log.info("updating score percentage");
+
+		proteinTypeScoringService.modifyProteinTypeScoring(updatedPercentages);
 	}
 }
