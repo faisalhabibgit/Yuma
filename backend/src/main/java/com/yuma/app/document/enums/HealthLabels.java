@@ -10,4 +10,5 @@ public enum HealthLabels {
 	TREE_NUT_FREE,
 	SOY_FREE,
 	SHELLFISH_FREE,
+	NONE
 }
