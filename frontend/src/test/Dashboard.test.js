@@ -6,9 +6,13 @@ import sinon from 'sinon';
 let wrapper;
 
 beforeEach(() => {
-    
-    const stubber = sinon.stub(Dashboard.prototype, 'checkAuthenticated').returns(true);
-    wrapper = shallow(<Dashboard checkAuthenticated={stubber}/>);
+
+  //stub the authentication token
+  const stubber = sinon.stub(Dashboard.prototype, 'checkAuthenticated').returns(true);
+
+  //stub the componentDidMount method, as it causes a react error
+  const cmDidMount = sinon.stub(Dashboard.prototype, 'componentDidMount').returns(true);
+  wrapper = shallow(<Dashboard checkAuthenticated={stubber} componentDidMount={cmDidMount}/>);
 
   });
 

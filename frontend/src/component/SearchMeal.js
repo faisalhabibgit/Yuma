@@ -114,7 +114,7 @@ class SearchMeal extends Component {
           </Col>
           <div  style = {{height:'400px',overflow:'auto'}}>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <ListGroup >
+              <ListGroup data-test='meal-list' >
                 {
                   this.state.displayData.map(x => <ListGroupItem >
                     <div>
