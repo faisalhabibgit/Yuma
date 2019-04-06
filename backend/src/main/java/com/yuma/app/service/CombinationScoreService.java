@@ -25,6 +25,14 @@ public class CombinationScoreService {
 		this.userRepository = userRepository;
 	}
 
+	public EnumMap<ProteinType, Double> topCombination(int numOfmeals, Map<ProteinType, Double> proteinTypeMap ){
+		EnumMap<ProteinType, Double> proteinTypeEnumMap = new EnumMap<>(ProteinType.class);
+		for (int i = 0; i < numOfmeals; i++) {
+			proteinTypeEnumMap.put(proteinTypeMap.entrySet().iterator().next().getKey(), proteinTypeMap.entrySet().iterator().next().getValue());
+		}
+		return proteinTypeEnumMap;
+	}
+	
 	public Map<ProteinType, Double> highestOrder(EnumMap<ProteinType, Double> combination) {
 		Map<ProteinType, Double> sorted;
 		sorted = combination
