@@ -36,6 +36,10 @@ public class ProteinTypeScoringService {
 		proteinTypePercentageMap = proteinTypeDoubleEnumMap;
 	}
 	
+	public void resetProteinTypeScoring(){
+		proteinTypePercentageMap = null;
+	}
+	
 	private EnumMap<ProteinType, Integer> calculateProteinTypeCount() {
 		EnumMap<ProteinType, Integer> proteinTypeCountMap = new EnumMap<>(ProteinType.class);
 
