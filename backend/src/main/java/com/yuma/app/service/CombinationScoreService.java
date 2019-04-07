@@ -25,8 +25,8 @@ public class CombinationScoreService {
 		this.userRepository = userRepository;
 	}
 
-	public EnumMap<ProteinType, Double> bestCombinationForUser(EnumMap<ProteinType, Double> scoreMap, ConsumerTO consumerTO) {
-		Consumer consumer = userRepository.findByUserId(consumerTO.getUserId()).orElseThrow(() -> new ResourceNotFoundException("Consumer", "userId", consumerTO.getUserId()));
+	public EnumMap<ProteinType, Double> bestCombinationForUser(EnumMap<ProteinType, Double> scoreMap, String userId) {
+		Consumer consumer = userRepository.findByUserId(userId).orElseThrow(() -> new ResourceNotFoundException("Consumer", "userId", userId));
 		int numOfMeals = consumer.getPlan().getNumOfMeals();
 		Set<ProteinType> userProteinPreference = consumer.getPlan().getRequestedProteinTypes();
 		EnumMap<ProteinType, Double> proteinTypeCountMap = new EnumMap<>(ProteinType.class);
