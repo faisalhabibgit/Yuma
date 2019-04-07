@@ -51,11 +51,19 @@ class BuildUser {
         user.setPlan(this.JSONobjToPlan(obj['plan']));
         user.setIsActive(obj['enabled']);
         user.setTimestamp(obj['timestamp']);
+        user.setCompany(obj['company']);
 
         var mealList = [];
         for (let index = 0; index < obj['mealList'].length; index++) {
             mealList.push(buildMeal.JSONobjToMeal(obj['mealList'][index]));
         }
+
+        var allergies = [];
+        for (let index = 0; index < obj['allergies'].length; index++) {
+            allergies.push(obj['allergies'][index]);
+        }
+        console.log(allergies)
+
         user.setMealList(mealList);
         user.setDislikesList(obj['dislikesList']);
 
