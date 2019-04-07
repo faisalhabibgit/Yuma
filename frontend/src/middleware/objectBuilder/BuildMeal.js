@@ -110,6 +110,8 @@ class BuildMeal {
     meal.setIsAvailable(obj.available);
     meal.setFlags(obj.flags);
     meal.setIngredients(ingredientsList);
+    meal.setHealthLabels(obj.healthLabels);
+    meal.setProteinTypes(obj.proteinTypes);
   
     return meal;
   }
