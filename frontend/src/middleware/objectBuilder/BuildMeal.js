@@ -97,10 +97,12 @@ class BuildMeal {
       ingredients.setWeight(ingredientObj.weight);
       ingredients.setCalories(ingredientObj.calories);
       ingredients.setPrice(ingredientObj.price);
+      ingredients.setAllergens(ingredientObj.allergens);  //TODO: implement proper loop add
+      ingredients.setHealthLabels(ingredientObj.healthLabels);  //TODO: implement proper loop add
 
       ingredientsList.push(ingredients);
     }
-
+    console.log(ingredientsList);
     var meal = new Meal();
     meal.setMealId(obj.mealId);
     meal.setName(obj.name);
