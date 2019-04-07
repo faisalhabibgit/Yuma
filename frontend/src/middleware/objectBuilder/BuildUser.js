@@ -72,9 +72,10 @@ class BuildUser {
     JSONobjToPlan(obj){
         var plan = new Plan();
         plan.setNumOfMeal(obj.numOfMeals);
-        plan.setExtraVeggies(obj.extraVeggies);
-        plan.setExtraProtein(obj.extraProtein);
         plan.setDetails(obj.details);
+        plan.setSpecialRequests(obj.specialRequests);
+        plan.setRequestedProteinTypes(obj.requestedProteinTypes);
+        plan.setDiet(obj.diet);
         return plan;
     }
 
