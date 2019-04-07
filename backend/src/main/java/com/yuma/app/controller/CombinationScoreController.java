@@ -24,9 +24,9 @@ public class CombinationScoreController {
 		this.proteinTypeScoringService = proteinTypeScoringService;
 	}
 
-	@GetMapping("/user/{user}")
-	public EnumMap<ProteinType, Double> getProteinPercentage(@PathVariable ConsumerTO consumerTO) {
+	@GetMapping("/user/{userId}")
+	public EnumMap<ProteinType, Double> getProteinPercentage(@PathVariable String userId) {
 		log.info("fetching best protein combination for user");
-		return combinationScoreService.bestCombinationForUser(proteinTypeScoringService.calculateProteinTypeScore(), consumerTO);
+		return combinationScoreService.bestCombinationForUser(proteinTypeScoringService.calculateProteinTypeScore(), userId);
 	}
 }
