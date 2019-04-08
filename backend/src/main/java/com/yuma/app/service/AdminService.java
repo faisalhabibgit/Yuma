@@ -57,6 +57,6 @@ public class AdminService {
 	}
 
 	public void updateUsersFromYumaServer(){
-		userServiceLogger.info("Updating Users in Database");
+		log.info("Updating Users in Database");
 	}
 }
