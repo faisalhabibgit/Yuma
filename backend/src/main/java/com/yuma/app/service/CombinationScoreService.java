@@ -34,9 +34,7 @@ public class CombinationScoreService {
 		for (ProteinType type : userProteinPreference) {
 			proteinTypeCountMap.put(type, scoreMap.get(type));
 		}
-
 		Map<ProteinType, Double> proteinTypeMap = highestOrder(proteinTypeCountMap);
-
 		EnumMap<ProteinType, Double> topCombo = topCombination(numOfMeals, proteinTypeMap);
 		return topCombo;
 	}
@@ -73,8 +71,11 @@ public class CombinationScoreService {
 	
 	private EnumMap<ProteinType, Double> topCombination(int numOfmeals, Map<ProteinType, Double> proteinTypeMap ){
 		EnumMap<ProteinType, Double> proteinTypeEnumMap = new EnumMap<>(ProteinType.class);
-		for (int i = 0; i < numOfmeals; i++) {
-			proteinTypeEnumMap.put(proteinTypeMap.entrySet().iterator().next().getKey(), proteinTypeMap.entrySet().iterator().next().getValue());
+		int i = 0;
+		for(Map.Entry<ProteinType, Double> entry: proteinTypeMap.entrySet()){
+			if(i  < numOfmeals){ proteinTypeEnumMap.put(entry.getKey(), entry.getValue());}
+			else {break;}
+			i++;
 		}
 		return proteinTypeEnumMap;
 	}
