@@ -44,11 +44,11 @@ public class CombinationScoreService {
 	public HealthLabels convertAllergensToHealthLabels(Allergens allergens){
 		switch (allergens){
 			case DAIRY: return HealthLabels.DAIRY_FREE;
-			case GLUTEN:return HealthLabels.DAIRY_FREE;
-			case PEANUT:return HealthLabels.DAIRY_FREE;
-			case SHELLFISH: return HealthLabels.DAIRY_FREE;
-			case SOY:return HealthLabels.DAIRY_FREE;
-			case TREE_NUTS:return HealthLabels.DAIRY_FREE;
+			case GLUTEN:return HealthLabels.GLUTEN_FREE;
+			case PEANUT:return HealthLabels.PEANUT_FREE;
+			case SHELLFISH: return HealthLabels.SHELLFISH_FREE;
+			case SOY:return HealthLabels.SOY_FREE;
+			case TREE_NUTS:return HealthLabels.TREE_NUT_FREE;
 			default:  return HealthLabels.NONE;
 		}
 		
