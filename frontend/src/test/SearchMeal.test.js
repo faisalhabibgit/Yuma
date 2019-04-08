@@ -13,6 +13,7 @@ beforeAll(() => {
     //stub the componentDidMount method, as it causes a react error
     const cmDidMount = sinon.stub(SearchMeal.prototype, 'componentDidMount').returns(true);
     wrapper = shallow(<SearchMeal checkAuthenticated={stubber} componentDidMount={cmDidMount}/>);
+    
 });
 
 afterAll(() => {
@@ -44,3 +45,13 @@ test('Search meal page renders result limit select box', () =>{
     expect(selectBox.length).toBe(1);
 
 });
+
+test('Search meal page renders meal list', () =>{
+
+  expect(wrapper.length).toBe(1);
+
+  const mealList = wrapper.find("[data-test='meal-list']");
+  expect(mealList.length).toBe(1);
+
+});
+

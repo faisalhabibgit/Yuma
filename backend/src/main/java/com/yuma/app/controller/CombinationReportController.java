@@ -34,22 +34,27 @@ public class CombinationReportController {
 
 	@GetMapping("/weeklycombo")
 	public List<CombinationReportTO> getWeeklyCombo() {
+		log.info("generating weekly meal combo");
 		return this.combinationReportService.generateWeeklyCombination();
 	}
 
 	@PostMapping("/weeklycombo/{index}")
 	public void chosenCombo(@PathVariable int index){
+		
+		log.info("Saving combination report");
 		combinationReportService.saveCombinationReport(index);
 	}
 	
 	@RequestMapping(value = "/download/consumers.csv", produces = "text/csv")
 	public void downloadCSV(HttpServletResponse response) throws IOException {
+		log.info("Downloading CSV");
 		List<Consumer> consumerList = this.combinationReportService.getMostRecentlyAdded().getUserList();
 		WriteCsvToResponse.writeConsumers(response.getWriter(), consumerList);
 	}
 	
 	@GetMapping("/search/{date}")
 	public CombinationReportTO getCombinationReportByDate(@PathVariable DateTime date){
+		log.info("Retrieving combination report from "+ date);
 		return this.combinationReportService.getCombinationReportByDate(date);
 	}
 }

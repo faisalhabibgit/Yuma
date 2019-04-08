@@ -2,8 +2,6 @@ package com.yuma.app.service;
 
 import java.util.*;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,7 +17,7 @@ import com.yuma.app.to.ConsumerTO;
 @Slf4j
 @Service
 public class ConsumerService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerService.class);
+
 	private UserRepository userRepository;
 	private ConversionService conversionService;
 	private RoleRepository roleRepository;
@@ -33,8 +31,7 @@ public class ConsumerService {
 	}
 
 	public Consumer saveUser(SignUpRequest req) {
-		LOGGER.info("saving consumer {}", req.getEmail());
-
+		log.info("saving consumer {}", req.getEmail());
 		Consumer consumer = conversionService.convert(req, Consumer.class);
 		consumer.setPassword(passwordEncoder.encode(consumer.getPassword()));
 		consumer.setActive(false);
@@ -45,29 +42,27 @@ public class ConsumerService {
 	}
 
 	public List<ConsumerTO> list() {
-		LOGGER.info("fetching users list");
-
+		log.info("fetching users list");
 		List<Consumer> consumerList = userRepository.findAll();
 		return convertUserListToUserTOList(consumerList);
 	}
 
 	public ConsumerTO findUserByEmail(String email) {
-		LOGGER.info("fetching consumer by email: {}", email);
+		log.info("fetching consumer by email: %s", email);
 		Consumer consumer = userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Consumer", "email", email));
-		
 		return conversionService.convert(consumer, ConsumerTO.class);
 		
 	}
 	
 	public List<ConsumerTO> findUsersByCompany(String company){
-		LOGGER.info("fetching consumers from company: {}",company);
+		log.info("fetching consumers from company: %s",company);
 		List<Consumer> consumerList = userRepository.findByCompanyIgnoreCase(company);
 		return convertUserListToUserTOList(consumerList);	
 	}
 	
 	public void deleteUserByUserID(String uuid){
-		LOGGER.info("deleting user by uuid: {} ", uuid);
-		userRepository.delete(uuid);
+		log.info("deleting user by uuid: {}", uuid);
+    userRepository.delete(uuid);
 	}
 	
 	public ConsumerTO create(ConsumerTO consumerTO) {
@@ -78,9 +73,8 @@ public class ConsumerService {
 	}
 	
 	public ConsumerTO updateUser(ConsumerTO consumerTO){
-		LOGGER.info("fetching consumer from DB to update");
+		log.info("fetching consumer from DB to update");
 		Consumer consumer = userRepository.findByUserId(consumerTO.getUserId()).orElseThrow(() -> new ResourceNotFoundException("Consumer", "userId", consumerTO.getUserId()));
-		
 		Consumer consumerToUpdate = conversionService.convert(consumerTO, Consumer.class);
 		consumer.updateFrom(consumerToUpdate);
 		Consumer updatedConsumer = userRepository.save(consumer);
@@ -95,7 +89,7 @@ public class ConsumerService {
 	public boolean existsByCompany(String company){ return userRepository.existsByCompany(company);}
 	
 	public List<ConsumerTO> activeUsers(){
-		LOGGER.info("fetching users list");
+		log.info("fetching users list");
 		List<Consumer> consumerList = userRepository.findByIsActiveIsTrue();
 		return convertUserListToUserTOList(consumerList);
 	}
