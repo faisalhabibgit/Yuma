@@ -283,7 +283,7 @@ calculateCalories(e, idx){
                         <br />
                         <label htmlFor={caloriesId}>Calories</label>
                         <input
-                          style={{ marginLeft: 61 }}
+                          style={{ marginLeft: 61}}
                           type="text"
                           name={caloriesId}
                           data-id={idx}
@@ -293,6 +293,40 @@ calculateCalories(e, idx){
                           className="calories"
                           data-test='ingredient-calories'
                         />
+                        <br />
+                        <div className="text-left"   style={{ marginLeft: 352 }}>
+                        <label>Possible Food Allergies</label>
+                        </div>
+                        
+                        
+                      <CardBody className="text-left" style={{paddingLeft:'500px'}}>
+                      <label>
+                      <Input type="checkbox" id="nuts" onChange={this.handleChange} />
+                        Tree Nuts
+                      </label>                       
+                      
+                      <br />
+                      <Label>
+                        <Input type="checkbox" id="dairy" onChange={this.handleChange} />
+                        Dairy
+                      </Label>
+                      <br />
+                      <Label>
+                        <Input type="checkbox" id="gluten" onChange={this.handleChange} />
+                        Gluten
+                      </Label>
+                      <br />
+                      <Label>
+                        <Input type="checkbox" id="shellfish" onChange={this.handleChange} />
+                        Shellfish
+                      </Label>
+                      <br />
+                      <Label>
+                        <Input type="checkbox" id="soy" onChange={this.handleChange} />
+                        Soy
+                      </Label>
+                      </CardBody>
+                      
                         <div>
                          <Button variant="secondary"  onClick={(e) => this.calculateCalories(e, idx)}>Calculate</Button>
                        </div>
@@ -326,47 +360,12 @@ calculateCalories(e, idx){
                   <Button variant="secondary" size="lg" block data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</Button>
                 </div>
                 <br />
-
-
-                <Card  data-test="possible-allergies-card" style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
-                  <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
-                    <h5 style={{color: 'black'}}> Possible Food Allergies</h5>
-                  </CardHeader>
-                <CardBody className="text-left" style={{padding:'50px'}}>
-                     <Label>
-                      <Input type="checkbox" id="nuts" onChange={this.handleChange} />
-                        Tree Nuts
-                      </Label>
-                      <br />
-                      <Label>
-                        <Input type="checkbox" id="dairy" onChange={this.handleChange} />
-                        Dairy
-                      </Label>
-                      <br />
-                      <Label>
-                        <Input type="checkbox" id="gluten" onChange={this.handleChange} />
-                        Gluten
-                      </Label>
-                      <br />
-                      <Label>
-                        <Input type="checkbox" id="shellfish" onChange={this.handleChange} />
-                        Shellfish
-                      </Label>
-                      <br />
-                      <Label>
-                        <Input type="checkbox" id="soy" onChange={this.handleChange} />
-                        Soy
-                      </Label>
-
-
-
-                </CardBody>
-                </Card>
+                                
             </FormGroup>
             <br />
 
               <div class="text-center" >
-              <Button  type="submit" value="Submit" size="lg" block>Submit</Button>
+              <Button   variant="secondary" type="submit" value="Submit" size="lg" block>Submit</Button>
               </div>
             </Col>
           </Form>
