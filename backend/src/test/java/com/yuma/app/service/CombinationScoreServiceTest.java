@@ -2,6 +2,8 @@ package com.yuma.app.service;
 
 import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Plan;
+import com.yuma.app.document.enums.Allergens;
+import com.yuma.app.document.enums.HealthLabels;
 import com.yuma.app.document.enums.ProteinType;
 import com.yuma.app.repository.UserRepository;
 import org.junit.Before;
@@ -29,6 +31,27 @@ public class CombinationScoreServiceTest {
 		proteinTypeScoringService = new ProteinTypeScoringService(userRepository);
 	}
 	
+	@Test
+	public void saveComboWithHealthLabels(){
+
+		List<Consumer> consumers = createConsumersList();
+		consumers.get(0).setUserId("1234");
+		consumers.get(0).setActive(true);
+		Plan plan = new Plan();
+		plan.setNumOfMeals(2);
+		Set<Allergens> allergens = new HashSet<>(Arrays.asList(Allergens.DAIRY, Allergens.PEANUT));
+		Set<ProteinType> proteinTypesConsumer1 = new HashSet<>(Arrays.asList(ProteinType.FISH, ProteinType.BEEF, ProteinType.LAMB));
+		plan.setRequestedProteinTypes(proteinTypesConsumer1);
+		consumers.get(0).setPlan(plan);
+		consumers.get(0).setAllergies(allergens);
+		when(userRepository.findAll()).thenReturn(consumers);
+		when(userRepository.findByUserId("1234")).thenReturn(Optional.of(consumers.get(0)));
+		EnumMap<ProteinType, Double> proteinTypeScore = proteinTypeScoringService.calculateProteinTypeScore();
+		EnumMap<ProteinType, Double> combinationMap = combinationScoreService.bestCombinationForUser(proteinTypeScore, consumers.get(0).getUserId());
+		EnumMap<ProteinType, Set<HealthLabels>> combinationMapHealthLabel = combinationScoreService.saveComboWithHealthLabels(combinationMap, consumers.get(0).getUserId());
+		Set<HealthLabels> healthLabels = combinationMapHealthLabel.entrySet().iterator().next().getValue();
+		assertEquals(healthLabels.size(), allergens.size());
+	}
 	
 	@Test
 	public void bestCombinationForUserTest(){
@@ -44,7 +67,7 @@ public class CombinationScoreServiceTest {
 		when(userRepository.findByUserId("1234")).thenReturn(Optional.of(consumers.get(0)));
 		EnumMap<ProteinType, Double> map = proteinTypeScoringService.calculateProteinTypeScore();
 		EnumMap<ProteinType, Double> map1 = combinationScoreService.bestCombinationForUser(map, consumers.get(0).getUserId());
-		assertEquals(2, map1.size());
+		assertEquals(plan.getNumOfMeals(), map1.size());
 	}
 	
 	private List<Consumer> createConsumersList() {
