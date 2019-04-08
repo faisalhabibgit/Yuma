@@ -2,7 +2,6 @@ package com.yuma.app.service;
 
 import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Plan;
-import com.yuma.app.document.enums.Allergens;
 import com.yuma.app.document.enums.ProteinType;
 import com.yuma.app.repository.UserRepository;
 import org.junit.Before;
@@ -21,7 +20,6 @@ public class CombinationScoreServiceTest {
 	private UserRepository userRepository;
 	private CombinationScoreService combinationScoreService;
 	private ProteinTypeScoringService proteinTypeScoringService;
-	private Set<ProteinType> proteinTypesE;
 
 
 	@Before
@@ -29,7 +27,6 @@ public class CombinationScoreServiceTest {
 		initMocks(this);
 		combinationScoreService = new CombinationScoreService(userRepository);
 		proteinTypeScoringService = new ProteinTypeScoringService(userRepository);
-		Set<ProteinType> proteinTypesE = new HashSet<>() ;
 	}
 	
 	
@@ -40,19 +37,14 @@ public class CombinationScoreServiceTest {
 		consumers.get(0).setActive(true);
 		Plan plan = new Plan();
 		plan.setNumOfMeals(2);
-		Set<ProteinType> proteinTypesTrial = new HashSet<>(Arrays.asList(ProteinType.FISH, ProteinType.BEEF, ProteinType.LAMB));
-		plan.setRequestedProteinTypes(proteinTypesTrial);
-		consumers.get(0).setPlan(plan);
+		Set<ProteinType> proteinTypesConsumer1 = new HashSet<>(Arrays.asList(ProteinType.FISH, ProteinType.BEEF, ProteinType.LAMB));
+		plan.setRequestedProteinTypes(proteinTypesConsumer1);
+		consumers.get(0).setPlan(plan);	
 		when(userRepository.findAll()).thenReturn(consumers);
 		when(userRepository.findByUserId("1234")).thenReturn(Optional.of(consumers.get(0)));
 		EnumMap<ProteinType, Double> map = proteinTypeScoringService.calculateProteinTypeScore();
 		EnumMap<ProteinType, Double> map1 = combinationScoreService.bestCombinationForUser(map, consumers.get(0).getUserId());
-		assertEquals(1, map1.size());
-	}
-	
-	@Test
-	public void converting(){
-		System.out.println(combinationScoreService.convertAllergensToHealthLabels(Allergens.DAIRY));
+		assertEquals(2, map1.size());
 	}
 	
 	private List<Consumer> createConsumersList() {
