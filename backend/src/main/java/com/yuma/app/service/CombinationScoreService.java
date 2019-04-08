@@ -58,11 +58,17 @@ public class CombinationScoreService {
 		for(Allergens allergies: allergens){
 			switch (allergies){
 				case DAIRY: healthLabels.add(HealthLabels.DAIRY_FREE);
+				break;
 				case GLUTEN: healthLabels.add(HealthLabels.GLUTEN_FREE);
+				break;
 				case PEANUT: healthLabels.add(HealthLabels.PEANUT_FREE);
+				break;
 				case SHELLFISH: healthLabels.add(HealthLabels.SHELLFISH_FREE);
+				break;
 				case SOY: healthLabels.add(HealthLabels.SOY_FREE);
+				break;
 				case TREE_NUTS: healthLabels.add(HealthLabels.TREE_NUT_FREE);
+				break;
 				default:  healthLabels.add(HealthLabels.NONE);
 			}
 		}
