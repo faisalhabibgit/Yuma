@@ -41,6 +41,16 @@ public class CombinationScoreService {
 		return topCombo;
 	}
 	
+	public EnumMap<ProteinType, Set<HealthLabels>> saveComboWithHealthLabels(EnumMap<ProteinType, Double> combinationForUser, String userId) {
+		Consumer consumer = userRepository.findByUserId(userId).orElseThrow(() -> new ResourceNotFoundException("Consumer", "userId", userId));
+		Set<HealthLabels> healthLabels = getHealthLabelsFromUser(consumer);
+		EnumMap<ProteinType, Set<HealthLabels>> proteinMapWithLabels = new EnumMap<>(ProteinType.class);
+		for(ProteinType proteinType: combinationForUser.keySet()){
+			proteinMapWithLabels.put(proteinType, healthLabels); 
+		} 
+		return proteinMapWithLabels;
+	}
+	
 	private Set<HealthLabels> getHealthLabelsFromUser(Consumer consumer){
 		return convertAllergensToHealthLabels(consumer.getAllergies());
 	}
