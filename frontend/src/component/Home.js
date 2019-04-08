@@ -5,7 +5,7 @@ import history from './images/history.png';
 import dashboard from './images/dashboard.png';
 import search from './images/search.png';
 import add from './images/add.png';
-import delivery from './images/delivery.jpg'
+import delivery from './images/delivery.png'
 import {
     CardDeck,
     Card,  CardText, CardBody,
