@@ -1,10 +1,11 @@
 package com.yuma.app.service;
 
 import com.yuma.app.document.Consumer;
+import com.yuma.app.document.enums.Allergens;
+import com.yuma.app.document.enums.HealthLabels;
 import com.yuma.app.document.enums.ProteinType;
 import com.yuma.app.exception.ResourceNotFoundException;
 import com.yuma.app.repository.UserRepository;
-import com.yuma.app.to.ConsumerTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,18 @@ public class CombinationScoreService {
 		return topCombo;
 	}
 	
+	public HealthLabels convertAllergensToHealthLabels(Allergens allergens){
+		switch (allergens){
+			case DAIRY: return HealthLabels.DAIRY_FREE;
+			case GLUTEN:return HealthLabels.DAIRY_FREE;
+			case PEANUT:return HealthLabels.DAIRY_FREE;
+			case SHELLFISH: return HealthLabels.DAIRY_FREE;
+			case SOY:return HealthLabels.DAIRY_FREE;
+			case TREE_NUTS:return HealthLabels.DAIRY_FREE;
+			default:  return HealthLabels.NONE;
+		}
+		
+	}
 	private EnumMap<ProteinType, Double> topCombination(int numOfmeals, Map<ProteinType, Double> proteinTypeMap ){
 		EnumMap<ProteinType, Double> proteinTypeEnumMap = new EnumMap<>(ProteinType.class);
 		for (int i = 0; i < numOfmeals; i++) {
