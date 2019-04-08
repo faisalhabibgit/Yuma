@@ -41,11 +41,11 @@ public class CombinationScoreService {
 		return topCombo;
 	}
 	
-	public Set<HealthLabels> getHealthLabelsFromUser(Consumer consumer){
+	private Set<HealthLabels> getHealthLabelsFromUser(Consumer consumer){
 		return convertAllergensToHealthLabels(consumer.getAllergies());
 	}
 	
-	public Set<HealthLabels> convertAllergensToHealthLabels(Set<Allergens> allergens){
+	private Set<HealthLabels> convertAllergensToHealthLabels(Set<Allergens> allergens){
 		Set<HealthLabels> healthLabels = new HashSet<>();
 		for(Allergens allergies: allergens){
 			switch (allergies){
