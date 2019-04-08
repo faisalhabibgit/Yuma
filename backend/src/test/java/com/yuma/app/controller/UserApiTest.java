@@ -1,7 +1,7 @@
 package com.yuma.app.controller;
 
 import com.yuma.app.HelperCombo;
-import com.yuma.app.to.UserTO;
+import com.yuma.app.to.ConsumerTO;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.After;
 import org.junit.Before;
@@ -20,7 +20,7 @@ public class UserApiTest {
 	@Inject
 	WebApplicationContext context;
 	private HelperCombo helper;
-	private UserTO consumerTo1, consumerTo2;
+	private ConsumerTO consumerTo1, consumerTo2;
 	private String userId = "pl";
 	private String fName = "John";
 	private String lName = "Smith";
@@ -73,8 +73,8 @@ public class UserApiTest {
 			statusCode(200);
 	}
 
-	public UserTO prepareUserTO1() {
-		UserTO userTO = new UserTO();
+	public ConsumerTO prepareUserTO1() {
+		ConsumerTO userTO = new ConsumerTO();
 		userTO.setUserId("id");
 		userTO.setFirstName("first name");
 		userTO.setLastName("last name");
