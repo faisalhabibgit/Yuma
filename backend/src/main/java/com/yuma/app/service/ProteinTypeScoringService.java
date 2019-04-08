@@ -71,7 +71,6 @@ public class ProteinTypeScoringService {
 	private List<Set<ProteinType>> getListOfSetsOfUserProteinTypes() {
 		List<Consumer> usersList = userRepository.findAll();
 		List<Plan> usersPlans = usersList.stream().map(Consumer::getPlan).collect(Collectors.toList());
-
 		return usersPlans.stream().map(Plan::getRequestedProteinTypes).collect(Collectors.toList());
 	}
 }
