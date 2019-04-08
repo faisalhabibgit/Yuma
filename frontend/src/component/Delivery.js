@@ -1,42 +1,50 @@
-// import React, { Component } from 'react';
-// import {
-//     Container, Table
-// } from 'reactstrap';
+import React, { Component } from 'react';
+import {
+    Container, Table, Col, Form,
+    FormGroup, Label, Input,
+    Button, Card, CardHeader,  CardBody,
+    CardDeck
+} from 'reactstrap';
 
-// import Retriever from '../middleware/Retriever';
+import Retriever from '../middleware/Retriever';
 
-// render() 
+class Delivery extends Component{
+
+    // constructor(props) {
+    //     super(props);
+
+    //     this.state = {
+
+    //     };
+
+    //     this.handleSubmit = this.handleSubmit.bind(this);
+
+render() {
       
-//     return(
+    return(
+      <Container>
 
-//       <Container>
-
-//         <h5 className="text-center"> Number of Users:{' '+this.state.apiObject.length} </h5>
-//         <div style={{ maxWidth:'1800px', maxHeight:'275px', overflow:'scroll'}}>
-//           <Table bordered condensed>
-//             <thead style={{background: '#599BE9',color:'white'}}>
-//             <th className="text-center" >First Name</th>
-//             <th className="text-center" >Last Name</th>
-//             <th className="text-center" >isActive</th>
-//             </thead>
-//             <tbody style={{background:'#d3d3d3'}}>
-
-//             {
-//               this.state.apiObject.map(x =>
-//                 <tr>
-//                   <td>{x.firstName.toString()}</td>
-//                   <td>{x.lastName.toString()}</td>
-//                   <td>{x.isActive.toString()}</td>
-//                 </tr>
-//               )}
-
-//             </tbody>
-//           </Table>
-//         </div>
-//       </Container>
-//   );
+        <CardDeck style={{padding:'12px', height:'275px'}}>
+          <Card>           
+            <CardBody>
+                <label> Create a checklist for today's  meal delivery</label>
+            <div>
+             <Button onClick style={{ background: '#599BE9' }}>Create</Button>
+            </div>
+            </CardBody>
+          </Card>
 
 
+          <Card>            
+            <CardBody>
+            </CardBody>
+          </Card>
 
+        </CardDeck>
 
-// export default Delivery;
+      </Container>
+  );
+}
+
+}
+export default Delivery;
