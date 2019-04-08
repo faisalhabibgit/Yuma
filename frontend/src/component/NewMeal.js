@@ -348,19 +348,20 @@ calculateCalories(e, idx){
                         <div>
                          <Button variant="secondary"  data-test="delete-ingredient-button" onClick={(e) => { this.removeIngredient(e, idx) }}> Remove </Button>
                        </div>
+                       <br />
+                       
                       </div>
 
                     )
                   })
                 }
+                <div className="text-left">
+                 <Button variant="secondary" data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</Button>
+                </div>
                 </CardBody>
                 </Card>
                 <br />
-                <div>
-                  <Button variant="secondary" size="lg" block data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</Button>
-                </div>
-                <br />
-                                
+                
             </FormGroup>
             <br />
 
