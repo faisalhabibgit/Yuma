@@ -2,6 +2,7 @@ package com.yuma.app.service;
 
 import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Plan;
+import com.yuma.app.document.enums.Allergens;
 import com.yuma.app.document.enums.ProteinType;
 import com.yuma.app.repository.UserRepository;
 import org.junit.Before;
@@ -47,6 +48,11 @@ public class CombinationScoreServiceTest {
 		EnumMap<ProteinType, Double> map = proteinTypeScoringService.calculateProteinTypeScore();
 		EnumMap<ProteinType, Double> map1 = combinationScoreService.bestCombinationForUser(map, consumers.get(0).getUserId());
 		assertEquals(1, map1.size());
+	}
+	
+	@Test
+	public void converting(){
+		System.out.println(combinationScoreService.convertAllergensToHealthLabels(Allergens.DAIRY));
 	}
 	
 	private List<Consumer> createConsumersList() {
