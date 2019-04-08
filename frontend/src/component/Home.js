@@ -5,6 +5,7 @@ import history from './images/history.png';
 import dashboard from './images/dashboard.png';
 import search from './images/search.png';
 import add from './images/add.png';
+import delivery from './images/delivery.jpg'
 import {
     CardDeck,
     Card,  CardText, CardBody,
@@ -83,6 +84,16 @@ class Home extends Component {
                       <h3 style={{color: '#599BE9'}}>Meal History</h3>
                     </CardTitle>
                     <CardText>View Past Meal Combinations </CardText>
+                  </CardBody>
+                </Card>
+
+                <Card  style={{border:'none', height:'200px'}}>
+                  <CardBody data-test="delivery-card">
+                    <Link to="/Delivery"> <img data-test='delivery-button' src={delivery} height='120px' alt="delivery"/> </Link>
+                    <CardTitle>
+                      <h3 style={{color: '#599BE9'}}>Delivery</h3>
+                    </CardTitle>
+                    <CardText>Make Delivery Checklist</CardText>
                   </CardBody>
                 </Card>
 
