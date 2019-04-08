@@ -27,7 +27,7 @@ render() {
         <CardDeck style={{padding:'12px', height:'275px'}}>
           <Card>           
             <CardBody>
-                <label> Create a checklist for today's  meal delivery</label>
+                <label style={{ marginLeft: 90 }}> Create a checklist for today's  meal delivery</label>
             <div>
              <Button onClick style={{ background: '#599BE9' }}>Create</Button>
             </div>
