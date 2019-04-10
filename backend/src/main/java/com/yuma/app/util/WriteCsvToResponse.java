@@ -3,17 +3,15 @@ package com.yuma.app.util;
 import java.io.PrintWriter;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import com.opencsv.CSVWriter;
 import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Ingredients;
 import com.yuma.app.document.Meal;
 
+@Slf4j
 public class WriteCsvToResponse {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(WriteCsvToResponse.class);
 
 	public static void writeConsumers(PrintWriter writer, List<Consumer> consumers)  {
 
@@ -29,7 +27,7 @@ public class WriteCsvToResponse {
 			for (Consumer consumer : consumers) {
 				StringBuilder fullName = new StringBuilder();
 				fullName.append(consumer.getFirstName().toUpperCase()).append(" ").append(consumer.getLastName());
-				String companyName = consumer.getCompany().getAlias();
+				String companyName = consumer.getCompany();
 				for (Meal meal : consumer.getMealList()) {
 					String[] data = {
 						companyName,
@@ -40,9 +38,9 @@ public class WriteCsvToResponse {
 					csvWriter.writeNext(data);
 				}
 			}
-			LOGGER.info("Write CSV using BeanToCsv successfully!");
+			log.info("Write CSV using BeanToCsv successfully!");
 		}catch (Exception e) {
-			LOGGER.info("Writing CSV error!");
+			log.info("Writing CSV error!");
 			e.printStackTrace();
 		}
 	}

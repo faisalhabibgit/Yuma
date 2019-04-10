@@ -74,7 +74,7 @@ class Dashboard extends Component {
         </CardDeck>
 
 
-        <CardDeck data-test="users-card" style={{padding:'12px', height:'450px'}}>
+        <CardDeck data-test="users-card" style={{padding:'12px', height:'620px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
               <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Users </h5>

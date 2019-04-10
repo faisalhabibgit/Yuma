@@ -213,7 +213,7 @@ calculateCalories(e, idx){
     return (
       <div style={{background: '#ADB7BF'}} >
       <Container>
-     
+
         <Col sm="12" md={{ size: 12}}>
           <CardHeader  className="text-center" style={{background: '#B9C5D5', borderRadius: 10}}>
             <h2>Enter a New Meal</h2>
@@ -224,7 +224,7 @@ calculateCalories(e, idx){
             <Col >
               <FormGroup>
               <CardDeck data-test="name" style={{padding:'12px', height:'200px', borderRadius: 10}}>
-                <Card>
+                <Card  data-test="name-card">
                   <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
                     <h5 style={{color: 'black'}}> Name</h5>
                   </CardHeader>
@@ -240,7 +240,7 @@ calculateCalories(e, idx){
                 </CardBody>
                 </Card>
 
-                <Card>
+                <Card  data-test="meal-description-card">
                   <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
                     <h5 style={{color: 'black'}}> Meal Description</h5>
                   </CardHeader>
@@ -257,20 +257,15 @@ calculateCalories(e, idx){
                 </CardBody>
                 </Card>
               </CardDeck>
-                <br />
-
-                <div>
-                  <Button variant="secondary" size="lg" block data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</Button>
-                </div>
                 <br /><br />
-                               
-                <Card style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
+
+                <Card  data-test="ingredient-card" style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
                 <CardBody className="text-center">
                 {
                   this.state.ingredients.map((val, idx) => {
                     let ingredientId = `name-${idx}`, weightId = `weight-${idx}`, caloriesId = `calories-${idx}`, priceId = `price-${idx}`;
                     return (
-                     
+
                       <div data-test="initial-ingredient" key={idx}>
                         <br />
                         <label htmlFor={ingredientId}>{`Ingredient #${idx + 1}`}</label>
@@ -283,6 +278,7 @@ calculateCalories(e, idx){
                           value={this.state.ingredients[idx].name}
                           onChange={this.handleChange}
                           className="name"
+                          data-test='ingredient-name'
                         />
                         <br />
                         <label htmlFor={weightId}>Weight</label>
@@ -295,6 +291,7 @@ calculateCalories(e, idx){
                           value={this.state.ingredients[idx].weight}
                           onChange={this.handleChange}
                           className="weight"
+                          data-test='ingredient-weight'
                         />
                         <br />
                         <label htmlFor={caloriesId}>Calories</label>
@@ -307,6 +304,7 @@ calculateCalories(e, idx){
                           value={this.state.ingredients[idx].calories}
                           onChange={this.handleChange }
                           className="calories"
+                          data-test='ingredient-calories'
                         />
                         <div>
                          <Button variant="secondary"  onClick={(e) => this.calculateCalories(e, idx)}>Calculate</Button>
@@ -322,6 +320,7 @@ calculateCalories(e, idx){
                           value={this.state.ingredients[idx].price}
                           onChange={this.handleChange}
                           className="price"
+                          data-test='ingredient-price'
                         />
                         <br />
                         <br />
@@ -329,20 +328,24 @@ calculateCalories(e, idx){
                          <Button variant="secondary"  data-test="delete-ingredient-button" onClick={(e) => { this.removeIngredient(e, idx) }}> Remove </Button>
                        </div>
                       </div>
-                      
+
                     )
                   })
-                }                
+                }
                 </CardBody>
                 </Card>
                 <br />
-                
-                
-                <Card style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
+                <div>
+                  <Button variant="secondary" size="lg" block data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</Button>
+                </div>
+                <br />
+
+
+                <Card  data-test="possible-allergies-card" style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
                   <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
                     <h5 style={{color: 'black'}}> Possible Food Allergies</h5>
                   </CardHeader>
-                <CardBody className="text-left" style={{padding:'50px'}}>              
+                <CardBody className="text-left" style={{padding:'50px'}}>
                      <Label>
                       <Input type="checkbox" id="nuts" onChange={this.handleChange} />
                         Tree Nuts
@@ -367,18 +370,18 @@ calculateCalories(e, idx){
                         <Input type="checkbox" id="soy" onChange={this.handleChange} />
                         Soy
                       </Label>
-                    
-                 
-                
+
+
+
                 </CardBody>
                 </Card>
             </FormGroup>
             <br />
-              
+
               <div class="text-center" >
               <Button  type="submit" value="Submit" size="lg" block>Submit</Button>
               </div>
-            </Col>            
+            </Col>
           </Form>
         </Col>
       </Container>

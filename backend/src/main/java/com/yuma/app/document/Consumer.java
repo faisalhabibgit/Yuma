@@ -32,7 +32,7 @@ public class Consumer {
 	private boolean isActive;
 	private String timestamp;
 	private String yumaServerId;
-	private Company company;
+	private String company;
 	@DBRef
 	private Set<Role> roles;
 	private List<Meal> mealList = new ArrayList<>();
