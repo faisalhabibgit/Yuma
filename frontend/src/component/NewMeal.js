@@ -23,7 +23,6 @@ class NewMeal extends Component {
     super(props);
 
     this.checkAuthenticated();
-
     this.state = {
       name: '',
       description: '',
@@ -54,10 +53,10 @@ class NewMeal extends Component {
 
     const apiToken = new ApiToken();
     if (!apiToken.isAuthenticated()) {
-      console.log('User Not Logged');
+      CustomLogging.error('Check Authentification NewMeal: FAIL','NewMeal');
       this.props.history.push(`/Login`)
     } else {
-      console.log('User Login Success');
+      CustomLogging.info('Check Authentification NewMeal: PASS','NewMeal');
     }
   }
 
@@ -90,7 +89,7 @@ class NewMeal extends Component {
 
       let ingredients = [...this.state.ingredients];
       ingredients[event.target.dataset.id][event.target.className] = event.target.value;
-      this.setState({ ingredients: ingredients }, () => console.log(this.state.ingredients));
+      this.setState({ ingredients: ingredients }, () => CustomLogging.info(this.state.ingredients));
 
     } else {
 
@@ -113,8 +112,8 @@ addIngredient(e){
 calculateCalories(e, idx){
     e.preventDefault();
     var index = idx;
-    console.log("this" + this)
-    console.log("calulateCalories(index), index = " + index )
+    CustomLogging.info("this" + this)
+    CustomLogging.info("calulateCalories(index), index = " + index )
     var ingr = this.state.ingredients[index]['name'];
     var weight = this.state.ingredients[index]['weight'];
     var ingredientTempList = this.state.ingredients
@@ -153,7 +152,7 @@ calculateCalories(e, idx){
 
     for (let i = 0; i < this.state.ingredients.length; i++) {
       var anIngredient = new Ingredients();
-      console.log("ingedient: " + i);
+      CustomElementRegistry.info("ingredient: " + i);
 
       anIngredient.setName(this.state.ingredients[i]['name']);
       anIngredient.setWeight(this.state.ingredients[i]['weight']);

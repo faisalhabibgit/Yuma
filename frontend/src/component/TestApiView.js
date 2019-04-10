@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import ApiToken from '../middleware/ApiToken';
+import CustomLogging from "../CustomLogging";
 
 class TestApiView extends Component {
 
@@ -10,7 +11,7 @@ class TestApiView extends Component {
         apiToken.getToken('http://localhost:2020/api/auth/signin', 
         {email: 'whatsup1@email.com',
         password: 'idk1'})
-        .then(data => console.log('Token from cookie: ' + apiToken.getCookie('yuma-token')));
+        .then(data => CustomLogging.info('Token from cookie: ' + apiToken.getCookie('yuma-token')));
 
         return (
             <div>
