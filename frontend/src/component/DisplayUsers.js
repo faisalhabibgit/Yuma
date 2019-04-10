@@ -68,7 +68,7 @@ class DisplayUsers extends Component {
       matchedArr = this.state.apiObject.filter((element) => (element.firstName.charAt(0).toLowerCase() === firstLetter.toLowerCase() && element.lastName.charAt(0).toLowerCase() === lastLetter.toLowerCase()))
     }
     this.setState({displayData: matchedArr});
-    CustomLogging.info('displaying matched users with first letter: ' + this.state.firstLetter + " " + 'last letter: ' + this.state.lastLetter,'DisplayUsers');
+    CustomLogging.info('displaying matched users with first letter: ' + this.state.firstLetter + 'last letter: ' + this.state.lastLetter,'DisplayUsers');
   }
 
   prepareLastLetterAlphabets ()  {
@@ -106,7 +106,7 @@ class DisplayUsers extends Component {
     }
 
     this.setState({displayData: matchedArr});
-    CustomLogging.info('displaying matched users with first letter: ' + this.state.firstLetter + " " + 'last letter: ' + this.state.lastLetter,'DisplayUsers');
+    CustomLogging.info('displaying matched users with first letter: ' + this.state.firstLetter + 'last letter: ' + this.state.lastLetter,'DisplayUsers');
   }
 
   render() {
