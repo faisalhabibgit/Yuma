@@ -6,7 +6,7 @@ import {
   Container,
 } from 'reactstrap';
 import ApiToken from '../middleware/ApiToken';
-
+import CustomLogging from '../CustomLogging';
 //const REDIRECTDASHBOARD='/';
 
 class Login extends Component {
@@ -16,9 +16,9 @@ class Login extends Component {
 
     const apiToken = new ApiToken();
     if(!apiToken.isAuthenticated()){
-      console.log('User Not Logged');
+      CustomLogging.error('User Not Logged','Login');
     }else{
-      console.log('User Login Success');
+      CustomLogging.info('User Login Success','Login');
       this.props.history.push(`/`)
     }
 

@@ -9,6 +9,7 @@ import AvailableMeals from "./AvailableMeals";
 import DisplayMeals from "./DisplayMeals";
 import DisplayUsers from "./DisplayUsers";
 import MealCombo from "./MealCombo";
+import CustomLogging from '../CustomLogging';
 
 class Dashboard extends Component {
 
@@ -27,10 +28,10 @@ class Dashboard extends Component {
 
     const apiToken = new ApiToken();
     if (!apiToken.isAuthenticated()) {
-      console.log('Check Authentification Dashboard: FAIL');
+      CustomLogging.error('Check Authentification Dashboard: FAIL','dashboard');
       this.props.history.push(`/Login`)
     } else {
-      console.log('Check Authentification Dashboard: PASS');
+      CustomLogging.info('Check Authentification Dashboard: PASS','Dashboard');
     }
 
   }

@@ -3,6 +3,7 @@ import {
   Container, Table
 } from 'reactstrap';
 import Retriever from '../middleware/Retriever';
+import CustomLogging from '../CustomLogging';
 
 class DisplayUsers extends Component {
 
@@ -21,6 +22,7 @@ class DisplayUsers extends Component {
 
   componentDidMount() {
     const retriever = new Retriever('api/rest/all');
+    CustomLogging.info('retrieving all users','DisplayUsers');
     retriever.getEntityPromise()
       .then((obj) => {
         var matchedArr = [];
@@ -66,6 +68,7 @@ class DisplayUsers extends Component {
       matchedArr = this.state.apiObject.filter((element) => (element.firstName.charAt(0).toLowerCase() === firstLetter.toLowerCase() && element.lastName.charAt(0).toLowerCase() === lastLetter.toLowerCase()))
     }
     this.setState({displayData: matchedArr});
+    CustomLogging.info('displaying matched users with first letter: ' + this.state.firstLetter + " " + 'last letter: ' + this.state.lastLetter,'DisplayUsers');
   }
 
   prepareLastLetterAlphabets ()  {
@@ -103,6 +106,7 @@ class DisplayUsers extends Component {
     }
 
     this.setState({displayData: matchedArr});
+    CustomLogging.info('displaying matched users with first letter: ' + this.state.firstLetter + " " + 'last letter: ' + this.state.lastLetter,'DisplayUsers');
   }
 
   render() {

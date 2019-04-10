@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Retriever from '../middleware/Retriever';
+import CustomLogging from '../CustomLogging';
 
 
 import {
@@ -18,6 +19,7 @@ class AvailableMeals extends Component {
 
   componentDidMount() {
     const retriever = new Retriever('api/meals/availablemeals');
+    CustomLogging.info("retrieving available meals","AvailableMeals");
     retriever.getEntityPromise()
       .then((obj) => {
         var matchedArr = [];
