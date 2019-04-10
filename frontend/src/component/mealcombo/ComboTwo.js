@@ -30,7 +30,7 @@ class ComboTwo extends Component {
 
     getDisplay(){
         if (this.state.apiObject === undefined || this.state.apiObject.length === 0) {
-            CustomLogging.alert("no combination report 2 to display","ComboOne");
+            CustomLogging.alert("no combination report 2 to display","ComboTwo");
             return <Loading />
         } else {
             CustomLogging.info("displaying combination report 2","ComboTwo");
