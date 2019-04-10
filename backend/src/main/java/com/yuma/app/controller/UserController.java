@@ -33,6 +33,11 @@ public class UserController {
 		log.info("retrieving user list from DB");
 		return this.userService.list();
 	}
+
+	@DeleteMapping()
+	public void deleteAllUsers(){
+		this.userService.deleteAllUsers();
+	}
 	
 	@DeleteMapping("/{uuid}")
 	public void deleteUserByUserID(@PathVariable String uuid) {
