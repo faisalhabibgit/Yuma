@@ -12,14 +12,6 @@ import Meal from '../middleware/objects/Meal';
 import BuildMeal from '../middleware/objectBuilder/BuildMeal';
 import CustomLogging from '../CustomLogging';
 
-const info = new CustomLogging ('info');
-const error = new CustomLogging('error');
-const alert = new CustomLogging('alert');
-
-error.setBodyStyle({ color: 'red', size: '0.75rem' });
-info.setBodyStyle({ color: 'green', size: '0.75rem' });
-info.log('Ingredient is added!'); // sample
-error.log('something is not correct!'); // sample 
 
 
 
@@ -115,7 +107,7 @@ addIngredient(e){
     this.setState((prevState) => ({
       ingredients: [...prevState.ingredients, { name: "", weight: "", calories: "", price: "" }],
     }));
-    info.log('Ingredient is added!');
+    CustomLogging.info('Ingredient is added!',"New Meal");
 };
 
 calculateCalories(e, idx){
@@ -150,7 +142,7 @@ calculateCalories(e, idx){
     e.preventDefault();
     this.state.ingredients.splice(index, 1);
     this.setState({ ingredients: this.state.ingredients });
-  info.log('Ingredient is removed!');
+ // error.log('Ingredient is removed!');
   };
 
 
