@@ -45,10 +45,13 @@ class Login extends Component {
     
     if(this.state.email.length<1){
       alert('Please enter an email address');
+      CustomLogging.alert('No email added','Login');
     } else if(this.state.password.length<1){
       alert('Please enter a password');
+      CustomLogging.alert('No password','Login');
     }else{
       this.postLogin();
+      CustomLogging.info('logging in..','Login');
     }
   }
   
@@ -59,8 +62,8 @@ class Login extends Component {
         email: this.state.email,
         password: this.state.password
       })
-      .then(msg => console.log(msg))
-      .then(x => console.log('Attempting to Redirect...'))
+      .then(msg => CustomLogging.info(msg,'Login'))
+      .then(x => CustomLogging.info('Attempting to Redirect...','Login'))
       .then(y => this.props.history.push(`/`));
   }
   

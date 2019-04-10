@@ -18,7 +18,7 @@ class ComboTwo extends Component {
     }
 
     componentDidMount() {
-        CustomLogging.info('component mounted','ComboTwo');
+        CustomLogging.info('retrieving combo two','ComboTwo');
         const retriever = new Retriever('api/combinationreport/weeklycombo');
         retriever.getEntityPromise()
             .then((obj) => {
@@ -33,7 +33,7 @@ class ComboTwo extends Component {
             CustomLogging.alert("no combination report 2 to display","ComboOne");
             return <Loading />
         } else {
-            CustomLogging.alert("displaying combination report 2","ComboTwo");
+            CustomLogging.info("displaying combination report 2","ComboTwo");
             return <DisplayCombo data={this.state.apiObject} />
         }
     }
