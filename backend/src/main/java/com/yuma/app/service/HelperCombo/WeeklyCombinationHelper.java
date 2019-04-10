@@ -1,16 +1,17 @@
-package com.yuma.app.util.HelperCombo;
+package com.yuma.app.service.HelperCombo;
 
-import com.yuma.app.util.HelperCombo.CombinationReportHelper;
 import com.yuma.app.document.CombinationReport;
 import com.yuma.app.document.Meal;
 import com.yuma.app.document.WeeklyCombination;
 import com.yuma.app.repository.MealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class WeeklyCombinationHelper {
 
+	@Autowired
 	private CombinationReportHelper combinationReportHelper;
 	@Autowired
 	private MealRepository mealRepository;
