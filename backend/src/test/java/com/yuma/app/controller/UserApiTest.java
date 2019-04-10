@@ -1,7 +1,6 @@
 package com.yuma.app.controller;
 
 import com.yuma.app.HelperCombo;
-import com.yuma.app.document.Company;
 import com.yuma.app.to.UserTO;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.After;
@@ -28,8 +27,6 @@ public class UserApiTest {
 	private String email = "john.smith@gmail.com";
 	private String password = "password";
 	private String companyName = "google";
-	private Company company = new Company(companyName, companyName);
-
 
 	private String userId1 = "pl";
 	@Before
@@ -84,7 +81,6 @@ public class UserApiTest {
 		userTO.setPassword("password");
 		userTO.setEnabled(true);
 		userTO.setEmail("test@email.com");
-		userTO.setCompany(company);
 
 		return userTO;
 	}

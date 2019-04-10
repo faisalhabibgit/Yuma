@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.yuma.app.service.HelperCombo.CombinationReportHelper;
+import com.yuma.app.service.HelperCombo.WeeklyCombinationHelper;
 import lombok.extern.slf4j.Slf4j;
 
 import org.joda.time.DateTime;
@@ -26,10 +28,14 @@ import com.yuma.app.util.WriteCsvToResponse;
 public class CombinationReportController {
 	
 	CombinationReportService combinationReportService;
+	CombinationReportHelper combinationReportHelper;
+	WeeklyCombinationHelper weeklyCombinationHelper;
 	
 	@Autowired
-	public CombinationReportController(CombinationReportService combinationReportService) {
+	public CombinationReportController(CombinationReportService combinationReportService, CombinationReportHelper combinationReportHelper, WeeklyCombinationHelper weeklyCombinationHelper) {
 		this.combinationReportService = combinationReportService;
+		this.combinationReportHelper = combinationReportHelper;
+		this.weeklyCombinationHelper =weeklyCombinationHelper;
 	}
 
 	@GetMapping("/weeklycombo")
