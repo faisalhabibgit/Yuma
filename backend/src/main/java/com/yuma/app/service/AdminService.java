@@ -42,8 +42,9 @@ public class AdminService {
 	}
 
 	public Admin saveAdmin(SignUpRequest req) {
-		log.info("saving admin {}", req.getEmail());
 
+		log.info("saving admin {}", req.getEmail());
+    
 		Admin admin = conversionService.convert(req, Admin.class);
 		admin.setPassword(passwordEncoder.encode(admin.getPassword()));
 		admin.setActive(true);

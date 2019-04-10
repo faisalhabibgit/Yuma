@@ -47,7 +47,7 @@ public class CombinationReportService {
 		this.addedMeals = new ArrayList<>();
 		this.possibleCombinations = new ArrayList<>();
 	}
-  
+
 	public CombinationReport getMostRecentlyAdded() {
 		log.info("Retrieving most recently added combination report.");
 

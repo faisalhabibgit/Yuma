@@ -32,7 +32,6 @@ public class ConsumerService {
 
 	public Consumer saveUser(SignUpRequest req) {
 		log.info("saving consumer {}", req.getEmail());
-
 		Consumer consumer = conversionService.convert(req, Consumer.class);
 		consumer.setPassword(passwordEncoder.encode(consumer.getPassword()));
 		consumer.setActive(false);
@@ -44,7 +43,6 @@ public class ConsumerService {
 
 	public List<ConsumerTO> list() {
 		log.info("fetching users list");
-
 		List<Consumer> consumerList = userRepository.findAll();
 		return convertUserListToUserTOList(consumerList);
 	}
@@ -53,9 +51,8 @@ public class ConsumerService {
 		log.info("fetching consumer by email: %s", email);
 
 		Consumer consumer = userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Consumer", "email", email));
-		
+
 		return conversionService.convert(consumer, ConsumerTO.class);
-		
 	}
 	
 	public List<ConsumerTO> findUsersByCompany(String company){
@@ -81,7 +78,6 @@ public class ConsumerService {
 	public ConsumerTO updateUser(ConsumerTO consumerTO){
 		log.info("fetching consumer from DB to update");
 		Consumer consumer = userRepository.findByUserId(consumerTO.getUserId()).orElseThrow(() -> new ResourceNotFoundException("Consumer", "userId", consumerTO.getUserId()));
-		
 		Consumer consumerToUpdate = conversionService.convert(consumerTO, Consumer.class);
 		consumer.updateFrom(consumerToUpdate);
 		Consumer updatedConsumer = userRepository.save(consumer);

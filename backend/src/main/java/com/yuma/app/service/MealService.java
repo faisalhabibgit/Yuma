@@ -74,7 +74,7 @@ public class MealService {
 		}
 	}
 	
-	public List<MealTO> convertMealToMealTO(List<Meal> meals){
+	private List<MealTO> convertMealToMealTO(List<Meal> meals){
 		log.info("converting Meal List to MealTO list with description %s in %s", MealService.class);
 
 		List<MealTO> mealTos = new ArrayList<>();
