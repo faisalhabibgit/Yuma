@@ -63,4 +63,10 @@ public class UserController {
 		log.info("updating user from DB in controller");
 		return this.userService.updateUser(userTO);
 	}
+
+	@GetMapping("/listcompanies")
+	public List<String> listCompanies(){
+		log.info("updating user companies from DB in controller");
+		return this.userService.listUserCompanies();
+	}
 }
