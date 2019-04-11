@@ -2,12 +2,13 @@ import ApiToken from '../ApiToken';
 import User from '../objects/User';
 import Plan from '../objects/Plan';
 import BuildMeal from '../objectBuilder/BuildMeal';
+import CustomLogging from '../../CustomLogging';
 
 
 class BuildUser {
 
     constructor() {
-        console.log("Building User...");
+        CustomLogging.info("Building User...");
     }
 
     getUserPromiseObj(apiPath) {
