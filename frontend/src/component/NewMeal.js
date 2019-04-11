@@ -297,6 +297,8 @@ calculateCalories(e, idx){
                           data-test='ingredient-calories'
                         />
                         <br />
+                        <br />
+                        <br />
                         <div className="text-left"   style={{ marginLeft: 352 }}>
                         <label>Possible Food Allergies</label>
                         </div>
