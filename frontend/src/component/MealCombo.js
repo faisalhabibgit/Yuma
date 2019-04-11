@@ -24,7 +24,6 @@ class MealCombo extends Component {
       ModalContent: '',
       downloadCSV: '',
       hiddenElement: null,
-      //active: false
       background: '#599BE9',
      
     };
@@ -92,6 +91,7 @@ class MealCombo extends Component {
   handleSubmit(e) {
     CustomLogging.info("Selected Combo"+e.target.id,"MealCombo");
 
+    this.setState({background:'red'});
     this.poster.selectMealCombo(e.target.id).then(() => {
 
       const retriever = new Retriever('api/combinationreport/download/consumers.csv');      
@@ -102,7 +102,7 @@ class MealCombo extends Component {
         link.target = '_blank';
         link.download = 'report.csv';
 
-        //this.setState({background: "red"});
+        this.setState({background: "red"});
         //this.setState({ active: true }) 
         this.setState({ hiddenElement : link});
         this.setState({ downloadCSV: <Button style={{ background: '#599BE9', margin:'15px' }} type="submit" onClick={this.handleDownloadCSV} >Download CSV</Button> })
@@ -132,7 +132,7 @@ class MealCombo extends Component {
               </div>
               <div style={{ padding: '15px' }}>
                 <Button data-test="combo-one-button-select" style={{background:this.state.background}} onClick={this.handleSubmit} id='1' type="submit">Select</Button>
-              </div>
+              </div> 
             </CardBody>
           </Card>
           <Card>
