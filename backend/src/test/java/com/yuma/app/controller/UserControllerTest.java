@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import com.yuma.app.service.ConsumerService;
@@ -32,6 +33,13 @@ public class UserControllerTest {
 		when(userService.list()).thenReturn(new ArrayList<UserTO>());
 		userController.getAll();
 		verify(userService).list();
+	}
+
+	@Test
+	public void getAllUserCompaniesTest() {
+		when(userService.listUserCompanies()).thenReturn(new HashSet<>());
+		userController.listCompanies();
+		verify(userService).listUserCompanies();
 	}
 
 	@Test

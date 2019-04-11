@@ -9,7 +9,7 @@ import com.yuma.app.repository.CombinationReportRepository;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.repository.UserRepository;
 import com.yuma.app.to.CombinationReportTO;
-import com.yuma.app.util.HelperCombo.WeeklyCombinationHelper;
+import com.yuma.app.service.HelperCombo.WeeklyCombinationHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +35,7 @@ public class CombinationReportService {
 	private List<CombinationReport> possibleCombinations;
 	private List<Meal> addedMeals;
 	private ConversionService conversionService;
+	@Autowired
 	private WeeklyCombinationHelper weeklyCombinationHelper;
 	
 	public static final int MAX = 2;

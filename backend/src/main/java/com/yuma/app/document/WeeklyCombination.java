@@ -1,5 +1,8 @@
 package com.yuma.app.document;
 
+import com.yuma.app.document.CombinationReport;
+import com.yuma.app.document.Consumer;
+import com.yuma.app.document.Meal;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 

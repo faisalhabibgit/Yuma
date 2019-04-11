@@ -12,6 +12,7 @@ import ComboTwo from './mealcombo/ComboTwo';
 import ComboThree from './mealcombo/ComboThree';
 
 import Retriever from '../middleware/Retriever';
+import CustomLogging from "../CustomLogging";
 
 class MealCombo extends Component {
 
@@ -69,22 +70,28 @@ class MealCombo extends Component {
 
   handleModalChange1() {
     this.openModal();
+    CustomLogging.info("Combo One content opened","MealCombo");
     this.setState({ ModalContent: <ComboOne /> })
   }
 
   handleModalChange2() {
     this.openModal();
+    CustomLogging.info("Combo Two content opened","MealCombo");
     this.setState({ ModalContent: <ComboTwo /> })
   }
 
   handleModalChange3() {
     this.openModal();
+    CustomLogging.info("Combo Three content opened","MealCombo");
     this.setState({ ModalContent: <ComboThree /> })
   }
 
-  handleSubmit(e) { 
-      
     
+    
+
+  handleSubmit(e) {
+    CustomLogging.info("Selected Combo"+e.target.id,"MealCombo");
+
     this.poster.selectMealCombo(e.target.id).then(() => {
 
       const retriever = new Retriever('api/combinationreport/download/consumers.csv');      
@@ -104,7 +111,10 @@ class MealCombo extends Component {
   }
 
   handleDownloadCSV() {
-    this.state.hiddenElement.click();    
+
+    CustomLogging.info("CSV downloaded","MealCombo");
+    this.state.hiddenElement.click();
+
   }
 
 

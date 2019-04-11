@@ -1,15 +1,18 @@
-package com.yuma.app.util.HelperCombo;
+package com.yuma.app.service.HelperCombo;
 
 import com.yuma.app.document.*;
 import com.yuma.app.service.CombinationReportService;
+import com.yuma.app.document.WeeklyCombination;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class CombinationReportHelper {
 	
 	private Logger logger = LoggerFactory.getLogger(CombinationReportService.class);

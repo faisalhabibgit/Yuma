@@ -5,7 +5,7 @@ import com.yuma.app.document.*;
 import com.yuma.app.repository.CombinationReportRepository;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.service.CombinationReportService;
-import com.yuma.app.util.HelperCombo.CombinationReportHelper;
+import com.yuma.app.service.HelperCombo.CombinationReportHelper;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
