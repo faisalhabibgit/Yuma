@@ -20,11 +20,15 @@ class MealCombo extends Component {
     super();
 
     this.state = {
+      button_1 : false,
+      button_2 : false,
+      button_3 : false,
+
       modalIsOpen: false,
       ModalContent: '',
       downloadCSV: '',
       hiddenElement: null,
-      background: '#599BE9',
+      background: 'blue',
      
     };
 
@@ -131,7 +135,17 @@ class MealCombo extends Component {
                 <Button variant="secondary" onClick={this.handleModalChange1}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-                <Button data-test="combo-one-button-select" style={{background:this.state.background}} onClick={this.handleSubmit} id='1' type="submit">Select</Button>
+                <Button data-test="combo-one-button-select" 
+                id='1'
+                color={this.state.button_1 ? "red" : "blue"}
+                onPress={() => {
+                            this.setState({
+                                 button_1: !this.state.button_1,
+                                 button_2: false,
+                                 button_3: false
+                                 });
+                         }}
+                style={{background:this.state.background}} onClick={this.handleSubmit} id='1' type="submit">Select</Button>
               </div> 
             </CardBody>
           </Card>
@@ -142,7 +156,17 @@ class MealCombo extends Component {
                 <Button variant="secondary" onClick={this.handleModalChange2}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-                <Button data-test="combo-two-button-select" style={{background:this.state.background}} onClick={this.handleSubmit} id='2' type="submit">Select</Button>
+                <Button data-test="combo-two-button-select"
+                id ='2'
+                color={this.state.button_1 ? "red" : "blue"}
+                onClick={() => {
+                            this.setState({
+                                 button_1: false,
+                                 button_2: !this.state.button_2,
+                                 button_3: false
+                                 
+                                 });
+                         }} style={{background:this.state.background}} onClick={this.handleSubmit} id='2' type="submit">Select</Button>
               </div>
             </CardBody>
           </Card>
@@ -154,7 +178,17 @@ class MealCombo extends Component {
                 <Button variant="secondary" onClick={this.handleModalChange3}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-                <Button data-test="combo-three-button-select" style={{background:this.state.background}} onClick={this.handleSubmit} id='3' type="submit">Select</Button>
+                <Button data-test="combo-three-button-select" 
+                 id = '3'
+                 color={this.state.button_1 ? "red" : "blue"}
+                 onPress={() => {
+                             this.setState({
+                                  button_1: false,
+                                  button_2: false,
+                                  button_3: !this.state.button_3,
+                                  });
+                          }}
+                style={{background:this.state.background}} onClick={this.handleSubmit} id='3' type="submit">Select</Button>
               </div>
             </CardBody>
           </Card>
