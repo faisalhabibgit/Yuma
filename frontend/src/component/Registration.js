@@ -5,6 +5,7 @@ import {
   Button,
 } from 'reactstrap';
 
+
 class Registration extends Component {
   constructor() {
     super();

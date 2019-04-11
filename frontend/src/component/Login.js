@@ -6,7 +6,7 @@ import {
   Container,
 } from 'reactstrap';
 import ApiToken from '../middleware/ApiToken';
-
+import CustomLogging from '../CustomLogging';
 //const REDIRECTDASHBOARD='/';
 
 class Login extends Component {
@@ -16,9 +16,9 @@ class Login extends Component {
 
     const apiToken = new ApiToken();
     if(!apiToken.isAuthenticated()){
-      console.log('User Not Logged');
+      CustomLogging.error('User Not Logged','Login');
     }else{
-      console.log('User Login Success');
+      CustomLogging.info('User Login Success','Login');
       this.props.history.push(`/`)
     }
 
@@ -45,10 +45,13 @@ class Login extends Component {
     
     if(this.state.email.length<1){
       alert('Please enter an email address');
+      CustomLogging.alert('No email added','Login');
     } else if(this.state.password.length<1){
       alert('Please enter a password');
+      CustomLogging.alert('No password','Login');
     }else{
       this.postLogin();
+      CustomLogging.info('logging in..','Login');
     }
   }
   
@@ -59,8 +62,8 @@ class Login extends Component {
         email: this.state.email,
         password: this.state.password
       })
-      .then(msg => console.log(msg))
-      .then(x => console.log('Attempting to Redirect...'))
+      .then(msg => CustomLogging.info(msg,'Login'))
+      .then(x => CustomLogging.info('Attempting to Redirect...','Login'))
       .then(y => this.props.history.push(`/`));
   }
   

@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import ApiToken from "../middleware/ApiToken";
 import {  Container, Col, Form,  FormGroup, Label, Input,  Button,} from 'reactstrap';
+import CustomLogging from "../CustomLogging";
 
 
 class MealHistory extends Component{
@@ -12,10 +13,10 @@ class MealHistory extends Component{
     
     const apiToken = new ApiToken();
     if (!apiToken.isAuthenticated()) {
-      console.log('User Not Logged');
+      CustomLogging.error('Check Authentification MealHistory: FAIL','MealHistory');
       this.props.history.push(`/Login`)
     } else {
-      console.log('User Login Success');
+      CustomLogging.info('Check Authentification MealHistory: PASS','MealHistory');
     }
     
     this.state = {
