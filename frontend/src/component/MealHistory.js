@@ -57,17 +57,19 @@ class MealHistory extends Component{
                     
 
                     <Card  data-test="start-date" style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>                  
-                    <CardBody>
-                    <Label >From</Label>
+                    <CardBody className="text-center" style={{padding:'50px'}}>
+                    <Label style={{color: 'black', fontSize:20}} >Start Date</Label>
                     <br />
-                      <DatePicker selected={this.state.startDate} onChange={this.handleChange} />
+                      <DatePicker 
+                          selected={this.state.startDate} onChange={this.handleChange} mode="date"
+                           />
                     </CardBody>
                     </Card>      
                   
     
                     <Card  data-test="end-date" style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>                  
-                    <CardBody>
-                    <Label>To</Label>
+                    <CardBody className="text-center" style={{padding:'50px'}}>
+                    <Label style={{color: 'black', fontSize:20}}>End Date</Label>
                     <br />
                       <DatePicker selected={this.state.startDate} onChange={this.handleChange} />
                     </CardBody>
