@@ -4,7 +4,7 @@ import {
   FormGroup, Label, Input,
   Button,
 } from 'reactstrap';
-import CustomLogging from "../CustomLogging";
+
 
 class Registration extends Component {
   constructor() {
