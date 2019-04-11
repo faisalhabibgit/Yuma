@@ -8,7 +8,7 @@ class User {
     this.plan = null;
     this.isActive = null;
     this.timestamp = null;
-
+    this.company = null;
     this.mealList = null;
     this.dislikesList = null;
   }
@@ -22,6 +22,7 @@ class User {
   setTimestamp(timestamp) { this.timestamp = timestamp }
   setMealList(mealList){this.mealList = mealList;}
   setDislikesList(dislikesList){this.dislikesList = dislikesList}
+  setCompany(company){this.company = company}
 
   toString() {
     return (this.userId +', '+ this.firstName +', '+ this.lastName +', '+ 

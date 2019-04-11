@@ -1,4 +1,4 @@
-import ApiToken from '../ApiToken';
+  import ApiToken from '../ApiToken';
 import User from '../objects/User';
 import Plan from '../objects/Plan';
 import BuildMeal from '../objectBuilder/BuildMeal';
@@ -52,6 +52,7 @@ class BuildUser {
         user.setPlan(this.JSONobjToPlan(obj['plan']));
         user.setIsActive(obj['enabled']);
         user.setTimestamp(obj['timestamp']);
+        user.setCompany(obj['company']);
 
         var mealList = [];
         for (let index = 0; index < obj['mealList'].length; index++) {
