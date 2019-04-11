@@ -48,10 +48,10 @@ public class ConsumerService {
 		return convertUserListToUserTOList(consumerList);
 	}
 
-	public List<String> listUserCompanies() {
+	public Set<String> listUserCompanies() {
 		log.info("fetching users list");
 		
-		List<String> companies = new ArrayList<>();
+		Set<String> companies = new HashSet<>();
 		
 		List<Consumer> consumerList = userRepository.findAll();
 		for (Consumer consumer : consumerList) {

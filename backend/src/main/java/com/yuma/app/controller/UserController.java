@@ -1,6 +1,7 @@
 package com.yuma.app.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -65,7 +66,7 @@ public class UserController {
 	}
 
 	@GetMapping("/listcompanies")
-	public List<String> listCompanies(){
+	public Set<String> listCompanies(){
 		log.info("updating user companies from DB in controller");
 		return this.userService.listUserCompanies();
 	}
