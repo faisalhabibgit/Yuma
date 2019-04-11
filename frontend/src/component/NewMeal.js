@@ -112,8 +112,7 @@ addIngredient(e){
 calculateCalories(e, idx){
     e.preventDefault();
     var index = idx;
-    CustomLogging.info("this" + this)
-    CustomLogging.info("calulateCalories(index), index = " + index )
+    CustomLogging.info('calory calculated' )
     var ingr = this.state.ingredients[index]['name'];
     var weight = this.state.ingredients[index]['weight'];
     var ingredientTempList = this.state.ingredients
@@ -141,7 +140,7 @@ calculateCalories(e, idx){
     e.preventDefault();
     this.state.ingredients.splice(index, 1);
     this.setState({ ingredients: this.state.ingredients });
- // error.log('Ingredient is removed!');
+    CustomLogging.info('Ingredient is removed!');
   };
 
 
@@ -152,7 +151,7 @@ calculateCalories(e, idx){
 
     for (let i = 0; i < this.state.ingredients.length; i++) {
       var anIngredient = new Ingredients();
-      CustomElementRegistry.info("ingredient: " + i);
+      CustomLogging.info("ingredient: " + i);
 
       anIngredient.setName(this.state.ingredients[i]['name']);
       anIngredient.setWeight(this.state.ingredients[i]['weight']);
