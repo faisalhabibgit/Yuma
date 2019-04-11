@@ -10,9 +10,12 @@ import ApiToken from '../middleware/ApiToken';
 import Ingredients from '../middleware/objects/Ingredients';
 import Meal from '../middleware/objects/Meal';
 import BuildMeal from '../middleware/objectBuilder/BuildMeal';
+import CustomLogging from '../CustomLogging';
+
+
+
 
 const REDIRECTHOME = '/';
-
 class NewMeal extends Component {
 
 
@@ -20,7 +23,6 @@ class NewMeal extends Component {
     super(props);
 
     this.checkAuthenticated();
-
     this.state = {
       name: '',
       description: '',
@@ -51,10 +53,10 @@ class NewMeal extends Component {
 
     const apiToken = new ApiToken();
     if (!apiToken.isAuthenticated()) {
-      console.log('User Not Logged');
+      CustomLogging.error('Check Authentification NewMeal: FAIL','NewMeal');
       this.props.history.push(`/Login`)
     } else {
-      console.log('User Login Success');
+      CustomLogging.info('Check Authentification NewMeal: PASS','NewMeal');
     }
   }
 
@@ -87,7 +89,7 @@ class NewMeal extends Component {
 
       let ingredients = [...this.state.ingredients];
       ingredients[event.target.dataset.id][event.target.className] = event.target.value;
-      this.setState({ ingredients: ingredients }, () => console.log(this.state.ingredients));
+      this.setState({ ingredients: ingredients }, () => CustomLogging.info(this.state.ingredients));
 
     } else {
 
@@ -104,13 +106,13 @@ addIngredient(e){
     this.setState((prevState) => ({
       ingredients: [...prevState.ingredients, { name: "", weight: "", calories: "", price: "" }],
     }));
-  };
+    CustomLogging.info('Ingredient is added!',"New Meal");
+};
 
 calculateCalories(e, idx){
     e.preventDefault();
     var index = idx;
-    console.log("this" + this)
-    console.log("calulateCalories(index), index = " + index )
+    CustomLogging.info('calory calculated' )
     var ingr = this.state.ingredients[index]['name'];
     var weight = this.state.ingredients[index]['weight'];
     var ingredientTempList = this.state.ingredients
@@ -138,6 +140,7 @@ calculateCalories(e, idx){
     e.preventDefault();
     this.state.ingredients.splice(index, 1);
     this.setState({ ingredients: this.state.ingredients });
+    CustomLogging.info('Ingredient is removed!');
   };
 
 
@@ -148,7 +151,7 @@ calculateCalories(e, idx){
 
     for (let i = 0; i < this.state.ingredients.length; i++) {
       var anIngredient = new Ingredients();
-      console.log("ingedient: " + i);
+      CustomLogging.info("ingredient: " + i);
 
       anIngredient.setName(this.state.ingredients[i]['name']);
       anIngredient.setWeight(this.state.ingredients[i]['weight']);

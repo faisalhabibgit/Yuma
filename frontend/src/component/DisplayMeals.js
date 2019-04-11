@@ -5,7 +5,7 @@ import {
 } from 'reactstrap';
 import Retriever from '../middleware/Retriever';
 import Poster from '../middleware/Poster';
-
+import CustomLogging from '../CustomLogging';
 
 class DisplayMeals extends Component {
 
@@ -19,6 +19,7 @@ class DisplayMeals extends Component {
 
   componentDidMount() {
     const retriever = new Retriever('api/meals/all');
+    CustomLogging.info('retrieving all meals','DisplayMeals');
     retriever.getEntityPromise()
       .then((obj) => {
         var matchedArr = [];
@@ -27,14 +28,16 @@ class DisplayMeals extends Component {
           matchedArr.push(element);
         }
         this.setState({ apiObject: matchedArr });
-
+  
         // This stores the availability of the meals as
         // mealId => value inside checkboxToggle
+        CustomLogging.info('checking availability of meals','DisplayMeals');
         var checkToggleArr = {};
         for (let index = 0; index < this.state.apiObject.length; index++) {
           const element = this.state.apiObject[index].mealId.toString();
           const value = this.state.apiObject[index].isAvailable
           checkToggleArr[element] = value;
+          CustomLogging.info('Meal availability: ' + this.state.apiObject[index].mealId+': '+this.state.apiObject[index].isAvailable,'DisplayMeals');
         }
         this.setState({ checkboxToggle: checkToggleArr });
       })
@@ -51,8 +54,8 @@ class DisplayMeals extends Component {
         // eslint-disable-next-line
         this.state.checkboxToggle[toggleId] = !this.state.checkboxToggle[toggleId]
         this.forceUpdate()
+        CustomLogging.info("Updating meal availability of " +toggleId,"DisplayMeals")
       });
-    //console.log(this.state.checkboxToggle)
   }
 
   render() {
