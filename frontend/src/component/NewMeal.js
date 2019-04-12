@@ -371,7 +371,11 @@ calculateCalories(e, idx){
             <br />
 
               <div class="text-center" >
+
               <Button   variant="secondary" type="submit" value="Submit" size="lg" block>Submit</Button>
+
+            
+
               </div>
             </Col>
           </Form>
