@@ -10,6 +10,7 @@ class DisplayDelivery extends Component {
     this.state = {
       apiObject: this.props.data,
       displayLimit: 10,
+      checkboxToggle: {}
     }
   }
   
@@ -37,8 +38,12 @@ class DisplayDelivery extends Component {
                         <tr>
                           <td>{x.name}</td>
                           <td>{x.description.toString()}</td>
-                          <td>{"true"}</td>
-                        </tr>
+                          <td>  {
+                            <label className="switch">
+                              <input type="checkbox"/>
+                              <span className="slider round"></span>
+                            </label>
+                          }</td>                        </tr>
                       )}
                     </tbody>
                   </Table>
