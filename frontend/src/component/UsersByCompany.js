@@ -68,7 +68,7 @@ class UsersByCompany extends Component {
     return (
       <div>
         <h5 className='text-center'> Users By Company </h5>
-        <Pie height="60px" data={data} />
+        <Pie data-test="pie-chart" height="60px" data={data} />
       </div>
 
     );
