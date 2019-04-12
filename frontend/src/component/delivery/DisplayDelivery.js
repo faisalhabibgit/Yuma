@@ -26,6 +26,9 @@ class DisplayDelivery extends Component {
               <CardBody >
                 <div style={{ padding:'12px', maxWidth:'1800px', maxHeight:'275px', overflow:'scroll'}}>
                   <Table bordered condensed>
+                    <thead style={{ color: '#599BE9' }}>
+                    <th className="text-center" >User Info: {x.firstName} at {x.company}</th>
+                    </thead>
                     <thead style={{background: '#599BE9',color:'white'}}>
                     <th className="text-center" >Name</th>
                     <th className="text-center" >Description </th>
