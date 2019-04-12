@@ -70,4 +70,8 @@ public class UserController {
 		log.info("updating user companies from DB in controller");
 		return this.userService.listUserCompanies();
 	}
+	@DeleteMapping()
+	public void deleteAllUsers(){
+		this.userService.deleteAllUsers();
+	}
 }

@@ -33,6 +33,7 @@ class Poster {
         });
     }
 
+  
 }
 
 export default Poster;

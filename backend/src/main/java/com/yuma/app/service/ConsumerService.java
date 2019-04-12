@@ -121,4 +121,7 @@ public class ConsumerService {
 		}
 		return userTOS;
 	}
+	public void deleteAllUsers(){
+		userRepository.deleteAll();
+	}
 }
