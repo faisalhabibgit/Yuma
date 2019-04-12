@@ -9,9 +9,9 @@ import AvailableMeals from "./AvailableMeals";
 import DisplayMeals from "./DisplayMeals";
 import DisplayUsers from "./DisplayUsers";
 import MealCombo from "./MealCombo";
+import CustomLogging from '../CustomLogging';
 import UsersByCompany from "./UsersByCompany";
 import MealChart from "./MealChart";
-import CustomLogging from '../CustomLogging';
 
 class Dashboard extends Component {
 
@@ -42,22 +42,24 @@ class Dashboard extends Component {
     return (
       <div style={{background: '#ADB7BF'}}>
 
+        <CardDeck  style={{padding:'12px', height:'380px'}}>
 
-        <CardDeck style={{padding:'12px', height:'380px'}}>
           <Card data-test="meal-combo-card">
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Meal Combo</h5>
+              <h2 style={{color: 'black'}}> Meal Combination Reports</h2>
             </CardHeader>
             <CardBody>
               <MealCombo/>
             </CardBody>
           </Card>
+
         </CardDeck>
 
         <CardDeck style={{padding:'12px', height:'450px'}}>
+
           <Card data-test="available-meal-card">
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Available Meals</h5>
+              <h5 style={{color: 'black'}}> Available Meals</h5>
             </CardHeader>
             <CardBody>
               <AvailableMeals />
@@ -66,7 +68,7 @@ class Dashboard extends Component {
 
           <Card data-test="all-meals-card">
             <CardHeader className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> All Meals</h5>
+              <h5 style={{color: 'black'}}> All Meals</h5>
             </CardHeader>
             <CardBody>
               <DisplayMeals />
@@ -87,13 +89,14 @@ class Dashboard extends Component {
               <MealChart />
             </CardBody>
           </Card>
-
         </CardDeck>
 
-        <CardDeck style={{padding:'12px', height:'620px'}}>
+        <CardDeck  style={{padding:'12px', height:'620px'}}>
           <Card data-test="users-card">
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Users </h5>
+              <div>
+                <Button variant="secondary"  onClick={this.handleModalChange3}>Update User</Button>
+              </div>
             </CardHeader>
             <CardBody>
               <DisplayUsers />
@@ -108,6 +111,5 @@ class Dashboard extends Component {
 
   }
 }
-
 
 export default Dashboard;
