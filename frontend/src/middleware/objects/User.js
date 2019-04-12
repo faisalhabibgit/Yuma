@@ -4,6 +4,7 @@ class User {
     this.userId = null;
     this.firstName = null;
     this.lastName = null;
+    this.company = null;
     this.email = null;
     this.plan = null;
     this.isActive = null;
@@ -16,6 +17,7 @@ class User {
   setUserId(userId) { this.userId = userId }
   setFirstName(firstName) { this.firstName = firstName }
   setLastName(lastName) { this.lastName = lastName }
+  setCompany(company) { this.company = company }
   setEmail(email) { this.email = email }
   setPlan(plan) { this.plan = plan }
   setIsActive(isActive) { this.isActive = isActive }
