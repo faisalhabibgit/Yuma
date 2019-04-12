@@ -49,7 +49,7 @@ class MealCombo extends Component {
     }
   }
   
-  myColor(id){
+  selectColor(id){
     if (this.state.active === id) {
       return '#e9a759';
     }
@@ -98,15 +98,16 @@ class MealCombo extends Component {
         link.download = 'report.csv';  
              
         this.setState({ hiddenElement : link});
-        this.setState({ downloadCSV: <Button style={{ background: '#599BE9', margin:'15px' }} type="submit" onClick={this.handleDownloadCSV} >Download CSV</Button> })
+        this.setState({ downloadCSV: <Button style={{ background: '#599BE9', margin:'15px' }} 
+        type="submit" onClick={this.handleDownloadCSV} >Download CSV</Button> })
       })
     })
 }
 
-// handelSelect(){
-  //   this.toggle();
-  //   this.handleSubmit()
-  // }
+handelSelect(){
+    this.toggle();
+    this.handleSubmit();
+  }
 
 
   handleDownloadCSV() {
@@ -131,8 +132,8 @@ class MealCombo extends Component {
               </div>
               <div style={{ padding: '15px' }}>
                 <Button 
-                        style={{background: this.myColor(1)}}  onClick={() => {this.toggle(1)}}
-                        //onClick={() => {this.handleSubmit}} 
+                        style={{background: this.selectColor(1)}}  onClick={() => {this.toggle(1)}}
+                        //onClick={this.handleSubmit} 
                         id ='1' type="submit">Select</Button>
               </div> 
             </CardBody>
@@ -145,8 +146,8 @@ class MealCombo extends Component {
               </div>
               <div style={{ padding: '15px' }}>
                 <Button 
-                        style={{background: this.myColor(2)}}  onClick={() => {this.toggle(2)}}
-                        //onClick={this.handleSubmit}
+                        style={{background: this.selectColor(2)}} onClick={() => {this.toggle(2)}}
+                       // onClick={this.handelSelect}
                         id = '2' type="submit">Select</Button>
               </div>
             </CardBody>
@@ -160,7 +161,7 @@ class MealCombo extends Component {
               </div>
               <div style={{ padding: '15px' }}>
                 <Button 
-                        style={{background: this.myColor(3)}}  onClick={() => {this.toggle(3)}}
+                        style={{background: this.selectColor(3)}}  onClick={() => {this.toggle(3)}}
                         //onClick={this.handleSubmit}
                         id='3' type="submit">Select</Button>
               </div>
