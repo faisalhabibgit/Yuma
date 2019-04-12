@@ -46,12 +46,14 @@ render() {
       
     return(
       <Container>
-       <label style={{ marginLeft: 10, color: '#599BE9', fontFamily: 'Comic Sans MS' }}> Checklist for Meal Delivery Service</label>
-        <CardDeck style={{padding:'12px', height:'275px', maxWidth:'800px'}}>
+      <div style={{padding:'25px'}}>
+        <h2 style={{color: '#599BE9'}}>Checklist for Meal Delivery Service</h2>
+      </div>
+        <CardDeck style={{padding:'12px', height:'200px', maxWidth:'600px'}}>
           <Card>           
             <CardBody>
               <div>
-                <Button onClick={this.handleModalChange} style={{ background: '#599BE9' }}>Delivery Service 1</Button>
+                <Button onClick={this.handleModalChange} style={{ background: '#599BE9' }}> + Delivery Service 1</Button>
               </div>
             </CardBody>
           </Card>
