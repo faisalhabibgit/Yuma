@@ -34,6 +34,7 @@ class MealCombo extends Component {
     this.handleDownloadCSV = this.handleDownloadCSV.bind(this);
     this.toggle = this.toggle.bind(this);
     this.myColor = this.myColor.bind(this);
+   // this.handelSelect = this.handelSelect.bind(this);
 
     this.poster = new Poster();
   }
@@ -82,6 +83,11 @@ class MealCombo extends Component {
     this.setState({ ModalContent: <ComboThree /> })
   }
 
+  // handelSelect(){
+  //   this.toggle();
+  //   this.handleSubmit()
+  // }
+
 
   handleSubmit(e) {
     CustomLogging.info("Selected Combo"+e.target.id,"MealCombo");
@@ -124,7 +130,7 @@ class MealCombo extends Component {
               </div>
               <div style={{ padding: '15px' }}>
                 <Button 
-                        style={{background: this.myColor(1)}} onClick={() => {this.toggle(1)}}
+                        style={{background: this.myColor(1)}}  onClick={() => {this.toggle(1)}}
                         //onClick={this.handleSubmit} 
                         id ='1' type="submit">Select</Button>
               </div> 
@@ -138,7 +144,7 @@ class MealCombo extends Component {
               </div>
               <div style={{ padding: '15px' }}>
                 <Button 
-                        style={{background: this.myColor(2)}} onClick={() => {this.toggle(2)}}
+                        style={{background: this.myColor(2)}}  onClick={() => {this.toggle(2)}}
                         //onClick={this.handleSubmit}
                         id = '2' type="submit">Select</Button>
               </div>
@@ -153,7 +159,7 @@ class MealCombo extends Component {
               </div>
               <div style={{ padding: '15px' }}>
                 <Button 
-                        style={{background: this.myColor(3)}} onClick={() => {this.toggle(3)}} 
+                        style={{background: this.myColor(3)}}  onClick={() => {this.toggle(3)}}
                         //onClick={this.handleSubmit}
                         id='3' type="submit">Select</Button>
               </div>
