@@ -56,6 +56,13 @@ test('Renders Users Card', () => {
     
 });
 
+test('Renders Users By Company Card', () => {
+
+  const usersByCompany = wrapper.find("[data-test='users-per-company']");
+  expect(usersByCompany.length).toBe(1);
+
+});
+
 test('Renders Meals Chart Card', () => {
 
   const mealsChartCard = wrapper.find("[data-test='meals-chart-card']");
