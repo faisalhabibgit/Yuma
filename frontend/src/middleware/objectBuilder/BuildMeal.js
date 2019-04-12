@@ -1,12 +1,13 @@
 import Meal from '../objects/Meal';
 import Ingredients from '../objects/Ingredients';
 import ApiToken from '../ApiToken';
+import CustomLogging from '../../CustomLogging';
 
 
 class BuildMeal {
 
   constructor() {
-    console.log("Building Meal...");
+    CustomLogging.info("Building Meal...");
   }
 
   getMealPromiseObj(apiPath) {
@@ -64,7 +65,7 @@ class BuildMeal {
     const apiToken = new ApiToken();
     const API = 'api/meals';
 
-    console.log('Adding: ' + someMeal.toString());
+    CustomLogging.info('Adding: ' + someMeal.toString());
 
     fetch(API, {
       method: 'POST',

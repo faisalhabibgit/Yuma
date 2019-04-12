@@ -7,6 +7,7 @@ import {
 
 import ApiToken from '../middleware/ApiToken';
 import search from './images/background.png';
+import CustomLogging from "../CustomLogging";
 
 var sectionStyle = {
   width: "100%",
@@ -39,10 +40,10 @@ class SearchMeal extends Component {
   checkAuthenticated(){
     const apiToken = new ApiToken();
     if(!apiToken.isAuthenticated()){
-      console.log('User Not Logged');
+      CustomLogging.error('User Not Logged');
       this.props.history.push(`/Login`)
     }else{
-      console.log('User Login Success');
+      CustomLogging.info('User Login Success');
     }
   }
 

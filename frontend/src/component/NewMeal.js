@@ -10,9 +10,12 @@ import ApiToken from '../middleware/ApiToken';
 import Ingredients from '../middleware/objects/Ingredients';
 import Meal from '../middleware/objects/Meal';
 import BuildMeal from '../middleware/objectBuilder/BuildMeal';
+import CustomLogging from '../CustomLogging';
+
+
+
 
 const REDIRECTHOME = '/';
-
 class NewMeal extends Component {
 
 
@@ -20,7 +23,6 @@ class NewMeal extends Component {
     super(props);
 
     this.checkAuthenticated();
-
     this.state = {
       name: '',
       description: '',
@@ -51,10 +53,10 @@ class NewMeal extends Component {
 
     const apiToken = new ApiToken();
     if (!apiToken.isAuthenticated()) {
-      console.log('User Not Logged');
+      CustomLogging.error('Check Authentification NewMeal: FAIL','NewMeal');
       this.props.history.push(`/Login`)
     } else {
-      console.log('User Login Success');
+      CustomLogging.info('Check Authentification NewMeal: PASS','NewMeal');
     }
   }
 
@@ -87,7 +89,7 @@ class NewMeal extends Component {
 
       let ingredients = [...this.state.ingredients];
       ingredients[event.target.dataset.id][event.target.className] = event.target.value;
-      this.setState({ ingredients: ingredients }, () => console.log(this.state.ingredients));
+      this.setState({ ingredients: ingredients }, () => CustomLogging.info(this.state.ingredients));
 
     } else {
 
@@ -104,13 +106,13 @@ addIngredient(e){
     this.setState((prevState) => ({
       ingredients: [...prevState.ingredients, { name: "", weight: "", calories: "", price: "" }],
     }));
-  };
+    CustomLogging.info('Ingredient is added!',"New Meal");
+};
 
 calculateCalories(e, idx){
     e.preventDefault();
     var index = idx;
-    console.log("this" + this)
-    console.log("calulateCalories(index), index = " + index )
+    CustomLogging.info('calory calculated' )
     var ingr = this.state.ingredients[index]['name'];
     var weight = this.state.ingredients[index]['weight'];
     var ingredientTempList = this.state.ingredients
@@ -138,6 +140,7 @@ calculateCalories(e, idx){
     e.preventDefault();
     this.state.ingredients.splice(index, 1);
     this.setState({ ingredients: this.state.ingredients });
+    CustomLogging.info('Ingredient is removed!');
   };
 
 
@@ -148,7 +151,7 @@ calculateCalories(e, idx){
 
     for (let i = 0; i < this.state.ingredients.length; i++) {
       var anIngredient = new Ingredients();
-      console.log("ingedient: " + i);
+      CustomLogging.info("ingredient: " + i);
 
       anIngredient.setName(this.state.ingredients[i]['name']);
       anIngredient.setWeight(this.state.ingredients[i]['weight']);
@@ -283,7 +286,7 @@ calculateCalories(e, idx){
                         <br />
                         <label htmlFor={caloriesId}>Calories</label>
                         <input
-                          style={{ marginLeft: 61 }}
+                          style={{ marginLeft: 61}}
                           type="text"
                           name={caloriesId}
                           data-id={idx}
@@ -293,6 +296,42 @@ calculateCalories(e, idx){
                           className="calories"
                           data-test='ingredient-calories'
                         />
+                        <br />
+                        <br />
+                        <br />
+                        <div className="text-left"   style={{ marginLeft: 352 }}>
+                        <label>Possible Food Allergies</label>
+                        </div>
+                        
+                        
+                      <CardBody className="text-left" style={{paddingLeft:'500px'}}>
+                      <label>
+                      <Input type="checkbox" id="nuts" onChange={this.handleChange} />
+                        Tree Nuts
+                      </label>                       
+                      
+                      <br />
+                      <Label>
+                        <Input type="checkbox" id="dairy" onChange={this.handleChange} />
+                        Dairy
+                      </Label>
+                      <br />
+                      <Label>
+                        <Input type="checkbox" id="gluten" onChange={this.handleChange} />
+                        Gluten
+                      </Label>
+                      <br />
+                      <Label>
+                        <Input type="checkbox" id="shellfish" onChange={this.handleChange} />
+                        Shellfish
+                      </Label>
+                      <br />
+                      <Label>
+                        <Input type="checkbox" id="soy" onChange={this.handleChange} />
+                        Soy
+                      </Label>
+                      </CardBody>
+                      
                         <div>
                          <Button variant="secondary"  onClick={(e) => this.calculateCalories(e, idx)}>Calculate</Button>
                        </div>
@@ -314,59 +353,29 @@ calculateCalories(e, idx){
                         <div>
                          <Button variant="secondary"  data-test="delete-ingredient-button" onClick={(e) => { this.removeIngredient(e, idx) }}> Remove </Button>
                        </div>
+                       <br />
+                       
                       </div>
 
                     )
                   })
                 }
-                </CardBody>
-                </Card>
-                <br />
-                <div>
-                  <Button variant="secondary" size="lg" block data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</Button>
+                <div className="text-left">
+                 <Button variant="secondary" data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</Button>
                 </div>
-                <br />
-
-
-                <Card  data-test="possible-allergies-card" style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
-                  <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
-                    <h5 style={{color: 'black'}}> Possible Food Allergies</h5>
-                  </CardHeader>
-                <CardBody className="text-left" style={{padding:'50px'}}>
-                     <Label>
-                      <Input type="checkbox" id="nuts" onChange={this.handleChange} />
-                        Tree Nuts
-                      </Label>
-                      <br />
-                      <Label>
-                        <Input type="checkbox" id="dairy" onChange={this.handleChange} />
-                        Dairy
-                      </Label>
-                      <br />
-                      <Label>
-                        <Input type="checkbox" id="gluten" onChange={this.handleChange} />
-                        Gluten
-                      </Label>
-                      <br />
-                      <Label>
-                        <Input type="checkbox" id="shellfish" onChange={this.handleChange} />
-                        Shellfish
-                      </Label>
-                      <br />
-                      <Label>
-                        <Input type="checkbox" id="soy" onChange={this.handleChange} />
-                        Soy
-                      </Label>
-
-
-
                 </CardBody>
                 </Card>
+                <br />
+                
             </FormGroup>
             <br />
 
               <div class="text-center" >
-              <Button  type="submit" value="Submit" size="lg" block>Submit</Button>
+
+              <Button   variant="secondary" type="submit" value="Submit" size="lg" block>Submit</Button>
+
+            
+
               </div>
             </Col>
           </Form>

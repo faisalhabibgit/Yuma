@@ -47,6 +47,21 @@ public class ConsumerService {
 		return convertUserListToUserTOList(consumerList);
 	}
 
+	public Set<String> listUserCompanies() {
+		log.info("fetching users list");
+		
+		Set<String> companies = new HashSet<>();
+		
+		List<Consumer> consumerList = userRepository.findAll();
+		for (Consumer consumer : consumerList) {
+			
+			if(consumer.getCompany() != null) {
+				companies.add(consumer.getCompany());
+			}
+		}
+		return companies;
+	}
+
 	public ConsumerTO findUserByEmail(String email) {
 		log.info("fetching consumer by email: %s", email);
 
@@ -106,5 +121,8 @@ public class ConsumerService {
 		}
 
 		return consumerTOS;
+	}
+	public void deleteAllUsers(){
+		userRepository.deleteAll();
 	}
 }

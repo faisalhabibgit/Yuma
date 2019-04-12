@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -84,6 +85,28 @@ public class ConsumerServiceTest {
 		verify(conversionService, times(1)).convert(consumers.get(1), ConsumerTO.class);
 		verify(userRepository, times(1)).findAll();
 		Assert.assertEquals(retrievedListOfUsers.size(), 2);
+
+	}
+
+	@Test
+	public void WhenListUserCompaniesCalledThenShouldReturnListOfUsersCompanies() {
+
+		List<Consumer> consumers = new ArrayList<>();
+
+		Consumer consumer1 = new Consumer();
+		Consumer consumer2 = new Consumer();
+		consumer1.setCompany("Concordia");
+		consumer2.setCompany("Mcgill");
+		
+		consumers.add(consumer1);
+		consumers.add(consumer2);
+		
+		when(userRepository.findAll()).thenReturn(consumers);
+		
+		Set<String> companies = userService.listUserCompanies();
+		
+		verify(userRepository).findAll();
+		Assert.assertEquals(companies.size(), 2);
 
 	}
 
