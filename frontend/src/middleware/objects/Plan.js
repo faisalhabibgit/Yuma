@@ -2,16 +2,18 @@ class Plan {
 
   constructor() {
     this.numOfMeals = null;
-    this.extraVeggies = null;
-    this.extraProtein = null;
     this.details = null;
+    this.specialRequests = null;
+    this.requestedProteinTypes = null;
+    this.diet = null;
   
   }
 
     setNumOfMeal(numOfMeals){ this.numOfMeals = numOfMeals }
-    setExtraVeggies(extraVeggies){ this.extraVeggies = extraVeggies }
-    setExtraProtein(extraProtein){ this.extraProtein = extraProtein }
     setDetails(details){ this.details = details}
+    setSpecialRequests(specialRequests){this.specialRequests = specialRequests}
+    setRequestedProteinTypes(requestedProteinTypes){this.requestedProteinTypes = requestedProteinTypes}
+    setDiet(diet){this.diet = diet}
 
 
 

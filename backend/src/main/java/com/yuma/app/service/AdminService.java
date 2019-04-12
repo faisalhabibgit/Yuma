@@ -46,6 +46,5 @@ public class AdminService {
 	public boolean existsByEmail(String email){
 		return adminRepository.existsByEmail(email);
 	}
-
-
+	
 }

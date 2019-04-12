@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.yuma.app.document.Consumer;
-import com.yuma.app.to.UserTO;
+import com.yuma.app.to.ConsumerTO;
 
 public class ConsumerTOConverterTest {
 
@@ -12,12 +12,12 @@ public class ConsumerTOConverterTest {
 	public void testUserTOConverter() {
 		Consumer consumer = prepareUser();
 		UserTOConverter userTOConverter = new UserTOConverter();
-		UserTO userTo = userTOConverter.convert(consumer);
+		ConsumerTO consumerTo = userTOConverter.convert(consumer);
 		
-		Assert.assertEquals(userTo.getUserId(), consumer.getUserId());
-		Assert.assertEquals(userTo.getFirstName(), consumer.getFirstName());
-		Assert.assertEquals(userTo.getLastName(), consumer.getLastName());
-		Assert.assertEquals(userTo.isEnabled(), consumer.isActive());
+		Assert.assertEquals(consumerTo.getUserId(), consumer.getUserId());
+		Assert.assertEquals(consumerTo.getFirstName(), consumer.getFirstName());
+		Assert.assertEquals(consumerTo.getLastName(), consumer.getLastName());
+		Assert.assertEquals(consumerTo.isEnabled(), consumer.isActive());
 	}
 
 	public Consumer prepareUser() {
