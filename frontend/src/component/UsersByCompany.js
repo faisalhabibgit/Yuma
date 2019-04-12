@@ -3,7 +3,7 @@ import Retriever from "../middleware/Retriever";
 import CustomLogging from "../CustomLogging";
 import {Pie} from 'react-chartjs-2';
 
-const dataArr=[]
+const dataArr=[];
 
 class UsersByCompany extends Component {
 
@@ -15,25 +15,24 @@ class UsersByCompany extends Component {
     }
   }
   componentDidMount() {
-
     const retriever = new Retriever('api/rest/listcompanies');
     CustomLogging.info('retrieving list of companies', 'UsersByCompany');
     retriever.getEntityPromise()
       .then((obj) => {
-        this.setState({apiObject: obj});
-       
         // this gets the company list then finds the amount of user per company
+        this.setState({apiObject: obj});
+        
+        // gets the data for every company in the company list
         for (var x = 0; x < this.state.apiObject.length; x++) {
           const retriever = new Retriever("api/rest/company/" + this.state.apiObject[x]);
           CustomLogging.info('retrieving company user list', 'UsersByCompany');
           retriever.getEntityPromise()
-            .then((obj1) => {
-              dataArr.push(obj1.length)
+            .then((company) => {
+              dataArr.push(company.length)
               this.setState({DataArr:dataArr})
             })
         }
       })
-
   }
 
   render() {
@@ -50,6 +49,7 @@ class UsersByCompany extends Component {
       var b = i* 400/total;
       return "rgb(" + r + "," + g + "," + b + ")";
     };
+    
     var colors = [];
 
     for (var i in this.state.apiObject) {
