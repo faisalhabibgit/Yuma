@@ -38,8 +38,6 @@ class Retriever {
             default:
               const userBuilderCompany = new BuildUser();
               this.entityPromise = userBuilderCompany.getUserPromiseObj(apiPath);
-              break;
-            // code block
         }
 
     }

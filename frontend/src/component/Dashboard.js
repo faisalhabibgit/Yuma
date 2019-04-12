@@ -75,7 +75,6 @@ class Dashboard extends Component {
 
         </CardDeck>
 
-
         <CardDeck style={{padding:'12px', height:'370px'}}>
           <Card>
             <CardBody>

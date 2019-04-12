@@ -3,41 +3,47 @@ import Retriever from "../middleware/Retriever";
 import CustomLogging from "../CustomLogging";
 import {Pie} from 'react-chartjs-2';
 
+const dataArr=[]
+
 class UsersByCompany extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       apiObject: [],
-      companyLength: [],
-      DataArr:[]
+      dataArr: []
     }
   }
-
   componentDidMount() {
-    var DataArr = [];
+
     const retriever = new Retriever('api/rest/listcompanies');
     CustomLogging.info('retrieving list of companies', 'UsersByCompany');
     retriever.getEntityPromise()
       .then((obj) => {
         this.setState({apiObject: obj});
-          
-        var company = obj[0];
-          const retriever = new Retriever("api/rest/company/" + company);
+       
+        // this gets the company list then finds the amount of user per company
+        for (var x = 0; x < this.state.apiObject.length; x++) {
+          const retriever = new Retriever("api/rest/company/" + this.state.apiObject[x]);
           CustomLogging.info('retrieving company user list', 'UsersByCompany');
           retriever.getEntityPromise()
             .then((obj1) => {
-              this.setState({DataArr: obj1});
-
-              DataArr.push(this.state.DataArr.length)
-              this.setState({companyLength: DataArr});
+              dataArr.push(obj1.length)
+              this.setState({DataArr:dataArr})
             })
-      }) 
-  
+        }
+      })
+
   }
 
   render() {
     
+    var values = []
+    for (var x in dataArr) {
+      values.push(dataArr[x])
+    }
+    
+    // dynamic colors for every company added to the pie chart
     var dynamicColors = function( i, total) {
       var r = 10+i* 15/total;
       var g = i* 200/total;
@@ -49,25 +55,23 @@ class UsersByCompany extends Component {
     for (var i in this.state.apiObject) {
       colors.push(dynamicColors(i, this.state.apiObject.length));
     }
-    
-    const data = {
-      labels: this.state.apiObject,
-      datasets: [{
-        data: [1,2,2,1,1],
-        backgroundColor: colors,
 
+    // data for the pie chart
+    const data = {
+        labels: this.state.apiObject,
+        datasets: [{
+        data: values,
+        backgroundColor: colors,
       }]
     };
-      
-      return (
-        <div>
-          <h5 className='text-center'> Users By Company </h5>
-          <Pie height="60px" data={data} />
-          {this.state.DataArr.length}
-          {this.state.companyLength.toString()}
-        </div>
-        
-  );
+
+    return (
+      <div>
+        <h5 className='text-center'> Users By Company </h5>
+        <Pie height="60px" data={data} />
+      </div>
+
+    );
   }
 }
 

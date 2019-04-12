@@ -77,6 +77,7 @@ public class ConsumerService {
 		return convertUserListToUserTOList(consumerList);	
 	}
 	
+	
 	public void deleteUserByUserID(String uuid){
 		log.info("deleting user by uuid: {}", uuid);
 		
