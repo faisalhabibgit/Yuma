@@ -37,18 +37,33 @@ class UsersByCompany extends Component {
   }
 
   render() {
-   
+    
+    var dynamicColors = function( i, total) {
+      var r = 10+i* 15/total;
+      var g = i* 200/total;
+      var b = i* 400/total;
+      return "rgb(" + r + "," + g + "," + b + ")";
+    };
+    var colors = [];
+
+    for (var i in this.state.apiObject) {
+      colors.push(dynamicColors(i, this.state.apiObject.length));
+    }
+    
     const data = {
       labels: this.state.apiObject,
       datasets: [{
-        data: []
+        data: [1,2,2,1,1],
+        backgroundColor: colors,
+
       }]
     };
       
       return (
         <div>
-          <Pie height="50x" data={data} />
-          {this.state.DataArr.length} 
+          <h5 className='text-center'> Users By Company </h5>
+          <Pie height="60px" data={data} />
+          {this.state.DataArr.length}
           {this.state.companyLength.toString()}
         </div>
         
