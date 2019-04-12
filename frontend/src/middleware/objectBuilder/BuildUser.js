@@ -53,11 +53,18 @@ class BuildUser {
         user.setPlan(this.JSONobjToPlan(obj['plan']));
         user.setIsActive(obj['enabled']);
         user.setTimestamp(obj['timestamp']);
+        user.setCompany(obj['company']);
 
         var mealList = [];
         for (let index = 0; index < obj['mealList'].length; index++) {
             mealList.push(buildMeal.JSONobjToMeal(obj['mealList'][index]));
         }
+
+        var allergies = [];
+        for (let index = 0; index < obj['allergies'].length; index++) {
+            allergies.push(obj['allergies'][index]);
+        }
+
         user.setMealList(mealList);
         user.setDislikesList(obj['dislikesList']);
 
@@ -67,9 +74,10 @@ class BuildUser {
     JSONobjToPlan(obj){
         var plan = new Plan();
         plan.setNumOfMeal(obj.numOfMeals);
-        plan.setExtraVeggies(obj.extraVeggies);
-        plan.setExtraProtein(obj.extraProtein);
         plan.setDetails(obj.details);
+        plan.setSpecialRequests(obj.specialRequests);
+        plan.setRequestedProteinTypes(obj.requestedProteinTypes);
+        plan.setDiet(obj.diet);
         return plan;
     }
 

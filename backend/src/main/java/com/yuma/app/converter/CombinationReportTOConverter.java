@@ -8,8 +8,8 @@ import org.springframework.core.convert.converter.Converter;
 
 import com.yuma.app.document.CombinationReport;
 import com.yuma.app.to.CombinationReportTO;
+import com.yuma.app.to.ConsumerTO;
 import com.yuma.app.to.MealTO;
-import com.yuma.app.to.UserTO;
 
 public class CombinationReportTOConverter implements Converter<CombinationReport, CombinationReportTO> {
 	
@@ -31,7 +31,7 @@ public class CombinationReportTOConverter implements Converter<CombinationReport
 		combinationReportTO.setNumberOfBlanks(combinationReport.getNumberOfBlanks());
 		combinationReportTO.setCreatedOn(combinationReport.getCreatedOn());
 		combinationReportTO.setMealTOS(combinationReport.getMealsList().stream().map(meal -> conversionService.convert(meal, MealTO.class)).collect(Collectors.toList()));
-		combinationReportTO.setUserTOS(combinationReport.getUserList().stream().map(user -> conversionService.convert(user, UserTO.class)).collect(Collectors.toList()));
+		combinationReportTO.setConsumerTOS(combinationReport.getUserList().stream().map(user -> conversionService.convert(user, ConsumerTO.class)).collect(Collectors.toList()));
 		return combinationReportTO;
 		
 	}

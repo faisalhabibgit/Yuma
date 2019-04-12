@@ -9,9 +9,13 @@ class User {
     this.plan = null;
     this.isActive = null;
     this.timestamp = null;
+    this.company = null;
 
     this.mealList = null;
     this.dislikesList = null;
+    this.allergies = null;
+
+    this.consumerComments = null;
   }
 
   setUserId(userId) { this.userId = userId }
@@ -22,8 +26,11 @@ class User {
   setPlan(plan) { this.plan = plan }
   setIsActive(isActive) { this.isActive = isActive }
   setTimestamp(timestamp) { this.timestamp = timestamp }
+  setCompany(company) { this.company = company }
   setMealList(mealList){this.mealList = mealList;}
   setDislikesList(dislikesList){this.dislikesList = dislikesList}
+  setAllergies(allergies){this.allergies = allergies}
+  setConsumerComments(consumerComments){this.consumerComments = consumerComments}
 
   toString() {
     return (this.userId +', '+ this.firstName +', '+ this.lastName +', '+ 
