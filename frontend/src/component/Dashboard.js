@@ -3,7 +3,7 @@ import ApiToken from "../middleware/ApiToken";
 
 import {
   Card, CardHeader,  CardBody,
-  CardDeck
+  CardDeck, Button
 } from 'reactstrap';
 import AvailableMeals from "./AvailableMeals";
 import DisplayMeals from "./DisplayMeals";
@@ -42,71 +42,69 @@ class Dashboard extends Component {
     return (
       <div style={{background: '#ADB7BF'}}>
 
-  <CardDeck style={{padding:'12px', height:'380px'}}>
-  <Card data-test="meal-combo-card">
-      <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-  <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Meal Combo</h5>
-    </CardHeader>
-    <CardBody>
-    <MealCombo/>
-    </CardBody>
-    </Card>
 
-    </CardDeck>
+        <CardDeck style={{padding:'12px', height:'380px'}}>
+          <Card data-test="meal-combo-card">
+            <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
+              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Meal Combo</h5>
+            </CardHeader>
+            <CardBody>
+              <MealCombo/>
+            </CardBody>
+          </Card>
+        </CardDeck>
 
+        <CardDeck style={{padding:'12px', height:'450px'}}>
+          <Card data-test="available-meal-card">
+            <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
+              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Available Meals</h5>
+            </CardHeader>
+            <CardBody>
+              <AvailableMeals />
+            </CardBody>
+          </Card>
 
-    <CardDeck style={{padding:'12px', height:'450px'}}>
-  <Card data-test="available-meal-card">
-      <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-  <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Available Meals</h5>
-    </CardHeader>
-    <CardBody>
-    <AvailableMeals />
-    </CardBody>
-    </Card>
+          <Card data-test="all-meals-card">
+            <CardHeader className="text-center" style={{background: '#B9C5D5'}}>
+              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> All Meals</h5>
+            </CardHeader>
+            <CardBody>
+              <DisplayMeals />
+            </CardBody>
+          </Card>
 
-    <Card data-test="all-meals-card">
-      <CardHeader className="text-center" style={{background: '#B9C5D5'}}>
-  <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> All Meals</h5>
-    </CardHeader>
-    <CardBody>
-    <DisplayMeals />
-    </CardBody>
-    </Card>
+        </CardDeck>
 
-    </CardDeck>
+        <CardDeck  style={{padding:'12px', height:'370px'}}>
+          <Card data-test="users-per-company">
+            <CardBody>
+              <UsersByCompany />
+            </CardBody>
+          </Card>
 
-    <CardDeck  style={{padding:'12px', height:'370px'}}>
-  <Card data-test="users-per-company">
-      <CardBody>
-      <UsersByCompany />
-      </CardBody>
-      </Card>
+          <Card data-test="meals-chart-card">
+            <CardBody>
+              <MealChart />
+            </CardBody>
+          </Card>
 
-      <Card data-test="meals-chart-card">
-      <CardBody>
-      <MealChart />
-      </CardBody>
-      </Card>
+        </CardDeck>
 
-      </CardDeck>
+        <CardDeck style={{padding:'12px', height:'620px'}}>
+          <Card data-test="users-card">
+            <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
+              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Users </h5>
+            </CardHeader>
+            <CardBody>
+              <DisplayUsers />
+            </CardBody>
+          </Card>
 
-      <CardDeck style={{padding:'12px', height:'620px'}}>
-  <Card data-test="users-card">
-      <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-  <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Users </h5>
-    </CardHeader>
-    <CardBody>
-    <DisplayUsers />
-    </CardBody>
-    </Card>
-
-    </CardDeck>
-
+        </CardDeck>
 
 
-    </div>
-  );
+      </div>
+    );
 
   }
 }

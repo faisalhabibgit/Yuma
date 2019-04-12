@@ -55,3 +55,10 @@ test('Renders Users Card', () => {
     expect(usersCard.length).toBe(1);
     
 });
+
+test('Renders Meals Chart Card', () => {
+
+  const mealsChartCard = wrapper.find("[data-test='meals-chart-card']");
+  expect(mealsChartCard.length).toBe(1);
+
+});
