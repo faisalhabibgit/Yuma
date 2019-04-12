@@ -4,13 +4,10 @@ import {
   Button
 } from 'reactstrap';
 import Modal from 'react-modal';
-
 import Poster from '../middleware/Poster';
-
 import ComboOne from './mealcombo/ComboOne';
 import ComboTwo from './mealcombo/ComboTwo';
 import ComboThree from './mealcombo/ComboThree';
-
 import Retriever from '../middleware/Retriever';
 import CustomLogging from "../CustomLogging";
 
@@ -23,7 +20,9 @@ class MealCombo extends Component {
       modalIsOpen: false,
       ModalContent: '',
       downloadCSV: '',
-      hiddenElement: null
+      hiddenElement: null,
+      background:'#599BE9',
+      active: null
     };
 
     this.openModal = this.openModal.bind(this);
@@ -33,9 +32,30 @@ class MealCombo extends Component {
     this.handleModalChange3 = this.handleModalChange3.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDownloadCSV = this.handleDownloadCSV.bind(this);
+   // this.toggle = this.toggle.bind(this);
+   // this.myColor = this.myColor.bind(this);
+   // this.handelSelect = this.handelSelect.bind(this);
 
     this.poster = new Poster();
   }
+
+ 
+
+  toggle(id){
+    if (this.state.active === id) {
+      this.setState({active : null})
+    } else {
+      this.setState({active : id})
+    }
+  }
+  
+  selectColor(id){
+    if (this.state.active === id) {
+      return '#e9a759';
+    }
+    return "#599BE9";
+  }
+
 
   openModal() {
     this.setState({ modalIsOpen: true });
@@ -63,26 +83,38 @@ class MealCombo extends Component {
     this.setState({ ModalContent: <ComboThree /> })
   }
 
+  
   handleSubmit(e) {
     CustomLogging.info("Selected Combo"+e.target.id,"MealCombo");
-    this.poster.selectMealCombo(e.target.id).then(() => {
-      const retriever = new Retriever('api/combinationreport/download/consumers.csv');
+
+      this.poster.selectMealCombo(e.target.id).then(() => {
+
+      const retriever = new Retriever('api/combinationreport/download/consumers.csv');      
       retriever.getEntityPromise().then((csv) => {
 
         var link = document.createElement('a');
         link.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
         link.target = '_blank';
-        link.download = 'report.csv';
-
+        link.download = 'report.csv';  
+             
         this.setState({ hiddenElement : link});
-        this.setState({ downloadCSV: <Button style={{ background: '#599BE9', margin:'15px' }} type="submit" onClick={this.handleDownloadCSV} >Download CSV</Button> })
+        this.setState({ downloadCSV: <Button style={{ background: '#599BE9', margin:'15px' }} 
+        type="submit" onClick={this.handleDownloadCSV} >Download CSV</Button> })
       })
     })
+}
+
+handelSelect(){
+    this.toggle();
+    this.handleSubmit();
   }
 
+
   handleDownloadCSV() {
+
     CustomLogging.info("CSV downloaded","MealCombo");
     this.state.hiddenElement.click();
+
   }
 
 
@@ -94,35 +126,44 @@ class MealCombo extends Component {
 
           <Card>
             <CardBody className="text-center">
-              <h2> Meal Combo #1</h2>
+              <h4> Meal Combo #1</h4>
               <div>
                 <Button variant="secondary" onClick={this.handleModalChange1}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-                <Button data-test="combo-one-button-select" style={{ background: '#599BE9' }} onClick={this.handleSubmit} id='1' type="submit">Select</Button>
-              </div>
+                <Button 
+                        style={{background: this.selectColor(1)}}  onClick={() => {this.toggle(1)}}
+                        //onClick={this.handleSubmit} 
+                        id ='1' type="submit">Select</Button>
+              </div> 
             </CardBody>
           </Card>
           <Card>
             <CardBody className="text-center">
-              <h2> Meal Combo #2</h2>
+              <h4> Meal Combo #2</h4>
               <div>
                 <Button variant="secondary" onClick={this.handleModalChange2}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-                <Button data-test="combo-two-button-select" style={{ background: '#599BE9' }} onClick={this.handleSubmit} id='2' type="submit">Select</Button>
+                <Button 
+                        style={{background: this.selectColor(2)}} onClick={() => {this.toggle(2)}}
+                       // onClick={this.handelSelect}
+                        id = '2' type="submit">Select</Button>
               </div>
             </CardBody>
           </Card>
 
           <Card>
             <CardBody className="text-center">
-              <h2> Meal Combo #3</h2>
+              <h4> Meal Combo #3</h4>
               <div>
                 <Button variant="secondary" onClick={this.handleModalChange3}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-                <Button data-test="combo-three-button-select" style={{ background: '#599BE9' }} onClick={this.handleSubmit} id='3' type="submit">Select</Button>
+                <Button 
+                        style={{background: this.selectColor(3)}}  onClick={() => {this.toggle(3)}}
+                        //onClick={this.handleSubmit}
+                        id='3' type="submit">Select</Button>
               </div>
             </CardBody>
           </Card>
