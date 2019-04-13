@@ -10,6 +10,7 @@ import DisplayMeals from "./DisplayMeals";
 import DisplayUsers from "./DisplayUsers";
 import MealCombo from "./MealCombo";
 import CustomLogging from '../CustomLogging';
+import Poster from '../middleware/Poster';
 
 class Dashboard extends Component {
 
@@ -24,6 +25,11 @@ class Dashboard extends Component {
     window.scrollTo(0, 0);
   }
 
+  handleUpdate() {
+    
+    CustomLogging.info("User Updated");
+    this.Poster.updateUser();
+  }
   
 
   checkAuthenticated(){
