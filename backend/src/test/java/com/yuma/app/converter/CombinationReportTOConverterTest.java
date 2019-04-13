@@ -16,9 +16,8 @@ import com.yuma.app.document.CombinationReport;
 import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Meal;
 import com.yuma.app.to.CombinationReportTO;
+import com.yuma.app.to.ConsumerTO;
 import com.yuma.app.to.MealTO;
-import com.yuma.app.to.UserTO;
-
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -41,8 +40,8 @@ public class CombinationReportTOConverterTest {
 		Assert.assertEquals(combinationReportTO.getNumberOfBlanks(), combinationReportTO.getNumberOfBlanks());
 
 
-		verify(conversionService).convert(combinationReport.getUserList().get(0), UserTO.class);
-		verify(conversionService).convert(combinationReport.getUserList().get(1), UserTO.class);
+		verify(conversionService).convert(combinationReport.getUserList().get(0), ConsumerTO.class);
+		verify(conversionService).convert(combinationReport.getUserList().get(1), ConsumerTO.class);
 		
 		verify(conversionService).convert(combinationReport.getMealsList().get(0), MealTO.class);
 		verify(conversionService).convert(combinationReport.getMealsList().get(1), MealTO.class);

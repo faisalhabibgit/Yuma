@@ -39,10 +39,46 @@ public class MealControllerTest {
 
 	@Before
 	public void setUp(){
-		mealTO1 = new MealTO(UUID.randomUUID().toString(), "chicken", "chicken", false, new HashSet<>(), 30, new ArrayList<>());
-		mealTO1updated = new MealTO(mealTO1.getMealId(), "chicken", "chicken", true, new HashSet<>(), 24, new ArrayList<>());
-		mealTO1Created = new MealTO(mealTO1.getMealId(), "chicken", "chicken", false, new HashSet<>(), 5, new ArrayList<>());
-		mealTO2 = new MealTO(UUID.randomUUID().toString(), "mutton", "mutton", true, new HashSet<>(), 67, new ArrayList<>());
+		mealTO1 = MealTO.builder()
+			.mealId(UUID.randomUUID().toString())
+			.name("chicken")
+			.description("chicken")
+			.isAvailable(false)
+			.flags(new HashSet<>())
+			.mealScore(30)
+			.ingredients(new ArrayList<>())
+			.build();
+			
+		mealTO1updated =  MealTO.builder()
+			.mealId(UUID.randomUUID().toString())
+			.name("chicken")
+			.description("chicken")
+			.isAvailable(true)
+			.flags(new HashSet<>())
+			.mealScore(24)
+			.ingredients(new ArrayList<>())
+			.build();
+		
+		mealTO1Created =  MealTO.builder()
+			.mealId(UUID.randomUUID().toString())
+			.name("chicken")
+			.description("chicken")
+			.isAvailable(false)
+			.flags(new HashSet<>())
+			.mealScore(5)
+			.ingredients(new ArrayList<>())
+			.build();
+		
+		mealTO2 =  MealTO.builder()
+			.mealId(UUID.randomUUID().toString())
+			.name("mutton")
+			.description("mutton")
+			.isAvailable(false)
+			.flags(new HashSet<>())
+			.mealScore(67)
+			.ingredients(new ArrayList<>())
+			.build();
+		
 		initMocks(this);
 	}
 

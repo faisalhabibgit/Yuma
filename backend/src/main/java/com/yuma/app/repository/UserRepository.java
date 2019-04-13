@@ -14,5 +14,4 @@ public interface UserRepository extends MongoRepository<Consumer, String> {
 	Boolean existsByCompany(String company);
 	List<Consumer> findByIsActiveIsTrue();
 	List<Consumer> findByCompanyIgnoreCase(String company);
-	Consumer findByYumaServerId(String yumaServerId);
 }

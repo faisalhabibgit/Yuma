@@ -45,7 +45,7 @@ class BuildMealCombo {
                     mealcombo.setNumberOfBlanks(obj['numberOfBlanks']);
                     mealcombo.setCombinationScore(obj['combinationScore']);
 
-                    var consumerList = obj['userTOS'];
+                    var consumerList = obj['consumerTOS'];
                     var buildUser = new BuildUser();
                     for (let j = 0; j < consumerList.length; j++) {
                         var consumerInfo = consumerList[j];
