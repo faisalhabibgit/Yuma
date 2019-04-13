@@ -1,17 +1,5 @@
 package com.yuma.app.service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import lombok.extern.slf4j.Slf4j;
-
-import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
-import org.springframework.stereotype.Service;
-
 import com.yuma.app.document.CombinationReport;
 import com.yuma.app.document.Consumer;
 import com.yuma.app.document.Meal;
@@ -58,9 +46,10 @@ public class CombinationReportService {
 		this.addedMeals = new ArrayList<>();
 		this.possibleCombinations = new ArrayList<>();
 	}
-  
+
 	public CombinationReport getMostRecentlyAdded() {
 		log.info("Retrieving most recently added combination report.");
+
 		CombinationReport combinationReport = combinationReportRepository.findTopByOrderByCreatedOnDesc().orElseThrow(() ->
 			new ResourceNotFoundException("Combination report", "most recently added", null)
 		);
@@ -83,6 +72,7 @@ public class CombinationReportService {
 		while (i < MAX && (combinationReport.getNumberOfBlanks() != 0)) {
 			weeklyCombinationHelper.reRunMealCombinationAlgorithm(weeklyCombination, i, addedMeals);
 		}
+
 		return possibleCombinations.stream().map(combinationReport1 ->
 			conversionService.convert(combinationReport1, CombinationReportTO.class)).collect(Collectors.toList());
 	}
