@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import {
-  CardDeck, CardBody, Card,
-  Button
-} from 'reactstrap';
+import { CardDeck, CardBody, Card, Button} from 'reactstrap';
 import Modal from 'react-modal';
 import Poster from '../middleware/Poster';
 import ComboOne from './mealcombo/ComboOne';
@@ -22,7 +19,7 @@ class MealCombo extends Component {
       downloadCSV: '',
       hiddenElement: null,
       background:'#599BE9',
-      active: null
+      //active: null
     };
 
     this.openModal = this.openModal.bind(this);
@@ -31,31 +28,27 @@ class MealCombo extends Component {
     this.handleModalChange2 = this.handleModalChange2.bind(this);
     this.handleModalChange3 = this.handleModalChange3.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDownloadCSV = this.handleDownloadCSV.bind(this);
-   // this.toggle = this.toggle.bind(this);
-   // this.myColor = this.myColor.bind(this);
-   // this.handelSelect = this.handelSelect.bind(this);
-
+    this.handleDownloadCSV = this.handleDownloadCSV.bind(this);   
     this.poster = new Poster();
   }
 
  
 
-  toggle(ide){
-    if (this.state.active === ide) {
-      this.setState({active : null})
-    } else {
-      this.setState({active : ide})
-      this.handleSubmit();
-    }
-  }
+  // toggle(ide){
+  //   if (this.state.active === ide) {
+  //     this.setState({active : null})
+  //   } else {
+  //     this.setState({active : ide})
+  //     this.handleSubmit();
+  //   }
+  // }
   
-  selectColor(ide){
-    if (this.state.active === ide) {
-      return '#e9a759';
-    }
-    return "#599BE9";
-  }
+  // selectColor(ide){
+  //   if (this.state.active === ide) {
+  //     return '#e9a759';
+  //   }
+  //   return "#599BE9";
+  // }
 
 
   openModal() {
@@ -129,11 +122,12 @@ class MealCombo extends Component {
               </div>
               <div style={{ padding: '15px' }}>
               <Button
-              style={{
-                background:
-                  this.state.active === 1 ? "#e9a759" : "#599BE9"
-              }}
-              onClick={() => this.toggle(1)}
+              // style={{
+              //   background:
+              //     this.state.active === 1 ? "#e9a759" : "#599BE9"
+              // }}
+              // onClick={() => this.toggle(1)}
+              onClick= {this.handleSubmit}
               id='1'
               type="submit"
             >
@@ -150,11 +144,12 @@ class MealCombo extends Component {
               </div>
               <div style={{ padding: '15px' }}>
               <Button
-              style={{
-                background:
-                  this.state.active === 2 ? "#e9a759" : "#599BE9"
-              }}
-              onClick={() => this.toggle(2)}
+              // style={{
+              //   background:
+              //     this.state.active === 2 ? "#e9a759" : "#599BE9"
+              // }}
+              // onClick={() => this.toggle(2)}
+              onClick= {this.handleSubmit}
               id='2'
               type="submit"
             >
@@ -172,11 +167,12 @@ class MealCombo extends Component {
               </div>
               <div style={{ padding: '15px' }}>
               <Button
-              style={{
-                background:
-                  this.state.active === 3 ? "#e9a759" : "#599BE9"
-              }}
-              onClick={() => this.toggle(3)}
+              // style={{
+              //   background:
+              //     this.state.active === 3 ? "#e9a759" : "#599BE9"
+              // }}
+              // onClick={() => this.toggle(3)}
+              onClick= {this.handleSubmit}
               id='3'
               type="submit"
             >
