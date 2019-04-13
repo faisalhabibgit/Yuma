@@ -63,10 +63,9 @@ public class CombinationReportServiceTest {
 
 	private List<CombinationReport> possibleCombinations;
 
+	private Optional<CombinationReport> optionalCombinationReport;
 
-	Optional<CombinationReport> optionalCombinationReport;
-
-	Optional<CombinationReport> optionalCombinationReportEmpty;
+	private Optional<CombinationReport> optionalCombinationReportEmpty;
 
 	@Before
 	public void setup() {

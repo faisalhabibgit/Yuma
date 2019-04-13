@@ -57,8 +57,4 @@ public class AdminService {
 	public boolean existsByEmail(String email){
 		return adminRepository.existsByEmail(email);
 	}
-
-	public void updateUsersFromYumaServer(){
-		log.info("Updating Users in Database");
-	}
 }

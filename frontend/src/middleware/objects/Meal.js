@@ -7,6 +7,8 @@ class Meal {
       this.isAvailable = null;
       this.flags = null;
       this.ingredients = null;
+      this.healthLabels = null;
+      this.proteinTypes = null;
     }
 
     setMealId(mealId){this.mealId = mealId}
@@ -15,6 +17,8 @@ class Meal {
     setIsAvailable(value){this.isAvailable = value}
     setFlags(flags){this.flags = flags}
     setIngredients(ingredients){this.ingredients = ingredients}
+    setHealthLabels(healthLabels){this.healthLabels = healthLabels}
+    setProteinTypes(proteinTypes){this.proteinTypes = proteinTypes}
   
     toString() {
       var ingredientsList = [];

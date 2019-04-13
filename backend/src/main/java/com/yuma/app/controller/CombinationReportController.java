@@ -30,7 +30,7 @@ public class CombinationReportController {
 	CombinationReportService combinationReportService;
 	CombinationReportHelper combinationReportHelper;
 	WeeklyCombinationHelper weeklyCombinationHelper;
-	
+
 	@Autowired
 	public CombinationReportController(CombinationReportService combinationReportService, CombinationReportHelper combinationReportHelper, WeeklyCombinationHelper weeklyCombinationHelper) {
 		this.combinationReportService = combinationReportService;

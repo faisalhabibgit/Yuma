@@ -66,7 +66,6 @@ public class ConsumerService {
 		log.info("fetching consumer by email: %s", email);
 
 		Consumer consumer = userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Consumer", "email", email));
-
 		return conversionService.convert(consumer, ConsumerTO.class);
 	}
 	

@@ -28,6 +28,7 @@ public class UserApiTest {
 	private String password = "password";
 	private String companyName = "google";
 
+
 	private String userId1 = "pl";
 	@Before
 	public void setUp() throws Exception {
