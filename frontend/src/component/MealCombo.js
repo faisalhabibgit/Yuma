@@ -7,6 +7,7 @@ import ComboTwo from './mealcombo/ComboTwo';
 import ComboThree from './mealcombo/ComboThree';
 import Retriever from '../middleware/Retriever';
 import CustomLogging from "../CustomLogging";
+import './stylesheet/buttonColor.css';
 
 class MealCombo extends Component {
 
@@ -19,7 +20,7 @@ class MealCombo extends Component {
       downloadCSV: '',
       hiddenElement: null,
       background:'#599BE9',
-      //active: null
+      
     };
 
     this.openModal = this.openModal.bind(this);
@@ -33,23 +34,6 @@ class MealCombo extends Component {
   }
 
  
-
-  // toggle(ide){
-  //   if (this.state.active === ide) {
-  //     this.setState({active : null})
-  //   } else {
-  //     this.setState({active : ide})
-  //     this.handleSubmit();
-  //   }
-  // }
-  
-  // selectColor(ide){
-  //   if (this.state.active === ide) {
-  //     return '#e9a759';
-  //   }
-  //   return "#599BE9";
-  // }
-
 
   openModal() {
     this.setState({ modalIsOpen: true });
@@ -121,18 +105,7 @@ class MealCombo extends Component {
                 <Button variant="secondary" onClick={this.handleModalChange1}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-              <Button
-              // style={{
-              //   background:
-              //     this.state.active === 1 ? "#e9a759" : "#599BE9"
-              // }}
-              // onClick={() => this.toggle(1)}
-              onClick= {this.handleSubmit}
-              id='1'
-              type="submit"
-            >
-              Select
-            </Button>
+              <Button onClick= {this.handleSubmit} id='1' type="submit">Select </Button>
               </div> 
             </CardBody>
           </Card>
@@ -143,19 +116,8 @@ class MealCombo extends Component {
                 <Button variant="secondary" onClick={this.handleModalChange2}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-              <Button
-              // style={{
-              //   background:
-              //     this.state.active === 2 ? "#e9a759" : "#599BE9"
-              // }}
-              // onClick={() => this.toggle(2)}
-              onClick= {this.handleSubmit}
-              id='2'
-              type="submit"
-            >
-              Select
-            </Button>
-              </div>
+              <Button onClick= {this.handleSubmit} id='2' type="submit">Select </Button>
+              </div> 
             </CardBody>
           </Card>
 
@@ -166,19 +128,8 @@ class MealCombo extends Component {
                 <Button variant="secondary" onClick={this.handleModalChange3}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-              <Button
-              // style={{
-              //   background:
-              //     this.state.active === 3 ? "#e9a759" : "#599BE9"
-              // }}
-              // onClick={() => this.toggle(3)}
-              onClick= {this.handleSubmit}
-              id='3'
-              type="submit"
-            >
-              Select
-            </Button>
-              </div>
+              <Button onClick= {this.handleSubmit} id='3' type="submit">Select </Button>
+              </div> 
             </CardBody>
           </Card>
 
