@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import static com.yuma.app.HelperCombo.prepareMealList;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
@@ -69,7 +70,7 @@ public class CombinationReportServiceTest {
 	@Before
 	public void setup() {
 
-		mealList = HelperCombo.prepareMealList();
+		mealList = prepareMealList();
 		userList = HelperCombo.prepareUserList();
 		combinationReportHelper = new CombinationReportHelper();
 		possibleCombinations = new ArrayList<>();
@@ -119,5 +120,4 @@ public class CombinationReportServiceTest {
 		verify(mealRepository, times(1)).findByIsAvailableIsTrue();
 		verify(userRepository, times(1)).findByIsActiveIsTrue();
 	}
-
 }

@@ -24,7 +24,7 @@ import com.yuma.app.to.ConsumerTO;
 public class UserController {
 	
 	private ConsumerService userService;
-
+	
 	public UserController(ConsumerService consumerService) {
 		this.userService = consumerService;
 	}
@@ -54,15 +54,15 @@ public class UserController {
 
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ConsumerTO createUser(@RequestBody ConsumerTO userTO){
+	public ConsumerTO createUser(@RequestBody ConsumerTO consumerTO){
 		log.info("creating user from DB in controller");
-		return this.userService.create(userTO);
+		return this.userService.create(consumerTO);
 	}
 	
 	@PutMapping("/update")
-	public ConsumerTO updateUser(@RequestBody ConsumerTO userTO){
+	public ConsumerTO updateUser(@RequestBody ConsumerTO consumerTO){
 		log.info("updating user from DB in controller");
-		return this.userService.updateUser(userTO);
+		return this.userService.updateUser(consumerTO);
 	}
 
 	@GetMapping("/listcompanies")
