@@ -41,16 +41,17 @@ class MealCombo extends Component {
 
  
 
-  toggle(id){
-    if (this.state.active === id) {
+  toggle(ide){
+    if (this.state.active === ide) {
       this.setState({active : null})
     } else {
-      this.setState({active : id})
+      this.setState({active : ide})
+      this.handleSubmit();
     }
   }
   
-  selectColor(id){
-    if (this.state.active === id) {
+  selectColor(ide){
+    if (this.state.active === ide) {
       return '#e9a759';
     }
     return "#599BE9";
@@ -85,9 +86,9 @@ class MealCombo extends Component {
 
   
   handleSubmit(e) {
-    CustomLogging.info("Selected Combo"+e.target.id,"MealCombo");
+    CustomLogging.info("Selected Combo"+ e.target.id + "MealCombo");
 
-      this.poster.selectMealCombo(e.target.id).then(() => {
+      this.poster.selectMealCombo(e.target.index).then(() => {
 
       const retriever = new Retriever('api/combinationreport/download/consumers.csv');      
       retriever.getEntityPromise().then((csv) => {
@@ -104,10 +105,6 @@ class MealCombo extends Component {
     })
 }
 
-handelSelect(){
-    this.toggle();
-    this.handleSubmit();
-  }
 
 
   handleDownloadCSV() {
@@ -131,10 +128,17 @@ handelSelect(){
                 <Button variant="secondary" onClick={this.handleModalChange1}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-                <Button 
-                        style={{background: this.selectColor(1)}}  onClick={() => {this.toggle(1)}}
-                        //onClick={this.handleSubmit} 
-                        id ='1' type="submit">Select</Button>
+              <Button
+              style={{
+                background:
+                  this.state.active === 1 ? "#e9a759" : "#599BE9"
+              }}
+              onClick={() => this.toggle(1)}
+              id='1'
+              type="submit"
+            >
+              Select
+            </Button>
               </div> 
             </CardBody>
           </Card>
@@ -145,10 +149,17 @@ handelSelect(){
                 <Button variant="secondary" onClick={this.handleModalChange2}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-                <Button 
-                        style={{background: this.selectColor(2)}} onClick={() => {this.toggle(2)}}
-                       // onClick={this.handelSelect}
-                        id = '2' type="submit">Select</Button>
+              <Button
+              style={{
+                background:
+                  this.state.active === 2 ? "#e9a759" : "#599BE9"
+              }}
+              onClick={() => this.toggle(2)}
+              id='2'
+              type="submit"
+            >
+              Select
+            </Button>
               </div>
             </CardBody>
           </Card>
@@ -160,10 +171,17 @@ handelSelect(){
                 <Button variant="secondary" onClick={this.handleModalChange3}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-                <Button 
-                        style={{background: this.selectColor(3)}}  onClick={() => {this.toggle(3)}}
-                        //onClick={this.handleSubmit}
-                        id='3' type="submit">Select</Button>
+              <Button
+              style={{
+                background:
+                  this.state.active === 3 ? "#e9a759" : "#599BE9"
+              }}
+              onClick={() => this.toggle(3)}
+              id='3'
+              type="submit"
+            >
+              Select
+            </Button>
               </div>
             </CardBody>
           </Card>
