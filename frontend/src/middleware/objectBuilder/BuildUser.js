@@ -64,7 +64,8 @@ class BuildUser {
         for (let index = 0; index < obj['allergies'].length; index++) {
             allergies.push(obj['allergies'][index]);
         }
-
+        
+        user.setAllergies(allergies)
         user.setMealList(mealList);
         user.setDislikesList(obj['dislikesList']);
 

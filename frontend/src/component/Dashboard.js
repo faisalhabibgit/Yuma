@@ -12,6 +12,9 @@ import MealCombo from "./MealCombo";
 import CustomLogging from '../CustomLogging';
 import UsersByCompany from "./UsersByCompany";
 import MealChart from "./MealChart";
+import DietChart from "./DietChart";
+import ProteinTyespChart from "./ProteinTypesChart";
+import AllergiesChart from "./AllergiesChart";
 
 class Dashboard extends Component {
 
@@ -87,6 +90,26 @@ class Dashboard extends Component {
           <Card data-test="meals-chart-card">
             <CardBody>
               <MealChart />
+            </CardBody>
+          </Card>
+        </CardDeck>
+
+        <CardDeck  style={{padding:'12px', height:'370px'}}>
+          <Card data-test="users-per-diet">
+            <CardBody>
+              <DietChart />
+            </CardBody>
+          </Card>
+
+          <Card data-test="protein-chart-card">
+            <CardBody>
+              <ProteinTyespChart />
+            </CardBody>
+          </Card>
+
+          <Card data-test="allergies-card">
+            <CardBody>
+              <AllergiesChart />
             </CardBody>
           </Card>
         </CardDeck>

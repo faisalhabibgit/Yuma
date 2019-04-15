@@ -69,3 +69,23 @@ test('Renders Meals Chart Card', () => {
   expect(mealsChartCard.length).toBe(1);
 
 });
+
+test('Renders Diet Chart Card', () => {
+
+  const usersDietChart = wrapper.find("[data-test='users-per-diet']");
+  expect(usersDietChart.length).toBe(1);
+
+});
+
+test('Renders Allergies Chart Card', () => {
+
+  const allergiesCard = wrapper.find("[data-test='allergies-card']");
+  expect(allergiesCard.length).toBe(1);
+
+});
+
+test('Renders Protein Chart Card', () => {
+  const proteinCard = wrapper.find("[data-test='protein-chart-card']");
+  expect(proteinCard.length).toBe(1);
+
+});
