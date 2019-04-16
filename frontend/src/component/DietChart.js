@@ -25,6 +25,7 @@ class DietChart extends Component {
     retrieverAll.getEntityPromise()
       .then((obj) => {
 
+        // get count of diets
     for (var i = 0; i < obj.length; i++)
     {   
       if (obj[i].plan.diet.toString() === "NONE")

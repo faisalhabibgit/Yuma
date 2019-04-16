@@ -37,6 +37,8 @@ class ProteinTypesChart extends Component {
     CustomLogging.info('retrieving all users','ProteinTypesChart');
     retrieverAll.getEntityPromise()
       .then((obj) => {
+        
+        // get count of protein types
         for (var i = 0; i < obj.length; i++) {
           for (var x = 0; x < obj[i].plan.requestedProteinTypes.length; x++)
             if (obj[i].plan.requestedProteinTypes[x].toString() === "LAMB") {
@@ -64,9 +66,7 @@ class ProteinTypesChart extends Component {
             {
               matchedCountVegetarian++
             }
-
         }
-
         this.setState({proteinLamb:matchedCountLamb});
         this.setState({proteinBeef:matchedCountBeef});
         this.setState({proteinFish:matchedCountFish});
@@ -76,11 +76,7 @@ class ProteinTypesChart extends Component {
         this.setState({proteinShellfish:matchedCountShellfish});
         this.setState({proteinVegan:matchedCountVegan});
         this.setState({proteinVegetarian:matchedCountVegetarian});
-
-
       })
-
-
   }
 
   render() {

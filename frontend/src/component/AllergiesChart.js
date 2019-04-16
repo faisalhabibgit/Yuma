@@ -9,6 +9,7 @@ class AllergiesChart extends Component {
     super(props);
     this.state = {
       allUsers: [],
+      allergicUsers:"",
       allergyDairy:"",
       allergyGluten:"",
       allergyPeanut:"",
@@ -19,6 +20,7 @@ class AllergiesChart extends Component {
   }
 
   componentDidMount() {
+    var countNotAllergic =0;
     var matchedCountDairy=0;
     var matchedCountGluten=0;
     var matchedCountPeanut=0;
@@ -30,6 +32,18 @@ class AllergiesChart extends Component {
     CustomLogging.info('retrieving all users','AllergiesChart');
     retrieverAll.getEntityPromise()
       .then((obj) => {
+        // get number of users with allergies
+        for (var y = 0; y < obj.length; y++) {
+          if (obj[y].allergies.length === 0)
+          {
+            countNotAllergic++
+          }
+        }
+        var allergicUsers = obj.length-countNotAllergic;
+
+        this.setState({allergicUsers:allergicUsers});
+        
+        // get count of allergies
         for (var i = 0; i < obj.length; i++) {
           for (var x = 0; x < obj[i].allergies.length; x++)
             if (obj[i].allergies[x].toString() === "DAIRY") {
@@ -49,6 +63,7 @@ class AllergiesChart extends Component {
               matchedCountTreeNuts++
             }
         }
+        
         this.setState({allergyDairy:matchedCountDairy});
         this.setState({allergyGluten:matchedCountGluten});
         this.setState({allergyPeanut:matchedCountPeanut});
@@ -68,8 +83,9 @@ class AllergiesChart extends Component {
       }]
     };
     return (
-      <div>
-        <h5 className='text-center'> Allergies </h5>
+      <div className='text-center'>
+        <h5 > Allergies </h5>
+        <h7> {this.state.allergicUsers} users have allergies </h7>
         <Pie data-test="pie-chart-allergies" height="200px" data={data} />
       </div>
 

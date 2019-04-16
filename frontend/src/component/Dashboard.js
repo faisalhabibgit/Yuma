@@ -94,7 +94,7 @@ class Dashboard extends Component {
           </Card>
         </CardDeck>
 
-        <CardDeck  style={{padding:'12px', height:'370px'}}>
+        <CardDeck  style={{padding:'12px', height:'380px'}}>
           <Card data-test="users-per-diet">
             <CardBody>
               <DietChart />
