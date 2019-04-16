@@ -57,7 +57,7 @@ class DietChart extends Component {
     return (
       <div>
         <h5 className='text-center'> Diet </h5>
-        <Pie data-test="pie-chart-diet" height="200px" data={data} />
+        <Pie data-test="chart-diet" height="120px" data={data} />
       </div>
 
     );

@@ -22,7 +22,7 @@ test('Protein Types Chart renders pie chart', () => {
 
   expect(wrapper.length).toBe(1);
 
-  const pieChart = wrapper.find("[data-test='pie-chart-protein']");
+  const pieChart = wrapper.find("[data-test='chart-protein']");
   expect(pieChart.length).toBe(1);
 
 });

@@ -22,7 +22,7 @@ test('Users By company renders pie chart', () => {
 
   expect(wrapper.length).toBe(1);
 
-  const pieChart = wrapper.find("[data-test='pie-chart']");
+  const pieChart = wrapper.find("[data-test='chart-users']");
   expect(pieChart.length).toBe(1);
 
 });

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Retriever from "../middleware/Retriever";
 import CustomLogging from "../CustomLogging";
-import {Pie} from 'react-chartjs-2';
+import {Line} from 'react-chartjs-2';
 
 const dataArr=[];
 
@@ -41,34 +41,21 @@ class UsersByCompany extends Component {
     for (var x in dataArr) {
       values.push(dataArr[x])
     }
-    
-    // dynamic colors for every company added to the pie chart
-    var dynamicColors = function( i, total) {
-      var r = 10+i* 15/total;
-      var g = i* 200/total;
-      var b = i* 400/total;
-      return "rgb(" + r + "," + g + "," + b + ")";
-    };
-    
-    var colors = [];
-
-    for (var i in this.state.apiObject) {
-      colors.push(dynamicColors(i, this.state.apiObject.length));
-    }
 
     // data for the pie chart
     const data = {
         labels: this.state.apiObject,
         datasets: [{
+        label:"Users",
         data: values,
-        backgroundColor: colors,
+        backgroundColor: '#83AEDE'
       }]
     };
 
     return (
       <div>
         <h5 className='text-center'> Users By Company </h5>
-        <Pie data-test="pie-chart" height="120px" data={data} />
+        <Line data-test="chart-users" height="50px" data={data} />
       </div>
 
     );

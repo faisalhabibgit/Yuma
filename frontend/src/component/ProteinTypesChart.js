@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Retriever from "../middleware/Retriever";
 import CustomLogging from "../CustomLogging";
-import {Pie} from 'react-chartjs-2';
+import {HorizontalBar} from 'react-chartjs-2';
 
 
 class ProteinTypesChart extends Component {
@@ -84,15 +84,16 @@ class ProteinTypesChart extends Component {
     const data = {
       labels: ["Lamb","Beef", "Fish", "Plant Based Diet","Pork","Poultry","Shellfish","Vegan","Vegetarian"],
       datasets: [{
+        label: "Protein Types",
         data: [this.state.proteinLamb,this.state.proteinBeef,this.state.proteinFish,this.state.proteinPlant,this.state.proteinPork,
           this.state.proteinPoultry,this.state.proteinShellfish,this.state.proteinVegan,this.state.proteinVegetarian],
-        backgroundColor:['#2E78C9', '#83AEDE',"#194D33",'#3EC682','#C2C050','#42412E','#B95A34','#971EAB','#EBEBEB']
+        backgroundColor:'#194D33'
       }]
     };
     return (
       <div>
-        <h5 className='text-center'>Requested Protein Types </h5>
-        <Pie data-test="pie-chart-protein" height="200px" data={data} />
+        <h5 className='text-center'>Requested Protein Types</h5>
+        <HorizontalBar data-test="chart-protein" height="120px" data={data} />
       </div>
 
     );

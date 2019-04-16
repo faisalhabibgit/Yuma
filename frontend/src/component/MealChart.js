@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Retriever from "../middleware/Retriever";
 import CustomLogging from "../CustomLogging";
-import {Pie} from 'react-chartjs-2';
+import {Doughnut} from 'react-chartjs-2';
 
 
 class MealsChart extends Component {
@@ -57,7 +57,7 @@ class MealsChart extends Component {
     return (
       <div>
       <h5 className='text-center'> Meals </h5>
-      <Pie data-test="pie-chart-meals" height="120px" data={data} />
+      <Doughnut data-test="chart-meals" height="120px" data={data} />
     </div>
 
   );

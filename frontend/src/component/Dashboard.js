@@ -86,20 +86,23 @@ class Dashboard extends Component {
               <UsersByCompany />
             </CardBody>
           </Card>
-
+        </CardDeck>
+       
+        <CardDeck  style={{padding:'12px', height:'370px'}}>
+         
           <Card data-test="meals-chart-card">
             <CardBody>
               <MealChart />
             </CardBody>
           </Card>
-        </CardDeck>
-
-        <CardDeck  style={{padding:'12px', height:'380px'}}>
           <Card data-test="users-per-diet">
             <CardBody>
               <DietChart />
             </CardBody>
           </Card>
+        </CardDeck>
+
+        <CardDeck  style={{padding:'12px', height:'380px'}}>
 
           <Card data-test="protein-chart-card">
             <CardBody>
@@ -114,7 +117,7 @@ class Dashboard extends Component {
           </Card>
         </CardDeck>
 
-        <CardDeck  style={{padding:'12px', height:'620px'}}>
+        <CardDeck  style={{padding:'12px', height:'640px'}}>
           <Card data-test="users-card">
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
               <div>
@@ -125,10 +128,8 @@ class Dashboard extends Component {
               <DisplayUsers />
             </CardBody>
           </Card>
-
         </CardDeck>
-
-
+        
       </div>
     );
 

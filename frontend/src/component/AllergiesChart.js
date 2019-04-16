@@ -86,7 +86,7 @@ class AllergiesChart extends Component {
       <div className='text-center'>
         <h5 > Allergies </h5>
         <h7> {this.state.allergicUsers} users have allergies </h7>
-        <Pie data-test="pie-chart-allergies" height="200px" data={data} />
+        <Pie data-test="chart-allergies" height="120px" data={data} />
       </div>
 
     );
