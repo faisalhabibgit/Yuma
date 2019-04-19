@@ -5,7 +5,7 @@ import com.yuma.app.document.*;
 import com.yuma.app.repository.CombinationReportRepository;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.service.CombinationReportService;
-import com.yuma.app.util.HelperCombo.CombinationReportHelper;
+import com.yuma.app.service.HelperCombo.CombinationReportHelper;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,10 +16,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.core.convert.ConversionService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -57,7 +54,7 @@ public class CombinationReportHelperTest {
 	@Test
 	public void givenMealAndNonMatchingUserLikesWhenCheckIfMealWorksThenShouldReturnFalse() {
 
-		Meal meal = HelperCombo.prepareAndReturnMeal();
+		Meal meal = HelperCombo.prepareAndReturnMealWithAllergies();
 		Consumer user = HelperCombo.prepareAndReturnUser();
 
 		boolean result = combinationReportHelper.checkIfMealWorks(meal, user, addedMeals);
@@ -69,7 +66,7 @@ public class CombinationReportHelperTest {
 		
 		Meal meal = HelperCombo.prepareAndReturnMeal();
 		Consumer user = HelperCombo.prepareAndReturnUser();
-		user.getDislikesList().clear();
+		
 		combinationReport.setMealsList(HelperCombo.prepareMealList());
 
 		boolean result = combinationReportHelper.checkIfMealWorks(meal, user, addedMeals);
@@ -99,9 +96,9 @@ public class CombinationReportHelperTest {
 		Assert.assertEquals(((Meal)meals.get(0)).getName(), "meal1");
 		Assert.assertEquals(((Meal)meals.get(1)).getName(), "meal2");
 		Assert.assertEquals(((Meal)meals.get(2)).getName(), "meal3");
-		Assert.assertEquals(((Meal)meals.get(0)).getMealScore(), 3);
-		Assert.assertEquals(((Meal)meals.get(1)).getMealScore(), 2);
-		Assert.assertEquals(((Meal)meals.get(2)).getMealScore(), 2);
+		Assert.assertEquals(((Meal)meals.get(0)).getMealScore(), 2);
+		Assert.assertEquals(((Meal)meals.get(1)).getMealScore(), 1);
+		Assert.assertEquals(((Meal)meals.get(2)).getMealScore(), 1);
 	}
 
 	@Test
@@ -125,7 +122,6 @@ public class CombinationReportHelperTest {
 
 		Meal resultMeal = combinationReportHelper.generateNewMealWithModifiedIngredients(mealWithOnions, mealWithOnions.getIngredients());
 
-		//fix me
 		Assert.assertTrue(resultMeal.getIngredients().isEmpty());
 	}
 

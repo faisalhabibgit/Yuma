@@ -9,7 +9,7 @@ import com.yuma.app.repository.CombinationReportRepository;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.repository.UserRepository;
 import com.yuma.app.to.CombinationReportTO;
-import com.yuma.app.util.HelperCombo.WeeklyCombinationHelper;
+import com.yuma.app.service.HelperCombo.WeeklyCombinationHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -36,6 +36,7 @@ public class CombinationReportService {
 	private List<CombinationReport> possibleCombinations;
 	private List<Meal> addedMeals;
 	private ConversionService conversionService;
+	@Autowired
 	private WeeklyCombinationHelper weeklyCombinationHelper;
 	
 	public static final int MAX = 2;
@@ -46,9 +47,10 @@ public class CombinationReportService {
 		this.addedMeals = new ArrayList<>();
 		this.possibleCombinations = new ArrayList<>();
 	}
-  
+
 	public CombinationReport getMostRecentlyAdded() {
 		log.info("Retrieving most recently added combination report.");
+
 		CombinationReport combinationReport = combinationReportRepository.findTopByOrderByCreatedOnDesc().orElseThrow(() ->
 			new ResourceNotFoundException("Combination report", "most recently added", null)
 		);
@@ -71,6 +73,7 @@ public class CombinationReportService {
 		while (i < MAX && (combinationReport.getNumberOfBlanks() != 0)) {
 			weeklyCombinationHelper.reRunMealCombinationAlgorithm(weeklyCombination, i, addedMeals);
 		}
+
 		return possibleCombinations.stream().map(combinationReport1 ->
 			conversionService.convert(combinationReport1, CombinationReportTO.class)).collect(Collectors.toList());
 	}

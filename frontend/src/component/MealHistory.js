@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import ApiToken from "../middleware/ApiToken";
-import {  Container, Col, Form,  FormGroup, Label, Input,  Button,} from 'reactstrap';
+import {  
+  Container, Col, Form,
+  FormGroup, Label, 
+  Button,
+  Card, CardDeck, CardBody, CardHeader} from 'reactstrap';
+import CustomLogging from "../CustomLogging";
 
 
 class MealHistory extends Component{
@@ -12,10 +17,10 @@ class MealHistory extends Component{
     
     const apiToken = new ApiToken();
     if (!apiToken.isAuthenticated()) {
-      console.log('User Not Logged');
+      CustomLogging.error('Check Authentification MealHistory: FAIL','MealHistory');
       this.props.history.push(`/Login`)
     } else {
-      console.log('User Login Success');
+      CustomLogging.info('Check Authentification MealHistory: PASS','MealHistory');
     }
     
     this.state = {
@@ -39,47 +44,44 @@ class MealHistory extends Component{
   render() {
     return (
     <Container>
-      <Col sm="12" md={{ size:20, offset: 15 }}>
-      <h2>Meal Combination History</h2>
-        <Form className="form-inline">
 
-      <Col >
-      <FormGroup>
-      <Label>User Name</Label>
-    <Input
-    type="text"
-    name="userName"
-    id="userName"
-    placeholder=""
-    onChange={this.handleChange}
-    />
+      <Col sm="12" md={{ size: 12}}>
+          <CardHeader  className="text-center" style={{background: '#B9C5D5', borderRadius: 10}}>
+          <h2>Meal Combination History</h2>
+          </CardHeader>
+          <br />
+          <Form className="form" onSubmit={this.handleSubmit}>
+            <Col >
+              <FormGroup>
+                  <CardDeck data-test="name" style={{padding:'12px', height:'200px', borderRadius: 10}}>
+                    
 
-    </FormGroup>
-    </Col>
-      <Col >
-      <FormGroup>
-      <Label>From: </Label>
-    <DatePicker
-    selected={this.state.startDate}
-    onChange={this.handleChange}
-    />
-    </FormGroup>
-    </Col>
-    <Col >
-    <FormGroup>
-    <Label>To__: </Label>
-    <DatePicker
-    selected={this.state.startDate}
-    onChange={this.handleChange}
-    />
+                    <Card  data-test="start-date" style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>                  
+                    <CardBody className="text-center" style={{padding:'50px'}}>
+                    <Label style={{color: 'black', fontSize:20}} >Start Date</Label>
+                    <br />
+                      <DatePicker 
+                          selected={this.state.startDate} onChange={this.handleChange} mode="date"
+                           />
+                    </CardBody>
+                    </Card>      
+                  
+    
+                    <Card  data-test="end-date" style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>                  
+                    <CardBody className="text-center" style={{padding:'50px'}}>
+                    <Label style={{color: 'black', fontSize:20}}>End Date</Label>
+                    <br />
+                      <DatePicker selected={this.state.startDate} onChange={this.handleChange} />
+                    </CardBody>
+                    </Card> 
+                  </CardDeck>
+             </FormGroup>
+           </Col>
       
-    </FormGroup>
-    </Col>
-      
-    <Button>View</Button>
-    </Form>
-    </Col>
-  
+                <Button type="view" value="view" size="lg" block>View</Button>
+          </Form>
+
+      </Col>
     </Container>
   );
   }

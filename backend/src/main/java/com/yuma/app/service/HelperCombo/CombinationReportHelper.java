@@ -1,15 +1,16 @@
-package com.yuma.app.util.HelperCombo;
+package com.yuma.app.service.HelperCombo;
 
 import com.yuma.app.document.*;
+import com.yuma.app.document.enums.Allergens;
 import com.yuma.app.service.CombinationReportService;
+import com.yuma.app.document.WeeklyCombination;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
+@Service
 public class CombinationReportHelper {
 	
 	private Logger logger = LoggerFactory.getLogger(CombinationReportService.class);
@@ -26,15 +27,20 @@ public class CombinationReportHelper {
 		logger.info("Setting meal scores");
 
 		boolean scorable = true;
-		List<String> userDislikesList;
+		Set<Allergens> consumerAllergensSet;
 		for (Consumer user : userList) {
-			userDislikesList = user.getDislikesList();
+			consumerAllergensSet = user.getAllergies();
 			for (Meal meal : mealList) {
 				for (Ingredients ingredient : meal.getIngredients()) {
-					if (userDislikesList.contains(ingredient.getName())) {
-						if (!ingredient.isOptional()) {
-							scorable = false;
-							break;
+					HashSet<Allergens> ingredientAllergens = ingredient.getAllergens();
+					for (Allergens ingredientAllergies : ingredientAllergens) {
+						for (Allergens consumerAllergy : consumerAllergensSet) {
+							if (consumerAllergy.toString().equalsIgnoreCase(ingredientAllergies.toString())) {
+								if (!ingredient.isOptional()) {
+									scorable = false;
+									break;
+								}
+							}
 						}
 					}
 				}
@@ -120,16 +126,21 @@ public class CombinationReportHelper {
 	public boolean checkIfMealWorks(Meal meal, Consumer user, List<Meal> addedMeals) {
 		logger.info("checking if: " + meal.getName() + " works for " + user.getFirstName());
 
-		List<String> userDislikesList = user.getDislikesList();
+		Set<Allergens> consumerAllergens = user.getAllergies();
 		List<Ingredients> ingredientsToRemove = new ArrayList<>();
 		Meal newMeal = meal;
 
 		for (Ingredients ingredient : newMeal.getIngredients()) {
-			if (userDislikesList.contains(ingredient.getName())) {
-				if (!ingredient.isOptional()) {
-					return false;
-				} else {
-					ingredientsToRemove.add(ingredient);
+			HashSet<Allergens> ingredientAllergens = ingredient.getAllergens();
+			for (Allergens ingredientAllergies : ingredientAllergens) {
+				for (Allergens consumerAllergy : consumerAllergens) {
+					if (consumerAllergy.toString().equalsIgnoreCase(ingredientAllergies.toString())) {
+						if (!ingredient.isOptional()) {
+							return false;
+						} else {
+							ingredientsToRemove.add(ingredient);
+						}
+					}
 				}
 			}
 		}

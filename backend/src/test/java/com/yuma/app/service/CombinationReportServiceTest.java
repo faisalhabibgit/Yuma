@@ -9,8 +9,8 @@ import com.yuma.app.repository.CombinationReportRepository;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.repository.UserRepository;
 import com.yuma.app.to.CombinationReportTO;
-import com.yuma.app.util.HelperCombo.CombinationReportHelper;
-import com.yuma.app.util.HelperCombo.WeeklyCombinationHelper;
+import com.yuma.app.service.HelperCombo.CombinationReportHelper;
+import com.yuma.app.service.HelperCombo.WeeklyCombinationHelper;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.junit.Before;
@@ -27,6 +27,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import static com.yuma.app.HelperCombo.prepareMealList;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
@@ -64,14 +65,14 @@ public class CombinationReportServiceTest {
 
 	private List<CombinationReport> possibleCombinations;
 
-	Optional<CombinationReport> optionalCombinationReport;
+	private Optional<CombinationReport> optionalCombinationReport;
 
-	Optional<CombinationReport> optionalCombinationReportEmpty;
+	private Optional<CombinationReport> optionalCombinationReportEmpty;
 
 	@Before
 	public void setup() {
 
-		mealList = HelperCombo.prepareMealList();
+		mealList = prepareMealList();
 		userList = HelperCombo.prepareUserList();
 		combinationReportHelper = new CombinationReportHelper();
 		possibleCombinations = new ArrayList<>();
@@ -121,6 +122,7 @@ public class CombinationReportServiceTest {
 		verify(mealRepository, times(1)).findByIsAvailableIsTrue();
 		verify(userRepository, times(1)).findByIsActiveIsTrue();
 	}
+<<<<<<< HEAD
 
 	@Test
 	public void testListCombinationReportInDateRange() {
@@ -141,4 +143,6 @@ public class CombinationReportServiceTest {
 		verify(conversionService).convert(combinationReports.get(0), CombinationReportTO.class);
 	}
 
+=======
+>>>>>>> master
 }

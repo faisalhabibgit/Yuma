@@ -11,6 +11,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.joda.time.LocalDate;
+import com.yuma.app.service.HelperCombo.CombinationReportHelper;
+import com.yuma.app.service.HelperCombo.WeeklyCombinationHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,34 +33,40 @@ public class CombinationReportControllerTest {
 
 	@Mock
 	CombinationReportService combinationReportService;
+	
+	@Mock
+	CombinationReportHelper combinationReportHelper;
+	
+	@Mock
+	WeeklyCombinationHelper weeklyCombinationHelper;
 
 	@Mock
 	HttpServletResponse httpServletResponse;
 
 	@Mock
 	CombinationReportRepository combinationReportRepository;
-	
+
 	@Captor
 	private ArgumentCaptor<WriteCsvToResponse> writeCsvToResponseArgumentCaptor;
 
 	CombinationReportController combinationReportController;
-	
+
 	@Before
 	public void init(){
 		initMocks(this);
-		combinationReportController = new CombinationReportController(combinationReportService);
+		combinationReportController = new CombinationReportController(combinationReportService, combinationReportHelper, weeklyCombinationHelper);
 	}
-	
+
 	@Test
 	public void testGetWeeklyCombo() {
 		combinationReportController.getWeeklyCombo();
 		verify(combinationReportService).generateWeeklyCombination();
 	}
-	
+
 	@Test
 	public void testChosenCombo() {
 		int index = 1;
-		
+
 		combinationReportController.chosenCombo(index);
 		verify(combinationReportService).saveCombinationReport(index);
 	}
@@ -76,7 +84,7 @@ public class CombinationReportControllerTest {
 	}
 
 	private List<Consumer> prepareList() {
-		
+
 		List<Meal> meals = new ArrayList<>();
 		Meal meal1 = new Meal();
 		meal1.setName("meal1");

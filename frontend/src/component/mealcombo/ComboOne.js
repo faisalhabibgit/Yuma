@@ -5,11 +5,12 @@ import Loading from '../Loading';
 import {
     Container
 } from 'reactstrap';
+import CustomLogging from '../../CustomLogging';
 
 
 class ComboOne extends Component {
     constructor(props) {
-        console.log('inside combo 1');
+        CustomLogging.info('inside combo 1','ComboOne');
         super(props);
         this.state = {
             apiObject: []
@@ -17,7 +18,7 @@ class ComboOne extends Component {
     }
 
     componentDidMount() {
-        console.log('component mounted');
+        CustomLogging.info('retrieving combo 1','ComboOne');
         const retriever = new Retriever('api/combinationreport/weeklycombo');
         retriever.getEntityPromise()
             .then((obj) => {
@@ -29,10 +30,12 @@ class ComboOne extends Component {
 
     getDisplay(){
         if (this.state.apiObject === undefined || this.state.apiObject.length === 0) {
-            console.log(this.state.apiObject);
+            CustomLogging.alert("no combination report 1 to display","ComboOne");
             return <Loading />
         } else {
+            CustomLogging.info("displaying combination report 1","ComboOne");
             return <DisplayCombo data={this.state.apiObject} />
+           
         }
     }
 

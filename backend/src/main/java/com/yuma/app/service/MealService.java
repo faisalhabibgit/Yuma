@@ -51,7 +51,7 @@ public class MealService {
 	
 	public List<MealTO> availableMeals(){
 		log.info("retrieving available meals in %s", MealService.class);
-		
+
 		List<Meal> availableMeals = mealRepository.findByIsAvailableIsTrue();
 		List<MealTO> mealTOS = convertMealToMealTO(availableMeals);
 		return mealTOS;
@@ -74,7 +74,7 @@ public class MealService {
 		}
 	}
 	
-	public List<MealTO> convertMealToMealTO(List<Meal> meals){
+	private List<MealTO> convertMealToMealTO(List<Meal> meals){
 		log.info("converting Meal List to MealTO list with description %s in %s", MealService.class);
 
 		List<MealTO> mealTos = new ArrayList<>();
@@ -90,8 +90,8 @@ public class MealService {
 		Meal meal = mealRepository.findByMealId(mealId).map(Meal::new).orElseThrow(() -> new ResourceNotFoundException("Meal", "mealId", mealId));
 		switchAvailability(meal);
 	}
-	
-	protected void switchAvailability(Meal meal){
+
+	private void switchAvailability(Meal meal){
 		if (meal.isAvailable()) {
 			meal.setAvailable(false);
 			mealRepository.save(meal);

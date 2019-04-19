@@ -3,6 +3,7 @@ package com.yuma.app.document;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +13,9 @@ import lombok.Setter;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.yuma.app.document.enums.HealthLabels;
+import com.yuma.app.document.enums.ProteinType;
 
 @Document
 @Getter
@@ -26,29 +30,20 @@ public class Meal {
 	private String name;
 	private String description;
 	private boolean isAvailable;
-	private HashSet<String> flags = new HashSet<>();
 	private int mealScore;
-	protected List<Ingredients> ingredients = new ArrayList<>();
-
+	private HashSet<String> flags = new HashSet<>();
+	private List<Ingredients> ingredients = new ArrayList<>();
+	private Set<HealthLabels> healthLabels = new HashSet<>();
+	private Set<ProteinType> proteinTypes = new HashSet<>();
 	
 	public Meal(Meal deepCopy){
 		this.setMealId(deepCopy.mealId);
 		this.setName(deepCopy.getName());
 		this.setDescription(deepCopy.getDescription());
 		this.setAvailable(deepCopy.isAvailable);
-		this.setFlags(deepCopy.getFlags());
 		this.setIngredients(new ArrayList<>(deepCopy.getIngredients()));
-	}
-	@Override
-	public String toString() {
-		return "Meal{" +
-			"ingredients=" + ingredients +
-			", mealId=" + mealId +
-			", description='" + description + '\'' +
-			", isAvailable=" + isAvailable +
-			", flags=" + flags +
-			", mealScore=" + mealScore +
-			'}';
+		this.setHealthLabels(new HashSet<>(deepCopy.getHealthLabels()));
+		this.setProteinTypes(new HashSet<>(deepCopy.getProteinTypes()));
 	}
 
 	public void updateFrom(Meal mealToUpdate) {
@@ -56,7 +51,8 @@ public class Meal {
 		this.setDescription(mealToUpdate.getDescription());
 		this.setAvailable(mealToUpdate.isAvailable());
 		this.setIngredients(mealToUpdate.getIngredients());
-		this.setFlags(mealToUpdate.getFlags());
 		this.setMealScore(mealToUpdate.getMealScore());
+		this.setHealthLabels(mealToUpdate.getHealthLabels());
+		this.setProteinTypes(mealToUpdate.getProteinTypes());
 	}
 }

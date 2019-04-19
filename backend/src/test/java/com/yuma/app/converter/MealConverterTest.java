@@ -17,7 +17,7 @@ public class MealConverterTest {
 		MealTO mealTO = prepareMealTO();
 		MealConverter mealConverter = new MealConverter();
 		Meal meal = mealConverter.convert(mealTO);
-		
+
 		Assert.assertEquals(meal.getMealId(), mealTO.getMealId());
 		Assert.assertEquals(meal.getDescription(), mealTO.getDescription());
 		Assert.assertEquals(meal.isAvailable(), mealTO.isAvailable());
@@ -32,7 +32,12 @@ public class MealConverterTest {
 		mealTO.setAvailable(true);
 		mealTO.setIngredients(new ArrayList<Ingredients>() {
 			{
-				add(new Ingredients("Tomatoes", 30, 30, 30, false));
+				add(Ingredients.builder()
+					.name("Tomatoes")
+					.weight(20)
+					.calories(21)
+					.price(32)
+					.build());
 			}
 		});
 		mealTO.setMealScore(34);

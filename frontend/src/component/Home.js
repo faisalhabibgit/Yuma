@@ -11,6 +11,7 @@ import {
     CardTitle
 } from 'reactstrap';
 import ApiToken from '../middleware/ApiToken';
+import CustomLogging from '../CustomLogging';
 
 class Home extends Component {
   constructor(props) {
@@ -23,10 +24,10 @@ class Home extends Component {
   checkAuthenticated(){
     const apiToken = new ApiToken();
     if(!apiToken.isAuthenticated()){
-      console.log('User Not Logged');
+      CustomLogging.error('User Not Logged','Home');
       this.props.history.push(`/Login`)
     }else{
-      console.log('User Login Success');
+      CustomLogging.info('User Login Success','Home');
     }
   }
     render() {

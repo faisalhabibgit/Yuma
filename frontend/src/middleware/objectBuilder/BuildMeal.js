@@ -1,12 +1,13 @@
 import Meal from '../objects/Meal';
 import Ingredients from '../objects/Ingredients';
 import ApiToken from '../ApiToken';
+import CustomLogging from '../../CustomLogging';
 
 
 class BuildMeal {
 
   constructor() {
-    console.log("Building Meal...");
+    CustomLogging.info("Building Meal...");
   }
 
   getMealPromiseObj(apiPath) {
@@ -64,7 +65,7 @@ class BuildMeal {
     const apiToken = new ApiToken();
     const API = 'api/meals';
 
-    console.log('Adding: ' + someMeal.toString());
+    CustomLogging.info('Adding: ' + someMeal.toString());
 
     fetch(API, {
       method: 'POST',
@@ -96,10 +97,12 @@ class BuildMeal {
       ingredients.setWeight(ingredientObj.weight);
       ingredients.setCalories(ingredientObj.calories);
       ingredients.setPrice(ingredientObj.price);
+      ingredients.setAllergens(ingredientObj.allergens);  //TODO: implement proper loop add
+      ingredients.setHealthLabels(ingredientObj.healthLabels);  //TODO: implement proper loop add
 
       ingredientsList.push(ingredients);
     }
-
+    console.log(ingredientsList);
     var meal = new Meal();
     meal.setMealId(obj.mealId);
     meal.setName(obj.name);
@@ -107,6 +110,8 @@ class BuildMeal {
     meal.setIsAvailable(obj.available);
     meal.setFlags(obj.flags);
     meal.setIngredients(ingredientsList);
+    meal.setHealthLabels(obj.healthLabels);
+    meal.setProteinTypes(obj.proteinTypes);
   
     return meal;
   }
