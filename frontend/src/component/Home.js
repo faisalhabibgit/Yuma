@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import yuma from '../component/images/yuma.png';
 import history from './images/history.png';
+import blog from './images/blog.png';
 import dashboard from './images/dashboard.png';
 import search from './images/search.png';
 import add from './images/add.png';
@@ -83,6 +84,16 @@ class Home extends Component {
                       <h3 style={{color: '#599BE9'}}>Meal History</h3>
                     </CardTitle>
                     <CardText>View Past Meal Combinations </CardText>
+                  </CardBody>
+                </Card>
+
+                <Card  style={{border:'none', height:'200px'}}>
+                  <CardBody data-test="blog-card">
+                    <Link to="/Blog"> <img  data-test='blog-button' src={blog}  height='120px' alt="blog"/> </Link>
+                    <CardTitle>
+                      <h3 style={{color: '#599BE9'}}>Blog</h3>
+                    </CardTitle>
+                    <CardText>Access the Blog</CardText>
                   </CardBody>
                 </Card>
 
