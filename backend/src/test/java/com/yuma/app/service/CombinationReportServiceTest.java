@@ -122,7 +122,6 @@ public class CombinationReportServiceTest {
 		verify(mealRepository, times(1)).findByIsAvailableIsTrue();
 		verify(userRepository, times(1)).findByIsActiveIsTrue();
 	}
-<<<<<<< HEAD
 
 	@Test
 	public void testListCombinationReportInDateRange() {
@@ -142,7 +141,4 @@ public class CombinationReportServiceTest {
 
 		verify(conversionService).convert(combinationReports.get(0), CombinationReportTO.class);
 	}
-
-=======
->>>>>>> master
 }
