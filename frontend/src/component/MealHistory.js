@@ -25,21 +25,38 @@ class MealHistory extends Component{
     
     this.state = {
       startDate: new Date(),
+      endDate: new Date(),
       error: '',
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleStart = this.handleStart.bind(this);
+    this.handleEnd = this.handleEnd.bind(this);
+    this.getCombo = this.getCombo.bind(this);
+  }
+
+  getCombo(){
+    
+    
+
+
+
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
   }
   
-  handleChange(date)
-  {
+  handleStart(date){
     this.setState({
       startDate: date
     });
+  }
+
+  handleEnd(date){
+    this.setState({
+      endDate: date
+    });
+
   }
   render() {
     return (
@@ -61,7 +78,7 @@ class MealHistory extends Component{
                     <Label style={{color: 'black', fontSize:20}} >Start Date</Label>
                     <br />
                       <DatePicker 
-                          selected={this.state.startDate} onChange={this.handleChange} mode="date"
+                          selected={this.state.startDate} onChange={this.handleStart} mode="date"
                            />
                     </CardBody>
                     </Card>      
@@ -71,14 +88,14 @@ class MealHistory extends Component{
                     <CardBody className="text-center" style={{padding:'50px'}}>
                     <Label style={{color: 'black', fontSize:20}}>End Date</Label>
                     <br />
-                      <DatePicker selected={this.state.startDate} onChange={this.handleChange} />
+                      <DatePicker selected={this.state.endDate} onChange={this.handleEnd} />
                     </CardBody>
                     </Card> 
                   </CardDeck>
              </FormGroup>
            </Col>
       
-                <Button type="view" value="view" size="lg" block>View</Button>
+                <Button type="view" value="view" size="lg" block onClick={this.getCombo}>View</Button>
           </Form>
 
       </Col>
