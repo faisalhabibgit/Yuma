@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Container, Table
+  Container, Table, Button
 } from 'reactstrap';
 import Retriever from '../middleware/Retriever';
 import CustomLogging from '../CustomLogging';
@@ -18,6 +18,7 @@ class DisplayUsers extends Component {
     
     this.onAlphabetClickFirst = this.onAlphabetClickFirst.bind(this);
     this.onAlphabetClickLast = this.onAlphabetClickLast.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
 
   componentDidMount() {
@@ -84,6 +85,15 @@ class DisplayUsers extends Component {
     return result;
   }
 
+  handleUpdate() {
+    
+    CustomLogging.info("User Updated");
+    // var poster = new Poster();
+    // poster.updateUser();
+    this.forceUpdate();
+  
+  }
+
   onAlphabetClickLast(e) {
     var lastLetter = e.target.id;
     this.setState({lastLetter: lastLetter});
@@ -115,7 +125,9 @@ class DisplayUsers extends Component {
 
       <Container>
         <div className='text-center' style={{padding:'12px'}}>
-
+        
+        <Button variant="secondary"  onClick={this.handleUpdate}>Update User</Button>
+      
           <h5> First Name beginning with:  <h7 style={{ color: '#599BE9' }}>{this.state.firstLetter.toLowerCase()} </h7> </h5>
           {this.prepareFirstLetterAlphabets()}
 

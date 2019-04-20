@@ -10,7 +10,7 @@ import DisplayMeals from "./DisplayMeals";
 import DisplayUsers from "./DisplayUsers";
 import MealCombo from "./MealCombo";
 import CustomLogging from '../CustomLogging';
-import Poster from '../middleware/Poster';
+import Poster from "../middleware/Poster";
 
 class Dashboard extends Component {
 
@@ -25,11 +25,7 @@ class Dashboard extends Component {
     window.scrollTo(0, 0);
   }
 
-  handleUpdate() {
-    
-    CustomLogging.info("User Updated");
-    this.Poster.updateUser();
-  }
+
   
 
   checkAuthenticated(){
@@ -86,9 +82,9 @@ class Dashboard extends Component {
         <CardDeck data-test="users-card" style={{padding:'12px', height:'620px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <div>
-                <Button variant="secondary"  onClick={this.handleModalChange3}>Update User</Button>
-              </div>
+              {/* <div>
+                <Button variant="secondary"  onClick={this.handleUpdate}>Update User</Button>
+              </div> */}
             </CardHeader>
             <CardBody>
               <DisplayUsers />

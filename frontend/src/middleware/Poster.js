@@ -33,7 +33,7 @@ class Poster {
         });
     }
 
-//fetch users from Yuma DB
+    //fetch users from Yuma DB
     updateUser() {
         const API = 'api/update/users';
         return fetch(API, {
