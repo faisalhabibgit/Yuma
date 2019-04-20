@@ -46,6 +46,7 @@ export default class UserInfoPage extends Component{
     }
   }
 
+  
   displayPlan() {
     return(
       <UserPlan
@@ -59,6 +60,31 @@ export default class UserInfoPage extends Component{
 
 
   render(){
-    return()
+    return(
+      <div>
+        <Card>
+          <CardHeader>Plan</CardHeader>
+          <CardBody>
+            <CardTitle>{this.props.lastName}, {this.props.firstName}</CardTitle>
+            <CardText>
+              {this.displayPlan()}
+              <ListGroup>
+                <ListGroupItem>isActive: {this.props.isActive}</ListGroupItem>
+                <ListGroupItem>Company: {this.props.company}</ListGroupItem>
+                <h5>Allergies: </h5>
+                  <ListGroup>{this.displayAllergies()}</ListGroup>
+                <h5>Consumer Comments: </h5>
+                  <ListGroup>{this.displayConsumerComments()}</ListGroup>
+                <h5>Dislikes: </h5>
+                  <ListGroup>{this.displayDislikeList()}</ListGroup>
+                <h5>Likes: </h5>
+                  <ListGroup>{this.displayLikes()}</ListGroup>
+              </ListGroup>
+            </CardText>
+          </CardBody>
+          <CardFooter> Diet: {this.props.diet} </CardFooter>
+        </Card>
+      </div>
+    )
   }
 }
