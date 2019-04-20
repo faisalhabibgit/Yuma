@@ -48,6 +48,7 @@ class BuildUser {
         user.setUserId(obj['userId']);
         user.setFirstName(obj['firstName']);
         user.setLastName(obj['lastName']);
+        user.setCompany(obj['company'])
         user.setEmail(obj['email']);
         user.setPlan(this.JSONobjToPlan(obj['plan']));
         user.setIsActive(obj['enabled']);
@@ -63,7 +64,8 @@ class BuildUser {
         for (let index = 0; index < obj['allergies'].length; index++) {
             allergies.push(obj['allergies'][index]);
         }
-
+        
+        user.setAllergies(allergies)
         user.setMealList(mealList);
         user.setDislikesList(obj['dislikesList']);
 

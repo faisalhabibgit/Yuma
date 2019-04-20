@@ -10,21 +10,24 @@ import DisplayMeals from "./DisplayMeals";
 import DisplayUsers from "./DisplayUsers";
 import MealCombo from "./MealCombo";
 import CustomLogging from '../CustomLogging';
+import UsersByCompany from "./UsersByCompany";
+import MealChart from "./MealChart";
+import DietChart from "./DietChart";
+import ProteinTyespChart from "./ProteinTypesChart";
+import AllergiesChart from "./AllergiesChart";
 
 class Dashboard extends Component {
 
 
   constructor(props) {
     super(props);
-  
+
     this.checkAuthenticated();
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
   }
-
-  
 
   checkAuthenticated(){
 
@@ -42,21 +45,22 @@ class Dashboard extends Component {
     return (
       <div style={{background: '#ADB7BF'}}>
 
-        <CardDeck data-test="meal-combo-card" style={{padding:'12px', height:'380px'}}>
-          <Card>
+        <CardDeck  style={{padding:'12px', height:'380px'}}>
+
+          <Card data-test="meal-combo-card">
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
               <h2 style={{color: 'black'}}> Meal Combination Reports</h2>
             </CardHeader>
             <CardBody>
-            <MealCombo/>  
+              <MealCombo/>
             </CardBody>
           </Card>
 
         </CardDeck>
 
+        <CardDeck style={{padding:'12px', height:'450px'}}>
 
-        <CardDeck data-test="available-meal-card" style={{padding:'12px', height:'450px'}}>
-          <Card>
+          <Card data-test="available-meal-card">
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
               <h5 style={{color: 'black'}}> Available Meals</h5>
             </CardHeader>
@@ -65,8 +69,8 @@ class Dashboard extends Component {
             </CardBody>
           </Card>
 
-          <Card>
-            <CardHeader data-test="all-meals-card" className="text-center" style={{background: '#B9C5D5'}}>
+          <Card data-test="all-meals-card">
+            <CardHeader className="text-center" style={{background: '#B9C5D5'}}>
               <h5 style={{color: 'black'}}> All Meals</h5>
             </CardHeader>
             <CardBody>
@@ -76,9 +80,45 @@ class Dashboard extends Component {
 
         </CardDeck>
 
+        <CardDeck  style={{padding:'12px', height:'370px'}}>
+          <Card data-test="users-per-company">
+            <CardBody>
+              <UsersByCompany />
+            </CardBody>
+          </Card>
+        </CardDeck>
+       
+        <CardDeck  style={{padding:'12px', height:'370px'}}>
+         
+          <Card data-test="meals-chart-card">
+            <CardBody>
+              <MealChart />
+            </CardBody>
+          </Card>
+          <Card data-test="users-per-diet">
+            <CardBody>
+              <DietChart />
+            </CardBody>
+          </Card>
+        </CardDeck>
 
-        <CardDeck data-test="users-card" style={{padding:'12px', height:'620px'}}>
-          <Card>
+        <CardDeck  style={{padding:'12px', height:'380px'}}>
+
+          <Card data-test="protein-chart-card">
+            <CardBody>
+              <ProteinTyespChart />
+            </CardBody>
+          </Card>
+
+          <Card data-test="allergies-card">
+            <CardBody>
+              <AllergiesChart />
+            </CardBody>
+          </Card>
+        </CardDeck>
+
+        <CardDeck  style={{padding:'12px', height:'640px'}}>
+          <Card data-test="users-card">
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
               <div>
                 <Button variant="secondary"  onClick={this.handleModalChange3}>Update User</Button>
@@ -88,15 +128,12 @@ class Dashboard extends Component {
               <DisplayUsers />
             </CardBody>
           </Card>
-
         </CardDeck>
-
         
       </div>
     );
 
   }
 }
-
 
 export default Dashboard;

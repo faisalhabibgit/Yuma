@@ -55,3 +55,37 @@ test('Renders Users Card', () => {
     expect(usersCard.length).toBe(1);
     
 });
+
+test('Renders Users By Company Card', () => {
+
+  const usersByCompany = wrapper.find("[data-test='users-per-company']");
+  expect(usersByCompany.length).toBe(1);
+
+});
+
+test('Renders Meals Chart Card', () => {
+
+  const mealsChartCard = wrapper.find("[data-test='meals-chart-card']");
+  expect(mealsChartCard.length).toBe(1);
+
+});
+
+test('Renders Diet Chart Card', () => {
+
+  const usersDietChart = wrapper.find("[data-test='users-per-diet']");
+  expect(usersDietChart.length).toBe(1);
+
+});
+
+test('Renders Allergies Chart Card', () => {
+
+  const allergiesCard = wrapper.find("[data-test='allergies-card']");
+  expect(allergiesCard.length).toBe(1);
+
+});
+
+test('Renders Protein Chart Card', () => {
+  const proteinCard = wrapper.find("[data-test='protein-chart-card']");
+  expect(proteinCard.length).toBe(1);
+
+});

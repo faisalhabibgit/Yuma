@@ -49,6 +49,7 @@ public class Consumer {
 		this.setLastName(consumerToUpdate.getLastName());
 		this.setEmail(consumerToUpdate.getEmail());
 		this.setPlan(consumerToUpdate.getPlan());
+		this.setCompany(consumerToUpdate.getCompany());
 		this.setActive(consumerToUpdate.isActive());
 	}
 }
