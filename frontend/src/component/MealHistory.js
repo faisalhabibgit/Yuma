@@ -36,25 +36,29 @@ class MealHistory extends Component{
   }
 
   getCombo(){
-    
-    const apiToken = new ApiToken();
-    var comboSearchAPI = 'api/combinationreport/search';
 
-    fetch(comboSearchAPI, {
+    const apiToken = new ApiToken();
+
+    var comboSearchAPI = 'api/combinationreport/search?startdate='+
+    this.state.startDate+'&enddate='+
+    this.state.endDate;
+
+    var obj = {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer '+apiToken.getCookie('yuma-token')
-      },
-      body: JSON.stringify({
-        startdate: this.state.startDate,
-        enddate: this.state.endDate
-      })
-    })
+          'cache-control': "no-cache",
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + apiToken.getCookie('yuma-token')
+          //'Bearer ' + apiToken.getCookie('yuma-token')
+      }
+    }
+
+    fetch(comboSearchAPI,obj)
     .then(response => response.json())
-    .then(data => this.setState({array: data}))
+    .then(data => console.log(data))
 
-
+    
+    
 
   }
 
@@ -66,12 +70,15 @@ class MealHistory extends Component{
     this.setState({
       startDate: date
     });
+
+    
   }
 
   handleEnd(date){
     this.setState({
       endDate: date
     });
+    
 
   }
   render() {
@@ -111,10 +118,11 @@ class MealHistory extends Component{
              </FormGroup>
            </Col>
       
-                <Button type="view" value="view" size="lg" block onClick={this.getCombo}>View</Button>
+                <Button onClick={this.getCombo}>View</Button>
           </Form>
 
       </Col>
+
     </Container>
   );
   }
