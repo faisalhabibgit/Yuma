@@ -88,8 +88,6 @@ class DisplayUsers extends Component {
   handleUpdate() {
     
     CustomLogging.info("User Updated");
-    // var poster = new Poster();
-    // poster.updateUser();
     this.forceUpdate();
   
   }

@@ -82,9 +82,7 @@ class Dashboard extends Component {
         <CardDeck data-test="users-card" style={{padding:'12px', height:'620px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              {/* <div>
-                <Button variant="secondary"  onClick={this.handleUpdate}>Update User</Button>
-              </div> */}
+             
             </CardHeader>
             <CardBody>
               <DisplayUsers />
