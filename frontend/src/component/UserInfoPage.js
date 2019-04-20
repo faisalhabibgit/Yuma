@@ -46,7 +46,38 @@ export default class UserInfoPage extends Component{
     }
   }
 
-  
+  displayAllergies() {
+    return(
+      {this.props.allergies.map(allergy =>
+        <ListGroupItem>{allergy}</ListGroupItem>
+      )}
+    );
+  }
+
+  displayConsumerComments() {
+    return(
+      {this.props.consumerComments.map(consumerComments =>
+        <ListGroupItem>{consumerComments}</ListGroupItem>
+      )}
+    );
+  }
+
+  displayDislikeList() {
+    return(
+      {this.props.dislikesList.map(dislikes =>
+        <ListGroupItem>{dislikes}</ListGroupItem>
+      )}
+    );
+  }
+
+  displayLikes() {
+    return(
+      {this.props.likes.map(like =>
+        <ListGroupItem>{like}</ListGroupItem>
+      )}
+    );
+  }
+
   displayPlan() {
     return(
       <UserPlan
