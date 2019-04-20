@@ -20,11 +20,12 @@ class UserByCompanyName extends Component {
       // apiObject: [{company:"google", email: "email", firstname: "some first name", lastname: "some last name"}
       //             ],
       apiObject: null,
-      searchList: [],
+      searchList: []
     }
 
     this.handleQueryChange = this.handleQueryChange.bind(this);
     this.companyFetch = this.companyFetch.bind(this);
+    this.display = this.display.bind(this);
   }
 
   checkAuthenticated(){
@@ -38,44 +39,73 @@ class UserByCompanyName extends Component {
   }
 
   handleQueryChange(input){
+
     this.setState({
       userInput: input
     }, this.companyFetch(input));
-    if( (this.state.apiObject === null) || (this.searchList = ["no result"])) {
+    if( (this.state.apiObject === null) || (this.state.apiObject === [])) {
       this.setState({
         searchList: ["no result"]
       })
     }
     else{
-      this.search()
+      this.display()
+      console.log("the user inputs: " + this.state.userInput)
     }
   }
 
   companyFetch(company){
+
     console.log(company)
     const retriever = new Retriever(API + company);
     CustomLogging.info('retrieving company user list', 'UsersByCompanyName');
     retriever.getEntityPromise()
     // fetch(API + company)
     .then((obj) => {
+      console.log(obj)
+
       this.setState({ apiObject: obj})
     })
   }
 
-  search() {
+  pushMatchedArr(thingy){
+    var matchedArr = [];
+
+    matchedArr.push(" email: "  + thingy.email.toString()  +
+                    "  First Name: " + thingy.firstname.toString() +
+                    "  Last Name: " + thingy.lastname.toString());
+  }
+
+  pushMatchedArrWithNoEmail(thingy){
+    var matchedArr = [];
+
+    matchedArr.push(" email: No email registered"   +
+                    "  First Name: " + thingy.firstname.toString() +
+                    "  Last Name: " + thingy.lastname.toString());
+  }
+
+
+  display() {
+    debugger
+
     var matchedArr = [];
     for (var i = 0; i < this.state.apiObject.length; i++) {
       console.log("this.state.apiObject[i].company: " + this.state.apiObject[i].company);
       console.log("this.state.userInput: " + this.state.userInput);
+      console.log("this.state.apiObject[i].firstName" + this.state.apiObject[i].firstName);
+      // validate but partially works
+      // if (this.state.apiObject[i].company.toString().includes(this.state.userInput)
+      // ) {
 
-      if (this.state.apiObject[i].company.toString().includes(this.state.userInput)
-      ) {
+// !this.state.apiObject[i].email.length ? pushMatchedArr(this.state.apiObject): pushMatchedArrWithNoEmail(this.state.apiObject)
 
-        matchedArr.push(" email: "  + this.state.apiObject[i].email.toString() +
-                        "  First Name: " + this.state.apiObject[i].firstname.toString() +
-                        "  Last Name: " + this.state.apiObject[i].lastname.toString());
-      }
+      // }
+      matchedArr.push(" email: No email registered"   +
+                      "  First Name: " + this.state.apiObject[i].firstname +
+                      "  Last Name: " + this.state.apiObject[i].lastname);
+
     }
+    console.log("matchedArr: " + matchedArr)
     this.setState({ searchList: matchedArr });
   }
 
@@ -96,7 +126,7 @@ class UserByCompanyName extends Component {
         <Col sm={{ size: 6, order: 2, offset: 1 }}>
           <ListGroup>
             {
-              this.state.searchList.map(x => <ListGroupItem>{x}</ListGroupItem>)
+              this.state.searchList.map(x => <ListGroupItem key={x}>{x}</ListGroupItem>)
             }
           </ListGroup>
         </Col>

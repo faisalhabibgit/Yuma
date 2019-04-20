@@ -30,11 +30,9 @@ class User {
   setConsumerComments(consumerComments){this.consumerComments = consumerComments}
 
   toString() {
-    return (this.userId +', '+ this.firstName +', '+ this.lastName +', '+ 
+    return (this.userId +', '+ this.firstName +', '+ this.lastName +', '+
       this.email +', '+ this.password +', '+ this.isActive +', '+ this.plan +', '+ this.dislikesList);
   }
 }
 
 export default User;
-
-
