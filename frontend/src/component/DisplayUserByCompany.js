@@ -14,6 +14,7 @@ displayUsers(){
         <li key={i}>
           {this.props.lastName}
           {this.props.firstName}
+          <button><Link to="/theUserPage">Check User</Link></button>
         </li>
       )
     }
