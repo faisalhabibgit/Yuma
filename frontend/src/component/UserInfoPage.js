@@ -27,6 +27,7 @@ export default class UserInfoPage extends Component{
       isActive: "",
       company: "",
       allergies: [],
+      consumerComments: [],
       dislikesList: [],
       likes: [],
     }

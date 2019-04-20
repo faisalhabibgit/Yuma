@@ -78,11 +78,6 @@ class UserByCompanyName extends Component {
 
   display() {
 
-    for (var i = 0; i < this.state.apiObject.length; i++) {
-
-      console.log("this.state.apiObject[i].company: " + this.state.apiObject[i].company);
-      console.log("this.state.userInput: " + this.state.userInput);
-      console.log("this.state.apiObject[i].firstName" + this.state.apiObject[i].firstName);
       return(
           <table >
               <thead>
@@ -111,7 +106,7 @@ class UserByCompanyName extends Component {
               )}
           </table>
       )
-    }
+
     console.log("matchedArr: " + matchedArr)
     this.setState({ searchList: matchedArr });
   }
