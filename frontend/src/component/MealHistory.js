@@ -27,6 +27,7 @@ class MealHistory extends Component{
       startDate: new Date(),
       endDate: new Date(),
       error: '',
+      array: []
     };
 
     this.handleStart = this.handleStart.bind(this);
@@ -36,7 +37,22 @@ class MealHistory extends Component{
 
   getCombo(){
     
-    
+    const apiToken = new ApiToken();
+    var comboSearchAPI = 'api/combinationreport/search';
+
+    fetch(comboSearchAPI, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+apiToken.getCookie('yuma-token')
+      },
+      body: JSON.stringify({
+        startdate: this.state.startDate,
+        enddate: this.state.endDate
+      })
+    })
+    .then(response => response.json())
+    .then(data => this.setState({array: data}))
 
 
 
