@@ -17,6 +17,7 @@ export default class UserPlan extends Component{
     this.checkAuthenticated();
   }
 
+
   checkAuthenticated(){
 
     const apiToken = new ApiToken();
@@ -28,8 +29,42 @@ export default class UserPlan extends Component{
     }
   }
 
+  displaySpecialRequests() {
+    return(
+      {this.props.specialRequests.map(request =>
+        <ListGroupItem>{request}</ListGroupItem>
+      )}
+    );
+  }
+  displayProteinTypes() {
+    return(
+      {this.props.requestedProteinTypes.map(requestType =>
+        <ListGroupItem>{requestType}</ListGroupItem>
+      )}
+    );
+  }
 
   render(){
-    return()
+    return(
+      <div>
+        <Card>
+          <CardHeader>Plan</CardHeader>
+          <CardBody>
+            <CardTitle>Number of Meals: {this.props.numOfMeals}</CardTitle>
+            <CardText>
+              <h5>Special Requests: </h5>
+              <ListGroup>
+                {this.displaySpecialRequests()}
+              </ListGroup>
+              <h5>Requested Protein Types: </h5>
+              <ListGroup>
+                {this.displayProteinTypes()}
+              </ListGroup>
+            </CardText>
+          </CardBody>
+          <CardFooter> Diet: {this.props.diet} </CardFooter>
+        </Card>
+      </div>
+    );
   }
 }
