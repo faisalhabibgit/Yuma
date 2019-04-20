@@ -3,12 +3,16 @@ import { shallow } from 'enzyme';
 import NewMeal, { addIngredient } from '../component/NewMeal';
 import sinon from 'sinon';
 
+
 let wrapper;
 
 beforeEach(() => {
     
     const stubber = sinon.stub(NewMeal.prototype, 'checkAuthenticated').returns(true);
-    wrapper = shallow(<NewMeal checkAuthenticated={stubber}/>);
+
+  //stub the componentDidMount method, as it causes a react error
+  const cmDidMount = sinon.stub(NewMeal.prototype, 'componentDidMount').returns(true);
+  wrapper = shallow(<NewMeal checkAuthenticated={stubber} componentDidMount={cmDidMount}/>);
 
   });
 
@@ -42,6 +46,34 @@ test('New meal page renders "meal description" input', () => {
 
 });
 
+test('Renders Name Card', () => {
+
+  const nameCard = wrapper.find("[data-test='name-card']");
+  expect(nameCard.length).toBe(1);
+
+});
+
+test('Renders Description Card', () => {
+
+  const descriptionCard = wrapper.find("[data-test='meal-description-card']");
+  expect(descriptionCard.length).toBe(1);
+
+});
+
+test('Renders Ingredient Card', () => {
+
+  const ingredientCard = wrapper.find("[data-test='ingredient-card']");
+  expect(ingredientCard.length).toBe(1);
+
+});
+
+test('Renders Possible Allergies Card', () => {
+
+  const allergiesCard = wrapper.find("[data-test='possible-allergies-card']");
+  expect(allergiesCard.length).toBe(1);
+
+});
+
 test('New meal page renders "add new ingredient" button and adds an ingredient when clicked', () => {
 
     expect(wrapper.length).toBe(1);
@@ -59,6 +91,24 @@ test('New meal page renders "add new ingredient" button and adds an ingredient w
     const ingredients = wrapper.find("[data-test='initial-ingredient']");
     expect(ingredients.length).toBe(2);
 
+
+});
+
+test('New meal page renders ingredient form inputs', () => {
+
+  expect(wrapper.length).toBe(1);
+
+  const ingredientNameInput = wrapper.find("[data-test='ingredient-name']");
+  expect(ingredientNameInput.length).toBe(1);
+
+  const ingredientWeightInput = wrapper.find("[data-test='ingredient-weight']");
+  expect(ingredientWeightInput.length).toBe(1);
+
+  const ingredientCaloriesInput = wrapper.find("[data-test='ingredient-calories']");
+  expect( ingredientCaloriesInput.length).toBe(1);
+
+  const ingredientPriceInput = wrapper.find("[data-test='ingredient-price']");
+  expect(ingredientPriceInput.length).toBe(1);
 
 });
 
@@ -100,3 +150,5 @@ test(' New meal page renders remove button for each ingredient, and removes the 
     const ingredientsAfter = wrapper.find("[data-test='initial-ingredient']");
     expect(ingredientsAfter.length).toBe(1);
 });
+
+

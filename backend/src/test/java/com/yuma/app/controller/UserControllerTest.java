@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import com.yuma.app.service.ConsumerService;
@@ -17,7 +18,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.yuma.app.to.UserTO;
+import com.yuma.app.to.ConsumerTO;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
@@ -29,9 +30,16 @@ public class UserControllerTest {
 
 	@Test
 	public void getAllTest() {
-		when(userService.list()).thenReturn(new ArrayList<UserTO>());
+		when(userService.list()).thenReturn(new ArrayList<ConsumerTO>());
 		userController.getAll();
 		verify(userService).list();
+	}
+
+	@Test
+	public void getAllUserCompaniesTest() {
+		when(userService.listUserCompanies()).thenReturn(new HashSet<>());
+		userController.listCompanies();
+		verify(userService).listUserCompanies();
 	}
 
 	@Test
@@ -44,24 +52,24 @@ public class UserControllerTest {
 
 	@Test
 	public void testCreateUser() {
-		UserTO userTO = prepareAndReturnUserTo();
-		when(userService.create(userTO)).thenReturn(userTO);
-		userController.createUser(userTO);
-		verify(userService).create(userTO);
+		ConsumerTO consumerTO = prepareAndReturnUserTo();
+		when(userService.create(consumerTO)).thenReturn(consumerTO);
+		userController.createUser(consumerTO);
+		verify(userService).create(consumerTO);
 	}
 
 	@Test
 	public void testUpdateUser() {
-		UserTO userTO = prepareAndReturnUserTo();
-		when(userService.updateUser(userTO)).thenReturn(userTO);
-		userController.updateUser(userTO);
-		verify(userService).updateUser(userTO);
+		ConsumerTO consumerTO = prepareAndReturnUserTo();
+		when(userService.updateUser(consumerTO)).thenReturn(consumerTO);
+		userController.updateUser(consumerTO);
+		verify(userService).updateUser(consumerTO);
 	}
 	
 	@Test
 	public void testGetByCompany(){
 		
-		ArrayList<UserTO> actualList = new ArrayList<UserTO>(Arrays.asList(Mockito.mock(UserTO.class),Mockito.mock(UserTO.class)));
+		ArrayList<ConsumerTO> actualList = new ArrayList<ConsumerTO>(Arrays.asList(Mockito.mock(ConsumerTO.class),Mockito.mock(ConsumerTO.class)));
 		
 		when(userService.findUsersByCompany("Google")).thenReturn(actualList);
 		
@@ -74,20 +82,20 @@ public class UserControllerTest {
 	@Test
 	public void testGetCompanyDoesntExist(){
 
-		List<UserTO> emptyList;
+		List<ConsumerTO> emptyList;
 		when(userService.existsByCompany("AGreatcompany")).thenReturn((Boolean.FALSE));
 		
 		//to mock mongo, return an empty list
 		if(userService.existsByCompany("AGreatcompany"))
-			when(userController.getUsersByCompany("AGreatcompany")).thenReturn(new ArrayList<UserTO>());
+			when(userController.getUsersByCompany("AGreatcompany")).thenReturn(new ArrayList<ConsumerTO>());
 		
 		emptyList = userController.getUsersByCompany("AGreatcompany");
 		Assert.assertTrue(emptyList.size() == 0);
 		
 	}
 
-	private UserTO prepareAndReturnUserTo() {
-		UserTO userTO = new UserTO();
-		return userTO;
+	private ConsumerTO prepareAndReturnUserTo() {
+		ConsumerTO consumerTO = new ConsumerTO();
+		return consumerTO;
 	}
 }

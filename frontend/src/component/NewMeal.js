@@ -3,23 +3,26 @@ import {
   Col, Form,
   FormGroup, Label, Input,
   Button,
-  Container,
+  Container,Card, CardHeader,  CardBody,
+  CardDeck
 } from 'reactstrap';
 import ApiToken from '../middleware/ApiToken';
 import Ingredients from '../middleware/objects/Ingredients';
 import Meal from '../middleware/objects/Meal';
 import BuildMeal from '../middleware/objectBuilder/BuildMeal';
+import CustomLogging from '../CustomLogging';
+
+
+
 
 const REDIRECTHOME = '/';
-
 class NewMeal extends Component {
-  
+
 
   constructor(props) {
     super(props);
 
     this.checkAuthenticated();
-
     this.state = {
       name: '',
       description: '',
@@ -35,8 +38,10 @@ class NewMeal extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.postMeal = this.postMeal.bind(this);
     this.setFlags = this.setFlags.bind(this);
-    this.calculate = this.calculate.bind(this);
+    // this.calculate = this.calculate.bind(this);
     this.calculateCalories = this.calculateCalories.bind(this);
+    // this.caloriesFromWeight = this.caloriesFromWeight.bind(this);
+    this.addIngredient = this.addIngredient.bind(this);
 
   }
   
@@ -48,15 +53,14 @@ class NewMeal extends Component {
 
     const apiToken = new ApiToken();
     if (!apiToken.isAuthenticated()) {
-      console.log('User Not Logged');
+      CustomLogging.error('Check Authentification NewMeal: FAIL','NewMeal');
       this.props.history.push(`/Login`)
     } else {
-      console.log('User Login Success');
+      CustomLogging.info('Check Authentification NewMeal: PASS','NewMeal');
     }
   }
 
   handleSubmit(event) {
-
     event.preventDefault();
 
     if (this.state.name.length < 1) {
@@ -85,7 +89,7 @@ class NewMeal extends Component {
 
       let ingredients = [...this.state.ingredients];
       ingredients[event.target.dataset.id][event.target.className] = event.target.value;
-      this.setState({ ingredients: ingredients }, () => console.log(this.state.ingredients));
+      this.setState({ ingredients: ingredients }, () => CustomLogging.info(this.state.ingredients));
 
     } else {
 
@@ -97,68 +101,46 @@ class NewMeal extends Component {
     }
   }
 
-  addIngredient = (e) => {
+addIngredient(e){
     e.preventDefault();
     this.setState((prevState) => ({
       ingredients: [...prevState.ingredients, { name: "", weight: "", calories: "", price: "" }],
     }));
-  };
-  
-  calculate = (e) =>{
-    e.preventDefault();
-    this.setState((prevState) => ({
-      ingredients: [...prevState.ingredients, {calories: this.calculateCalories(e) }],
-    }))
-    
-  };
-  
-  //TODO
-  // Take name of ingredient and return calories from edamam api call
-  calculateCalories (e){
-    var ingr = this.state.ingredients[0]['name'];
-    var unit = this.state.ingredients[0]['weight'];
+    CustomLogging.info('Ingredient is added!',"New Meal");
+};
 
-    var api = "https://api.edamam.com/api/nutrition-data?app_id=71abc6c1&app_key=455917addf9580d94f113a626b5ac632&ingr="+unit+" "+ ingr;
-   console.log(this.state.ingredients[0]['name'])
-    
+calculateCalories(e, idx){
+    e.preventDefault();
+    var index = idx;
+    CustomLogging.info('calory calculated' )
+    var ingr = this.state.ingredients[index]['name'];
+    var weight = this.state.ingredients[index]['weight'];
+    var ingredientTempList = this.state.ingredients
+    var calculatedIngredient = this.state.ingredients[index]
+
+    var api = "https://api.edamam.com/api/nutrition-data?app_id=6fd2547b&app_key=61888ddf81b29e52ad9aaf1a8d5b4400&ingr="+ ingr +"%20" + weight;
+
     fetch(api)
       .then((response) => {
         return response.json();
       })
       .then((json) => {
-      console.log("Calculated Number of calories in this ingredient is "+json['calories']);
-      console.log(json);
-      var totalweight = json['totalWeight'];
-      console.log(totalweight);
-      
-        this.setState(() => ({                                                           
-            ingredients: [{calories: json['calories' ], weight: json['totalWeight']}], 
-         }));
-
-        //bug fix attempt
-        // let ingredients = [...this.state.ingredients];
-        // var i = 0;
-        // if(ingredients[i]['calories'] != null){
-        //   i++;
-        // }
-        //   ingredients[i]['calories'] = json['calories'];
-        //
-        //   this.setState({ ingredients: this.state.ingredients });
-
-
-      })
+        if (json['totalWeight'] === "0" && json['calories'] === "0"){
+           alert('Please verify the ingredient name and/or the input weight.')}
+        else{
+            calculatedIngredient['calories'] = json['calories'];
+            ingredientTempList[idx] = calculatedIngredient;
+            this.setState(() => ({
+                ingredients: ingredientTempList,
+            }));
+      }})
   };
-  
-  //TODO: 
-  //calculate Calories from input weight and not ingredient name
-  caloriesFromWeight(){
-    
-  }
-  
-  removeIngredient(e, index) {
+
+ removeIngredient(e, index) {
     e.preventDefault();
     this.state.ingredients.splice(index, 1);
     this.setState({ ingredients: this.state.ingredients });
+    CustomLogging.info('Ingredient is removed!');
   };
 
 
@@ -169,6 +151,7 @@ class NewMeal extends Component {
 
     for (let i = 0; i < this.state.ingredients.length; i++) {
       var anIngredient = new Ingredients();
+      CustomLogging.info("ingredient: " + i);
 
       anIngredient.setName(this.state.ingredients[i]['name']);
       anIngredient.setWeight(this.state.ingredients[i]['weight']);
@@ -218,46 +201,61 @@ class NewMeal extends Component {
 
   render() {
     return (
+      <div style={{background: '#ADB7BF'}} >
       <Container>
-        <Col sm="12" md={{ size: 6, offset: 3 }}>
-          <h2>Enter a New Meal</h2>
 
+        <Col sm="12" md={{ size: 12}}>
+          <CardHeader  className="text-center" style={{background: '#B9C5D5', borderRadius: 10}}>
+            <h2>Enter a New Meal</h2>
+          </CardHeader>
           <br />
 
           <Form className="form" onSubmit={this.handleSubmit}>
             <Col >
               <FormGroup>
-                <Label>Name</Label>
-                <Input
-                  type="text"
-                  name="name"
-                  data-test="enter-meal-name"
-                  id="name"
-                  placeholder="Chicken Parmesan"
-                  onChange={this.handleChange}
-                />
+              <CardDeck data-test="name" style={{padding:'12px', height:'200px', borderRadius: 10}}>
+                <Card  data-test="name-card">
+                  <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
+                    <h5 style={{color: 'black'}}> Name</h5>
+                  </CardHeader>
+                <CardBody>
+                  <Input
+                        type="text"
+                        name="name"
+                        data-test="enter-meal-name"
+                        id="name"
+                        placeholder="Chicken Parmesan"
+                        onChange={this.handleChange}
+                      />
+                </CardBody>
+                </Card>
 
-                <br />
-
-                <Label>Meal Description</Label>
-                <Input
-                  type="text"
-                  name="description"
-                  data-test="enter-meal-description"
-                  id="description"
-                  placeholder="Chicken basted in tomato sauce."
-                  onChange={this.handleChange}
-                />
-
-                <br />
-
-                <Label>Ingredients</Label>
-                <button style={{ marginLeft: 40 }} onClick={this.addIngredient} data-test="add-ingredient-button">Add new ingredient</button>
+                <Card  data-test="meal-description-card">
+                  <CardHeader data-test="meal-description" className="text-center" style={{background: '#B9C5D5'}}>
+                    <h5 style={{color: 'black'}}> Meal Description</h5>
+                  </CardHeader>
+                <CardBody>
+                  <Input
+                        class="form-control"
+                        type="text"
+                        name="description"
+                        data-test="enter-meal-description"
+                        id="description"
+                        placeholder="Chicken basted in tomato sauce."
+                        onChange={this.handleChange}
+                      />
+                </CardBody>
+                </Card>
+              </CardDeck>
                 <br /><br />
+
+                <Card  data-test="ingredient-card" style= {{background:'#D0DCE5', borderRadius: 10, borderColor:'#274F6C'}}>
+                <CardBody className="text-center">
                 {
                   this.state.ingredients.map((val, idx) => {
                     let ingredientId = `name-${idx}`, weightId = `weight-${idx}`, caloriesId = `calories-${idx}`, priceId = `price-${idx}`;
                     return (
+
                       <div data-test="initial-ingredient" key={idx}>
                         <br />
                         <label htmlFor={ingredientId}>{`Ingredient #${idx + 1}`}</label>
@@ -270,6 +268,7 @@ class NewMeal extends Component {
                           value={this.state.ingredients[idx].name}
                           onChange={this.handleChange}
                           className="name"
+                          data-test='ingredient-name'
                         />
                         <br />
                         <label htmlFor={weightId}>Weight</label>
@@ -282,11 +281,12 @@ class NewMeal extends Component {
                           value={this.state.ingredients[idx].weight}
                           onChange={this.handleChange}
                           className="weight"
+                          data-test='ingredient-weight'
                         />
                         <br />
                         <label htmlFor={caloriesId}>Calories</label>
                         <input
-                          style={{ marginLeft: 65 }}
+                          style={{ marginLeft: 61}}
                           type="text"
                           name={caloriesId}
                           data-id={idx}
@@ -294,12 +294,51 @@ class NewMeal extends Component {
                           value={this.state.ingredients[idx].calories}
                           onChange={this.handleChange }
                           className="calories"
+                          data-test='ingredient-calories'
                         />
-                        <button style={{ marginLeft: 40 }} onClick={this.calculate}>Calculate</button>
+                        <br />
+                        <br />
+                        <br />
+                        <div className="text-left"   style={{ marginLeft: 352 }}>
+                        <label>Possible Food Allergies</label>
+                        </div>
+                        
+                        
+                      <CardBody className="text-left" style={{paddingLeft:'500px'}}>
+                      <label>
+                      <Input type="checkbox" id="nuts" onChange={this.handleChange} />
+                        Tree Nuts
+                      </label>                       
+                      
+                      <br />
+                      <Label>
+                        <Input type="checkbox" id="dairy" onChange={this.handleChange} />
+                        Dairy
+                      </Label>
+                      <br />
+                      <Label>
+                        <Input type="checkbox" id="gluten" onChange={this.handleChange} />
+                        Gluten
+                      </Label>
+                      <br />
+                      <Label>
+                        <Input type="checkbox" id="shellfish" onChange={this.handleChange} />
+                        Shellfish
+                      </Label>
+                      <br />
+                      <Label>
+                        <Input type="checkbox" id="soy" onChange={this.handleChange} />
+                        Soy
+                      </Label>
+                      </CardBody>
+                      
+                        <div>
+                         <Button variant="secondary"  onClick={(e) => this.calculateCalories(e, idx)}>Calculate</Button>
+                       </div>
                         <br />
                         <label htmlFor={priceId}>Price</label>
                         <input
-                          style={{ marginLeft: 86 }}
+                          style={{ marginLeft: 83 }}
                           type="text"
                           name={priceId}
                           data-id={idx}
@@ -307,57 +346,42 @@ class NewMeal extends Component {
                           value={this.state.ingredients[idx].price}
                           onChange={this.handleChange}
                           className="price"
+                          data-test='ingredient-price'
                         />
                         <br />
                         <br />
-                        <button data-test="delete-ingredient-button" onClick={(e) => { this.removeIngredient(e, idx) }}> Remove </button>
+                        <div>
+                         <Button variant="secondary"  data-test="delete-ingredient-button" onClick={(e) => { this.removeIngredient(e, idx) }}> Remove </Button>
+                       </div>
+                       <br />
+                       
                       </div>
+
                     )
                   })
                 }
-
+                <div className="text-left">
+                 <Button variant="secondary" data-test="add-ingredient-button" onClick={(e) => {this.addIngredient(e)}}>Add new ingredient</Button>
+                </div>
+                </CardBody>
+                </Card>
                 <br />
+                
+            </FormGroup>
+            <br />
 
-                <Label style={{ fontWeight: "bold" }}> Possible Food Allergies </Label>
+              <div class="text-center" >
 
-                <FormGroup row>
-                  <Col sm={{ size: 10 }}>
-                    <FormGroup check>
-                      <Label>
-                        <Input type="checkbox" id="nuts" onChange={this.handleChange} />
-                        Tree Nuts
-                        </Label>
-                      <br />
-                      <Label>
-                        <Input type="checkbox" id="dairy" onChange={this.handleChange} />
-                        Dairy
-                        </Label>
-                      <br />
-                      <Label>
-                        <Input type="checkbox" id="gluten" onChange={this.handleChange} />
-                        Gluten
-                        </Label>
-                      <br />
-                      <Label>
-                        <Input type="checkbox" id="shellfish" onChange={this.handleChange} />
-                        Shellfish
-                        </Label>
-                      <br />
-                      <Label>
-                        <Input type="checkbox" id="soy" onChange={this.handleChange} />
-                        Soy
-                        </Label>
-                    </FormGroup>
-                  </Col>
-                </FormGroup>
+              <Button   variant="secondary" type="submit" value="Submit" size="lg" block>Submit</Button>
 
-              </FormGroup>
+            
+
+              </div>
             </Col>
-            <Button type="submit" value="Submit">Submit</Button>
           </Form>
         </Col>
-
       </Container>
+      </div>
     );
   }
 }

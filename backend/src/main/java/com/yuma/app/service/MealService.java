@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +14,10 @@ import com.yuma.app.exception.ResourceNotFoundException;
 import com.yuma.app.repository.MealRepository;
 import com.yuma.app.to.MealTO;
 
+@Slf4j
 @Service
 public class MealService {
 
-	private Logger mealServiceLogger = LoggerFactory.getLogger(MealService.class);
 	private MealRepository mealRepository;
 	private ConversionService conversionService;
 
@@ -28,13 +27,13 @@ public class MealService {
 	}
 
 	public List<MealTO> list() {
-		mealServiceLogger.info("fetching list of all meals in %s", MealService.class);
+		log.info("fetching list of all meals in %s", MealService.class);
 		List<MealTO> mealTos = convertMealToMealTO(mealRepository.findAll());
 		return mealTos;
 	}
 
 	public MealTO update(MealTO mealTo) {
-		mealServiceLogger.info("updating meal with description %s, in %s", mealTo.getDescription(), MealService.class);
+		log.info("updating meal with description %s, in %s", mealTo.getDescription(), MealService.class);
 		Meal meal = mealRepository.findByMealId(mealTo.getMealId()).orElseThrow(() -> new ResourceNotFoundException("Meal", "mealID", mealTo.getName()));
 		Meal mealToUpdate = conversionService.convert(mealTo, Meal.class);
 		meal.updateFrom(mealToUpdate);
@@ -43,7 +42,7 @@ public class MealService {
 	}
 
 	public MealTO create(MealTO mealTo) {
-		this.mealServiceLogger.info("creating Meal in %s", MealService.class);
+		log.info("creating Meal in %s", MealService.class);
 		mealTo.setMealId(UUID.randomUUID().toString());
 		Meal mealToCreate = conversionService.convert(mealTo, Meal.class);
 		Meal meal = mealRepository.save(mealToCreate);
@@ -51,21 +50,21 @@ public class MealService {
 	}
 	
 	public List<MealTO> availableMeals(){
-		mealServiceLogger.info("retrieving available meals in %s", MealService.class);
-		
+		log.info("retrieving available meals in %s", MealService.class);
+
 		List<Meal> availableMeals = mealRepository.findByIsAvailableIsTrue();
 		List<MealTO> mealTOS = convertMealToMealTO(availableMeals);
 		return mealTOS;
 	}
 
 	public void deleteMeal(String mealId) {
-		mealServiceLogger.info("deleting meal in %s", MealService.class);
+		log.info("deleting meal in %s", MealService.class);
 
 		mealRepository.delete(mealRepository.findOne(mealId));
 	}
 
 	public MealTO findByDescription(String description) {
-		mealServiceLogger.info("fetching with description %s in %s", description, MealService.class);
+		log.info("fetching with description %s in %s", description, MealService.class);
 
 		Optional<Meal> optionalMeal = mealRepository.findByDescription(description);
 		if (!optionalMeal.isPresent()) {
@@ -75,8 +74,8 @@ public class MealService {
 		}
 	}
 	
-	public List<MealTO> convertMealToMealTO(List<Meal> meals){
-		mealServiceLogger.info("converting Meal List to MealTO list with description %s in %s", MealService.class);
+	private List<MealTO> convertMealToMealTO(List<Meal> meals){
+		log.info("converting Meal List to MealTO list with description %s in %s", MealService.class);
 
 		List<MealTO> mealTos = new ArrayList<>();
 		List<Meal> mealList = meals;
@@ -91,8 +90,8 @@ public class MealService {
 		Meal meal = mealRepository.findByMealId(mealId).map(Meal::new).orElseThrow(() -> new ResourceNotFoundException("Meal", "mealId", mealId));
 		switchAvailability(meal);
 	}
-	
-	protected void switchAvailability(Meal meal){
+
+	private void switchAvailability(Meal meal){
 		if (meal.isAvailable()) {
 			meal.setAvailable(false);
 			mealRepository.save(meal);

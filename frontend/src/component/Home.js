@@ -12,6 +12,7 @@ import {
     CardTitle
 } from 'reactstrap';
 import ApiToken from '../middleware/ApiToken';
+import CustomLogging from '../CustomLogging';
 
 class Home extends Component {
   constructor(props) {
@@ -24,10 +25,10 @@ class Home extends Component {
   checkAuthenticated(){
     const apiToken = new ApiToken();
     if(!apiToken.isAuthenticated()){
-      console.log('User Not Logged');
+      CustomLogging.error('User Not Logged','Home');
       this.props.history.push(`/Login`)
     }else{
-      console.log('User Login Success');
+      CustomLogging.info('User Login Success','Home');
     }
   }
     render() {
@@ -58,7 +59,7 @@ class Home extends Component {
 
                 <Card  style={{border:'none', height:'200px'}}>
                   <CardBody data-test="meal-card">
-                    <Link to="/Test"> <img data-test='meal-button' src={search}  height='120px' alt="search"/> </Link>
+                    <Link to="/SearchMeal"> <img data-test='meal-button' src={search}  height='120px' alt="search"/> </Link>
                     <CardTitle>
                       <h3 style={{color: '#599BE9'}}>Meals</h3>
                     </CardTitle>

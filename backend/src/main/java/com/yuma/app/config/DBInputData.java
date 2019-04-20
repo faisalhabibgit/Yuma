@@ -68,7 +68,8 @@ public class DBInputData {
 
 					String numOfMeals = (String) jsonobject.get("plan");
 					if (numOfMeals != null) {
-						user.getPlan().setNumOfMeals(Integer.parseInt(numOfMeals));
+						user.getPlan()
+							.setNumOfMeals(Integer.parseInt(numOfMeals));
 					}
 
 					String dislike = (String) jsonobject.get("allergy");
@@ -116,7 +117,8 @@ public class DBInputData {
 				roleRepository.save(newUserRole);
 			}
 		};
-		
+	}
+
 //	@Bean
 //	CommandLineRunner populateProductionUsers(UserRepository userRepository) {
 //		List<Consumer> consumers = parseJsonFileAndCreateAUserList();
@@ -125,5 +127,5 @@ public class DBInputData {
 //				userRepository.save(consumer);
 //			}
 //		};
-	}
+//	}
 }

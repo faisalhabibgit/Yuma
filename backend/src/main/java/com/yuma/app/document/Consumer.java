@@ -1,6 +1,7 @@
 package com.yuma.app.document;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -14,6 +15,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.yuma.app.document.enums.Allergens;
+
 @Document
 @Getter
 @Setter
@@ -21,7 +24,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Builder
 public class Consumer {
-	
+
 	@Id
 	private String userId;
 	private String password;
@@ -32,9 +35,12 @@ public class Consumer {
 	private boolean isActive;
 	private String timestamp;
 	private String company;
+
 	@DBRef
 	private Set<Role> roles;
 	private List<Meal> mealList = new ArrayList<>();
+	private Set<Allergens> allergies = new HashSet<>();
+	private List<String> consumerComments = new ArrayList<>();
 	private List<String> dislikesList;
 	private List<String> likes;
 
@@ -44,20 +50,5 @@ public class Consumer {
 		this.setEmail(consumerToUpdate.getEmail());
 		this.setPlan(consumerToUpdate.getPlan());
 		this.setActive(consumerToUpdate.isActive());
-	}
-
-	@Override
-	public String toString() {
-		return "Consumer{" +
-			"userId=" + userId +
-			", password='" + password + '\'' +
-			", firstName='" + firstName + '\'' +
-			", lastName='" + lastName + '\'' +
-			", email='" + email + '\'' +
-			", plan=" + plan +
-			", isActive=" + isActive +
-			", timestamp='" + timestamp + '\'' +
-			", roles=" + roles +
-			'}';
 	}
 }

@@ -1,9 +1,11 @@
 import ApiToken from '../ApiToken';
+import CustomLogging from '../../CustomLogging';
+ 
 
 class BuildDownload {
 
     constructor() {
-        console.log("Start Download...");
+        CustomLogging.info("Start Download...");
     }
 
     getCSVDownloadPromise(apiPath) {
