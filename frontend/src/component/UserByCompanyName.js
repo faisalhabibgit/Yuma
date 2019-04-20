@@ -4,6 +4,8 @@ import {
   Container, Col, Form, FormGroup, Label, Input
 } from 'reactstrap';
 import ApiToken from '../middleware/ApiToken';
+import Retriever from "../middleware/Retriever";
+import CustomLogging from "../CustomLogging";
 
 const API = "api/rest/company/"
 
@@ -12,6 +14,7 @@ class UserByCompanyName extends Component {
   constructor(props) {
     super(props);
 
+    this.checkAuthenticated();
     this.state = {
       userInput: "",
       // apiObject: [{company:"google", email: "email", firstname: "some first name", lastname: "some last name"}
@@ -50,7 +53,10 @@ class UserByCompanyName extends Component {
 
   companyFetch(company){
     console.log(company)
-    fetch(API + company)
+    const retriever = new Retriever(API + company);
+    CustomLogging.info('retrieving company user list', 'UsersByCompanyName');
+    retriever.getEntityPromise()
+    // fetch(API + company)
     .then((obj) => {
       this.setState({ apiObject: obj})
     })
