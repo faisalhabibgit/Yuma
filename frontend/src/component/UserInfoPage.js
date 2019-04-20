@@ -33,6 +33,10 @@ export default class UserInfoPage extends Component{
     }
 
     this.displayPlan = this.displayPlan.bind(this);
+    this.displayAllergies = this.displayAllergies.bind(this);
+    this.displayConsumerComments = this.displayConsumerComments.bind(this);
+    this.displayDislikeList = this.displayDislikeList.bind(this);
+    this.displayLikes = this.displayLikes.bind(this);
   }
 
   checkAuthenticated(){
