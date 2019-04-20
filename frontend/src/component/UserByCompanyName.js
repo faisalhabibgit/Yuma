@@ -6,6 +6,7 @@ import {
 import ApiToken from '../middleware/ApiToken';
 import Retriever from "../middleware/Retriever";
 import CustomLogging from "../CustomLogging";
+import UserInfoPage from "./UserInfoPage"
 
 const API = "api/rest/company/"
 
@@ -78,37 +79,34 @@ class UserByCompanyName extends Component {
 
   display() {
 
-      return(
-          <table >
-              <thead>
-                  <tr>
-                      <th>Consumer First Name</th>
-                      <th>Last Name</th>
-                  </tr>
-              </thead>
-              { this.state.apiObject.map(consumer =>
-                  <UserInfoPage
-                    firstName = {consumer.firstName}
-                    lastName = {consumer.lastName}
-                    plan = [
-                      numOfMeals = {consumer.plan.numOfMeals}
-                      specialRequests = {consumer.plan.specialRequests}
-                      requestedProteinTypes = {consumer.plan.requestedProteinTypes}
-                      diet = {consumer.plan.diet}
-                    ]
-                    isActive = {consumer.isActive}
-                    company = {consumer.company}
-                    allergies = {consumer.allergies}
-                    consumerComments = {consumer.consumerComments}
-                    dislikesList = {consumer.dislikesList}
-                    likes = {consumer.likes}
-                  </UserInfoPage>
-              )}
-          </table>
-      )
-
-    console.log("matchedArr: " + matchedArr)
-    this.setState({ searchList: matchedArr });
+    return(
+        <table >
+            <thead>
+                <tr>
+                    <th>Consumer First Name</th>
+                    <th>Last Name</th>
+                </tr>
+            </thead>
+            { this.state.apiObject.map(consumer =>
+                <UserInfoPage
+                  firstName = {consumer.firstName}
+                  lastName = {consumer.lastName}
+                  plan = [
+                    numOfMeals = {consumer.plan.numOfMeals}
+                    specialRequests = {consumer.plan.specialRequests}
+                    requestedProteinTypes = {consumer.plan.requestedProteinTypes}
+                    diet = {consumer.plan.diet}
+                  ]
+                  isActive = {consumer.isActive}
+                  company = {consumer.company}
+                  allergies = {consumer.allergies}
+                  consumerComments = {consumer.consumerComments}
+                  dislikesList = {consumer.dislikesList}
+                  likes = {consumer.likes}
+                </UserInfoPage>
+            )}
+        </table>
+    )
   }
 
   render() {

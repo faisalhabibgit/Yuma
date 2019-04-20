@@ -31,17 +31,30 @@ export default class UserInfoPage extends Component{
       dislikesList: [],
       likes: [],
     }
+
+    this.displayPlan = this.displayPlan.bind(this);
   }
 
   checkAuthenticated(){
 
     const apiToken = new ApiToken();
     if (!apiToken.isAuthenticated()) {
-      CustomLogging.error('Check Authentification NewMeal: FAIL','NewMeal');
+      CustomLogging.error('Check Authentification UserInfoPage: FAIL','UserInfoPage');
       this.props.history.push(`/Login`)
     } else {
-      CustomLogging.info('Check Authentification NewMeal: PASS','NewMeal');
+      CustomLogging.info('Check Authentification UserInfoPage: PASS','UserInfoPage');
     }
+  }
+
+  displayPlan() {
+    return(
+      <UserPlan
+        numOfMeals = {this.props.plan.numOfMeals}
+        specialRequests = {this.props.plan.specialRequests}
+        requestedProteinTypes = {this.props.plan.requestedProteinTypes}
+        diet = {this.props.plan.diet}>
+      </UserPlan>
+    )
   }
 
 
