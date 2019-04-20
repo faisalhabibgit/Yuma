@@ -14,7 +14,7 @@ import MealHistory from './component/MealHistory';
 import TestApiView from './component/TestApiView';
 import Dashboard from './component/Dashboard';
 import UserByCompanyName from './component/UserByCompanyName';
-
+import UserInfoPage from './component/UserInfoPage';
 
 class App extends Component {
 
@@ -35,6 +35,7 @@ class App extends Component {
           <Route path="/Logout" component={Logout} />
           <Route path="/Dashboard" component={Dashboard} />
           <Route path="/UserByCompanyName" component={UserByCompanyName} />
+          <Route path="/UserInfoPage" component={UserInfoPage} />
           <Route component={Error} />
           </Switch>
           <Footer/>

@@ -68,42 +68,49 @@ class UserByCompanyName extends Component {
     })
   }
 
-  pushMatchedArr(thingy){
-    var matchedArr = [];
+//Display Basic consumer information, and have a button available to view
+// consumer details at the UserInfoPage
 
-    matchedArr.push(" email: "  + thingy.email.toString()  +
-                    "  First Name: " + thingy.firstname.toString() +
-                    "  Last Name: " + thingy.lastname.toString());
-  }
+// Use a for loop for the basic information and passing the fetched information
+// per user to UserInfoPage Component
 
-  pushMatchedArrWithNoEmail(thingy){
-    var matchedArr = [];
-
-    matchedArr.push(" email: No email registered"   +
-                    "  First Name: " + thingy.firstname.toString() +
-                    "  Last Name: " + thingy.lastname.toString());
-  }
-
+// if possible open on a modal so its easily closed
 
   display() {
-    debugger
 
-    var matchedArr = [];
     for (var i = 0; i < this.state.apiObject.length; i++) {
+
       console.log("this.state.apiObject[i].company: " + this.state.apiObject[i].company);
       console.log("this.state.userInput: " + this.state.userInput);
       console.log("this.state.apiObject[i].firstName" + this.state.apiObject[i].firstName);
-      // validate but partially works
-      // if (this.state.apiObject[i].company.toString().includes(this.state.userInput)
-      // ) {
-
-// !this.state.apiObject[i].email.length ? pushMatchedArr(this.state.apiObject): pushMatchedArrWithNoEmail(this.state.apiObject)
-
-      // }
-      matchedArr.push(" email: No email registered"   +
-                      "  First Name: " + this.state.apiObject[i].firstname +
-                      "  Last Name: " + this.state.apiObject[i].lastname);
-
+      return(
+          <table >
+              <thead>
+                  <tr>
+                      <th>Consumer First Name</th>
+                      <th>Last Name</th>
+                  </tr>
+              </thead>
+              { this.state.apiObject.map(consumer =>
+                  <UserInfoPage
+                    firstName = {consumer.firstName}
+                    lastName = {consumer.lastName}
+                    plan = [
+                      numOfMeals = {consumer.plan.numOfMeals}
+                      specialRequests = {consumer.plan.specialRequests}
+                      requestedProteinTypes = {consumer.plan.requestedProteinTypes}
+                      diet = {consumer.plan.diet}
+                    ]
+                    isActive = {consumer.isActive}
+                    company = {consumer.company}
+                    allergies = {consumer.allergies}
+                    consumerComments = {consumer.consumerComments}
+                    dislikesList = {consumer.dislikesList}
+                    likes = {consumer.likes}
+                  </UserInfoPage>
+              )}
+          </table>
+      )
     }
     console.log("matchedArr: " + matchedArr)
     this.setState({ searchList: matchedArr });
@@ -125,15 +132,14 @@ class UserByCompanyName extends Component {
         </Col>
         <Col sm={{ size: 6, order: 2, offset: 1 }}>
           <ListGroup>
-            {
-              this.state.searchList.map(x => <ListGroupItem key={x}>{x}</ListGroupItem>)
-            }
+            // {
+            //   this.state.searchList.map(x => <ListGroupItem key={x}>{x}</ListGroupItem>)
+            // }
+            {this.display()}
           </ListGroup>
         </Col>
       </Container>
-
     );
   }
-
 }
 export default UserByCompanyName;
