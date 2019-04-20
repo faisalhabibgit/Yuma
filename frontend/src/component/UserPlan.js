@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import {
-  Col, Form,
-  FormGroup, Label, Input,
-  Button,
-  Container,Card, CardHeader,  CardBody,
-  CardDeck
+  Col, Form, ListGroup, ListGroupItem,
+  FormGroup, Card, CardHeader, CardFooter, CardBody,
+  CardTitle, CardText
 } from 'reactstrap';
 import ApiToken from '../middleware/ApiToken';
 import CustomLogging from '../CustomLogging';
