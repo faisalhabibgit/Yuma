@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import {
-  CardDeck, CardBody, Card,
-  Button
-} from 'reactstrap';
+import { CardDeck, CardBody, Card, Button} from 'reactstrap';
 import Modal from 'react-modal';
 import Poster from '../middleware/Poster';
 import ComboOne from './mealcombo/ComboOne';
 import Retriever from '../middleware/Retriever';
 import CustomLogging from "../CustomLogging";
+import './stylesheet/buttonColor.css';
 
 class MealCombo extends Component {
 
@@ -20,38 +18,18 @@ class MealCombo extends Component {
       downloadCSV: '',
       hiddenElement: null,
       background:'#599BE9',
-      active: null
+      
     };
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleModalChange1 = this.handleModalChange1.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDownloadCSV = this.handleDownloadCSV.bind(this);
-   // this.toggle = this.toggle.bind(this);
-   // this.myColor = this.myColor.bind(this);
-   // this.handelSelect = this.handelSelect.bind(this);
-
+    this.handleDownloadCSV = this.handleDownloadCSV.bind(this);   
     this.poster = new Poster();
   }
 
  
-
-  toggle(id){
-    if (this.state.active === id) {
-      this.setState({active : null})
-    } else {
-      this.setState({active : id})
-    }
-  }
-  
-  selectColor(id){
-    if (this.state.active === id) {
-      return '#e9a759';
-    }
-    return "#599BE9";
-  }
-
 
   openModal() {
     this.setState({ modalIsOpen: true });
@@ -69,9 +47,9 @@ class MealCombo extends Component {
   
   
   handleSubmit(e) {
-    CustomLogging.info("Selected Combo"+e.target.id,"MealCombo");
+    CustomLogging.info("Selected Combo"+ e.target.id + "MealCombo");
 
-      this.poster.selectMealCombo(e.target.id).then(() => {
+      this.poster.selectMealCombo(e.target.index).then(() => {
 
       const retriever = new Retriever('api/combinationreport/download/consumers.csv');      
       retriever.getEntityPromise().then((csv) => {
@@ -88,10 +66,6 @@ class MealCombo extends Component {
     })
 }
 
-handelSelect(){
-    this.toggle();
-    this.handleSubmit();
-  }
 
 
   handleDownloadCSV() {
@@ -115,10 +89,7 @@ handelSelect(){
                 <Button variant="secondary" onClick={this.handleModalChange1}>View Full Combination Report</Button>
               </div>
               <div style={{ padding: '15px' }}>
-                <Button 
-                        style={{background: this.selectColor(1)}}  onClick={() => {this.toggle(1)}}
-                        //onClick={this.handleSubmit} 
-                        id ='1' type="submit">Select</Button>
+              <Button onClick= {this.handleSubmit} id='1' type="submit">Select </Button>
               </div> 
             </CardBody>
           </Card>
