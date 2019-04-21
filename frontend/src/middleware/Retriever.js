@@ -2,6 +2,7 @@ import BuildMeal from './objectBuilder/BuildMeal';
 import BuildUser from './objectBuilder/BuildUser';
 import BuildMealCombo from './objectBuilder/BuildMealCombo';
 import BuildDownload from './objectBuilder/BuildDownload';
+import BuildProteinTypeScore from "./objectBuilder/BuildProteinTypeScore";
 
 class Retriever {
 
@@ -29,6 +30,10 @@ class Retriever {
             case 'api/combinationreport/download/consumers.csv':
                 const buildDownload = new BuildDownload();
                 this.entityPromise = buildDownload.getCSVDownloadPromise(apiPath);
+                break;
+            case 'api/score/proteinType/percentage':
+                const buildProteinScore = new BuildProteinTypeScore();
+                this.entityPromise = buildProteinScore.getProteinTypePromiseObj(apiPath);
                 break;
             default:
             // code block
