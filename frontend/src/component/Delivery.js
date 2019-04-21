@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import {
-    Container, Table, Col, Form,
-    FormGroup, Label, Input,
-    Button, Card, CardHeader,  CardBody,
+    Container,    
+    Button, Card,  CardBody,
     CardDeck
 } from 'reactstrap';
 
-import Retriever from '../middleware/Retriever';
 
 class Delivery extends Component{
 
