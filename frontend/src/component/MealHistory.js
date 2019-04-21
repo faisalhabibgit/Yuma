@@ -57,11 +57,7 @@ class MealHistory extends Component{
 
     fetch(comboSearchAPI,obj)
     .then(response => response.json())
-    .then(data => this.setState({array: data}))
-    
-
-    
-    
+    .then(data => this.setState({array: data},console.log(data)))
 
   }
 
@@ -101,31 +97,28 @@ class MealHistory extends Component{
     });
   }
 
-  // printCombo(){
-
-  //   if(this.state.array.length){
-
-  //     const items = this.state.array.map(function(item){
-  //       return <li> {item} </li>;
-  //     });
-
-  //     } else {
-  //       const { items } = null;
-  //     }
-
-  // }
-
 
   render() {
 
     const items = this.state.array.map(element => 
-     <div> 
-    <h3> Result </h3>   
-    <li> Combination Score: {element.combinationScore} </li>
-    <li> Number of Blanks: {element.numberOfBlanks} </li>
-    <li> Created on: {element.createdOn} </li> 
-    <br />
-    </div>
+     <div className="text-center">
+        <br /> 
+        <h1> Result </h1>   
+        <li> Combination Score: {element.combinationScore} </li>
+        <li> Number of Blanks: {element.numberOfBlanks} </li>
+        <li> Created on: {element.createdOn} </li>
+        <li> Users Combinations</li>
+            
+        {element.consumerTOS.map(user => 
+        <ul>
+          <li>{user.firstName}</li>
+
+        </ul>
+
+        )}
+            
+        <br />
+      </div>
     );
 
     return (
