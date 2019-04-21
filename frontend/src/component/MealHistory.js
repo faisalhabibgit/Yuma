@@ -37,11 +37,13 @@ class MealHistory extends Component{
 
   getCombo(){
 
-    const apiToken = new ApiToken();
+    var startFormatted = this.convertToDateOnly(this.state.startDate);
+    var endFormatted = this.convertToDateOnly(this.state.endDate);
 
-    var comboSearchAPI = 'api/combinationreport/search?startdate='+
-    this.state.startDate+'&enddate='+
-    this.state.endDate;
+    console.log('formatted date '+startFormatted)
+    const apiToken = new ApiToken();
+    var comboSearchAPI = 'api/combinationreport/search?startdate='+startFormatted
+    +'&enddate='+endFormatted;
 
     var obj = {
       method: 'GET',
@@ -49,7 +51,6 @@ class MealHistory extends Component{
           'cache-control': "no-cache",
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + apiToken.getCookie('yuma-token')
-          //'Bearer ' + apiToken.getCookie('yuma-token')
       }
     }
 
@@ -66,15 +67,33 @@ class MealHistory extends Component{
     window.scrollTo(0, 0);
   }
   
+  convertToDateOnly(date){
+
+    
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    var dt = date.getDate();
+
+    if (dt < 10) {
+      dt = '0' + dt;
+    }
+    if (month < 10) {
+      month = '0' + month;
+    }
+
+    return year+'-' + month + '-'+dt;
+
+  }
   handleStart(date){
+
     this.setState({
       startDate: date
     });
-
     
   }
 
   handleEnd(date){
+
     this.setState({
       endDate: date
     });

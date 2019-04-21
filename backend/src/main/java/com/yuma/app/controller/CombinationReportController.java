@@ -63,11 +63,10 @@ public class CombinationReportController {
 	}
 
 	@GetMapping("/search")
-	public List<CombinationReportTO> getCombinationReportByDate(@RequestParam(name = "startdate")
-																															@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-																																LocalDate startDate, @RequestParam(name = "enddate")
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-		LocalDate endDate){
+	public List<CombinationReportTO> getCombinationReportByDate(
+		@RequestParam(name = "startdate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+		@RequestParam(name = "enddate")	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate){
+		
 		log.info("Retrieving combination report from "+ startDate + " to " + endDate);
 		return this.combinationReportService.listCombinationReportByDate(startDate, endDate);
 	}
