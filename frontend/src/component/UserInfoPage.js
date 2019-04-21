@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import {
   Col, Form,
-  FormGroup, Label, Input,
-  Button, ListGroup, ListGroupItem,
-  Container,Card, CardHeader,  CardBody, CardTitle, CardText, CardFooter,
+  FormGroup, Label, Input,   ListGroup, ListGroupItem,
+  Button, CardTitle, CardText, CardFooter,
+  Container,Card, CardHeader,  CardBody,
   CardDeck
 } from 'reactstrap';
 import ApiToken from '../middleware/ApiToken';
 import CustomLogging from '../CustomLogging';
-import UserPlan from "./UserPlan";
+import UserPlan from './UserPlan';
 
 var hiddenToggle = {
   display: 'block'
@@ -21,6 +21,7 @@ export default class UserInfoPage extends Component{
 
     this.checkAuthenticated();
     this.state = {
+      isShowing: false
       // firstName: "",
       // lastName: "",
       // plan: {
@@ -67,33 +68,39 @@ export default class UserInfoPage extends Component{
   }
 
   displayConsumerComments() {
-    return(
-      <ListGroup>
-        {this.props.consumerComments.map(consumerComments =>
-          <ListGroupItem>{consumerComments}</ListGroupItem>
-        )}
-      </ListGroup>
-    );
+    if(this.props.consumerComments){
+      return(
+        <ListGroup>
+          {this.props.consumerComments.map(consumerComments =>
+            <ListGroupItem>{consumerComments}</ListGroupItem>
+          )}
+        </ListGroup>
+      );
+    }
   }
 
   displayDislikeList() {
-    return(
-      <ListGroup>
-        {this.props.dislikesList.map(dislikes =>
-          <ListGroupItem>{dislikes}</ListGroupItem>
-        )}
-      </ListGroup>
-    );
+    if(this.props.dislikesList){
+      return(
+        <ListGroup>
+          {this.props.dislikesList.map(dislikes =>
+            <ListGroupItem>{dislikes}</ListGroupItem>
+          )}
+        </ListGroup>
+      );
+    }
   }
 
   displayLikes() {
-    return(
-      <ListGroup>
-        {this.props.likes.map(like =>
-          <ListGroupItem>{like}</ListGroupItem>
-        )}
-      </ListGroup>
-    );
+    if(this.props.likes){
+      return(
+        <ListGroup>
+          {this.props.likes.map(like =>
+            <ListGroupItem>{like}</ListGroupItem>
+          )}
+        </ListGroup>
+      );
+    }
   }
 
   displayPlan() {
@@ -109,9 +116,12 @@ export default class UserInfoPage extends Component{
     )
   }
 
-  toggleHidden() {
-    var checkbox = document.getElementById("hiddenCheckbox")
-    if(checkbox.checked == true){
+  toggleHidden(event) {
+    var checkboxValue = event.target.checked;
+    this.setState({
+      hiddenCheckbox: checkboxValue
+    })
+    if(this.hiddenCheckbox){
       hiddenToggle = {
         display: "none"
       }
@@ -126,7 +136,7 @@ export default class UserInfoPage extends Component{
   render(){
     return(
       <div>
-        Show consumer info <input type="checkbox" id="hiddenCheckbox" onClick={this.toggleHidden()}/>
+        Show consumer info <input type="checkbox" name="hiddenCheckbox" checked={this.state.hiddenCheckbox} onChange={this.toggleHidden}/>
         <Card style={hiddenToggle}>
           <CardHeader>Plan</CardHeader>
           <CardBody>
