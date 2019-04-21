@@ -110,7 +110,10 @@ class UserByCompanyName extends Component {
         <Col sm="12" md={{ size: 6, offset: 3 }}>
           <Form className="form">
             <FormGroup>
-              <input
+            <Label for="searchCompany">Search Company Name</Label>
+              <Input
+                id="searchCompany"
+                placeholder="Company Name"
                 onChange = { (e)=>this.handleQueryChange(e.target.value)}
                 value={this.state.userInput}
                 type="text"
@@ -118,7 +121,7 @@ class UserByCompanyName extends Component {
             </FormGroup>
           </Form>
         </Col>
-        <Col sm={{ size: 6, order: 2, offset: 1 }}>
+        <Col sm={{ size: 12, order: 2, offset: 1 }}>
           <ListGroup>
             {this.display()}
           </ListGroup>

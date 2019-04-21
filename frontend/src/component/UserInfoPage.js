@@ -145,7 +145,7 @@ export default class UserInfoPage extends Component{
   render(){
     return(
       <div>
-          <Card>
+          <Card style={{width:"90%"}}>
             <CardHeader>
               <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Show consumer: {this.props.lastName}, {this.props.firstName}'s info
               </Button>
@@ -157,7 +157,7 @@ export default class UserInfoPage extends Component{
               onExiting={this.onExiting}
               onExited={this.onExited}
             >
-            <CardBody style={hiddenToggle}>
+            <CardBody>
               <CardTitle>User Info</CardTitle>
               <CardText>
                 {this.displayPlan()}
