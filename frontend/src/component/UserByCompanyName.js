@@ -44,8 +44,8 @@ class UserByCompanyName extends Component {
     this.setState({
       userInput: input
     }, this.companyFetch(input));
-    // if( (this.state.apiObject === null) || (this.state.apiObject === [])) {
-    if( this.state.apiObject === []) {
+    if( (this.state.apiObject === null) || (this.state.apiObject === [])) {
+    // if( this.state.apiObject === []) {
       this.setState({
         searchList: ["no result"]
       })
@@ -59,15 +59,18 @@ class UserByCompanyName extends Component {
   companyFetch(company){
 
     console.log(company)
-    const retriever = new Retriever(API + company);
-    CustomLogging.info('retrieving company user list', 'UsersByCompanyName');
-    retriever.getEntityPromise()
-    // fetch(API + company)
-    .then((obj) => {
-      console.log(obj)
+    if(company){
+      const retriever = new Retriever(API + company);
+      CustomLogging.info('retrieving company user list', 'UsersByCompanyName');
+      retriever.getEntityPromise()
+      // fetch(API + company)
+      .then((obj) => {
+        console.log(obj)
 
-      this.setState({ apiObject: obj})
-    })
+        this.setState({ apiObject: obj})
+      })
+    }
+
   }
 
 //Display Basic consumer information, and have a button available to view
@@ -82,11 +85,6 @@ class UserByCompanyName extends Component {
 
     return(
         <table >
-            <thead>
-                <tr>
-                    <th>Consumer Name</th>
-                </tr>
-            </thead>
             { this.state.apiObject.map(consumer =>
               <tr>
                 <UserInfoPage

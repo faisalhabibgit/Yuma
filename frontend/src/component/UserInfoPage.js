@@ -5,7 +5,7 @@ import {
   FormGroup, Label, Input,   ListGroup, ListGroupItem,
   Button, CardTitle, CardText, CardFooter,
   Container,Card, CardHeader,  CardBody,
-  CardDeck
+  CardDeck, Collapse
 } from 'reactstrap';
 import ApiToken from '../middleware/ApiToken';
 import CustomLogging from '../CustomLogging';
@@ -21,7 +21,9 @@ export default class UserInfoPage extends Component{
 
     this.checkAuthenticated();
     this.state = {
-      isShowing: false
+      isShowing: false,
+      collapse: false,
+      status: 'Closed'
       // firstName: "",
       // lastName: "",
       // plan: {
@@ -44,6 +46,11 @@ export default class UserInfoPage extends Component{
     this.displayDislikeList = this.displayDislikeList.bind(this);
     this.displayLikes = this.displayLikes.bind(this);
     this.toggleHidden = this.toggleHidden.bind(this);
+    this.onEntering = this.onEntering.bind(this);
+    this.onEntered = this.onEntered.bind(this);
+    this.onExiting = this.onExiting.bind(this);
+    this.onExited = this.onExited.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
   checkAuthenticated(){
@@ -132,33 +139,62 @@ export default class UserInfoPage extends Component{
     }
   }
 
+  onEntering() {
+    this.setState({ status: 'Opening...' });
+  }
+
+  onEntered() {
+    this.setState({ status: 'Opened' });
+  }
+
+  onExiting() {
+    this.setState({ status: 'Closing...' });
+  }
+
+  onExited() {
+    this.setState({ status: 'Closed' });
+  }
+
+  toggle() {
+    this.setState(state => ({ collapse: !state.collapse }));
+  }
 
   render(){
     return(
       <div>
-        Show consumer info <input type="checkbox" name="hiddenCheckbox" checked={this.state.hiddenCheckbox} onChange={this.toggleHidden}/>
-        <Card style={hiddenToggle}>
-          <CardHeader>Plan</CardHeader>
-          <CardBody>
-            <CardTitle>{this.props.lastName}, {this.props.firstName}</CardTitle>
-            <CardText>
-              {this.displayPlan()}
-              <ListGroup>
-                <ListGroupItem>isActive: {this.props.isActive}</ListGroupItem>
-                <ListGroupItem>Company: {this.props.company}</ListGroupItem>
-                <h5>Allergies: </h5>
-                  {this.displayAllergies()}
-                <h5>Consumer Comments: </h5>
-                  {this.displayConsumerComments()}
-                <h5>Dislikes: </h5>
-                  {this.displayDislikeList()}
-                <h5>Likes: </h5>
-                  {this.displayLikes()}
-              </ListGroup>
-            </CardText>
-          </CardBody>
-          <CardFooter> Diet: {this.props.diet} </CardFooter>
-        </Card>
+          <Card>
+            <CardHeader>
+              <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Show consumer: {this.props.lastName}, {this.props.firstName}'s info
+              </Button>
+            </CardHeader>
+            <Collapse
+              isOpen={this.state.collapse}
+              onEntering={this.onEntering}
+              onEntered={this.onEntered}
+              onExiting={this.onExiting}
+              onExited={this.onExited}
+            >
+            <CardBody style={hiddenToggle}>
+              <CardTitle>User Info</CardTitle>
+              <CardText>
+                {this.displayPlan()}
+                <ListGroup>
+                  <ListGroupItem>isActive: {this.props.isActive}</ListGroupItem>
+                  <ListGroupItem>Company: {this.props.company}</ListGroupItem>
+                  <h5>Allergies: </h5>
+                    {this.displayAllergies()}
+                  <h5>Consumer Comments: </h5>
+                    {this.displayConsumerComments()}
+                  <h5>Dislikes: </h5>
+                    {this.displayDislikeList()}
+                  <h5>Likes: </h5>
+                    {this.displayLikes()}
+                  <ListGroupItem> Diet: {this.props.diet} </ListGroupItem>
+                </ListGroup>
+              </CardText>
+            </CardBody>
+            </Collapse>
+          </Card>
       </div>
     )
   }
