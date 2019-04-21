@@ -125,7 +125,7 @@ class DisplayUsers extends Component {
       <Container>
         <div className='text-center' style={{padding:'12px'}}>
         
-        <Button variant="secondary"  onClick={this.handleUpdate}>Update User</Button>
+        <Button variant="secondary"  onClick={this.handleUpdate}>Update Users</Button>
       
           <h5> First Name beginning with:  <h7 style={{ color: '#599BE9' }}>{this.state.firstLetter.toLowerCase()} </h7> </h5>
           {this.prepareFirstLetterAlphabets()}
