@@ -1,0 +1,11 @@
+button {
+    background: #599BE9;
+  }
+  
+  button:active{
+      background:olive;
+  }
+  
+  button:focus{
+      background:olive;
+  }
