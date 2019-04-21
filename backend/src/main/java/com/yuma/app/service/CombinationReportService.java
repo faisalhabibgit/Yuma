@@ -101,8 +101,12 @@ public class CombinationReportService {
 	}
 
 	public List<CombinationReportTO> listCombinationReportByDate(LocalDate startDate, LocalDate endDate) {
+		
+		log.info("Listing combo reports by dates: "+startDate+"and end date: "+endDate);
+		
 		List<CombinationReport> combinationReports = this.combinationReportRepository.findAllByCreatedOnBetween(startDate.toDate(), endDate.toDate());
 
+		log.info("Total reports created betwee those dates is: "+combinationReports.size());
 		CombinationReportTO combinationReportTO = null;
 		List<CombinationReportTO> combinationReportTOS = new ArrayList<>();
 		for (CombinationReport combinationReport: combinationReports) {

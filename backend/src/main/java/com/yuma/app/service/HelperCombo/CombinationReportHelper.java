@@ -56,6 +56,7 @@ public class CombinationReportHelper {
 		int numOfBlanks;
 
 		for (Meal meal : combinationReport.getMealsList()) {
+			
 			if (user.getMealList().size() < user.getPlan().getNumOfMeals()) {
 				if (checkIfMealWorks(meal, user, addedMeals)) {
 					mealCounter++;
