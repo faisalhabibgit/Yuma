@@ -11,7 +11,7 @@ import Error from './component/Error';
 import SearchMeal from './component/SearchMeal';
 import NewMeal from './component/NewMeal';
 import MealHistory from './component/MealHistory';
-import Blog from './component/Blog';
+import Blog from './component/blog/Blog';
 import TestApiView from './component/TestApiView';
 import Dashboard from './component/Dashboard';
 
