@@ -3,7 +3,7 @@ import ApiToken from "../middleware/ApiToken";
 
 import {
   Card, CardHeader,  CardBody,
-  CardDeck
+  CardDeck, Button
 } from 'reactstrap';
 
 import AvailableMeals from "./AvailableMeals";
@@ -26,6 +26,8 @@ class Dashboard extends Component {
     window.scrollTo(0, 0);
   }
 
+  
+
   checkAuthenticated(){
 
     const apiToken = new ApiToken();
@@ -45,7 +47,7 @@ class Dashboard extends Component {
         <CardDeck data-test="meal-combo-card" style={{padding:'12px', height:'380px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Meal Combo</h5>
+              <h2 style={{color: 'black'}}> Meal Combination Reports</h2>
             </CardHeader>
             <CardBody>
             <MealCombo/>  
@@ -58,7 +60,7 @@ class Dashboard extends Component {
         <CardDeck data-test="available-meal-card" style={{padding:'12px', height:'450px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Available Meals</h5>
+              <h5 style={{color: 'black'}}> Available Meals</h5>
             </CardHeader>
             <CardBody>
               <AvailableMeals />
@@ -67,7 +69,7 @@ class Dashboard extends Component {
 
           <Card>
             <CardHeader data-test="all-meals-card" className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> All Meals</h5>
+              <h5 style={{color: 'black'}}> All Meals</h5>
             </CardHeader>
             <CardBody>
               <DisplayMeals />
@@ -80,7 +82,9 @@ class Dashboard extends Component {
         <CardDeck data-test="users-card" style={{padding:'12px', height:'620px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Users </h5>
+              <div>
+                <Button variant="secondary"  onClick={this.handleModalChange3}>Update User</Button>
+              </div>
             </CardHeader>
             <CardBody>
               <DisplayUsers />
@@ -89,27 +93,7 @@ class Dashboard extends Component {
 
         </CardDeck>
 
-
-        <CardDeck style={{padding:'12px', height:'275px'}}>
-          <Card>
-            <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}> Header</h5>
-            </CardHeader>
-            <CardBody>
-            </CardBody>
-          </Card>
-
-
-          <Card>
-            <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h5 style={{color: 'black', fontFamily: 'Comic Sans MS'}}>Header</h5>
-            </CardHeader>
-            <CardBody>
-            </CardBody>
-          </Card>
-
-        </CardDeck>
-
+        
       </div>
     );
 
