@@ -32,20 +32,6 @@ class Poster {
             }
         });
     }
-
-    //fetch users from Yuma DB
-    updateUser() {
-        const API = 'api/update/users';
-        return fetch(API, {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.apiToken.getCookie('yuma-token')
-            }
-        });
-    }
-
   
 }
 
