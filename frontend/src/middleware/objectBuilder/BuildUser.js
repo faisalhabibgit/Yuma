@@ -1,4 +1,4 @@
-import ApiToken from '../ApiToken';
+  import ApiToken from '../ApiToken';
 import User from '../objects/User';
 import Plan from '../objects/Plan';
 import BuildMeal from '../objectBuilder/BuildMeal';

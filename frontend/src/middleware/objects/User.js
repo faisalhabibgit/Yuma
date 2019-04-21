@@ -9,7 +9,6 @@ class User {
     this.isActive = null;
     this.timestamp = null;
     this.company = null;
-
     this.mealList = null;
     this.dislikesList = null;
     this.allergies = null;
