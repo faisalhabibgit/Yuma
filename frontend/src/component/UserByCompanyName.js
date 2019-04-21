@@ -83,11 +83,12 @@ class UserByCompanyName extends Component {
         <table >
             <thead>
                 <tr>
-                    <th>Consumer First Name</th>
-                    <th>Last Name</th>
+                    <th>Consumer Name</th>
                 </tr>
             </thead>
+            <tbody
             { this.state.apiObject.map(consumer =>
+              <tr>
                 <UserInfoPage
                   firstName = {consumer.firstName}
                   lastName = {consumer.lastName}
@@ -104,7 +105,9 @@ class UserByCompanyName extends Component {
                   dislikesList = {consumer.dislikesList}
                   likes = {consumer.likes}
                 </UserInfoPage>
+              </tr>
             )}
+            </tbody>
         </table>
     )
   }

@@ -10,6 +10,10 @@ import {
 import ApiToken from '../middleware/ApiToken';
 import CustomLogging from '../CustomLogging';
 
+const hiddenToggle = {
+  display: 'block'
+}
+
 export default class UserInfoPage extends Component{
   constructor(props) {
     super(props);
@@ -37,6 +41,7 @@ export default class UserInfoPage extends Component{
     this.displayConsumerComments = this.displayConsumerComments.bind(this);
     this.displayDislikeList = this.displayDislikeList.bind(this);
     this.displayLikes = this.displayLikes.bind(this);
+    this.toggleHidden = this.toggleHidden.bind(this);
   }
 
   checkAuthenticated(){
@@ -93,11 +98,25 @@ export default class UserInfoPage extends Component{
     )
   }
 
+  toggleHidden() {
+    var checkbox = document.getElementById("hiddenCheckbox")
+    if(checkbox.checked == true){
+      hiddenToggle = {
+        display: "none"
+      }
+    } else {
+      hiddenToggle = {
+        display: "block"
+      }
+    }
+  }
+
 
   render(){
     return(
       <div>
-        <Card>
+        Show consumer info <input type="checkbox" id="hiddenCheckbox" onClick={this.toggleHidden()}
+        <Card style={hiddenToggle}>
           <CardHeader>Plan</CardHeader>
           <CardBody>
             <CardTitle>{this.props.lastName}, {this.props.firstName}</CardTitle>
