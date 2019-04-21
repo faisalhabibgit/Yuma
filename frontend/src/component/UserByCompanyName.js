@@ -86,18 +86,12 @@ class UserByCompanyName extends Component {
                     <th>Consumer Name</th>
                 </tr>
             </thead>
-            <tbody
             { this.state.apiObject.map(consumer =>
               <tr>
                 <UserInfoPage
                   firstName = {consumer.firstName}
                   lastName = {consumer.lastName}
-                  plan = [
-                    numOfMeals = {consumer.plan.numOfMeals}
-                    specialRequests = {consumer.plan.specialRequests}
-                    requestedProteinTypes = {consumer.plan.requestedProteinTypes}
-                    diet = {consumer.plan.diet}
-                  ]
+                  plan = {consumer.plan}
                   isActive = {consumer.isActive}
                   company = {consumer.company}
                   allergies = {consumer.allergies}
@@ -107,7 +101,6 @@ class UserByCompanyName extends Component {
                 </UserInfoPage>
               </tr>
             )}
-            </tbody>
         </table>
     )
   }
