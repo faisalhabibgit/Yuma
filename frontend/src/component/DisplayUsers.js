@@ -88,8 +88,9 @@ class DisplayUsers extends Component {
   handleUpdate() {
     
     CustomLogging.info("User Updated");
-    this.forceUpdate();
-  
+    const retriever = new Retriever('api/update/users');
+    CustomLogging.info('updating users','DisplayUsers');
+    retriever.getEntityPromise();
   }
 
   onAlphabetClickLast(e) {
