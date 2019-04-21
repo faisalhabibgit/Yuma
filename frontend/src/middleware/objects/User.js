@@ -26,7 +26,6 @@ class User {
   setCompany(company) { this.company = company }
   setMealList(mealList){this.mealList = mealList;}
   setDislikesList(dislikesList){this.dislikesList = dislikesList}
-  setCompany(company){this.company = company}
   setAllergies(allergies){this.allergies = allergies}
   setConsumerComments(consumerComments){this.consumerComments = consumerComments}
 
