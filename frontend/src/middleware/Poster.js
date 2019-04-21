@@ -32,7 +32,6 @@ class Poster {
             }
         });
     }
-
   
 }
 

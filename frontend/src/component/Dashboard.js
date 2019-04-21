@@ -3,13 +3,14 @@ import ApiToken from "../middleware/ApiToken";
 
 import {
   Card, CardHeader,  CardBody,
-  CardDeck, Button
+  CardDeck,
 } from 'reactstrap';
 import AvailableMeals from "./AvailableMeals";
 import DisplayMeals from "./DisplayMeals";
 import DisplayUsers from "./DisplayUsers";
 import MealCombo from "./MealCombo";
 import CustomLogging from '../CustomLogging';
+
 
 class Dashboard extends Component {
 
@@ -23,6 +24,7 @@ class Dashboard extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
+
 
   
 
@@ -80,9 +82,7 @@ class Dashboard extends Component {
         <CardDeck data-test="users-card" style={{padding:'12px', height:'620px'}}>
           <Card>
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <div>
-                <Button variant="secondary"  onClick={this.handleModalChange3}>Update User</Button>
-              </div>
+             
             </CardHeader>
             <CardBody>
               <DisplayUsers />
