@@ -21,6 +21,30 @@ class Blog extends Component {
 
     }
 
+    postMessage() {
+
+        var api_key = '227b11f7fe20a3bbeb5be013ba857407-3fb021d1-b66a254f';
+        var DOMAIN = 'sandbox87c15faf9e284ce1888109640268cde8.mailgun.org';
+        // var mailgun = require('mailgun-js')({ apiKey: api_key, domain: DOMAIN });
+
+        var data = {
+            from: 'Mailgun Sandbox <postmaster@sandbox87c15faf9e284ce1888109640268cde8.mailgun.org>',
+            to: 'Jo Blo <yuma_admin@yuma.com>',
+            subject: 'Feedback from ' + this.state.email,
+            text: this.rating + '\n' + this.content
+        };
+
+        // mailgun.messages().send(data, function (error, body) {
+        //     console.log(body);
+        // });
+        // You can see a record of this email in your logs: https://app.mailgun.com/app/logs
+
+        // You can send up to 300 emails/day from this sandbox server.
+        // Next, you should add your own domain so you can send 10,000 emails/month for free.
+
+
+    }
+
     handleSubmit(event) {
         event.preventDefault();
         console.log(this.state);
