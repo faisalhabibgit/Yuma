@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  ListGroup, ListGroupItem,
+  ListGroup,
   Container, Col, Form, FormGroup, Label, Input
 } from 'reactstrap';
 import ApiToken from '../middleware/ApiToken';

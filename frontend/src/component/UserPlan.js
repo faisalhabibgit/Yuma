@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
 import {
-  Col, Form, ListGroup, ListGroupItem,
-  FormGroup, Card, CardHeader, CardFooter, CardBody,
+  ListGroup, ListGroupItem,
+  Card, CardHeader, CardFooter, CardBody,
   CardTitle, CardText
 } from 'reactstrap';
 import ApiToken from '../middleware/ApiToken';

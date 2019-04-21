@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
 import {
-  Col, Form,
-  FormGroup, Label, Input,   ListGroup, ListGroupItem,
-  Button, CardTitle, CardText, CardFooter,
-  Container,Card, CardHeader,  CardBody,
-  CardDeck, Collapse
+  ListGroup, ListGroupItem,
+  Button, CardTitle, CardText,
+  Card, CardHeader,  CardBody, Collapse
 } from 'reactstrap';
 import ApiToken from '../middleware/ApiToken';
 import CustomLogging from '../CustomLogging';
 import UserPlan from './UserPlan';
-
-var hiddenToggle = {
-  display: 'block'
-}
 
 export default class UserInfoPage extends Component{
   constructor(props) {

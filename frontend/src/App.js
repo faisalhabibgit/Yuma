@@ -35,7 +35,6 @@ class App extends Component {
           <Route path="/Logout" component={Logout} />
           <Route path="/Dashboard" component={Dashboard} />
           <Route path="/UserByCompanyName" component={UserByCompanyName} />
-          // <Route path="/UserInfoPage" component={UserInfoPage} />
           <Route component={Error} />
           </Switch>
           <Footer/>
