@@ -18,6 +18,7 @@ class DisplayCombo extends Component {
       <Container className="text-center">
 
         <h1>Meals</h1>
+        <div style={{ marginLeft: '80px', maxWidth: '900px', maxHeight: '300px', overflow: 'scroll' }}>
         <Table striped bordered size="sm">
           <thead>
             <tr>
@@ -36,14 +37,14 @@ class DisplayCombo extends Component {
           </tbody>
 
         </Table>
-
+        </div>
         <h1>Users</h1>
 
         {this.state.apiObject.consumerList.map(x =>
 
-          <div style={{ padding: '10px' }}>
+          <div style={{ padding: '10px', marginLeft: '80px'}}>
 
-            <Card style={{ background: '#d3d3d3' }}>
+            <Card style={{padding:'12px', height:'450px', width:'900px'}} body outline color="primary">
 
               <CardBody>
 
