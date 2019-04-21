@@ -14,7 +14,6 @@ import MealHistory from './component/MealHistory';
 import TestApiView from './component/TestApiView';
 import Dashboard from './component/Dashboard';
 import UserByCompanyName from './component/UserByCompanyName';
-import UserInfoPage from './component/UserInfoPage';
 
 class App extends Component {
 
