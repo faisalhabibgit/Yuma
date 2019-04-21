@@ -13,6 +13,7 @@ import NewMeal from './component/NewMeal';
 import MealHistory from './component/MealHistory';
 import TestApiView from './component/TestApiView';
 import Dashboard from './component/Dashboard';
+import Users from './component/Users'
 
 
 class App extends Component {
@@ -33,7 +34,9 @@ class App extends Component {
           <Route path="/TestApiView" component={TestApiView} />
           <Route path="/Logout" component={Logout} />
           <Route path="/Dashboard" component={Dashboard} />
-          <Route component={Error} />
+          <Route path="/Users" component={Users} />
+
+            <Route component={Error} />
           </Switch>
           <Footer/>
         </div>

@@ -3,13 +3,13 @@ import ApiToken from "../middleware/ApiToken";
 
 import {
   Card, CardHeader,  CardBody,
-  CardDeck, Button
+  CardDeck, 
 } from 'reactstrap';
 import AvailableMeals from "./AvailableMeals";
 import DisplayMeals from "./DisplayMeals";
-import DisplayUsers from "./DisplayUsers";
 import MealCombo from "./MealCombo";
 import CustomLogging from '../CustomLogging';
+import DisplayProteinScore from "./DisplayProteinScore";
 
 class Dashboard extends Component {
 
@@ -42,21 +42,17 @@ class Dashboard extends Component {
     return (
       <div style={{background: '#ADB7BF'}}>
 
-        <CardDeck data-test="meal-combo-card" style={{padding:'12px', height:'380px'}}>
-          <Card>
-            <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <h2 style={{color: 'black'}}> Meal Combination Reports</h2>
+        <CardDeck data-test="meal-combo-card" style={{padding:'12px', height:'480px'}}>
+          <Card style={{padding:'12px', height:'450px'}} body outline color="primary">
+            <CardHeader data-test="all-meals-card" className="text-center" style={{background: '#B9C5D5'}}>
+              <h5 style={{color: 'black'}}> Weekly Meal Combination Report</h5>
             </CardHeader>
             <CardBody>
             <MealCombo/>  
             </CardBody>
           </Card>
 
-        </CardDeck>
-
-
-        <CardDeck data-test="available-meal-card" style={{padding:'12px', height:'450px'}}>
-          <Card>
+          <Card style={{padding:'12px', height:'450px'}} body outline color="primary">
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
               <h5 style={{color: 'black'}}> Available Meals</h5>
             </CardHeader>
@@ -65,7 +61,11 @@ class Dashboard extends Component {
             </CardBody>
           </Card>
 
-          <Card>
+        </CardDeck>
+        
+        <CardDeck data-test="available-meal-card" style={{padding:'12px', height:'500px'}}>
+
+          <Card style={{padding:'12px', height:'450px'}} body outline color="primary">
             <CardHeader data-test="all-meals-card" className="text-center" style={{background: '#B9C5D5'}}>
               <h5 style={{color: 'black'}}> All Meals</h5>
             </CardHeader>
@@ -74,23 +74,16 @@ class Dashboard extends Component {
             </CardBody>
           </Card>
 
-        </CardDeck>
-
-
-        <CardDeck data-test="users-card" style={{padding:'12px', height:'620px'}}>
-          <Card>
-            <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <div>
-                <Button variant="secondary"  onClick={this.handleModalChange3}>Update User</Button>
-              </div>
+          <Card style={{padding:'12px', height:'450px'}} body outline color="primary">
+            <CardHeader data-test="all-meals-card" className="text-center" style={{background: '#B9C5D5'}}>
+              <h5 style={{color: 'black'}}> Protein Type Score</h5>
             </CardHeader>
             <CardBody>
-              <DisplayUsers />
+              <DisplayProteinScore />
             </CardBody>
           </Card>
 
         </CardDeck>
-
         
       </div>
     );

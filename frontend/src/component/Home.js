@@ -5,6 +5,7 @@ import history from './images/history.png';
 import dashboard from './images/dashboard.png';
 import search from './images/search.png';
 import add from './images/add.png';
+import users from './images/users.png'
 import {
     CardDeck,
     Card,  CardText, CardBody,
@@ -53,6 +54,16 @@ class Home extends Component {
                       <h3 style={{color: '#599BE9'}}>Dashboard</h3>
                     </CardTitle>
                     <CardText>Meal Combination Reports & Stats</CardText>
+                  </CardBody>
+                </Card>
+
+                <Card  style={{border:'none', height:'120px'}}>
+                  <CardBody data-test="stats-card">
+                    <Link to="/Users"> <img data-test='stats-button' src={users}   height='120px' alt="users"/> </Link>
+                    <CardTitle>
+                      <h3 style={{color: '#599BE9'}}>Users</h3>
+                    </CardTitle>
+                    <CardText>Display All Users</CardText>
                   </CardBody>
                 </Card>
 
