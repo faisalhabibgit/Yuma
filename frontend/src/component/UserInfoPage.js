@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import {
   Col, Form,
   FormGroup, Label, Input,
-  Button,
-  Container,Card, CardHeader,  CardBody,
+  Button, ListGroup, ListGroupItem,
+  Container,Card, CardHeader,  CardBody, CardTitle, CardText, CardFooter,
   CardDeck
 } from 'reactstrap';
 import ApiToken from '../middleware/ApiToken';
 import CustomLogging from '../CustomLogging';
+import UserPlan from "./UserPlan";
 
-const hiddenToggle = {
+var hiddenToggle = {
   display: 'block'
 }
 
@@ -57,44 +58,54 @@ export default class UserInfoPage extends Component{
 
   displayAllergies() {
     return(
-      {this.props.allergies.map(allergy =>
-        <ListGroupItem>{allergy}</ListGroupItem>
-      )}
+      <ListGroup>
+        {this.props.allergies.map(allergy =>
+          <ListGroupItem>{allergy}</ListGroupItem>
+        )}
+      </ListGroup>
     );
   }
 
   displayConsumerComments() {
     return(
-      {this.props.consumerComments.map(consumerComments =>
-        <ListGroupItem>{consumerComments}</ListGroupItem>
-      )}
+      <ListGroup>
+        {this.props.consumerComments.map(consumerComments =>
+          <ListGroupItem>{consumerComments}</ListGroupItem>
+        )}
+      </ListGroup>
     );
   }
 
   displayDislikeList() {
     return(
-      {this.props.dislikesList.map(dislikes =>
-        <ListGroupItem>{dislikes}</ListGroupItem>
-      )}
+      <ListGroup>
+        {this.props.dislikesList.map(dislikes =>
+          <ListGroupItem>{dislikes}</ListGroupItem>
+        )}
+      </ListGroup>
     );
   }
 
   displayLikes() {
     return(
-      {this.props.likes.map(like =>
-        <ListGroupItem>{like}</ListGroupItem>
-      )}
+      <ListGroup>
+        {this.props.likes.map(like =>
+          <ListGroupItem>{like}</ListGroupItem>
+        )}
+      </ListGroup>
     );
   }
 
   displayPlan() {
     return(
+      <div>
       <UserPlan
         numOfMeals = {this.props.plan.numOfMeals}
         specialRequests = {this.props.plan.specialRequests}
         requestedProteinTypes = {this.props.plan.requestedProteinTypes}
         diet = {this.props.plan.diet}>
       </UserPlan>
+      </div>
     )
   }
 
@@ -115,7 +126,7 @@ export default class UserInfoPage extends Component{
   render(){
     return(
       <div>
-        Show consumer info <input type="checkbox" id="hiddenCheckbox" onClick={this.toggleHidden()}
+        Show consumer info <input type="checkbox" id="hiddenCheckbox" onClick={this.toggleHidden()}/>
         <Card style={hiddenToggle}>
           <CardHeader>Plan</CardHeader>
           <CardBody>
@@ -126,13 +137,13 @@ export default class UserInfoPage extends Component{
                 <ListGroupItem>isActive: {this.props.isActive}</ListGroupItem>
                 <ListGroupItem>Company: {this.props.company}</ListGroupItem>
                 <h5>Allergies: </h5>
-                  <ListGroup>{this.displayAllergies()}</ListGroup>
+                  {this.displayAllergies()}
                 <h5>Consumer Comments: </h5>
-                  <ListGroup>{this.displayConsumerComments()}</ListGroup>
+                  {this.displayConsumerComments()}
                 <h5>Dislikes: </h5>
-                  <ListGroup>{this.displayDislikeList()}</ListGroup>
+                  {this.displayDislikeList()}
                 <h5>Likes: </h5>
-                  <ListGroup>{this.displayLikes()}</ListGroup>
+                  {this.displayLikes()}
               </ListGroup>
             </CardText>
           </CardBody>

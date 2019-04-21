@@ -20,7 +20,7 @@ class UserByCompanyName extends Component {
       userInput: "",
       // apiObject: [{company:"google", email: "email", firstname: "some first name", lastname: "some last name"}
       //             ],
-      apiObject: null,
+      apiObject: [],
       searchList: []
     }
 
@@ -44,7 +44,8 @@ class UserByCompanyName extends Component {
     this.setState({
       userInput: input
     }, this.companyFetch(input));
-    if( (this.state.apiObject === null) || (this.state.apiObject === [])) {
+    // if( (this.state.apiObject === null) || (this.state.apiObject === [])) {
+    if( this.state.apiObject === []) {
       this.setState({
         searchList: ["no result"]
       })
@@ -97,7 +98,7 @@ class UserByCompanyName extends Component {
                   allergies = {consumer.allergies}
                   consumerComments = {consumer.consumerComments}
                   dislikesList = {consumer.dislikesList}
-                  likes = {consumer.likes}
+                  likes = {consumer.likes}>
                 </UserInfoPage>
               </tr>
             )}
@@ -121,9 +122,6 @@ class UserByCompanyName extends Component {
         </Col>
         <Col sm={{ size: 6, order: 2, offset: 1 }}>
           <ListGroup>
-            // {
-            //   this.state.searchList.map(x => <ListGroupItem key={x}>{x}</ListGroupItem>)
-            // }
             {this.display()}
           </ListGroup>
         </Col>
