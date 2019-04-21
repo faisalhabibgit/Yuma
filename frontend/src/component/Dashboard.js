@@ -3,7 +3,7 @@ import ApiToken from "../middleware/ApiToken";
 
 import {
   Card, CardHeader,  CardBody,
-  CardDeck, Button
+  CardDeck,
 } from 'reactstrap';
 import AvailableMeals from "./AvailableMeals";
 import DisplayMeals from "./DisplayMeals";
@@ -15,6 +15,7 @@ import MealChart from "./MealChart";
 import DietChart from "./DietChart";
 import ProteinTyespChart from "./ProteinTypesChart";
 import AllergiesChart from "./AllergiesChart";
+
 
 class Dashboard extends Component {
 
@@ -120,9 +121,7 @@ class Dashboard extends Component {
         <CardDeck  style={{padding:'12px', height:'640px'}}>
           <Card data-test="users-card">
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-              <div>
-                <Button variant="secondary"  onClick={this.handleModalChange3}>Update User</Button>
-              </div>
+             
             </CardHeader>
             <CardBody>
               <DisplayUsers />
