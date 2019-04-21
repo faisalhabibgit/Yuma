@@ -5,12 +5,8 @@ import {
   Card, CardHeader,  CardBody,
   CardDeck, Button
 } from 'reactstrap';
-import AvailableMeals from "./AvailableMeals";
-import DisplayMeals from "./DisplayMeals";
 import DisplayUsers from "./DisplayUsers";
-import MealCombo from "./MealCombo";
 import CustomLogging from '../CustomLogging';
-import DisplayProteinScore from "./DisplayProteinScore";
 
 class Users extends Component {
 

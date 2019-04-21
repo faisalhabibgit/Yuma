@@ -11,7 +11,6 @@ class BuildProteinTypeScore {
 
   getProteinTypePromiseObj(apiPath) {
     var proteinList = [];
-    var protein;
     var api;
     const apiToken = new ApiToken();
 
