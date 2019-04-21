@@ -2,7 +2,6 @@ import BuildMeal from './objectBuilder/BuildMeal';
 import BuildUser from './objectBuilder/BuildUser';
 import BuildMealCombo from './objectBuilder/BuildMealCombo';
 import BuildDownload from './objectBuilder/BuildDownload';
-import companyList from "./objectBuilder/CompanyList";
 
 class Retriever {
   constructor(apiPath) {
@@ -34,10 +33,6 @@ class Retriever {
         const buildDownload = new BuildDownload();
         this.entityPromise = buildDownload.getCSVDownloadPromise(apiPath);
         break;
-      case 'api/rest/listcompanies':
-        const getComapnyList = new companyList();
-        this.entityPromise = getComapnyList.getCompanyPromiseObj(apiPath);
-        break;
       default:
         const userBuilderCompany = new BuildUser();
         this.entityPromise = userBuilderCompany.getUserPromiseObj(apiPath);
@@ -51,4 +46,3 @@ class Retriever {
 }
 
 export default Retriever;
-

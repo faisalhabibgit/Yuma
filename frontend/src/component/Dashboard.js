@@ -10,12 +10,6 @@ import DisplayMeals from "./DisplayMeals";
 import DisplayUsers from "./DisplayUsers";
 import MealCombo from "./MealCombo";
 import CustomLogging from '../CustomLogging';
-import UsersByCompany from "./UsersByCompany";
-import MealChart from "./MealChart";
-import DietChart from "./DietChart";
-import ProteinTyespChart from "./ProteinTypesChart";
-import AllergiesChart from "./AllergiesChart";
-
 
 class Dashboard extends Component {
 
@@ -81,54 +75,17 @@ class Dashboard extends Component {
 
         </CardDeck>
 
-        <CardDeck  style={{padding:'12px', height:'370px'}}>
-          <Card data-test="users-per-company">
-            <CardBody>
-              <UsersByCompany />
-            </CardBody>
-          </Card>
-        </CardDeck>
-       
-        <CardDeck  style={{padding:'12px', height:'370px'}}>
-         
-          <Card data-test="meals-chart-card">
-            <CardBody>
-              <MealChart />
-            </CardBody>
-          </Card>
-          <Card data-test="users-per-diet">
-            <CardBody>
-              <DietChart />
-            </CardBody>
-          </Card>
-        </CardDeck>
-
-        <CardDeck  style={{padding:'12px', height:'380px'}}>
-
-          <Card data-test="protein-chart-card">
-            <CardBody>
-              <ProteinTyespChart />
-            </CardBody>
-          </Card>
-
-          <Card data-test="allergies-card">
-            <CardBody>
-              <AllergiesChart />
-            </CardBody>
-          </Card>
-        </CardDeck>
-
         <CardDeck  style={{padding:'12px', height:'640px'}}>
           <Card data-test="users-card">
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-             
+
             </CardHeader>
             <CardBody>
               <DisplayUsers />
             </CardBody>
           </Card>
         </CardDeck>
-        
+
       </div>
     );
 
