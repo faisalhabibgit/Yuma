@@ -21,7 +21,6 @@ export default class UserInfoPage extends Component{
 
     this.checkAuthenticated();
     this.state = {
-      isShowing: false,
       collapse: false,
       status: 'Closed'
       // firstName: "",
@@ -45,7 +44,6 @@ export default class UserInfoPage extends Component{
     this.displayConsumerComments = this.displayConsumerComments.bind(this);
     this.displayDislikeList = this.displayDislikeList.bind(this);
     this.displayLikes = this.displayLikes.bind(this);
-    this.toggleHidden = this.toggleHidden.bind(this);
     this.onEntering = this.onEntering.bind(this);
     this.onEntered = this.onEntered.bind(this);
     this.onExiting = this.onExiting.bind(this);
@@ -123,21 +121,6 @@ export default class UserInfoPage extends Component{
     )
   }
 
-  toggleHidden(event) {
-    var checkboxValue = event.target.checked;
-    this.setState({
-      hiddenCheckbox: checkboxValue
-    })
-    if(this.hiddenCheckbox){
-      hiddenToggle = {
-        display: "none"
-      }
-    } else {
-      hiddenToggle = {
-        display: "block"
-      }
-    }
-  }
 
   onEntering() {
     this.setState({ status: 'Opening...' });
