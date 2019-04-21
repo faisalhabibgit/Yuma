@@ -33,6 +33,7 @@ class MealHistory extends Component{
     this.handleStart = this.handleStart.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
     this.getCombo = this.getCombo.bind(this);
+    
   }
 
   getCombo(){
@@ -56,7 +57,8 @@ class MealHistory extends Component{
 
     fetch(comboSearchAPI,obj)
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => this.setState({array: data}))
+    
 
     
     
@@ -97,10 +99,35 @@ class MealHistory extends Component{
     this.setState({
       endDate: date
     });
-    
-
   }
+
+  // printCombo(){
+
+  //   if(this.state.array.length){
+
+  //     const items = this.state.array.map(function(item){
+  //       return <li> {item} </li>;
+  //     });
+
+  //     } else {
+  //       const { items } = null;
+  //     }
+
+  // }
+
+
   render() {
+
+    const items = this.state.array.map(element => 
+     <div> 
+    <h3> Result </h3>   
+    <li> Combination Score: {element.combinationScore} </li>
+    <li> Number of Blanks: {element.numberOfBlanks} </li>
+    <li> Created on: {element.createdOn} </li> 
+    <br />
+    </div>
+    );
+
     return (
     <Container>
 
@@ -135,13 +162,22 @@ class MealHistory extends Component{
                     </Card> 
                   </CardDeck>
              </FormGroup>
+             
            </Col>
       
-                <Button onClick={this.getCombo}>View</Button>
+                
           </Form>
 
       </Col>
+      <div className="text-center">
+        <Button style={{width: 105, height: 50}}onClick={this.getCombo}>View</Button>
 
+        <ul>
+        {items}
+        </ul>
+      </div>
+      
+      
     </Container>
   );
   }
