@@ -138,7 +138,7 @@ export default class UserInfoPage extends Component{
   render(){
     return(
       <div>
-          <Card style={{width:"90%"}}>
+          <Card>
             <CardHeader>
               <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Show consumer: {this.props.lastName}, {this.props.firstName}'s info
               </Button>

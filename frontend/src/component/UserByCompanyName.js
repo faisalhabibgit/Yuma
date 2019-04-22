@@ -121,7 +121,7 @@ class UserByCompanyName extends Component {
             </FormGroup>
           </Form>
         </Col>
-        <Col sm={{ size: 12, order: 2, offset: 1 }}>
+        <Col>
           <ListGroup>
             {this.display()}
           </ListGroup>
