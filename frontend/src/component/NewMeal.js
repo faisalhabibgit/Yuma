@@ -85,7 +85,7 @@ class NewMeal extends Component {
 
   handleChange(event) {
 
-    if (["name", "weight", "calories", "price", "quantifier",].includes(event.target.className)) {
+    if (["name", "weight", "calories", "price", "quantifier"].includes(event.target.className)) {
 
       let ingredients = [...this.state.ingredients];
       ingredients[event.target.dataset.id][event.target.className] = event.target.value;
