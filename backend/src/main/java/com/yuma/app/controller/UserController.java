@@ -51,7 +51,7 @@ public class UserController {
 		log.info("retrieving list of users by company");
 		return this.userService.findUsersByCompany(company);
 	}
-	
+
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ConsumerTO createUser(@RequestBody ConsumerTO consumerTO){

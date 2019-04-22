@@ -11,22 +11,18 @@ import DisplayUsers from "./DisplayUsers";
 import MealCombo from "./MealCombo";
 import CustomLogging from '../CustomLogging';
 
-
 class Dashboard extends Component {
 
 
   constructor(props) {
     super(props);
-  
+
     this.checkAuthenticated();
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
   }
-
-
-  
 
   checkAuthenticated(){
 
@@ -44,21 +40,22 @@ class Dashboard extends Component {
     return (
       <div style={{background: '#ADB7BF'}}>
 
-        <CardDeck data-test="meal-combo-card" style={{padding:'12px', height:'380px'}}>
-          <Card>
+        <CardDeck  style={{padding:'12px', height:'380px'}}>
+
+          <Card data-test="meal-combo-card">
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
               <h2 style={{color: 'black'}}> Meal Combination Reports</h2>
             </CardHeader>
             <CardBody>
-            <MealCombo/>  
+              <MealCombo/>
             </CardBody>
           </Card>
 
         </CardDeck>
 
+        <CardDeck style={{padding:'12px', height:'450px'}}>
 
-        <CardDeck data-test="available-meal-card" style={{padding:'12px', height:'450px'}}>
-          <Card>
+          <Card data-test="available-meal-card">
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
               <h5 style={{color: 'black'}}> Available Meals</h5>
             </CardHeader>
@@ -67,8 +64,8 @@ class Dashboard extends Component {
             </CardBody>
           </Card>
 
-          <Card>
-            <CardHeader data-test="all-meals-card" className="text-center" style={{background: '#B9C5D5'}}>
+          <Card data-test="all-meals-card">
+            <CardHeader className="text-center" style={{background: '#B9C5D5'}}>
               <h5 style={{color: 'black'}}> All Meals</h5>
             </CardHeader>
             <CardBody>
@@ -78,25 +75,21 @@ class Dashboard extends Component {
 
         </CardDeck>
 
-
-        <CardDeck data-test="users-card" style={{padding:'12px', height:'620px'}}>
-          <Card>
+        <CardDeck  style={{padding:'12px', height:'640px'}}>
+          <Card data-test="users-card">
             <CardHeader  className="text-center" style={{background: '#B9C5D5'}}>
-             
+
             </CardHeader>
             <CardBody>
               <DisplayUsers />
             </CardBody>
           </Card>
-
         </CardDeck>
 
-        
       </div>
     );
 
   }
 }
-
 
 export default Dashboard;
