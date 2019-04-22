@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import ApiToken from "../middleware/ApiToken";
+import UserInfoPage from "../component/UserInfoPage";
 import {  
   Container, Col, Form,
   FormGroup, Label, 
   Button,
-  Card, CardDeck, CardBody, CardHeader} from 'reactstrap';
+  Card, CardDeck, CardBody, CardHeader, ListGroupItem} from 'reactstrap';
 import CustomLogging from "../CustomLogging";
 
 
@@ -25,23 +26,114 @@ class MealHistory extends Component{
     
     this.state = {
       startDate: new Date(),
+      endDate: new Date(),
       error: '',
+      array: []
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleStart = this.handleStart.bind(this);
+    this.handleEnd = this.handleEnd.bind(this);
+    this.getCombo = this.getCombo.bind(this);
+    
+  }
+
+  getCombo(){
+
+    var startFormatted = this.convertToDateOnly(this.state.startDate);
+    var endFormatted = this.convertToDateOnly(this.state.endDate);
+
+    console.log('formatted date '+startFormatted)
+    const apiToken = new ApiToken();
+    var comboSearchAPI = 'api/combinationreport/search?startdate='+startFormatted
+    +'&enddate='+endFormatted;
+
+    var obj = {
+      method: 'GET',
+      headers: {
+          'cache-control': "no-cache",
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + apiToken.getCookie('yuma-token')
+      }
+    }
+
+    fetch(comboSearchAPI,obj)
+    .then(response => response.json())
+    .then(data => this.setState({array: data},console.log(data)))
+
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
   }
   
-  handleChange(date)
-  {
+  convertToDateOnly(date){
+
+    
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    var dt = date.getDate();
+
+    if (dt < 10) {
+      dt = '0' + dt;
+    }
+    if (month < 10) {
+      month = '0' + month;
+    }
+
+    return year+'-' + month + '-'+dt;
+
+  }
+  handleStart(date){
+
     this.setState({
       startDate: date
     });
+    
   }
+
+  handleEnd(date){
+
+    this.setState({
+      endDate: date
+    });
+  }
+
+
   render() {
+
+    const items = this.state.array.map(element => 
+     <div className="text-center">
+        <br />
+        <br /> 
+        <h1> Result </h1> 
+          
+        <ListGroupItem> Combination Score: {element.combinationScore} </ListGroupItem>
+        <ListGroupItem> Number of Blanks: {element.numberOfBlanks} </ListGroupItem>
+        <ListGroupItem> Created on: {element.createdOn} </ListGroupItem>
+        
+        <br />
+        <h4> Users Combinations:</h4>
+        <br />
+        {element.consumerTOS.map(consumer => 
+        
+        <UserInfoPage
+        firstName = {consumer.firstName}
+        lastName = {consumer.lastName}
+        plan = {consumer.plan}
+        isActive = {consumer.enabled}
+        company = {consumer.company}
+        allergies = {consumer.allergies}
+        consumerComments = {consumer.consumerComments}
+        dislikesList = {consumer.dislikesList}
+        likes = {consumer.likes}>
+        </UserInfoPage>
+        )}
+                
+        <br />
+        <br />
+      </div>
+    );
+
     return (
     <Container>
 
@@ -61,7 +153,7 @@ class MealHistory extends Component{
                     <Label style={{color: 'black', fontSize:20}} >Start Date</Label>
                     <br />
                       <DatePicker 
-                          selected={this.state.startDate} onChange={this.handleChange} mode="date"
+                          selected={this.state.startDate} onChange={this.handleStart} mode="date"
                            />
                     </CardBody>
                     </Card>      
@@ -71,17 +163,27 @@ class MealHistory extends Component{
                     <CardBody className="text-center" style={{padding:'50px'}}>
                     <Label style={{color: 'black', fontSize:20}}>End Date</Label>
                     <br />
-                      <DatePicker selected={this.state.startDate} onChange={this.handleChange} />
+                      <DatePicker selected={this.state.endDate} onChange={this.handleEnd} />
                     </CardBody>
                     </Card> 
                   </CardDeck>
              </FormGroup>
+             
            </Col>
       
-                <Button type="view" value="view" size="lg" block>View</Button>
+                
           </Form>
 
       </Col>
+      <div className="text-center">
+        <Button style={{width: 105, height: 50}}onClick={this.getCombo}>View</Button>
+
+        <ul>
+        {items}
+        </ul>
+      </div>
+      
+      
     </Container>
   );
   }
