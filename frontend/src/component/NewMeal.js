@@ -26,12 +26,12 @@ class NewMeal extends Component {
     this.state = {
       name: '',
       description: '',
-      ingredients: [{ name: "", weight: "", calories: "", price: "" }],
+      ingredients: [{ name: "", weight: "", calories: "", price: "", quantifier: "" }],
       nuts: 'false',
       dairy: 'false',
       gluten: 'false',
       shellfish: 'false',
-      soy: 'false'
+      soy: 'false',
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,7 +44,7 @@ class NewMeal extends Component {
     this.addIngredient = this.addIngredient.bind(this);
 
   }
-  
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
@@ -85,7 +85,7 @@ class NewMeal extends Component {
 
   handleChange(event) {
 
-    if (["name", "weight", "calories", "price"].includes(event.target.className)) {
+    if (["name", "weight", "calories", "price", "quantifier"].includes(event.target.className)) {
 
       let ingredients = [...this.state.ingredients];
       ingredients[event.target.dataset.id][event.target.className] = event.target.value;
@@ -104,7 +104,7 @@ class NewMeal extends Component {
 addIngredient(e){
     e.preventDefault();
     this.setState((prevState) => ({
-      ingredients: [...prevState.ingredients, { name: "", weight: "", calories: "", price: "" }],
+      ingredients: [...prevState.ingredients, { name: "", weight: "", calories: "", price: "", quantifier:"" }],
     }));
     CustomLogging.info('Ingredient is added!',"New Meal");
 };
@@ -115,10 +115,11 @@ calculateCalories(e, idx){
     CustomLogging.info('calory calculated' )
     var ingr = this.state.ingredients[index]['name'];
     var weight = this.state.ingredients[index]['weight'];
+    var quantifier = this.state.ingredients[index]['quantifier']
     var ingredientTempList = this.state.ingredients
     var calculatedIngredient = this.state.ingredients[index]
 
-    var api = "https://api.edamam.com/api/nutrition-data?app_id=6fd2547b&app_key=61888ddf81b29e52ad9aaf1a8d5b4400&ingr="+ ingr +"%20" + weight;
+    var api = "https://api.edamam.com/api/nutrition-data?app_id=6fd2547b&app_key=61888ddf81b29e52ad9aaf1a8d5b4400&ingr="+ ingr +"%20" + weight + "%20" + quantifier;
 
     fetch(api)
       .then((response) => {
@@ -129,6 +130,8 @@ calculateCalories(e, idx){
            alert('Please verify the ingredient name and/or the input weight.')}
         else{
             calculatedIngredient['calories'] = json['calories'];
+            calculatedIngredient['weight'] = json['totalWeight'];
+            calculatedIngredient['quantifier'] = "g";
             ingredientTempList[idx] = calculatedIngredient;
             this.setState(() => ({
                 ingredients: ingredientTempList,
@@ -253,7 +256,7 @@ calculateCalories(e, idx){
                 <CardBody className="text-center">
                 {
                   this.state.ingredients.map((val, idx) => {
-                    let ingredientId = `name-${idx}`, weightId = `weight-${idx}`, caloriesId = `calories-${idx}`, priceId = `price-${idx}`;
+                    let ingredientId = `name-${idx}`, weightId = `weight-${idx}`, quantifierId = `quantifier-${idx}`, caloriesId = `calories-${idx}`, priceId = `price-${idx}`;
                     return (
 
                       <div data-test="initial-ingredient" key={idx}>
@@ -283,6 +286,16 @@ calculateCalories(e, idx){
                           className="weight"
                           data-test='ingredient-weight'
                         />
+                        <input
+                          type="text"
+                          name={quantifierId}
+                          data-id={idx}
+                          id={quantifierId}
+                          value={this.state.ingredients[idx].quantifier}
+                          onChange={this.handleChange}
+                          className="quantifier"
+                          placeholder="unit"
+                        />
                         <br />
                         <label htmlFor={caloriesId}>Calories</label>
                         <input
@@ -302,14 +315,14 @@ calculateCalories(e, idx){
                         <div className="text-left"   style={{ marginLeft: 352 }}>
                         <label>Possible Food Allergies</label>
                         </div>
-                        
-                        
+
+
                       <CardBody className="text-left" style={{paddingLeft:'500px'}}>
                       <label>
                       <Input type="checkbox" id="nuts" onChange={this.handleChange} />
                         Tree Nuts
-                      </label>                       
-                      
+                      </label>
+
                       <br />
                       <Label>
                         <Input type="checkbox" id="dairy" onChange={this.handleChange} />
@@ -331,7 +344,7 @@ calculateCalories(e, idx){
                         Soy
                       </Label>
                       </CardBody>
-                      
+
                         <div>
                          <Button variant="secondary"  onClick={(e) => this.calculateCalories(e, idx)}>Calculate</Button>
                        </div>
@@ -354,7 +367,7 @@ calculateCalories(e, idx){
                          <Button variant="secondary"  data-test="delete-ingredient-button" onClick={(e) => { this.removeIngredient(e, idx) }}> Remove </Button>
                        </div>
                        <br />
-                       
+
                       </div>
 
                     )
@@ -366,7 +379,7 @@ calculateCalories(e, idx){
                 </CardBody>
                 </Card>
                 <br />
-                
+
             </FormGroup>
             <br />
 
@@ -374,7 +387,7 @@ calculateCalories(e, idx){
 
               <Button   variant="secondary" type="submit" value="Submit" size="lg" block>Submit</Button>
 
-            
+
 
               </div>
             </Col>
