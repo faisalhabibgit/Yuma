@@ -12,6 +12,7 @@ import com.yuma.app.to.CombinationReportTO;
 import com.yuma.app.service.HelperCombo.WeeklyCombinationHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
@@ -97,5 +98,22 @@ public class CombinationReportService {
 			new ResourceNotFoundException("CombinationReport", "Date", endDate)
 		);
 		return conversionService.convert(combinationReport, CombinationReportTO.class);
+	}
+
+	public List<CombinationReportTO> listCombinationReportByDate(LocalDate startDate, LocalDate endDate) {
+		
+		log.info("Listing combo reports by dates: "+startDate+"and end date: "+endDate);
+		
+		List<CombinationReport> combinationReports = this.combinationReportRepository.findAllByCreatedOnBetween(startDate.toDate(), endDate.toDate());
+
+		log.info("Total reports created betwee those dates is: "+combinationReports.size());
+		CombinationReportTO combinationReportTO = null;
+		List<CombinationReportTO> combinationReportTOS = new ArrayList<>();
+		for (CombinationReport combinationReport: combinationReports) {
+			combinationReportTO = conversionService.convert(combinationReport, CombinationReportTO.class);
+			combinationReportTOS.add(combinationReportTO);
+
+		}
+		return combinationReportTOS;
 	}
 }

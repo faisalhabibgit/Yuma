@@ -23,9 +23,9 @@ afterEach(() => {
   });
 
 test('Combo page renders', () => {
-    
+
     expect(wrapper.length).toBe(1);
-    
+
 });
 
 test('Renders meal combo card', () => {
@@ -53,5 +53,5 @@ test('Renders Users Card', () => {
 
     const usersCard = wrapper.find("[data-test='users-card']");
     expect(usersCard.length).toBe(1);
-    
+
 });

@@ -4,7 +4,6 @@ import BuildMealCombo from './objectBuilder/BuildMealCombo';
 import BuildDownload from './objectBuilder/BuildDownload';
 
 class Retriever {
-
   constructor(apiPath) {
     this.entityPromise = null;
 
@@ -35,7 +34,8 @@ class Retriever {
         this.entityPromise = buildDownload.getCSVDownloadPromise(apiPath);
         break;
       default:
-      // code block
+        const userBuilderCompany = new BuildUser();
+        this.entityPromise = userBuilderCompany.getUserPromiseObj(apiPath);
     }
 
   }
@@ -46,4 +46,3 @@ class Retriever {
 }
 
 export default Retriever;
-
