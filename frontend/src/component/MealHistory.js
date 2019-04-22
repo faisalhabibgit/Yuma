@@ -103,6 +103,7 @@ class MealHistory extends Component{
 
     const items = this.state.array.map(element => 
      <div className="text-center">
+        <br />
         <br /> 
         <h1> Result </h1>   
         <li> Combination Score: {element.combinationScore} </li>
@@ -124,6 +125,7 @@ class MealHistory extends Component{
         </UserInfoPage>
         )}
                 
+        <br />
         <br />
       </div>
     );
