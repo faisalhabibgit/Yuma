@@ -7,7 +7,7 @@ import {
   Container, Col, Form,
   FormGroup, Label, 
   Button,
-  Card, CardDeck, CardBody, CardHeader} from 'reactstrap';
+  Card, CardDeck, CardBody, CardHeader, ListGroupItem} from 'reactstrap';
 import CustomLogging from "../CustomLogging";
 
 
@@ -105,11 +105,15 @@ class MealHistory extends Component{
      <div className="text-center">
         <br />
         <br /> 
-        <h1> Result </h1>   
-        <li> Combination Score: {element.combinationScore} </li>
-        <li> Number of Blanks: {element.numberOfBlanks} </li>
-        <li> Created on: {element.createdOn} </li>
-        <li> Users Combinations</li>
+        <h1> Result </h1> 
+          
+        <ListGroupItem> Combination Score: {element.combinationScore} </ListGroupItem>
+        <ListGroupItem> Number of Blanks: {element.numberOfBlanks} </ListGroupItem>
+        <ListGroupItem> Created on: {element.createdOn} </ListGroupItem>
+        
+        <br />
+        <h4> Users Combinations:</h4>
+        <br />
         {element.consumerTOS.map(consumer => 
         
         <UserInfoPage
