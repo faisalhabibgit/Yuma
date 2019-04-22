@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import ApiToken from "../middleware/ApiToken";
+import UserInfoPage from "../component/UserInfoPage";
 import {  
   Container, Col, Form,
   FormGroup, Label, 
@@ -108,15 +109,21 @@ class MealHistory extends Component{
         <li> Number of Blanks: {element.numberOfBlanks} </li>
         <li> Created on: {element.createdOn} </li>
         <li> Users Combinations</li>
-            
-        {element.consumerTOS.map(user => 
-        <ul>
-          <li>{user.firstName}</li>
-
-        </ul>
-
+        {element.consumerTOS.map(consumer => 
+        
+        <UserInfoPage
+        firstName = {consumer.firstName}
+        lastName = {consumer.lastName}
+        plan = {consumer.plan}
+        isActive = {consumer.enabled}
+        company = {consumer.company}
+        allergies = {consumer.allergies}
+        consumerComments = {consumer.consumerComments}
+        dislikesList = {consumer.dislikesList}
+        likes = {consumer.likes}>
+        </UserInfoPage>
         )}
-            
+                
         <br />
       </div>
     );
