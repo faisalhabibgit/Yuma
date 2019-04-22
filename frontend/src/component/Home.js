@@ -5,6 +5,7 @@ import history from './images/history.png';
 import dashboard from './images/dashboard.png';
 import search from './images/search.png';
 import add from './images/add.png';
+import companyUsers from './images/companyUsers.png';
 import {
     CardDeck,
     Card,  CardText, CardBody,
@@ -65,7 +66,7 @@ class Home extends Component {
                     <CardText>Search the Meal Inventory</CardText>
                   </CardBody>
                 </Card>
-                
+
                 <Card  style={{border:'none', height:'200px'}}>
                   <CardBody data-test="add-meal-card">
                     <Link to="/NewMeal"> <img data-test='add-meal-button' src={add}  height='120px' alt="add"/> </Link>
@@ -73,6 +74,16 @@ class Home extends Component {
                       <h3 style={{color: '#599BE9'}}>Add Meals</h3>
                     </CardTitle>
                     <CardText>Add a New Recipe  </CardText>
+                  </CardBody>
+                </Card>
+
+                <Card  style={{border:'none', height:'200px'}}>
+                  <CardBody data-test="view-clients-card">
+                    <Link to="/UserByCompanyName"> <img data-test='view-clients-button' src={companyUsers}  height='120px' alt="view"/> </Link>
+                    <CardTitle>
+                      <h3 style={{color: '#599BE9'}}>Client List</h3>
+                    </CardTitle>
+                    <CardText>View Users By Company</CardText>
                   </CardBody>
                 </Card>
 

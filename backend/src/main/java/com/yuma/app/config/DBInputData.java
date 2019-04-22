@@ -83,6 +83,7 @@ public class DBInputData {
 				user.setLastName("");
 				user.setEmail("");
 				user.setActive(true);
+				user.setCompany("");
 				usersList.add(user);
 				counter++;
 			}
