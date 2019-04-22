@@ -16,20 +16,6 @@ export default class UserInfoPage extends Component{
     this.state = {
       collapse: false,
       status: 'Closed'
-      // firstName: "",
-      // lastName: "",
-      // plan: {
-      //   numOfMeals: "",
-      //   specialRequests: [],
-      //   requestedProteinTypes: [],
-      //   diet: "NONE",
-      // },
-      // isActive: "",
-      // company: "",
-      // allergies: [],
-      // consumerComments: [],
-      // dislikesList: [],
-      // likes: [],
     }
 
     this.displayPlan = this.displayPlan.bind(this);
