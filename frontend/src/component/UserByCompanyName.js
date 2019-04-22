@@ -18,8 +18,6 @@ class UserByCompanyName extends Component {
     this.checkAuthenticated();
     this.state = {
       userInput: "",
-      // apiObject: [{company:"google", email: "email", firstname: "some first name", lastname: "some last name"}
-      //             ],
       apiObject: [],
       searchList: []
     }
