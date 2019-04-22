@@ -36,6 +36,7 @@ class App extends Component {
           <Route path="/UserByCompanyName" component={UserByCompanyName} />
           <Route component={Error} />
           </Switch>
+          <br />
           <Footer/>
         </div>
       </BrowserRouter>
